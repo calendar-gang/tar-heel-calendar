@@ -1,0 +1,49 @@
+{
+  "name": "tar-heel-calendar",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "tar-heel-calendar"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This is our final project for COMP 426: Modern Web Programming. It is under development.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calendar-gang/tar-heel-calendar.git"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "author": "Victoria Hoffman, Alfred Mathew, Eric Schneider, Ezri White",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/calendar-gang/tar-heel-calendar/issues"
+  },
+  "homepage": "*"
+}
