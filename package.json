@@ -2,6 +2,10 @@
   "name": "tar-heel-calendar",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "v12.16.0",
+    "npm": "6.13.4"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -45,5 +49,5 @@
   "bugs": {
     "url": "https://github.com/calendar-gang/tar-heel-calendar/issues"
   },
-  "homepage": "*"
+  "homepage": "https://tar-heel-calendar.herokuapp.com/"
 }
