@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+th, td {
+  width: 100px;
+}
+h1 {
+  color: white !important;
+}
+
+.calendar {
+  background-color: #b5e3f8;
+  height: 700px;
+  overflow: scroll;
+}
