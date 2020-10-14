@@ -1,31 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Calendar from './components/calendar';
 import Footer from './components/footer';
 import NavBar from './components/navbar';
+import ViewSelector from './components/viewSelector';
 
-function App() {
-  return (
-    <div className="App">
-      {/* <header className="App-header">
-        <h1 class="title is-1" >TAR HEEL CALENDAR</h1>
-      </header> */}
-      <NavBar />
-      <div className="container">
-        <div className="tabs is-centered">
-          <ul>
-            <li ><a>Day</a></li>
-            <li className="is-active"><a>Week</a></li>
-            <li><a>Month</a></li>
-            <li><a>Year</a></li>
-          </ul>
-        </div>
-      </div>
-      <Calendar />
-      <Footer />
-    </div >
+class App extends Component {
+  state = {};
 
-  );
+  render() {
+    return (
+      <div className="App">
+        <NavBar />
+        <ViewSelector />
+        <Calendar />
+        <Footer />
+      </div >
+    );
+  }
 }
 
 export default App;
