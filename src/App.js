@@ -2,13 +2,15 @@ import React from 'react';
 import './App.css';
 import Calendar from './components/calendar';
 import Footer from './components/footer';
+import NavBar from './components/navbar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <h1 class="title is-1" >TAR HEEL CALENDAR</h1>
-      </header>
+      </header> */}
+      <NavBar />
       <div class="container">
         <div class="tabs is-centered">
           <ul>

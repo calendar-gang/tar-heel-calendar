@@ -7,6 +7,15 @@
   pointer-events: none;
 }
 
+#top-nav {
+  background-color: #0b1846;
+}
+
+.nav-button {
+  display: flex;
+  align-items: flex-start;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -14,7 +23,7 @@
 }
 
 .App-header {
-  height:calc(100px + 1vmin);
+  height: calc(100px + 1vmin);
   background-color: #0b1846;
   display: flex;
   flex-direction: column;
