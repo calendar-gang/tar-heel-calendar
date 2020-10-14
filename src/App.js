@@ -1,47 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Week from './components/week';
+import Footer from './components/footer';
+import NavBar from './components/navbar';
+import ViewSelector from './components/viewSelector';
+import Day from './components/day';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>This is a calendar. Very fancy.</p>
-      </header>
-      <table>
-        <tr>
-          <th>Sunday</th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday</th>
-          <th>Thursday</th>
-          <th>Friday</th>
-          <th>Saturday</th>
-        </tr>
-        <tr>
-          <td>Sleep all day</td>
-          <td>Prepare for exam</td>
-          <td>Fail 521 exam</td>
-          <td>Move on with life</td>
-          <td>Anticipate future</td>
-          <td>Who cares about future, it's Friday!</td>
-          <td>Sleep</td>
-        </tr>
-      </table>
-    </div>
-  );
+class App extends Component {
+  state = {};
+
+  render() {
+    return (
+      <div className="App">
+        <NavBar />
+        <ViewSelector />
+        <Footer />
+      </div >
+    );
+  }
 }
 
 export default App;
