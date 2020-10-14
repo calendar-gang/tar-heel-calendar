@@ -5,8 +5,8 @@ class Footer extends Component {
     state = {}
     render() {
         return (
-            <footer class="footer">
-            <div class="content has-text-centered">
+            <footer className="footer">
+            <div className="content has-text-centered">
                 <p>
                 <strong> Tar Heel Calendar</strong> by Victoria Helenae Hoffmanne IV, Ezri, Eric Schneider II, Alfred.
             </p>

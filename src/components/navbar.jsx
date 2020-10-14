@@ -6,19 +6,19 @@ class NavBar extends Component {
 
     render() {
         return (
-            <nav id="top-nav" class="navbar" aria-label="main-navigation">
-                <div class="navbar-brand">
-                    <a class="navbar-item">
-                        <h1 class="title is-1" >TAR HEEL CALENDAR</h1>
+            <nav id="top-nav" className="navbar" aria-label="main-navigation">
+                <div className="navbar-brand">
+                    <a className="navbar-item">
+                        <h1 className="title is-1" >TAR HEEL CALENDAR</h1>
                     </a>
                 </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary">
+                <div className="navbar-end">
+                    <div className="navbar-item">
+                        <div className="buttons">
+                            <a className="button is-primary">
                                 Sign Up
                             </a>
-                            <a class="button is-light">
+                            <a className="button is-light">
                                 Log in
                             </a>
                         </div>

@@ -11,11 +11,11 @@ function App() {
         <h1 class="title is-1" >TAR HEEL CALENDAR</h1>
       </header> */}
       <NavBar />
-      <div class="container">
-        <div class="tabs is-centered">
+      <div className="container">
+        <div className="tabs is-centered">
           <ul>
             <li ><a>Day</a></li>
-            <li class="is-active"><a>Week</a></li>
+            <li className="is-active"><a>Week</a></li>
             <li><a>Month</a></li>
             <li><a>Year</a></li>
           </ul>
