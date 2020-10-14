@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Calendar extends Component {
+class Week extends Component {
     state = {};
     render() {
         return (
@@ -270,4 +270,4 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+export default Week;

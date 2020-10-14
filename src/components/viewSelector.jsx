@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import ViewSelectorButton from './viewSelectorButton';
+import Week from './week';
+import Day from './day';
+
 import '../App.css';
 
 class ViewSelector extends Component {
@@ -13,18 +16,30 @@ class ViewSelector extends Component {
         ]
     };
 
+    handleSelect = (id) => {
+        this.state.buttons.forEach((button) => {
+            if(button.id == id) {
+                button.selected = 1;
+            } else {
+                button.selected = 0;
+            }
+        });
+        this.setState(this.state);
+    }
 
     render() {
         return (
+            <div>
             <div className="container">
                 <div className="tabs is-centered">
                     <ul>
                         {this.state.buttons.map((button) => {
-                            return <ViewSelectorButton id={button.id} key={button.id} name={button.name} selected={button.selected}/>;
+                            return <ViewSelectorButton onSelect={this.handleSelect} id={button.id} key={button.id} name={button.name} selected={button.selected}/>;
                         })}
-                    
                     </ul>
                 </div>
+            </div>
+            <Week />
             </div>
         )
     }
