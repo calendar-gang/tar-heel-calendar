@@ -4,7 +4,7 @@ import '../App.css';
 class ViewSelectorButton extends Component {
 
     getColor = () => {
-        if(this.props.selected == 1) {
+        if(this.props.selected === 1) {
             return "button is-success selector-button";
         }
         return "button is-info selector-button";

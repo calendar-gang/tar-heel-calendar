@@ -1,42 +1,31 @@
 # Tar Heel Calendar
 This is our final project for COMP 426: Modern Web Programming. It is under development.
 
-## Available Scripts
+## Starting
+1. Run `npm run start`. This will first build and then start the server.
+2. Now the app has started! Note _you_ must manually connect to [your local host](http://localhost:8080/), Node.js will not open this up automatically for you.
 
-In the project directory, you can run:
+If you're only working on one end of the project, this may be a bit slow. There are a few other commands you can use if you feel this is the case:
+1. `npm run start-client` will run only the frontend. Note that, obviously, the frontend may not work very well without the backend.
+2. `npm run start-server` will run the backend without attempting to build the frontend. If your frontend is already built, this is fine, but any changes to the frontend must be built manually.
+3. `npm run build` will build the frontend.
+4. `npm run test` will run frontend unit tests.
 
-### `npm start`
+## Technologies used
+* [Node.JS](https://github.com/nodejs/node)
+* [React.JS](https://github.com/facebook/react) (and [Create React App](https://github.com/facebook/create-react-app))
+* [Bulma](https://github.com/jgthms/bulma)
+* [axios](https://github.com/axios/axios)
+* [express](https://github.com/expressjs/express)
+* [Heroku](https://www.heroku.com/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Other technologies used are listed in [`package.json`](package.json).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Authors
+* Victoria Hoffman
+* Alfred Mathew
+* Eric Schneider
+* Ezri White
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## See also
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live website
+The live website is currently located at [tar-heel-calendar.herokuapp.com](https://tar-heel-calendar.herokuapp.com/). Note it is not stable nor secure, so use with caution. The live website will restart with each upstream Git commit.

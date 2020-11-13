@@ -18,7 +18,7 @@ class ViewSelector extends Component {
 
     handleSelect = (id) => {
         this.state.buttons.forEach((button) => {
-            if(button.id == id) {
+            if(button.id === id) {
                 button.selected = 1;
             } else {
                 button.selected = 0;
