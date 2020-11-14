@@ -2,11 +2,82 @@ import React, {Component} from 'react';
 
 class Week extends Component {
     state = {};
+
+    toggleEditBox(event) {
+        event.persist();
+        console.log(event);
+        let td = event.nativeEvent.path[0];
+        let edit_box = document.getElementById("edit-box");
+        let content = document.getElementById("edit-box-content");
+        if(edit_box.className == "modal is-active") {
+            edit_box.className = "modal";
+            while(content.firstChild) {
+                content.removeChild(content.firstChild);
+            }
+        } else {
+            edit_box.className = "modal is-active";
+            let task = document.createElement("p");
+            task.innerHTML = td.innerHTML;
+            content.append(task);
+        }
+    }
+
+    createEditBox() {
+        return (
+            <div id="edit-box" class="modal">
+                <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                        <p class="modal-card-title">Here Are Your Tasks!</p>
+                        <button onClick={this.toggleEditBox} class="delete" aria-label="close"></button>
+                        </header>
+                        <section id="edit-box-content" class="modal-card-body">
+                        </section>
+                        <footer class="modal-card-foot">
+                        <button class="button is-warning">Edit</button>
+                        <button class="button is-success">Save changes</button>
+                        <button onClick={this.toggleEditBox} class="button">Cancel</button>
+                        </footer>
+                    </div>
+                </div>
+                
+        )
+    }
+
+    _renderRowByHour(time) {
+        let messages = ["Prepare for exam", "Fail 521 exam", "Move on with life", "Anticipate future",
+                        "Who cares about future, it's Friday!", "Sleep", "Hello"];
+        let rows = [];
+        messages.forEach((task) => {
+            rows.push(
+            <td onClick={this.toggleEditBox}>{task}</td>
+            );
+        })
+        return (
+            <tr>
+                <th>{time}</th>
+                {rows}
+            </tr>
+        )
+    }
+
+    _renderBody() {
+        let rows = [];
+        for(let i = 0; i < 24; i++) {
+            rows.push(this._renderRowByHour(i));
+        }
+        return (
+            <tbody>
+                {rows}
+            </tbody>
+        )
+    }
+
     render() {
         return (
             <div className="calendar">
                 <div className="container">
-                <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                     <thead>
                     <tr className="is-bordered">
                         <th></th>
@@ -19,252 +90,10 @@ class Week extends Component {
                         <th>Saturday</th>
                     </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                        <th>12am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>1am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>2am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>3am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>4am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>5am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>6am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>7am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>8am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>9am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>10am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>11am</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>12pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>1pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>2pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>3pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>4pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>5pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>6pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>7pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>8pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>9pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>10pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                        <tr>
-                        <th>11pm</th>
-                        <td>Prepare for exam</td>
-                        <td>Fail 521 exam</td>
-                        <td>Move on with life</td>
-                        <td>Anticipate future</td>
-                        <td>Who cares about future, it's Friday!</td>
-                        <td>Sleep</td>
-                        <td>Hello</td>
-                        </tr>
-                    </tbody>
-                    
-
+                    {this._renderBody()}
                 </table>
-                </div>
+                {this.createEditBox()}
+            </div>
             </div>
         )
     }

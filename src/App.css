@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+td {
+  height: 100px;
+}
+
+td:hover {
+  color: white;
+  background-color: #61dafb;
+}
+
 .App-logo {
   height: 10vmin;
   pointer-events: none;
