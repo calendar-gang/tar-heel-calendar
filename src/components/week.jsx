@@ -5,7 +5,6 @@ class Week extends Component {
 
     toggleEditBox(event) {
         event.persist();
-        console.log(event);
         let td = event.nativeEvent.path[0];
         let edit_box = document.getElementById("edit-box");
         let content = document.getElementById("edit-box-content");
