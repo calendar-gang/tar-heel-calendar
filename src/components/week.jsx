@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 
 class Week extends Component {
     state = {};
+
+
     render() {
         return (
             <div className="calendar">
                 <div className="container">
-                <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                     <thead>
                     <tr className="is-bordered">
                         <th></th>
@@ -261,8 +263,6 @@ class Week extends Component {
                         <td>Hello</td>
                         </tr>
                     </tbody>
-                    
-
                 </table>
                 </div>
             </div>

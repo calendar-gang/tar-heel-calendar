@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import ViewSelectorButton from './viewSelectorButton';
 import Week from './week';
 import Day from './day';
+import Year from './year';
+import Month from './month';
 
 import '../App.css';
 
@@ -28,6 +30,7 @@ class ViewSelector extends Component {
     }
 
     render() {
+        let view = null;
         return (
             <div>
             <div className="container">
@@ -39,7 +42,22 @@ class ViewSelector extends Component {
                     </ul>
                 </div>
             </div>
-            <Week />
+            {
+                this.state.buttons.forEach((button) => {
+                    if(button.selected) {
+                        if(button.name == "Day") {
+                            view = <Day />
+                        } else if(button.name == "Week") {
+                            view = <Week />
+                        } else if(button.name == "Month") {
+                            view = <Month />
+                        } else {
+                            view = <Year />
+                        }
+                    }
+                })
+            }
+            {view}
             </div>
         )
     }
