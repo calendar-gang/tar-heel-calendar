@@ -6,19 +6,19 @@ class ViewSelectorButton extends Component {
     getStyle = () => {
         if (this.props.selected === 1) {
             return {
-                backgroundColor: "#0b1846",
+                backgroundColor: "#b5e3f8",
             };
         }
         return {
-            backgroundColor: "#b5e3f8",
+            backgroundColor: "#e6e6e6",
         };
     }
 
     getClasses = () => {
         if (this.props.selected === 1) {
-            return "button is-primary selector-button";
+            return "button selector-button";
         }
-        return "button is-info-light selector-button";
+        return "button selector-button";
     }
 
     render() {

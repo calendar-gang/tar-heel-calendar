@@ -54,8 +54,9 @@ class Week extends Component {
         return (
             <div className="calendar">
                 <div className="container">
-                    <section style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
-                        <h1 class="has-text-left title">Week of 11/15/20 </h1>
+                    <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
+                        <h1 class="title level-left has-text-light" style={{ margin: "10px" }}>Week of 11/15/20 </h1>
+                        <a className="button is-light level-right">New Entry</a>
                     </section>
                 </div>
                 <div className="container">
