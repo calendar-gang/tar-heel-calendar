@@ -3,12 +3,13 @@
 }
 
 td {
-  height: 100px;
+  height: 80px;
 }
+
 
 td:hover {
   color: white;
-  background-color: #61dafb;
+  background-color: #f0f9fc;
 }
 
 .App-logo {
@@ -59,3 +60,7 @@ td:hover {
     transform: rotate(360deg);
   }
 }
+
+
+
+
