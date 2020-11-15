@@ -1,9 +1,19 @@
 # Tar Heel Calendar
 This is our final project for COMP 426: Modern Web Programming. It is under development.
 
+## Installation
+In order to run this project locally, you must have the following software installed:
+1. NodeJS and NPM. These will handle our JavaScript dependencies.
+2. MariaDB. (Theoretically MySQL might work too but let's not be soulless here.)
+
+HeidiSQL is also recommended for viewing the MariaDB databases directly. It can be installed alongside MariaDB.
+
+The database needs to be set up. Make sure to run the SQL scripts in `scripts/create/sql`, starting with `create_database.sql`. Note if you have any tables currently in the `calendar` database, they will be overwritten by these scripts. This is probably fine while testing.
+
 ## Starting
-1. Run `npm run start`. This will first build and then start the server.
-2. Now the app has started! Note _you_ must manually connect to [your local host](http://localhost:8080/), Node.js will not open this up automatically for you.
+1. Have the MariaDB server running.
+2. Run `npm run start`. This will first build and then start the server.
+3. Now the app has started! Note _you_ must manually connect to [your local host](http://localhost:8080/), Node.js will not open this up automatically for you.
 
 If you're only working on one end of the project, this may be a bit slow. There are a few other commands you can use if you feel this is the case:
 1. `npm run start-client` will run only the frontend. Note that, obviously, the frontend may not work very well without the backend.
