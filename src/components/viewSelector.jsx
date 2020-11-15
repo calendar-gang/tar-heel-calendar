@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ViewSelectorButton from './viewSelectorButton';
 import Week from './week';
-import WeekView from './weekview';
 import Day from './day';
 import Year from './year';
 import Month from './month';
@@ -49,7 +48,7 @@ class ViewSelector extends Component {
                             if (button.name == "Day") {
                                 view = <Day />
                             } else if (button.name == "Week") {
-                                view = <WeekView />
+                                view = <Week />
                             } else if (button.name == "Month") {
                                 view = <Month />
                             } else {

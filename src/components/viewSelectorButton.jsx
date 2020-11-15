@@ -1,18 +1,29 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../App.css';
 
 class ViewSelectorButton extends Component {
 
-    getColor = () => {
-        if(this.props.selected === 1) {
-            return "button is-success selector-button";
+    getStyle = () => {
+        if (this.props.selected === 1) {
+            return {
+                backgroundColor: "#0b1846",
+            };
         }
-        return "button is-info selector-button";
+        return {
+            backgroundColor: "#b5e3f8",
+        };
+    }
+
+    getClasses = () => {
+        if (this.props.selected === 1) {
+            return "button is-primary selector-button";
+        }
+        return "button is-info-light selector-button";
     }
 
     render() {
         return (
-            <li ><a ><button key={this.props.id} onClick={() => this.props.onSelect(this.props.id)} className={this.getColor()}>{this.props.name}</button></a></li>
+            <li ><a ><button key={this.props.id} onClick={() => this.props.onSelect(this.props.id)} style={this.getStyle()} className={this.getClasses()}>{this.props.name}</button></a></li>
         );
     }
 }

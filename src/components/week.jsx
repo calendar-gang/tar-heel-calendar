@@ -1,60 +1,38 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import WeekEvent from './weekEvent';
 
 class Week extends Component {
-    state = {};
+    state = {}
 
-    toggleEditBox(event) {
-        event.persist();
-        let td = event.nativeEvent.path[0];
-        let edit_box = document.getElementById("edit-box");
-        let content = document.getElementById("edit-box-content");
-        if(edit_box.className == "modal is-active") {
-            edit_box.className = "modal";
-            while(content.firstChild) {
-                content.removeChild(content.firstChild);
-            }
-        } else {
-            edit_box.className = "modal is-active";
-            let task = document.createElement("p");
-            task.innerHTML = td.innerHTML;
-            content.append(task);
-        }
-    }
+    _findHour(time) {
+        if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
+        else { return (time % 12) === 0 ? "12 PM" : (time % 12) + " PM" }
 
-    createEditBox() {
-        return (
-            <div id="edit-box" class="modal">
-                <div class="modal-background"></div>
-                    <div class="modal-card">
-                        <header class="modal-card-head">
-                        <p class="modal-card-title">Here Are Your Tasks!</p>
-                        <button onClick={this.toggleEditBox} class="delete" aria-label="close"></button>
-                        </header>
-                        <section id="edit-box-content" class="modal-card-body">
-                        </section>
-                        <footer class="modal-card-foot">
-                        <button class="button is-warning">Edit</button>
-                        <button class="button is-success">Save changes</button>
-                        <button onClick={this.toggleEditBox} class="button">Cancel</button>
-                        </footer>
-                    </div>
-                </div>
-                
-        )
     }
 
     _renderRowByHour(time) {
-        let messages = ["Prepare for exam", "Fail 521 exam", "Move on with life", "Anticipate future",
-                        "Who cares about future, it's Friday!", "Sleep", "Hello"];
+        let messages = ["", "", "", "",
+            "", "", ""];
         let rows = [];
-        messages.forEach((task) => {
-            rows.push(
-            <td onClick={this.toggleEditBox}>{task}</td>
-            );
-        })
+        if (time === 0) {
+            messages.forEach((task) => {
+                rows.push(
+                    // onClick={this.toggleEditBox}
+                    <td>{task}<WeekEvent /></td>
+                );
+            })
+        } else {
+            messages.forEach((task) => {
+                rows.push(
+                    // onClick={this.toggleEditBox}
+                    <td>{task}</td>
+                );
+            })
+        }
+
         return (
             <tr>
-                <th>{time}</th>
+                <th className="has-text-grey-light has-text-left">{this._findHour(time)}</th>
                 {rows}
             </tr>
         )
@@ -62,7 +40,7 @@ class Week extends Component {
 
     _renderBody() {
         let rows = [];
-        for(let i = 0; i < 24; i++) {
+        for (let i = 0; i < 24; i++) {
             rows.push(this._renderRowByHour(i));
         }
         return (
@@ -76,23 +54,27 @@ class Week extends Component {
         return (
             <div className="calendar">
                 <div className="container">
-                <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
-                    <thead>
-                    <tr className="is-bordered">
-                        <th></th>
-                        <th>Sunday</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                    </tr>
-                    </thead>
-                    {this._renderBody()}
-                </table>
-                {this.createEditBox()}
-            </div>
+                    <section style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
+                        <h1 class="has-text-left title">Week of 11/15/20 </h1>
+                    </section>
+                </div>
+                <div className="container">
+                    <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                            <tr className="is-bordered">
+                                <th></th>
+                                <th className="has-text-grey-light" >Sunday</th>
+                                <th className="has-text-grey-light">Monday</th>
+                                <th className="has-text-grey-light">Tuesday</th>
+                                <th className="has-text-grey-light">Wednesday</th>
+                                <th className="has-text-grey-light">Thursday</th>
+                                <th className="has-text-grey-light">Friday</th>
+                                <th className="has-text-grey-light">Saturday</th>
+                            </tr>
+                        </thead>
+                        {this._renderBody()}
+                    </table>
+                </div>
             </div>
         )
     }

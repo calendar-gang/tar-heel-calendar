@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../App.css'
 
 class NavBar extends Component {
@@ -15,7 +15,7 @@ class NavBar extends Component {
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">
-                            <a className="button is-primary">
+                            <a className="button" style={{ backgroundColor: "#b5e3f8" }}>
                                 Sign Up
                             </a>
                             <a className="button is-light">
@@ -25,7 +25,7 @@ class NavBar extends Component {
 
                     </div>
                 </div>
-                    
+
             </nav>
         );
     }
