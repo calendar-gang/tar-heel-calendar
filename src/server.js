@@ -6,7 +6,7 @@ const mysql = require('mysql');
 
 const port = process.env.PORT || 8080;
 const db = mysql.createConnection(process.env.JAWSDB_MARIA_URL || {
-    host: process.env.DBHOST || 'localhost', // on port 3306. this doesn't need to be specified.
+    host: process.env.DBHOST || 'localhost',
     user: process.env.DBUSER || 'root',
     password: process.env.DBPASSWORD || 'password',
     database: process.env.DBDATABASE || 'calendar'
@@ -18,7 +18,7 @@ db.connect(function(err) {
         return;
     }
 
-    console.log('Connected as id ' + db.threadId);
+    console.log('Connected to database as id ' + db.threadId);
 });
 
 const app = express();
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-app.post('/register', async(req, res) => {
+app.post('/register', (req, res) => {
     const { username, email, firstname, lastname, password } = req.body;
     // TODO: encrypt password
     if(!isStringValidLength(username, 1, 100)
@@ -54,7 +54,7 @@ app.post('/register', async(req, res) => {
     let canProcede = true;
 
     // TODO: this could be one query but that's a lot of work
-    await db.query(`SELECT username
+    db.query(`SELECT username
             FROM Users
             WHERE username=?`, username, (error, results, fields) => {
         if(error) throw error;
@@ -71,7 +71,7 @@ app.post('/register', async(req, res) => {
 
     if(!canProcede) return; // there's gotta be a better way to do but I'm too tired
 
-    await db.query(`SELECT email
+    db.query(`SELECT email
             FROM Users
             WHERE email=?`, email, (error, results, fields) => {
         if(error) throw error;
@@ -88,7 +88,7 @@ app.post('/register', async(req, res) => {
 
     if(!canProcede) return;
 
-    await db.query(`INSERT INTO Users(username, email, firstname, lastname, password)
+    db.query(`INSERT INTO Users(username, email, firstname, lastname, password)
             VALUES (?, ?, ?, ?, ?)`, [username, email, firstname, lastname, password],
             (error, results, fields) => {
         if(error) throw error;
