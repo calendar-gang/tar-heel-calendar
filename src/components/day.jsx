@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Task from './task';
+import ReactDOM from 'react-dom'
 
 class Day extends Component {
     state = {}
@@ -45,10 +46,16 @@ class Day extends Component {
 
     createTask(event) {
         let tasktext = this.refs.tasktext.value;
-        window.alert(tasktext)
+        // window.alert(tasktext)
         this.toggletaskform(event)
-        // let mytask = <Task />
-        // document.getElementById("tasklist").append(<p>hello</p>)
+        const d = document.createElement("div")
+        const id = Math.random() 
+        d.id = id
+        document.getElementById('newtasks').appendChild(d)
+        ReactDOM.render((<div class="box" style={{margin: "10px"}}>
+        <input type="checkbox"/>
+        <label class="task" style={{marginLeft: "5px"}}>{tasktext}</label><br/>
+        </div>), document.getElementById(id));
     }
 
     rendertaskform() {
@@ -116,6 +123,7 @@ class Day extends Component {
                             <input type="checkbox" id="task2" name="task2"/>
                             <label for="task2" class="task"> start adding data!!</label><br/>
                         </div>
+                        <div id="newtasks"></div>
                         {this.rendertaskform()}
                     </div>
                 </div>
