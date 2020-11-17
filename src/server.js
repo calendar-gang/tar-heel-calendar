@@ -93,27 +93,31 @@ app.post('/login', (req, res) => {
             || !isStringValidLength(password, 5, 255)){
         res.status(400);
         res.json({
-            message: "Invalid length of parameter."
+            message: "Invalid length of parameter.",
+            username: username,
+            password: password
         });
 
-        db.query(`SELECT username, password
+        return;
+    }
+
+    db.query(`SELECT username, password
             FROM Users
             WHERE username=?`, [username], (error, results, fields) => {
 
-            if(error) throw error;
+        if(error) throw error;
 
-            if(results.length !== 0){
-                res.status(400);
-                res.json({
-                    message: "Username missing."
-                });
+        if(results.length !== 0){
+            res.status(400);
+            res.json({
+                message: "Username missing."
+            });
 
-                return;
-            }
+            return;
+        }
 
-            console.log(results);
-        });
-    }
+        console.log(results);
+    });
 });
 
 function isStringValidLength(str, min, max){
