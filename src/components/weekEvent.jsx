@@ -60,7 +60,7 @@ class WeekEvent extends Component {
                 { this.createEditBox()}
             </div>
 
-        )
+        ) 
     }
 }
 
