@@ -27,14 +27,15 @@ class NavBar extends Component {
     }
 
     clickMe(event) {
-        // window.alert("clicked ")
-        // console.log(this.refs.pword.value)
         let valid = this.checkpassword(this.refs.pword.value)
-        if (valid) {
-            // window.alert("good to go")
+        let flen = this.refs.fname.value.length
+        let llen = this.refs.lname.value.length
+        let ulen = this.refs.uname.value.length
+        let elen = this.refs.email.value.length
+        if ( valid && flen > 0 && llen > 0 && ulen > 0 && elen > 4 ) {
             this.toggleSUBox(event)
         } else {
-            window.alert("try again")
+            window.alert("Invalid input field, please try again.")
         }
     }
 
@@ -76,19 +77,19 @@ class NavBar extends Component {
                     <div class="field is-horizontal">
                         <label class="label sulabel" style={sulabel}>Last Name:</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Doe" style={inputval}></input>
+                            <input class="input" type="text" ref="lname" placeholder="Doe" style={inputval}></input>
                         </div>
                     </div>
                     <div class="field is-horizontal">
                         <label class="label sulabel" style={sulabel}>Email:</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="johndoe@live.unc.edu" style={inputval}></input>
+                            <input class="input" type="text" ref="email" placeholder="johndoe@live.unc.edu" style={inputval}></input>
                         </div>
                     </div>
                     <div class="field is-horizontal">
                         <label class="label sulabel" style={sulabel}>Username:</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="johndoughboy33" style={inputval}></input>
+                            <input class="input" ref="uname" type="text" placeholder="johndoughboy33" style={inputval}></input>
                         </div>
                     </div>
                     <div class="field is-horizontal">
