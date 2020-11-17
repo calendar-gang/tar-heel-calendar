@@ -31,7 +31,7 @@ If you're only working on one end of the project, this may be a bit slow. There 
 * [Bulma](https://github.com/jgthms/bulma)
 * [axios](https://github.com/axios/axios)
 * [express](https://github.com/expressjs/express)
-* [mysql (Node.JS library)](https://www.npmjs.com/package/mysql)
+* [mysql (the npm package)](https://www.npmjs.com/package/mysql)
 * [MariaDB](https://mariadb.org/)
 * [Heroku](https://www.heroku.com/)
 
