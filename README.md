@@ -15,7 +15,7 @@ The database then needs to be set up. Run the following in the command line to d
 These processes will kinda just keep going even after they are done, so count to five and then force quit the process.
 
 ## Starting
-1. Have the MariaDB server running.
+1. Have the MariaDB server running. In order to log in/connect, JawsDB will interject their information if on the Heroku server, OR the calendar will use environmental variables for credentials (`DBHOST`, `DBUSER`, `DBPASSWORD`), or if those don't exist, defaults will be used (`'localhost'`, `'root'`, `'password'`).
 2. Run `npm run start`. This will first build and then start the server.
 3. Now the app has started! Note _you_ must manually connect to [your local host](http://localhost:8080/), Node.js will not open this up automatically for you.
 

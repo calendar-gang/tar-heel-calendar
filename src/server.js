@@ -32,8 +32,10 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/***
- * REQUESTS
+/*
+*****************
+* REQUESTS
+******************
  */
 
 app.get('/', (req, res) => {
@@ -86,7 +88,6 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    // TODO: wip
     const { username, password } = req.body;
 
     if(!isStringValidLength(username, 1, 100)
