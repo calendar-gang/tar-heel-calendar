@@ -71,9 +71,9 @@ app.post('/register', (req, res) => {
             return;
         }
 
-        let encryptedPassword = crypto.createHash('sha256').update(password).digest('base64');
+        let encryptedPassword = getHashedPassword(password);
 
-        db.query(`INSERT INTO Users(username, email, firstname, lastname, password)
+        db.query(`INSERT INTO users(username, email, firstname, lastname, password)
                 VALUES (?, ?, ?, ?, ?)`, [username, email, firstname, lastname, encryptedPassword],
                 (error, results, fields) => {
             if(error) throw error;
@@ -93,9 +93,7 @@ app.post('/login', (req, res) => {
             || !isStringValidLength(password, 5, 255)){
         res.status(400);
         res.json({
-            message: "Invalid length of parameter.",
-            username: username,
-            password: password
+            message: "Invalid length of parameter."
         });
 
         return;
@@ -107,7 +105,7 @@ app.post('/login', (req, res) => {
 
         if(error) throw error;
 
-        if(results.length !== 0){
+        if(results.length=== 0){
             res.status(400);
             res.json({
                 message: "Username missing."
@@ -116,12 +114,40 @@ app.post('/login', (req, res) => {
             return;
         }
 
-        console.log(results);
+        if(getHashedPassword(password) !== results[0].password){
+            res.status(400);
+            res.json({
+                message: "Password incorrect."
+            });
+
+            return;
+        }
+
+        const token = generateAuthToken();
+
+        db.query(`INSERT INTO tokens(token, username)
+                VALUES (?, ?)`, [token, username],
+                (error, results, fields) => {
+            if(error) throw error;
+
+            res.json({
+                message: "Logged in.",
+                token: token
+            });
+        });
     });
 });
 
 function isStringValidLength(str, min, max){
     return str !== undefined && typeof(str) === "string" && str.length >= min && str.length <= max;
+}
+
+function getHashedPassword(password){
+    return crypto.createHash('sha256').update(password).digest('base64');
+}
+
+function generateAuthToken(){
+    return crypto.randomBytes(30).toString('hex');
 }
 
 app.listen(port);
