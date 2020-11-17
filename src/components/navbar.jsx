@@ -14,16 +14,50 @@ class NavBar extends Component {
         }
     }
 
+    checkpassword(pword) {
+        // checks to make sure passowrd is between 8 and 100 chars, 
+        // contains at least one lowercase letter, one uppercase letter, 
+        // one numeric digit, and one special character
+        var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
+        if(decimal.test(pword)) { 
+            return true;
+        } else { 
+            return false;
+        }
+    }
+
+    clickMe(event) {
+        // window.alert("clicked ")
+        // console.log(this.refs.pword.value)
+        let valid = this.checkpassword(this.refs.pword.value)
+        if (valid) {
+            // window.alert("good to go")
+            this.toggleSUBox(event)
+        } else {
+            window.alert("try again")
+        }
+    }
+
     renderSignUp() {
         const header_style = {
             backgroundColor: "#b5e3f8",
             height: "75px"
-
-
         }
         const center = {
             left: "265px"
         }
+
+        const inputval = {
+            margin: "10px",
+            width: "300px"
+        }
+
+        const sulabel = {
+            margin: "10px",
+            marginLeft: "55px",
+            width: "100px"
+        }
+
         return (
             <div id="signup-box" class="modal">
                 <div class="modal-background"></div>
@@ -32,18 +66,43 @@ class NavBar extends Component {
                         <p class="modal-card-title">Welcome new user! Create an account below:</p>
                         <button onClick={this.toggleSUBox} class="delete" aria-label="close"></button>
                     </header>
-                    <div class="form modal-card-body" style={{height: "200px"}}>
-                        <label class="label">New Username</label>
+                    <div class="form modal-card-body">
+                    <div class="field is-horizontal">
+                        <label class="label sulabel" style={sulabel}>First Name:</label>
                         <div class="control">
-                            <input class="input" type="text"></input>
-                        </div>
-                        <label class="label">New Password</label>
-                        <div class="control">
-                            <input class="input" type="text"></input>
+                            <input class="input"  id= "fninput" ref="fname" type="text" placeholder="John" style={inputval}></input>
                         </div>
                     </div>
+                    <div class="field is-horizontal">
+                        <label class="label sulabel" style={sulabel}>Last Name:</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Doe" style={inputval}></input>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <label class="label sulabel" style={sulabel}>Email:</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="johndoe@live.unc.edu" style={inputval}></input>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <label class="label sulabel" style={sulabel}>Username:</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="johndoughboy33" style={inputval}></input>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <label class="label sulabel" style={sulabel}>Password:</label>
+                        <div class="control">
+                            <input class="input" ref="pword" type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
+                        </div>
+                    </div>
+                    <p>Note: Passwords must be at least 8 characters long and include at least one of each of the following: 
+                        uppercase letter, lowercase letter, special character, and a number!
+                            </p>
+                    </div>
                     <footer class="modal-card-foot" style={header_style}>
-                        <button class="button login" onClick={this.toggleSUBox} style={center}>Sign Up</button>
+                        <button class="button signup" id="signupbutton" onClick={this.clickMe.bind(this)} style={center}>Sign Up</button>
                     </footer>
                 </div>
             </div>
@@ -72,6 +131,17 @@ class NavBar extends Component {
             left: "275px"
         }
 
+        const inputval = {
+            margin: "10px",
+            width: "300px"
+        }
+
+        const sulabel = {
+            margin: "10px",
+            marginLeft: "55px",
+            width: "100px"
+        }
+
         return (
             <div id="login-box" class="modal">
                 <div class="modal-background"></div>
@@ -81,13 +151,17 @@ class NavBar extends Component {
                         <button onClick={this.toggleLoginBox} class="delete" aria-label="close"></button>
                     </header>
                     <div class="form modal-card-body" style={{height:"200px"}}>
-                        <label class="label">Username</label>
-                        <div class="control">
-                            <input class="input" type="text"></input>
+                        <div class="field is-horizontal">
+                            <label class="label" style={sulabel}>Username:</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="johndoughboy33" style={inputval}></input>
+                            </div>
                         </div>
-                        <label class="label">Password</label>
-                        <div class="control">
-                            <input class="input" type="text"></input>
+                        <div class="field is-horizontal">
+                            <label class="label" style={sulabel}>Password:</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
+                            </div>
                         </div>
                     </div>
                     <footer class="modal-card-foot" style={header_style}>

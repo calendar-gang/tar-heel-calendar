@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Task from './task';
 
 class Day extends Component {
     state = {}
@@ -32,7 +33,7 @@ class Day extends Component {
 
     toggletaskform(event) {
         event.persist();
-        let name = event.target.id;
+        // let name = event.target.id;
         let edit_box = document.getElementById("newtask");
 
         if (edit_box.className == "modal is-active") {
@@ -40,6 +41,14 @@ class Day extends Component {
         } else {
             edit_box.className = "modal is-active";
         }
+    }
+
+    createTask(event) {
+        let tasktext = this.refs.tasktext.value;
+        window.alert(tasktext)
+        this.toggletaskform(event)
+        // let mytask = <Task />
+        // document.getElementById("tasklist").append(<p>hello</p>)
     }
 
     rendertaskform() {
@@ -51,12 +60,12 @@ class Day extends Component {
                 <button onClick={this.toggletaskform} class="delete" aria-label="close"></button>
             </header>
             <div class="control">
-                <input class="input" type="text" placeholder="New Task"/>
+                <input class="input" ref="tasktext" type="text" placeholder="New Task"/>
             </div>
             <section id="login-box-content" class="modal-card-body">
             </section>
             <footer class="modal-card-foot">
-                <button class="button create" id="createtask" onClick={this.toggletaskform}>Create</button>
+                <button class="button create" id="createtask" onClick={this.createTask.bind(this)}>Create</button>
             </footer>
             
         </div>
@@ -97,13 +106,13 @@ class Day extends Component {
                         <section className="level" style={{ backgroundColor: "#0b1846", height: "50px" }}>
                             <h1 class="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                         </section>
-                    <div className="container tasklist box" style={{ backgroundColor: "white", height: "95%", margin: "15px"}}>
+                    <div className="container tasklist box" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px"}}>
                         <a className="button taskmaker" id="newtaskbutton" style={{ margin: "10px",  backgroundColor: "gray", color: "white"}} onClick={this.toggletaskform}><strong>Add a task!</strong></a><br/>
-                        <div style={{margin: "10px"}}>
+                        <div class="box" style={{margin: "10px"}}>
                             <input type="checkbox" id="task1" name="task1"/>
                             <label for="task1" class="task"> Be able to make new tasks</label><br/>
                         </div>
-                        <div style={{margin: "10px"}}>
+                        <div class="box" style={{margin: "10px"}}>
                             <input type="checkbox" id="task2" name="task2"/>
                             <label for="task2" class="task"> start adding data!!</label><br/>
                         </div>
