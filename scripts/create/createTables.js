@@ -17,7 +17,7 @@ db.connect(function(err) {
     console.log('Connected to database as id ' + db.threadId);
 });
 
-['create_users.sql'].forEach(file => {
+['create_users.sql', 'create_tokens.sql'].forEach(file => {
     fs.readFile(`scripts/create/sql/${file}`, 'utf8', (err, data) => {
         if(err){
             console.error(err);

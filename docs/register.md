@@ -12,7 +12,8 @@ This file describes the `/register` endpoint.
     * `password`: string of up to 5-255 characters. Currently, there are not any kind of complexity check, excluding length restrictions.
     
 ## Notes
-Make sure to check for constraints on the frontend so that no improper requests are sent. As seen below, the server can deal with bad requests, but the error messages are not very specific.
+* Make sure to check for constraints on the frontend so that no improper requests are sent. As seen below, the server can deal with bad requests, but the error messages are not very specific.
+* Although the password is encrypted in the database, security is not being strongly focused on here. Please warn the user that this application is in the development phase and as such, any password should be specific to this site.
     
 ## Example operations
 ### Example (valid input)

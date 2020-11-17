@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-app.post('/register', async(req, res) => {
+app.post('/register', (req, res) => {
     const { username, email, firstname, lastname, password } = req.body;
     if(!isStringValidLength(username, 1, 100)
             || !isStringValidLength(email, 5, 255)
@@ -56,7 +56,7 @@ app.post('/register', async(req, res) => {
         return;
     }
 
-    let f = db.query(`SELECT username, email
+    db.query(`SELECT username, email
             FROM Users
             WHERE username=? OR email=?`, [username, email], (error, results, fields) => {
         if(error) throw error;
@@ -83,6 +83,37 @@ app.post('/register', async(req, res) => {
             });
         });
     });
+});
+
+app.post('/login', (req, res) => {
+    // TODO: wip
+    const { username, password } = req.body;
+
+    if(!isStringValidLength(username, 1, 100)
+            || !isStringValidLength(password, 5, 255)){
+        res.status(400);
+        res.json({
+            message: "Invalid length of parameter."
+        });
+
+        db.query(`SELECT username, password
+            FROM Users
+            WHERE username=?`, [username], (error, results, fields) => {
+
+            if(error) throw error;
+
+            if(results.length !== 0){
+                res.status(400);
+                res.json({
+                    message: "Username missing."
+                });
+
+                return;
+            }
+
+            console.log(results);
+        });
+    }
 });
 
 function isStringValidLength(str, min, max){
