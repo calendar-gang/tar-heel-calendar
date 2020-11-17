@@ -9,7 +9,7 @@ const db = mysql.createConnection(process.env.JAWSDB_MARIA_URL || {
     host: process.env.DBHOST || 'localhost',
     user: process.env.DBUSER || 'root',
     password: process.env.DBPASSWORD || 'password',
-    database: process.env.DBDATABASE || 'calendar'
+    database: 'calendar'
 });
 
 db.connect(function(err) {

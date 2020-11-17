@@ -1,4 +1,4 @@
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
 	`username` CHAR(100) NOT NULL COLLATE 'utf8_general_ci',
 	`email` CHAR(100) NOT NULL COLLATE 'utf8_general_ci',
 	`firstname` CHAR(100) NOT NULL COLLATE 'utf8_general_ci',

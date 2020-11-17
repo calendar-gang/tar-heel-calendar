@@ -8,7 +8,11 @@ In order to run this project locally, you must have the following software insta
 
 HeidiSQL is also recommended for viewing the MariaDB databases directly. It can be installed alongside MariaDB.
 
-The database needs to be set up. Make sure to run the SQL scripts in `scripts/create/sql`, starting with `create_database.sql`. Note if you have any tables currently in the `calendar` database, they will be overwritten by these scripts. This is probably fine while testing.
+The database then needs to be set up. Run the following in the command line to do this:
+1. `npm run create-database`
+2. `npm run create-tables`
+
+These processes will kinda just keep going even after they are done, so count to five and then force quit the process.
 
 ## Starting
 1. Have the MariaDB server running.
@@ -17,7 +21,7 @@ The database needs to be set up. Make sure to run the SQL scripts in `scripts/cr
 
 If you're only working on one end of the project, this may be a bit slow. There are a few other commands you can use if you feel this is the case:
 1. `npm run start-client` will run only the frontend. Note that, obviously, the frontend may not work very well without the backend.
-2. `npm run start-server` will run the backend without attempting to build the frontend. If your frontend is already built, this is fine, but any changes to the frontend must be built manually.
+2. `npm run start-server` will run the backend without attempting to build the frontend. If your frontend is already built, this is fine, but any changes to the frontend must be rebuilt manually.
 3. `npm run build` will build the frontend.
 4. `npm run test` will run frontend unit tests.
 
@@ -27,6 +31,8 @@ If you're only working on one end of the project, this may be a bit slow. There 
 * [Bulma](https://github.com/jgthms/bulma)
 * [axios](https://github.com/axios/axios)
 * [express](https://github.com/expressjs/express)
+* [mysql (Node.JS library)](https://www.npmjs.com/package/mysql)
+* [MariaDB](https://mariadb.org/)
 * [Heroku](https://www.heroku.com/)
 
 Other technologies used are listed in [`package.json`](package.json).
