@@ -7,7 +7,7 @@ class NavBar extends Component {
     toggleSUBox(event) {
         event.persist();
         let edit_box = document.getElementById("signup-box");
-        if (edit_box.className == "modal is-active") {
+        if (edit_box.className === "modal is-active") {
             edit_box.className = "modal";
         } else {
             edit_box.className = "modal is-active";
@@ -18,7 +18,7 @@ class NavBar extends Component {
         // checks to make sure passowrd is between 8 and 100 chars, 
         // contains at least one lowercase letter, one uppercase letter, 
         // one numeric digit, and one special character
-        var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
+        let decimal =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
         if(decimal.test(pword)) { 
             return true;
         } else { 
@@ -60,50 +60,50 @@ class NavBar extends Component {
         }
 
         return (
-            <div id="signup-box" class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head" style={header_style}>
-                        <p class="modal-card-title">Welcome new user! Create an account below:</p>
-                        <button onClick={this.toggleSUBox} class="delete" aria-label="close"></button>
+            <div id="signup-box" className="modal">
+                <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head" style={header_style}>
+                        <p className="modal-card-title">Welcome new user! Create an account below:</p>
+                        <button onClick={this.toggleSUBox} className="delete" aria-label="close"></button>
                     </header>
-                    <div class="form modal-card-body">
-                    <div class="field is-horizontal">
-                        <label class="label sulabel" style={sulabel}>First Name:</label>
-                        <div class="control">
-                            <input class="input"  id= "fninput" ref="fname" type="text" placeholder="John" style={inputval}></input>
+                    <div className="form modal-card-body">
+                    <div className="field is-horizontal">
+                        <label className="label sulabel" style={sulabel}>First Name:</label>
+                        <div className="control">
+                            <input className="input"  id= "fninput" ref="fname" type="text" placeholder="John" style={inputval}></input>
                         </div>
                     </div>
-                    <div class="field is-horizontal">
-                        <label class="label sulabel" style={sulabel}>Last Name:</label>
-                        <div class="control">
-                            <input class="input" type="text" ref="lname" placeholder="Doe" style={inputval}></input>
+                    <div className="field is-horizontal">
+                        <label className="label sulabel" style={sulabel}>Last Name:</label>
+                        <div className="control">
+                            <input className="input" type="text" ref="lname" placeholder="Doe" style={inputval}></input>
                         </div>
                     </div>
-                    <div class="field is-horizontal">
-                        <label class="label sulabel" style={sulabel}>Email:</label>
-                        <div class="control">
+                    <div className="field is-horizontal">
+                        <label className="label sulabel" style={sulabel}>Email:</label>
+                        <div className="control">
                             <input class="input" type="text" ref="email" placeholder="johndoe@live.unc.edu" style={inputval}></input>
                         </div>
                     </div>
-                    <div class="field is-horizontal">
-                        <label class="label sulabel" style={sulabel}>Username:</label>
-                        <div class="control">
-                            <input class="input" ref="uname" type="text" placeholder="johndoughboy33" style={inputval}></input>
+                    <div className="field is-horizontal">
+                        <label className="label sulabel" style={sulabel}>Username:</label>
+                        <div className="control">
+                            <input className="input" ref="uname" type="text" placeholder="johndoughboy33" style={inputval}></input>
                         </div>
                     </div>
-                    <div class="field is-horizontal">
-                        <label class="label sulabel" style={sulabel}>Password:</label>
-                        <div class="control">
-                            <input class="input" ref="pword" type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
+                    <div className="field is-horizontal">
+                        <label className="label sulabel" style={sulabel}>Password:</label>
+                        <div className="control">
+                            <input className="input" ref="pword" type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
                         </div>
                     </div>
                     <p>Note: Passwords must be at least 8 characters long and include at least one of each of the following: 
                         uppercase letter, lowercase letter, special character, and a number!
                             </p>
                     </div>
-                    <footer class="modal-card-foot" style={header_style}>
-                        <button class="button signup" id="signupbutton" onClick={this.clickMe.bind(this)} style={center}>Sign Up</button>
+                    <footer className="modal-card-foot" style={header_style}>
+                        <button className="button signup" id="signupbutton" onClick={this.clickMe.bind(this)} style={center}>Sign Up</button>
                     </footer>
                 </div>
             </div>
@@ -115,7 +115,7 @@ class NavBar extends Component {
     toggleLoginBox(event) {
         event.persist();
         let edit_box = document.getElementById("login-box");
-        if (edit_box.className == "modal is-active") {
+        if (edit_box.className === "modal is-active") {
             edit_box.className = "modal";
         } else {
             edit_box.className = "modal is-active";
@@ -145,28 +145,28 @@ class NavBar extends Component {
 
         return (
             <div id="login-box" class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head" style={header_style}>
-                        <p class="modal-card-title">Let's Get Productive!</p>
-                        <button onClick={this.toggleLoginBox} class="delete" aria-label="close"></button>
+                <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head" style={header_style}>
+                        <p className="modal-card-title">Let's Get Productive!</p>
+                        <button onClick={this.toggleLoginBox} className="delete" aria-label="close"></button>
                     </header>
-                    <div class="form modal-card-body" style={{height:"200px"}}>
-                        <div class="field is-horizontal">
-                            <label class="label" style={sulabel}>Username:</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="johndoughboy33" style={inputval}></input>
+                    <div className="form modal-card-body" style={{height:"200px"}}>
+                        <div className="field is-horizontal">
+                            <label className="label" style={sulabel}>Username:</label>
+                            <div className="control">
+                                <input className="input" type="text" placeholder="johndoughboy33" style={inputval}></input>
                             </div>
                         </div>
-                        <div class="field is-horizontal">
-                            <label class="label" style={sulabel}>Password:</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
+                        <div className="field is-horizontal">
+                            <label className="label" style={sulabel}>Password:</label>
+                            <div className="control">
+                                <input className="input" type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
                             </div>
                         </div>
                     </div>
-                    <footer class="modal-card-foot" style={header_style}>
-                        <button class="button login" onClick={this.toggleLoginBox} style={center}>Log in</button>
+                    <footer className="modal-card-foot" style={header_style}>
+                        <button className="button login" onClick={this.toggleLoginBox} style={center}>Log in</button>
                     </footer>
                     
                 </div>

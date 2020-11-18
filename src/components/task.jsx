@@ -4,9 +4,9 @@ class Task extends Component {
 
     render() {
         return (
-            <div class="box" style={{margin: "10px"}}>
+            <div className="box" style={{margin: "10px"}}>
                 <input type="checkbox"/>
-                <label class="task">new task</label><br/>
+                <label className="task">new task</label><br/>
             </div>
 
         ) 

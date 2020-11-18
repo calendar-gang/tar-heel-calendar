@@ -45,11 +45,11 @@ class ViewSelector extends Component {
                 {
                     this.state.buttons.forEach((button) => {
                         if (button.selected) {
-                            if (button.name == "Day") {
+                            if (button.name === "Day") {
                                 view = <Day />
-                            } else if (button.name == "Week") {
+                            } else if (button.name === "Week") {
                                 view = <Week />
-                            } else if (button.name == "Month") {
+                            } else if (button.name === "Month") {
                                 view = <Month />
                             } else {
                                 view = <Year />
