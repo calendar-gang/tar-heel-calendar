@@ -14,7 +14,7 @@ class ViewSelector extends Component {
             { id: 1, name: "Day", selected: 0 },
             { id: 2, name: "Week", selected: 1 },
             { id: 3, name: "Month", selected: 0 },
-            { id: 4, name: "Year", selected: 0 }
+            // { id: 4, name: "Year", selected: 0 }
         ]
     };
 
@@ -49,10 +49,8 @@ class ViewSelector extends Component {
                                 view = <Day />
                             } else if (button.name === "Week") {
                                 view = <Week />
-                            } else if (button.name === "Month") {
-                                view = <Month />
                             } else {
-                                view = <Year />
+                                view = <Month />
                             }
                         }
                     })

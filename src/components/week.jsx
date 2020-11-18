@@ -11,23 +11,15 @@ class Week extends Component {
     }
 
     _renderRowByHour(time) {
-        let messages = ["", "", "", "",
-            "", "", ""];
         let rows = [];
         if (time === 0) {
-            messages.forEach((task) => {
-                rows.push(
-                    // onClick={this.toggleEditBox}
-                    <td>{task}<WeekEvent /></td>
-                );
-            })
+            for (let i = 7; i--;) {
+                rows.push(<td><WeekEvent /></td>);
+            }
         } else {
-            messages.forEach((task) => {
-                rows.push(
-                    // onClick={this.toggleEditBox}
-                    <td>{task}</td>
-                );
-            })
+            for (let i = 7; i--;) {
+                rows.push(<td></td>);
+            }
         }
 
         return (
