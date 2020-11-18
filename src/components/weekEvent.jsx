@@ -4,8 +4,8 @@ class WeekEvent extends Component {
     state = {}
     catcolors = ["#ffd4d4", "#ffe6d4", "#fffbd4", "#e2ffd4", "#d4ffec", "#d4f6ff", "#d4dfff", "#f0d4ff", "#ffd4ee"]
 
-    /*toggleEventBox(event) {
-        // event.persist();
+    toggleEventBox(event) {
+        event.persist();
         let td = event.nativeEvent.path[0];
         let edit_box = document.getElementById("event-box");
         if (edit_box.className === "is-hidden") {
@@ -21,22 +21,14 @@ class WeekEvent extends Component {
                 <div className="card">
                     <header className="card-head">
                         <p className="card-title">Here is this event!</p>
-                        <button onClick={this.toggleEditBox} className="delete" aria-label="close"></button>
                     </header>
-                    <section id="event-box-content" class="card-body">
-                    </section>
-                    <footer className="card-foot">
-                        <button className="button is-warning">Edit</button>
-                        <button className="button is-success">Save changes</button>
-                        <button onClick={this.toggleEditBox} className="button">Cancel</button>
-                    </footer>
                 </div>
             </div>
 
         )
-    }*/
+    }
 
-    toggleEventEditBox(event) {
+    /*toggleEventEditBox(event) {
         event.persist();
         let td = event.nativeEvent.path[0];
         let edit_box = document.getElementById("edit-box");
@@ -74,23 +66,23 @@ class WeekEvent extends Component {
             </div>
 
         )
-    }
+    }*/
 
 
     render() {
         const event_style = {
             width: "150px",
             position: "absolute",
-            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 60}px`,
+            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
             margin: "0px",
 
         }
 
         return (
-            <div style={event_style} className="box week-event" onDoubleClick={this.toggleEventEditBox} /*onClick={this.toggleEventBox*/>
+            <div style={event_style} className="box week-event" /*onDoubleClick={this.toggleEventEditBox}*/ onClick={this.toggleEventBox}>
                 <p className="has-text-left">{this.props.eventstate.name}</p>
-                { this.createEventEditBox()}
+                {this.createEventBox()}
             </div>
 
         )
