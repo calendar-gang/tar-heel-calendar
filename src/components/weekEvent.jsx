@@ -1,10 +1,41 @@
 import React, { Component } from 'react';
-// import './Menu.css';
 
 class WeekEvent extends Component {
     state = {}
 
-    toggleEditBox(event) {
+    /*toggleEventBox(event) {
+        // event.persist();
+        let td = event.nativeEvent.path[0];
+        let edit_box = document.getElementById("event-box");
+        if (edit_box.className === "is-hidden") {
+            edit_box.className = "";
+        } else {
+            edit_box.className = "is-hidden";
+        }
+    }
+
+    createEventBox() {
+        return (
+            <div id="event-box" className="is-hidden">
+                <div className="card">
+                    <header className="card-head">
+                        <p className="card-title">Here is this event!</p>
+                        <button onClick={this.toggleEditBox} className="delete" aria-label="close"></button>
+                    </header>
+                    <section id="event-box-content" class="card-body">
+                    </section>
+                    <footer className="card-foot">
+                        <button className="button is-warning">Edit</button>
+                        <button className="button is-success">Save changes</button>
+                        <button onClick={this.toggleEditBox} className="button">Cancel</button>
+                    </footer>
+                </div>
+            </div>
+
+        )
+    }*/
+
+    toggleEventEditBox(event) {
         event.persist();
         let td = event.nativeEvent.path[0];
         let edit_box = document.getElementById("edit-box");
@@ -22,13 +53,13 @@ class WeekEvent extends Component {
         }
     }
 
-    createEditBox() {
+    createEventEditBox() {
         return (
             <div id="edit-box" className="modal">
                 <div className="modal-background"></div>
                 <div className="modal-card">
                     <header className="modal-card-head">
-                        <p className="modal-card-title">Here Are Your Tasks!</p>
+                        <p className="modal-card-title">Edit this task!</p>
                         <button onClick={this.toggleEditBox} className="delete" aria-label="close"></button>
                     </header>
                     <section id="edit-box-content" class="modal-card-body">
@@ -55,12 +86,13 @@ class WeekEvent extends Component {
         }
 
         return (
-            <div style={event_style} className="box week-event" onClick={this.toggleEditBox}>
+            <div style={event_style} className="box week-event" onDoubleClick={this.toggleEventEditBox} /*onClick={this.toggleEventBox*/>
                 <p class="has-text-left">Event</p>
-                { this.createEditBox()}
+                { this.createEventEditBox()}
+                { /*this.createEventBox()*/}
             </div>
 
-        ) 
+        )
     }
 }
 
