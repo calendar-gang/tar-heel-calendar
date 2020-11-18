@@ -8,7 +8,7 @@ class Month extends Component {
         let td = event.nativeEvent.path[0];
         let edit_box = document.getElementById("edit-box");
         let content = document.getElementById("edit-box-content");
-        if(edit_box.className == "modal is-active") {
+        if(edit_box.className === "modal is-active") {
             edit_box.className = "modal";
             while(content.firstChild) {
                 content.removeChild(content.firstChild);
@@ -52,9 +52,9 @@ class Month extends Component {
         let rows = [];
         for(let i = 0; i < 7; i++){
             let day = (week_position*7 + i + 1) > day_count ? "" : (week_position*7 + i + 1);
-            if(day != "") {
+            if(day !== "") {
                 let real_day_num = day_num(month, day, year);
-                if(real_day_num != i) {
+                if(real_day_num !== i) {
                     day = "";
                 }
             }
@@ -94,13 +94,13 @@ class Month extends Component {
         
         return (
             <div className="calendar">
-                <section class="hero is-primary">
-                    <div class="hero-body">
-                        <div class="container">
-                            <h1 class="title">
+                <section className="hero is-primary">
+                    <div className="hero-body">
+                        <div className="container">
+                            <h1 className="title">
                                 {monthNames[(new Date()).getMonth()]}
                             </h1>
-                            <h1 class="subtitle">A Monthly View Designed Just For You!</h1>
+                            <h1 className="subtitle">A Monthly View Designed Just For You!</h1>
                         </div>
                     </div>
                 </section>

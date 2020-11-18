@@ -7,7 +7,7 @@ class NavBar extends Component {
     toggleSUBox(event) {
         event.persist();
         let edit_box = document.getElementById("signup-box");
-        if (edit_box.className == "modal is-active") {
+        if (edit_box.className === "modal is-active") {
             edit_box.className = "modal";
         } else {
             edit_box.className = "modal is-active";
@@ -18,7 +18,7 @@ class NavBar extends Component {
         // checks to make sure passowrd is between 8 and 100 chars, 
         // contains at least one lowercase letter, one uppercase letter, 
         // one numeric digit, and one special character
-        var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
+        let decimal =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
         if(decimal.test(pword)) { 
             return true;
         } else { 
@@ -115,7 +115,7 @@ class NavBar extends Component {
     toggleLoginBox(event) {
         event.persist();
         let edit_box = document.getElementById("login-box");
-        if (edit_box.className == "modal is-active") {
+        if (edit_box.className === "modal is-active") {
             edit_box.className = "modal";
         } else {
             edit_box.className = "modal is-active";
@@ -144,6 +144,7 @@ class NavBar extends Component {
         }
 
         return (
+
             <div id="login-box" className="modal">
                 <div className="modal-background"></div>
                 <div className="modal-card">

@@ -39,7 +39,7 @@ class Day extends Component {
         // let name = event.target.id;
         let edit_box = document.getElementById("newtask");
 
-        if (edit_box.className == "modal is-active") {
+        if (edit_box.className === "modal is-active") {
             edit_box.className = "modal";
         } else {
             edit_box.className = "modal is-active";
@@ -60,6 +60,7 @@ class Day extends Component {
         // <label className="task" style={{marginLeft: "5px"}}>{tasktext}</label><br/>
         // </div>), document.getElementById(id));
         ReactDOM.render(<Task text={tasktext}></Task>, document.getElementById(id));
+
     }
 
     // strikeTask(event) {

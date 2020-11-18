@@ -75,7 +75,7 @@ class Week extends Component {
                         </div>
                         <div className="level-right">
                             <a className="button is-light">New Entry</a>
-                            <h1 class="has-text-light" style={{ margin: "10px" }}>next</h1>
+                            <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
                         </div>
 
                     </section>
