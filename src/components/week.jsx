@@ -50,14 +50,28 @@ class Week extends Component {
         )
     }
 
+    getWeek() {
+        var curr = new Date; // get current date
+        var first = curr.getDate() - curr.getDay() - 1; // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+        
+        var firstday = new Date(curr.setDate(first)).toUTCString();
+        firstday = firstday.substring(0, 11)
+        var lastday = new Date(curr.setDate(last)).toUTCString();
+        lastday = lastday.substring(0, 11)
+
+        return firstday + " - " + lastday
+
+    }
+
     render() {
         return (
             <div className="calendar">
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 className="has-text-light" style={{ margin: "10px" }}>prev</h1>
-                            <h1 className="title has-text-light" style={{ margin: "10px" }}>Week of 11/15/20 </h1>
+                            <h1 class="has-text-light" style={{ margin: "10px" }}>prev</h1>
+                            <h1 class="title has-text-light" style={{ margin: "10px" }}>Week of: {this.getWeek()} </h1>
                         </div>
                         <div className="level-right">
                             <a className="button is-light">New Entry</a>

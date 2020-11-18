@@ -83,7 +83,7 @@ class NavBar extends Component {
                     <div className="field is-horizontal">
                         <label className="label sulabel" style={sulabel}>Email:</label>
                         <div className="control">
-                            <input class="input" type="text" ref="email" placeholder="johndoe@live.unc.edu" style={inputval}></input>
+                            <input className="input" type="text" ref="email" placeholder="johndoe@live.unc.edu" style={inputval}></input>
                         </div>
                     </div>
                     <div className="field is-horizontal">
@@ -144,7 +144,8 @@ class NavBar extends Component {
         }
 
         return (
-            <div id="login-box" class="modal">
+
+            <div id="login-box" className="modal">
                 <div className="modal-background"></div>
                 <div className="modal-card">
                     <header className="modal-card-head" style={header_style}>
