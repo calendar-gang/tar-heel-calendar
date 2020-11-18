@@ -34,6 +34,7 @@ If you're only working on one end of the project, this may be a bit slow. There 
 * [mysql (the npm package)](https://www.npmjs.com/package/mysql)
 * [MariaDB](https://mariadb.org/)
 * [Heroku](https://www.heroku.com/)
+* [JawsDB](https://www.jawsdb.com/)
 
 Other technologies used are listed in [`package.json`](package.json).
 
