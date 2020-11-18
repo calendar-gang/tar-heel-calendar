@@ -15,7 +15,7 @@ This file describes the `/login` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('tar-heel-calendar.herokuapp.com/login', {
     username: 'user',
     password: 'password'
 });
@@ -31,7 +31,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (no username)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('tar-heel-calendar.herokuapp.com/login', {
     username: 'useruseruser',
     password: 'password'
 });
@@ -46,7 +46,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (incorrect password)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('tar-heel-calendar.herokuapp.com/login', {
     username: 'user',
     password: 'password2'
 });
@@ -61,7 +61,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (bad length)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('tar-heel-calendar.herokuapp.com/login', {
     username: 'user',
     password: ''
 });
