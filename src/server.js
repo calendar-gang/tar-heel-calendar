@@ -59,7 +59,7 @@ app.post('/register', (req, res) => {
     }
 
     db.query(`SELECT username, email
-            FROM Users
+            FROM users
             WHERE username=? OR email=?`, [username, email], (error, results, fields) => {
         if(error) throw error;
 
@@ -101,7 +101,7 @@ app.post('/login', (req, res) => {
     }
 
     db.query(`SELECT username, password
-            FROM Users
+            FROM users
             WHERE username=?`, [username], (error, results, fields) => {
 
         if(error) throw error;
