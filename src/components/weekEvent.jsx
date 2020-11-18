@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class WeekEvent extends Component {
     state = {}
+    catcolors = ["#ffd4d4", "#ffe6d4", "#fffbd4", "#e2ffd4", "#d4ffec", "#d4f6ff", "#d4dfff", "#f0d4ff", "#ffd4ee"]
 
     /*toggleEventBox(event) {
         // event.persist();
@@ -62,7 +63,7 @@ class WeekEvent extends Component {
                         <p className="modal-card-title">Edit this task!</p>
                         <button onClick={this.toggleEditBox} className="delete" aria-label="close"></button>
                     </header>
-                    <section id="edit-box-content" class="modal-card-body">
+                    <section id="edit-box-content" className="modal-card-body">
                     </section>
                     <footer className="modal-card-foot">
                         <button className="button is-warning">Edit</button>
@@ -75,21 +76,21 @@ class WeekEvent extends Component {
         )
     }
 
+
     render() {
         const event_style = {
             width: "150px",
             position: "absolute",
-            height: "70px",
-            backgroundColor: "#f0d4ff",
-            margin: "80px 0px",
+            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 60}px`,
+            backgroundColor: this.catcolors[this.props.eventstate.category % 9],
+            margin: "0px",
 
         }
 
         return (
             <div style={event_style} className="box week-event" onDoubleClick={this.toggleEventEditBox} /*onClick={this.toggleEventBox*/>
-                <p class="has-text-left">Event</p>
+                <p className="has-text-left">{this.props.eventstate.name}</p>
                 { this.createEventEditBox()}
-                { /*this.createEventBox()*/}
             </div>
 
         )
