@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
 import Task from './task';
+import NewEntry from './newentry'
 import ReactDOM from 'react-dom'
 
 class Day extends Component {
@@ -76,7 +77,7 @@ class Day extends Component {
                 <p className="modal-card-title">Create a new task:</p>
                 <button onClick={this.toggletaskform} className="delete" aria-label="close"></button>
             </header>
-            <div className="control">
+            <div className="control is-horizontal">
                 <input className="input" ref="tasktext" type="text" placeholder="New Task"/>
             </div>
             <section id="login-box-content" className="modal-card-body">
@@ -118,7 +119,7 @@ class Day extends Component {
                                 <h1 className="title has-text-light" style={{ margin: "20px" }}>{writtendate} </h1>
                             </div>
                             <div className="level-right">
-                                <a className="button is-light">New Entry</a>
+                                <NewEntry></NewEntry>
                                 <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
                             </div>
 
@@ -142,6 +143,7 @@ class Day extends Component {
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                         </section>
                     <div className="container tasklist box" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px"}}>
+                        <button className="button create is-rounded" style={{backgroundColor: "#606163", color: "white"}} onClick={this.toggletaskform.bind(this)}>New Task</button>
                         {this.rendercurrenttasks()}
                         <div id="newtasks"></div>
                         {this.rendertaskform()}
@@ -155,3 +157,5 @@ class Day extends Component {
 export default Day;
 
 // <input type="checkbox" id="task2" name="task2" onClick={this.strikeTask.bind(this)}/>
+
+// readd todo list button

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NewEntry from './newentry';
 
 class Month extends Component {
     state = {};
@@ -59,7 +60,7 @@ class Month extends Component {
                 }
             }
             rows.push(
-                <td style={{ height: "100px" }} onClick={this.toggleEditBox}>{day}</td>
+                <td style={{ height: "100px", textAlign: "left"}} onClick={this.toggleEditBox}>{day}</td>
             );
         }
         return (
@@ -102,7 +103,7 @@ class Month extends Component {
                             <h1 className="subtitle" style={{ margin: "10px" }}> A Monthly View Designed Just For You!</h1>
                         </div>
                         <div className="level-right">
-                            <a className="button is-light">New Entry</a>
+                            <NewEntry></NewEntry>
                             <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
                         </div>
                     </section>
