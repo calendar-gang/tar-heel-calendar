@@ -1,8 +1,34 @@
 import React, { Component } from 'react';
 import WeekEvent from './weekEvent';
+import ReactDOM from 'react-dom'
 
 class Week extends Component {
     state = {}
+    eventlist = [{ day: 0, start: 2, end: 4, name: "History Lecture", category: 4 },
+    { day: 2, start: 2, end: 4, name: "History Lecture", category: 4 },
+    { day: 1, start: 1, end: 2, name: "Math Lecture", category: 2 },
+    { day: 3, start: 1, end: 2, name: "Math Lecture", category: 2 },
+    { day: 5, start: 1, end: 2, name: "Math Lecture", category: 2 },
+    { day: 4, start: 2, end: 3.5, name: "Breakfast in Durham", category: 3 },
+    { day: 3, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
+    { day: 1, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
+    { day: 5, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
+    { day: 6, start: 1, end: 2.5, name: "Coffee with Friends", category: 8 }]
+
+    constructor(props) {
+        super(props);
+
+        this.inputRef = {}
+        for (let i = 0; i < 7; i++) {
+            for (let j = 0; j < 24; j++) {
+                this.inputRef[`${i}${j}`] = React.createRef()
+            }
+        }
+    }
+
+    componentDidMount() {
+        this._rendercurrentevents()
+    }
 
     _findHour(time) {
         if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
@@ -12,14 +38,8 @@ class Week extends Component {
 
     _renderRowByHour(time) {
         let rows = [];
-        if (time === 0) {
-            for (let i = 7; i--;) {
-                rows.push(<td><WeekEvent /></td>);
-            }
-        } else {
-            for (let i = 7; i--;) {
-                rows.push(<td></td>);
-            }
+        for (let i = 0; i < 7; i++) {
+            rows.push(<td ref={this.inputRef[`${i}${time}`]}></td>);
         }
 
         return (
@@ -42,11 +62,11 @@ class Week extends Component {
         )
     }
 
-    getWeek() {
-        var curr = new Date; // get current date
+    _getWeek() {
+        var curr = new Date(); // get current date
         var first = curr.getDate() - curr.getDay() - 1; // First day is the day of the month - the day of the week
         var last = first + 6; // last day is the first day + 6
-        
+
         var firstday = new Date(curr.setDate(first)).toUTCString();
         firstday = firstday.substring(0, 11)
         var lastday = new Date(curr.setDate(last)).toUTCString();
@@ -56,14 +76,21 @@ class Week extends Component {
 
     }
 
+    _rendercurrentevents() {
+        for (let i = 0; i < this.eventlist.length; i++) {
+            let evt = this.eventlist[i]
+            ReactDOM.render(<WeekEvent eventstate={evt}></WeekEvent>, this.inputRef[`${evt.day}${evt.start}`].current)
+        }
+    }
+
     render() {
         return (
             <div className="calendar">
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 class="has-text-light" style={{ margin: "10px" }}>prev</h1>
-                            <h1 class="title has-text-light" style={{ margin: "10px" }}>Week of: {this.getWeek()} </h1>
+                            <h1 className="has-text-light" style={{ margin: "10px" }}>prev</h1>
+                            <h1 className="title has-text-light" style={{ margin: "10px" }}>{this._getWeek()} </h1>
                         </div>
                         <div className="level-right">
                             <a className="button is-light">New Entry</a>
@@ -90,6 +117,7 @@ class Week extends Component {
                     </table>
                 </div>
             </div>
+
         )
     }
 }
