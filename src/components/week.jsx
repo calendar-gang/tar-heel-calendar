@@ -39,7 +39,7 @@ class Week extends Component {
     _renderRowByHour(time) {
         let rows = [];
         for (let i = 0; i < 7; i++) {
-            rows.push(<td ref={this.inputRef[`${i}${time}`]}></td>);
+            rows.push(<td style={{ padding: "0px 8px" }} ref={this.inputRef[`${i}${time}`]}></td>);
         }
 
         return (
