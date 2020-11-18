@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NewEntry from './newentry';
 import WeekEvent from './weekEvent';
 
 class Week extends Component {
@@ -66,7 +67,7 @@ class Week extends Component {
                             <h1 class="title has-text-light" style={{ margin: "10px" }}>Week of: {this.getWeek()} </h1>
                         </div>
                         <div className="level-right">
-                            <a className="button is-light">New Entry</a>
+                            <NewEntry></NewEntry>
                             <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
                         </div>
 
