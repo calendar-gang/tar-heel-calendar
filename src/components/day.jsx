@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Task from './task';
 import NewEntry from './newentry'
 import ReactDOM from 'react-dom'
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 class Day extends Component {
     state = {}
@@ -53,7 +54,7 @@ class Day extends Component {
         // window.alert(tasktext)
         this.toggletaskform(event)
         const d = document.createElement("div")
-        const id = Math.random() 
+        const id = Math.random()
         d.id = id
         document.getElementById('newtasks').appendChild(d)
         // ReactDOM.render((<div className="box" style={{margin: "10px"}}>
@@ -71,23 +72,23 @@ class Day extends Component {
 
     rendertaskform() {
         return (<div id="newtask" className="modal">
-        <div className="modal-background"></div>
-        <div className="modal-card">
-            <header className="modal-card-head" >
-                <p className="modal-card-title">Create a new task:</p>
-                <button onClick={this.toggletaskform} className="delete" aria-label="close"></button>
-            </header>
-            <div className="control is-horizontal">
-                <input className="input" ref="tasktext" type="text" placeholder="New Task"/>
+            <div className="modal-background"></div>
+            <div className="modal-card">
+                <header className="modal-card-head" >
+                    <p className="modal-card-title">Create a new task:</p>
+                    <button onClick={this.toggletaskform} className="delete" aria-label="close"></button>
+                </header>
+                <div className="control is-horizontal">
+                    <input className="input" ref="tasktext" type="text" placeholder="New Task" />
+                </div>
+                <section id="login-box-content" className="modal-card-body">
+                </section>
+                <footer className="modal-card-foot">
+                    <button className="button create" id="createtask" onClick={this.createTask.bind(this)}>Create</button>
+                </footer>
+
             </div>
-            <section id="login-box-content" className="modal-card-body">
-            </section>
-            <footer className="modal-card-foot">
-                <button className="button create" id="createtask" onClick={this.createTask.bind(this)}>Create</button>
-            </footer>
-            
-        </div>
-    </div>)
+        </div>)
     }
 
     rendercurrenttasks() {
@@ -101,26 +102,27 @@ class Day extends Component {
     render() {
 
         var now = new Date();
-        var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        var day = days[ now.getDay() ];
-        var month = months[ now.getMonth() ];
+        var day = days[now.getDay()];
+        var month = months[now.getMonth()];
 
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
 
         return (
-            <div className="daysview columns" style={{margin: "0px"}}>
+
+            <div className="daysview columns" style={{ margin: "0px" }}>
                 <div className="calendar column">
                     <div className="container">
                         <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                             <div className="level-left">
-                                <h1 className="has-text-light" style={{ margin: "20px" }}>prev</h1>
+                                <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
                                 <h1 className="title has-text-light" style={{ margin: "20px" }}>{writtendate} </h1>
                             </div>
                             <div className="level-right">
                                 <NewEntry></NewEntry>
-                                <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
+                                <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                             </div>
 
                         </section>
@@ -138,19 +140,19 @@ class Day extends Component {
                     </div>
 
                 </div>
-                <div className="dailytodo container column box is-one-quarter" style={{ backgroundColor: "#0b1846"}}>
-                        <section className="level" style={{ backgroundColor: "#0b1846", height: "50px" }}>
-                            <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
-                        </section>
-                    <div className="container tasklist box" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px"}}>
-                        <button className="button create is-rounded" style={{backgroundColor: "#606163", color: "white"}} onClick={this.toggletaskform.bind(this)}>New Task</button>
+                <div className="dailytodo container column box is-one-quarter" style={{ backgroundColor: "#0b1846" }}>
+                    <section className="level" style={{ backgroundColor: "#0b1846", height: "50px" }}>
+                        <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
+                    </section>
+                    <div className="container tasklist box" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px" }}>
+                        <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
                         {this.rendercurrenttasks()}
                         <div id="newtasks"></div>
                         {this.rendertaskform()}
                     </div>
                 </div>
             </div>
-            )
+        )
     }
 }
 
