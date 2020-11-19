@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import NewEntry from './newentry';
 import WeekEvent from './weekEvent';
 import ReactDOM from 'react-dom'
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 class Week extends Component {
     state = {}
-    eventlist = [{ day: 0, start: 2, end: 4, name: "History Lecture", category: 4 },
-    { day: 2, start: 2, end: 4, name: "History Lecture", category: 4 },
+    eventlist = [{ day: 0, start: 2, end: 4, name: "History Lecture", category: 0 },
+    { day: 2, start: 2, end: 4, name: "History Lecture", category: 1 },
     { day: 1, start: 1, end: 2, name: "Math Lecture", category: 2 },
-    { day: 3, start: 1, end: 2, name: "Math Lecture", category: 2 },
-    { day: 5, start: 1, end: 2, name: "Math Lecture", category: 2 },
-    { day: 4, start: 2, end: 3.5, name: "Breakfast in Durham", category: 3 },
+    { day: 3, start: 1, end: 2, name: "Math Lecture", category: 3 },
+    { day: 5, start: 1, end: 2, name: "Math Lecture", category: 4 },
+    { day: 4, start: 2, end: 3.5, name: "Breakfast in Durham", category: 5 },
     { day: 3, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
-    { day: 1, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
-    { day: 5, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
-    { day: 6, start: 1, end: 2.5, name: "Coffee with Friends", category: 8 }]
+    { day: 1, start: 3, end: 5.5, name: "426 Lecture", category: 7 },
+    { day: 5, start: 3, end: 5.5, name: "426 Lecture", category: 8 },
+    { day: 6, start: 1, end: 2.5, name: "Coffee with Friends", category: 0 }]
 
     constructor(props) {
         super(props);
@@ -90,12 +91,12 @@ class Week extends Component {
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 className="has-text-light" style={{ margin: "10px" }}>prev</h1>
+                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>{this._getWeek()} </h1>
                         </div>
                         <div className="level-right">
                             <NewEntry></NewEntry>
-                            <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
+                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
 
                     </section>

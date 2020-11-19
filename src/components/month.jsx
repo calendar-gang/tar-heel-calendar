@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewEntry from './newentry';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 class Month extends Component {
     state = {};
@@ -60,7 +61,7 @@ class Month extends Component {
                 }
             }
             rows.push(
-                <td style={{ height: "100px", textAlign: "left"}} onClick={this.toggleEditBox}>{day}</td>
+                <td className="has-text-grey" style={{ height: "100px", textAlign: "left" }} onClick={this.toggleEditBox}>{day}</td>
             );
         }
         return (
@@ -98,13 +99,13 @@ class Month extends Component {
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 className="has-text-light" style={{ margin: "10px" }}>prev</h1>
+                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>{monthNames[(new Date()).getMonth()]} </h1>
                             <h1 className="subtitle" style={{ margin: "10px" }}> A Monthly View Designed Just For You!</h1>
                         </div>
                         <div className="level-right">
                             <NewEntry></NewEntry>
-                            <h1 className="has-text-light" style={{ margin: "10px" }}>next</h1>
+                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
                     </section>
                 </div >
@@ -112,13 +113,13 @@ class Month extends Component {
                     <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                         <thead>
                             <tr className="is-bordered">
-                                <th>Sunday</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
+                                <th className="has-text-grey-light">Sunday</th>
+                                <th className="has-text-grey-light">Monday</th>
+                                <th className="has-text-grey-light">Tuesday</th>
+                                <th className="has-text-grey-light">Wednesday</th>
+                                <th className="has-text-grey-light">Thursday</th>
+                                <th className="has-text-grey-light">Friday</th>
+                                <th className="has-text-grey-light">Saturday</th>
                             </tr>
                         </thead>
                         {this._renderBody()}
