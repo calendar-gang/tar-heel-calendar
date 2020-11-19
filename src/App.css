@@ -62,5 +62,11 @@ td:hover {
 }
 
 
-
+.eventBox {
+    width: 200px;
+    position: absolute;
+    height: 200px;
+    margin: 60px 0px 0px 50px;
+    z-index: 1;
+}
 

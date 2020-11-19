@@ -4,25 +4,41 @@ class WeekEvent extends Component {
     state = {}
     catcolors = ["#ffd4d4", "#ffe6d4", "#fffbd4", "#e2ffd4", "#d4ffec", "#d4f6ff", "#d4dfff", "#f0d4ff", "#ffd4ee"]
 
-    toggleEventBox(event) {
-        event.persist();
-        let td = event.nativeEvent.path[0];
-        let edit_box = document.getElementById("event-box");
-        if (edit_box.className === "is-hidden") {
-            edit_box.className = "";
+    constructor(props) {
+        super(props);
+
+        this.state = { windowWidth: window.innerWidth };
+
+        this.eventBox = React.createRef()
+    }
+
+    handleResize = (e) => {
+        this.setState({ windowWidth: window.innerWidth });
+    };
+
+    componentDidMount() {
+        window.addEventListener("resize", this.handleResize);
+    }
+
+
+    _toggleEventBox(event) {
+
+        if (this.eventBox.current.className === "is-hidden box eventBox") {
+            this.eventBox.current.className = "box eventBox";
         } else {
-            edit_box.className = "is-hidden";
+            this.eventBox.current.className = "is-hidden box eventBox";
         }
     }
 
-    createEventBox() {
+    _createEventBox() {
+
+
         return (
-            <div id="event-box" className="is-hidden">
-                <div className="card">
-                    <header className="card-head">
-                        <p className="card-title">Here is this event!</p>
-                    </header>
-                </div>
+            <div ref={this.eventBox} className="is-hidden box eventBox" >
+                <header className="card-head">
+                    <p className="card-title">Here is this event!</p>
+                </header>
+
             </div>
 
         )
@@ -45,7 +61,7 @@ class WeekEvent extends Component {
             content.append(task);
         }
     }
-
+    
     createEventEditBox() {
         return (
             <div id="edit-box" className="modal">
@@ -64,26 +80,28 @@ class WeekEvent extends Component {
                     </footer>
                 </div>
             </div>
-
+    
         )
     }*/
 
 
     render() {
         const event_style = {
-            width: "150px",
+            width: `${(this.state.windowWidth - 250) / 8}px`,
             position: "absolute",
             height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
             margin: "0px",
-
         }
 
         return (
-            <div style={event_style} className="box week-event" /*onDoubleClick={this.toggleEventEditBox}*/ onClick={this.toggleEventBox}>
-                <p className="has-text-left">{this.props.eventstate.name}</p>
-                {this.createEventBox()}
+            <div>
+                <div style={event_style} className="box week-event" /*onDoubleClick={this.toggleEventEditBox}*/ onClick={this._toggleEventBox.bind(this)}>
+                    <p className="has-text-left">{this.props.eventstate.name}</p>
+                </div>
+                {this._createEventBox()}
             </div>
+
 
         )
     }
