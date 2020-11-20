@@ -3,11 +3,34 @@ import { useState } from 'react';
 import Task from './task';
 import NewEntry from './newentry'
 import ReactDOM from 'react-dom'
+import DayEvent from './dayEvent'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 class Day extends Component {
     state = {}
     tasklist = ["get", "this", "to", "work"]
+
+    eventlist = [
+        { day: 0, start: 1, end: 2.5, name: "Breakfast in Durham", category: 5 },
+        { day: 0, start: 3, end: 4, name: "History Lecture", category: 0 },
+        { day: 0, start: 5, end: 5.5, name: "Math Lecture", category: 4 },
+        { day: 0, start: 6, end: 8, name: "426 Lecture", category: 8 },
+        { day: 0, start: 9, end: 10, name: "Coffee with Friends", category: 0 }]
+
+    constructor(props) {
+        super(props);
+
+        this.timeRef = {}
+
+        for (let i = 0; i < 24; i++) {
+            this.timeRef[`${i}`] = React.createRef()
+        }
+
+    }
+
+    componentDidMount() {
+        this._rendercurrentevents()
+    }
 
     _findHour(time) {
         if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
@@ -19,7 +42,7 @@ class Day extends Component {
         return (
             <tr>
                 <th className="has-text-grey-light has-text-left">{this._findHour(time)}</th>
-                <td></td>
+                <td ref={this.timeRef[`${time}`]}></td>
             </tr>
         )
     }
@@ -99,6 +122,13 @@ class Day extends Component {
         return tasks
     }
 
+    _rendercurrentevents() {
+        for (let i = 0; i < this.eventlist.length; i++) {
+            let evt = this.eventlist[i]
+            ReactDOM.render(<DayEvent eventstate={evt}></DayEvent>, this.timeRef[`${evt.start}`].current)
+        }
+    }
+
     render() {
 
         var now = new Date();
@@ -132,7 +162,7 @@ class Day extends Component {
                             <thead>
                                 <tr className="is-bordered">
                                     <th></th>
-                                    <th className="has-text-grey-light" >Tasks</th>
+                                    <th className="has-text-grey-light" >Events</th>
                                 </tr>
                             </thead>
                             {this._renderBody()}
