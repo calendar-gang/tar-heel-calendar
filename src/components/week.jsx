@@ -3,6 +3,7 @@ import NewEntry from './newentry';
 import WeekEvent from './weekEvent';
 import ReactDOM from 'react-dom'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import AutoCompleteText from './autocomplete';
 
 class Week extends Component {
     state = {}

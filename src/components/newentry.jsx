@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import AutoCompleteText from './autocomplete';
+import AutoComplete from './autocomplete';
 class NewEntry extends Component {
 
     constructor() {
@@ -39,6 +41,9 @@ class NewEntry extends Component {
             width: "100px"
         }
 
+        // <input className="input" type="text" placeholder="426 final expo" style={inputval}></input>
+        // <input className="input" type="text" placeholder="Virtual Sitterson" style={inputval}></input>
+
         return (
             <div>
             <a className="button is-light" onClick={this.toggleNewEntry.bind(this)}>New Entry</a>
@@ -53,13 +58,13 @@ class NewEntry extends Component {
                         <div className="field is-horizontal">
                             <label className="label" style={sulabel}>Event Name:</label>
                             <div className="control">
-                                <input className="input" type="text" placeholder="426 final expo" style={inputval}></input>
+                                <AutoCompleteText hold='426 Project Expo'></AutoCompleteText>
                             </div>
                         </div>
                         <div className="field is-horizontal">
                             <label className="label" style={sulabel}>Location:</label>
                             <div className="control">
-                                <input className="input" type="text" placeholder="Virtual Sitterson" style={inputval}></input>
+                            <AutoCompleteText hold='Virtual Sitterson'></AutoCompleteText>
                             </div>
                         </div>
                         <div className="field is-horizontal">
