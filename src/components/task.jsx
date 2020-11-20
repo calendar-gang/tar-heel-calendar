@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { unmountComponentAtNode} from "react-dom";
+import ReactDOM from 'react-dom'
 class Task extends Component {
 
     constructor() {
         super()
         // window.alert("hello")
-        this.state = {style: {textDecoration: 'none', margin: "10px"}}
+        this.state = {style: {textDecoration: 'none', margin: "10px", hideComponent: false}}
     }
 
     strikethrough() {
@@ -16,13 +18,15 @@ class Task extends Component {
     }
 
     deleteTask() {
-        // need to figure out how to go about deleting a task
-
+        // task is now hidden but not actually removed from our list
+        this.state.hideComponent = true;
 
     }
 
 
     render() {
+        if (this.state.hideComponent === true) {return false;}
+
         return (
             <div className="box" style={this.state.style} onClick={this.strikethrough.bind(this)}>
                 <button className="delete is-small" style={{float: "right"}} aria-label="close" onClick={this.deleteTask.bind(this)}></button>
