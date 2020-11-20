@@ -55,7 +55,7 @@ class MonthEvent extends Component {
     render() {
         const event_style = {
             width: `${(this.state.windowWidth - 250) / 8}px`,
-            position: "absolute",
+            position: "relative",
             height: `20px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
             margin: "0px 0px 0px 25px",
