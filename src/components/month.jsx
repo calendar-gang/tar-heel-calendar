@@ -104,7 +104,7 @@ class Month extends Component {
                         </div>
                     </section>
                 </div >
-                <div className="container">
+                <div className="container box" style={{ padding: "0px" }}>
                     <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                         <thead>
                             <tr className="is-bordered">

@@ -7,19 +7,21 @@ import AutoCompleteText from './autocomplete';
 
 class Week extends Component {
     state = {}
-    eventlist = [{ day: 0, start: 2, end: 4, name: "History Lecture", category: 0 },
-    { day: 2, start: 2, end: 4, name: "History Lecture", category: 1 },
-    { day: 1, start: 1, end: 2, name: "Math Lecture", category: 2 },
-    { day: 3, start: 1, end: 2, name: "Math Lecture", category: 3 },
-    { day: 5, start: 1, end: 2, name: "Math Lecture", category: 4 },
-    { day: 4, start: 2, end: 3.5, name: "Breakfast in Durham", category: 5 },
-    { day: 3, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
-    { day: 1, start: 3, end: 5.5, name: "426 Lecture", category: 7 },
-    { day: 5, start: 3, end: 5.5, name: "426 Lecture", category: 8 },
-    { day: 6, start: 1, end: 2.5, name: "Coffee with Friends", category: 0 }]
+    eventlist = [{ day: 0, start: 12, end: 14, name: "History Lecture", category: 0 },
+    { day: 2, start: 12, end: 14, name: "History Lecture", category: 1 },
+    { day: 1, start: 11, end: 12, name: "Math Lecture", category: 2 },
+    { day: 3, start: 11, end: 12, name: "Math Lecture", category: 3 },
+    { day: 5, start: 11, end: 12, name: "Math Lecture", category: 4 },
+    { day: 4, start: 12, end: 13.5, name: "Breakfast in Durham", category: 5 },
+    { day: 3, start: 13, end: 15.5, name: "426 Lecture", category: 6 },
+    { day: 1, start: 13, end: 15.5, name: "426 Lecture", category: 7 },
+    { day: 5, start: 13, end: 15.5, name: "426 Lecture", category: 8 },
+    { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", category: 0 }]
 
     constructor(props) {
         super(props);
+
+        this.scrollBox = React.createRef()
 
         this.inputRef = {}
         for (let i = 0; i < 7; i++) {
@@ -30,7 +32,9 @@ class Week extends Component {
     }
 
     componentDidMount() {
+        this.scrollBox.current.scrollTop = 800
         this._rendercurrentevents()
+
     }
 
     _findHour(time) {
@@ -87,6 +91,7 @@ class Week extends Component {
     }
 
     render() {
+        let header_style = { position: "sticky", top: "0px", zIndex: "2", backgroundColor: "#fff" }
         return (
             <div className="calendar">
                 <div className="container">
@@ -102,24 +107,24 @@ class Week extends Component {
 
                     </section>
                 </div>
-                <div className="container" style ={{height: "700px", overflow: "scroll"}}>
+                <div className="container weektable box" ref={this.scrollBox} style={{ height: "700px", overflow: "scroll", padding: "0px" }}>
                     <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
-                        <thead>
-                            <tr className="is-bordered">
-                                <th></th>
-                                <th className="has-text-grey-light" >Sunday</th>
-                                <th className="has-text-grey-light">Monday</th>
-                                <th className="has-text-grey-light">Tuesday</th>
-                                <th className="has-text-grey-light">Wednesday</th>
-                                <th className="has-text-grey-light">Thursday</th>
-                                <th className="has-text-grey-light">Friday</th>
-                                <th className="has-text-grey-light">Saturday</th>
+                        <thead style={header_style}>
+                            <tr className="is-bordered" style={header_style}>
+                                <th style={header_style}></th>
+                                <th className="has-text-grey-light" style={header_style}>Sunday</th>
+                                <th className="has-text-grey-light" style={header_style}>Monday</th>
+                                <th className="has-text-grey-light" style={header_style}>Tuesday</th>
+                                <th className="has-text-grey-light" style={header_style}>Wednesday</th>
+                                <th className="has-text-grey-light" style={header_style}>Thursday</th>
+                                <th className="has-text-grey-light" style={header_style}>Friday</th>
+                                <th className="has-text-grey-light" style={header_style}>Saturday</th>
                             </tr>
                         </thead>
                         {this._renderBody()}
                     </table>
                 </div>
-            </div>
+            </div >
 
         )
     }

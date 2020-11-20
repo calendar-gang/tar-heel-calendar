@@ -22,12 +22,13 @@ class DayEvent extends Component {
 
 
     _toggleEventBox(event) {
-
+        // I think we may just want to display all event info on a day event since it is pretty big?
+        /*
         if (this.eventBox.current.className === "is-hidden box") {
             this.eventBox.current.className = "box";
         } else {
             this.eventBox.current.className = "is-hidden box";
-        }
+        }*/
     }
 
     _createEventBox() {

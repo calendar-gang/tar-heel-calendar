@@ -70,7 +70,6 @@ td:hover {
   transform: rotate(-45deg);
   background: #fff;
   position: absolute;
-  box-shadow: 1px 4px 8px rgba(99, 99, 99, 0.5);
   z-index: -1;
   top: -10px;
   left: calc(50% - 10px);
