@@ -62,11 +62,16 @@ td:hover {
 }
 
 
-.eventBox {
-    width: 200px;
-    position: absolute;
-    height: 200px;
-    margin: 60px 0px 0px 50px;
-    z-index: 1;
-}
 
+.monthevent:after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  transform: rotate(-45deg);
+  background: #fff;
+  position: absolute;
+  box-shadow: 1px 4px 8px rgba(99, 99, 99, 0.5);
+  z-index: -1;
+  top: -10px;
+  left: calc(50% - 10px);
+}

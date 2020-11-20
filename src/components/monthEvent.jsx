@@ -23,24 +23,31 @@ class MonthEvent extends Component {
 
     _toggleEventBox(event) {
 
-        if (this.eventBox.current.className === "is-hidden box eventBox") {
-            this.eventBox.current.className = "box eventBox";
+        if (this.eventBox.current.className === "is-hidden box monthevent") {
+            this.eventBox.current.className = "box monthevent";
         } else {
-            this.eventBox.current.className = "is-hidden box eventBox";
+            this.eventBox.current.className = "is-hidden box monthevent";
         }
     }
 
     _createEventBox() {
+        const event_style = {
+            width: "200px",
+            position: "absolute",
+            height: "200px",
+            margin: "30px 0px 0px 50px",
+            zIndex: "1",
+        }
 
+
+        // backgroundColor: this.catcolors[this.props.eventstate.category % 9],
 
         return (
-            <div ref={this.eventBox} className="is-hidden box eventBox" >
+            <div ref={this.eventBox} className="is-hidden box monthevent" style={event_style} >
                 <header className="card-head">
                     <p className="card-title">Here is this event!</p>
                 </header>
-
             </div>
-
         )
     }
 
@@ -55,9 +62,23 @@ class MonthEvent extends Component {
             padding: "1px"
         }
 
+        const after_content = {
+            "&::after": {
+                width: "20px",
+                height: "20px",
+                transform: "rotate(-45deg)",
+                background: "#fff",
+                position: "absolute",
+                boxShadow: "1px 4px 8px rgba(99, 99, 99, 0.5)",
+                zIndex: "-1",
+                top: "-10px",
+                left: "calc(50% - 10px)"
+            }
+        }
+
         return (
             <div>
-                <div style={event_style} className="box" onClick={this._toggleEventBox.bind(this)}>
+                <div style={event_style} content={after_content} className="box" onClick={this._toggleEventBox.bind(this)}>
                     <p className="has-text-centered is-size-7">{this.props.eventstate.name}</p>
                 </div>
                 {this._createEventBox()}
