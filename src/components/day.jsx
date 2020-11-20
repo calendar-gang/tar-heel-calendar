@@ -27,6 +27,17 @@ class Day extends Component {
             this.timeRef[`${i}`] = React.createRef()
         }
 
+        var now = new Date();
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        var day = days[now.getDay()];
+        var month = months[now.getMonth()];
+
+        let writtendate = day + ", " + month + " " + now.getDate() + "th"
+
+        this.state = {day: writtendate}
+
     }
 
     componentDidMount() {
@@ -130,8 +141,42 @@ class Day extends Component {
         }
     }
 
-    render() {
+    updateDate(dir) {
+        // just for funzies so we can see it update, feel free to remove once we have backend if necessary :)
+        // this does NOT work month to month lol 
+        var now = new Date();
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+        var arrayver = this.state.day.split(',')
+        var dayindex = days.indexOf(arrayver[0])
+
+
+        if (dir == 1) {
+            if (dayindex < 6) {
+                dayindex = dayindex + 1
+            } else {
+                dayindex = 0
+            }
+        } else {
+            if (dayindex > 0) {
+                dayindex = dayindex - 1
+            } else {
+                dayindex = 6
+            }
+        }
+
+        var num = parseInt(arrayver[1].split(" ")[2].substring(0,2)) + dir
+        
+        var day = days[dayindex];
+        var month = months[now.getMonth()];
+
+        let writtendate = day + ", " + month + " " + num + "th"
+        this.setState({day: writtendate})
+
+    }
+
+    getCurrentDate() {
         var now = new Date();
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -140,25 +185,29 @@ class Day extends Component {
         var month = months[now.getMonth()];
 
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
+        return writtendate
+    }
+
+    render() {
 
         return (
 
-            <div className="daysview columns" style={{ margin: "0px" }}>
+            <div className="daysview columns" style={{ margin: "0px"}}>
                 <div className="calendar column is-half">
-                    <div className="container">
+                    <div className="container is-half">
                         <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                             <div className="level-left">
-                                <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
-                                <h1 className="title has-text-light" style={{ margin: "20px" }}>{writtendate} </h1>
+                                <h1 className="has-text-light" style={{ fontSize: "60px" , marginTop: "10px"}} onClick={() => this.updateDate(-1)}><BiChevronLeft /></h1>
+                                <h1 className="title has-text-light" style={{ margin: "20px"}}>{this.state.day} </h1>
                             </div>
                             <div className="level-right">
                                 <NewEntry></NewEntry>
-                                <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
+                                <h1 className="has-text-light" style={{ fontSize: "60px", marginTop: "10px"}} onClick={() => this.updateDate(1)}><BiChevronRight /></h1>
                             </div>
 
                         </section>
                     </div>
-                    <div className="container" style={{ margin: "10px"}}>
+                    <div className="container" style={{ margin: "10px", height: "700px", overflow: "scroll"}}>
                         <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                             <thead>
                                 <tr className="is-bordered">
