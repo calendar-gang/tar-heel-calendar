@@ -9,17 +9,19 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 class Day extends Component {
     state = {}
-    tasklist = ["get", "this", "to", "work"]
+    tasklist = ["get", "this", "to", "work", "check", "task", "scroll", "power"]
 
     eventlist = [
-        { day: 0, start: 1, end: 2.5, name: "Breakfast in Durham", category: 5 },
-        { day: 0, start: 3, end: 4, name: "History Lecture", category: 0 },
-        { day: 0, start: 5, end: 5.5, name: "Math Lecture", category: 4 },
-        { day: 0, start: 6, end: 8, name: "426 Lecture", category: 8 },
-        { day: 0, start: 9, end: 10, name: "Coffee with Friends", category: 0 }]
+        { day: 0, start: 10, end: 11.5, name: "Breakfast in Durham", category: 5 },
+        { day: 0, start: 12, end: 14, name: "History Lecture", category: 0 },
+        { day: 0, start: 15, end: 15.5, name: "Math Lecture", category: 4 },
+        { day: 0, start: 16, end: 18, name: "426 Lecture", category: 8 },
+        { day: 0, start: 19, end: 20, name: "Coffee with Friends", category: 0 }]
 
     constructor(props) {
         super(props);
+
+        this.scrollBox = React.createRef()
 
         this.timeRef = {}
 
@@ -36,11 +38,12 @@ class Day extends Component {
 
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
 
-        this.state = {day: writtendate}
+        this.state = { day: writtendate }
 
     }
 
     componentDidMount() {
+        this.scrollBox.current.scrollTop = 800
         this._rendercurrentevents()
     }
 
@@ -52,7 +55,7 @@ class Day extends Component {
 
     _renderRowByHour(time) {
         return (
-            <tr style={{width: "100px"}}>
+            <tr style={{ width: "100px" }}>
                 <th className="has-text-grey-light has-text-left is-narrow">{this._findHour(time)}</th>
                 <td ref={this.timeRef[`${time}`]}></td>
             </tr>
@@ -65,7 +68,7 @@ class Day extends Component {
             rows.push(this._renderRowByHour(i));
         }
         return (
-            <tbody style={{width: "50px"}}>
+            <tbody style={{ width: "50px" }}>
                 {rows}
             </tbody>
         )
@@ -166,13 +169,13 @@ class Day extends Component {
             }
         }
 
-        var num = parseInt(arrayver[1].split(" ")[2].substring(0,2)) + dir
-        
+        var num = parseInt(arrayver[1].split(" ")[2].substring(0, 2)) + dir
+
         var day = days[dayindex];
         var month = months[now.getMonth()];
 
         let writtendate = day + ", " + month + " " + num + "th"
-        this.setState({day: writtendate})
+        this.setState({ day: writtendate })
 
     }
 
@@ -189,30 +192,31 @@ class Day extends Component {
     }
 
     render() {
+        let header_style = { position: "sticky", top: "0px", zIndex: "2", backgroundColor: "#fff" }
 
         return (
 
-            <div className="daysview columns" style={{ margin: "0px"}}>
+            <div className="daysview columns" style={{ margin: "0px" }}>
                 <div className="calendar column is-half">
                     <div className="container is-half">
                         <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                             <div className="level-left">
-                                <h1 className="has-text-light" style={{ fontSize: "60px" , marginTop: "10px"}} onClick={() => this.updateDate(-1)}><BiChevronLeft /></h1>
-                                <h1 className="title has-text-light" style={{ margin: "20px"}}>{this.state.day} </h1>
+                                <h1 className="has-text-light" style={{ fontSize: "60px", marginTop: "10px" }} onClick={() => this.updateDate(-1)}><BiChevronLeft /></h1>
+                                <h1 className="title has-text-light" style={{ margin: "20px" }}>{this.state.day} </h1>
                             </div>
                             <div className="level-right">
                                 <NewEntry></NewEntry>
-                                <h1 className="has-text-light" style={{ fontSize: "60px", marginTop: "10px"}} onClick={() => this.updateDate(1)}><BiChevronRight /></h1>
+                                <h1 className="has-text-light" style={{ fontSize: "60px", marginTop: "10px" }} onClick={() => this.updateDate(1)}><BiChevronRight /></h1>
                             </div>
 
                         </section>
                     </div>
-                    <div className="container" style={{ margin: "10px", height: "700px", overflow: "scroll"}}>
+                    <div className="container box" ref={this.scrollBox} style={{ margin: "10px", height: "600px", overflow: "scroll", padding: "0px" }}>
                         <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
-                            <thead>
-                                <tr className="is-bordered">
-                                    <th></th>
-                                    <th className="has-text-grey-light is-4">Events</th>
+                            <thead style={header_style}>
+                                <tr className="is-bordered" style={header_style}>
+                                    <th style={header_style}></th>
+                                    <th className="has-text-grey-light is-4" style={header_style}>Events</th>
                                 </tr>
                             </thead>
                             {this._renderBody()}
@@ -221,21 +225,21 @@ class Day extends Component {
 
                 </div>
                 <div className="dailytodo container column box is-half" style={{ backgroundColor: "#0b1846" }}>
-                    <section className="level" style={{ backgroundColor: "#0b1846", height: "50px" }}>
+                    <section className="level" style={{ backgroundColor: "#0b1846", height: "50px", marginBottom: "8px" }}>
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                     </section>
-                    <div class="columns" style={{height: "100%"}}>
-                    <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "90%", margin: "15px" }}>
-                        <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
-                        {this.rendercurrenttasks()}
-                        <div id="newtasks"></div>
-                        {this.rendertaskform()}
-                    </div>
-                    <div class="column is-half stickynotes">
-                        <StickyNote color="lightyellow"></StickyNote>
-                        <StickyNote color="lightpink"></StickyNote>
-                        <StickyNote color="lightblue"></StickyNote>
-                    </div>
+                    <div class="columns" style={{ height: "100%" }}>
+                        <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "600px", overflow: "scroll", margin: "15px" }}>
+                            <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
+                            {this.rendercurrenttasks()}
+                            <div id="newtasks"></div>
+                            {this.rendertaskform()}
+                        </div>
+                        <div class="column is-half stickynotes">
+                            <StickyNote color="lightyellow"></StickyNote>
+                            <StickyNote color="lightpink"></StickyNote>
+                            <StickyNote color="lightblue"></StickyNote>
+                        </div>
                     </div>
                 </div>
             </div>
