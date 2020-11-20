@@ -9,6 +9,7 @@ class Month extends Component {
 
     eventlist = [{ day: 0, row: 0, start: 2, end: 4, name: "History Lecture", category: 0 },
     { day: 2, row: 2, start: 2, end: 4, name: "History Lecture", category: 1 },
+    { day: 2, row: 2, start: 2, end: 4, name: "Chem Lecture", category: 2 },
     { day: 1, row: 1, start: 1, end: 2, name: "Math Lecture", category: 2 },
     { day: 5, row: 3, start: 1, end: 2, name: "Math Lecture", category: 3 },
     { day: 5, row: 0, start: 1, end: 2, name: "Math Lecture", category: 4 },
@@ -20,11 +21,22 @@ class Month extends Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+            popup_shown: 0,
+            event_objs: []
+        }
         this.dayRef = {}
+        for(let i = 0; i < 7; i++) {
+            this.state.event_objs[i] = [];
+            for (let j = 0; j < 5; j++) {
+                this.state.event_objs[i][j] = 0;
+            }
+        }
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 5; j++) {
-                this.dayRef[`${i}${j}`] = React.createRef()
+                for(let k = 0; k < 3; k++) {
+                    this.dayRef[`${i}${j}${k}`] = React.createRef()
+                }
             }
         }
     }
@@ -36,7 +48,16 @@ class Month extends Component {
     _rendercurrentevents() {
         for (let i = 0; i < this.eventlist.length; i++) {
             let evt = this.eventlist[i]
-            ReactDOM.render(<MonthEvent eventstate={evt}></MonthEvent>, this.dayRef[`${evt.day}${evt.row}`].current)
+            let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
+
+            // introduce more bookeeping in the state to check how many month events are present
+            // for each day
+            let current_state = this.state.event_objs.slice();
+            let div_position = current_state[evt.day][evt.row];
+            current_state[evt.day][evt.row]+=1;
+            this.setState({event_objs: current_state});
+            // manipulates the dom directly
+            ReactDOM.render(event_object, this.dayRef[`${evt.day}${evt.row}${div_position}`].current)
         }
     }
 
@@ -51,12 +72,17 @@ class Month extends Component {
             let day = (week_position * 7 + i + 1) > day_count ? "" : (week_position * 7 + i + 1);
             if (day !== "") {
                 let real_day_num = day_num(month, day, year);
-                if (real_day_num !== i) {
-                    day = "";
-                }
+                day = real_day_num !== i ? "" : day;
             }
             rows.push(
-                <td className="has-text-grey" style={{ height: "100px", textAlign: "left" }} onClick={this.toggleEditBox}><div ref={this.dayRef[`${i}${week_position}`]}></div>{day}</td>
+                <td className="has-text-grey" style={{ height: "100px", textAlign: "left" }} onClick={this.toggleEditBox}>
+                    <div>
+                        <div ref={this.dayRef[`${i}${week_position}${0}`]}></div>
+                        <div ref={this.dayRef[`${i}${week_position}${1}`]}></div>
+                        <div ref={this.dayRef[`${i}${week_position}${2}`]}></div>
+                    </div>
+                    {day}
+                </td>
             );
         }
         return (
