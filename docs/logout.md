@@ -1,7 +1,7 @@
 # logout
 This file describes the `/logout` endpoint.
 
-## Core Details
+## Core details
 * Endpoint: `/logout`.
 * Request method: `POST`.
 * Body parameters:

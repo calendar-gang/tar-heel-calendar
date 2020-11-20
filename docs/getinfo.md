@@ -1,11 +1,11 @@
 # getinfo
 This file describes the `/getinfo` endpoint.
 
-## Core Details
+## Core details
 * Endpoint: `/getinfo`.
 * Request method: `GET`.
 * Body parameters:
-    * `token`: string of 60 characters
+    * `token`: string of 60 characters.
 
 ## Example operations
 ### Example (valid input)

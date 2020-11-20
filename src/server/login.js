@@ -1,11 +1,11 @@
-const {isStringValidLength, generateAuthToken} = require("./util");
+const {isStringValidLength, generateAuthToken, getHashedPassword} = require("./util");
 const {db} = require("../server");
 
 exports.login = (req, res) => {
     const { username, password } = req.body;
 
     if(!isStringValidLength(username, 1, 100)
-        || !isStringValidLength(password, 5, 255)){
+            || !isStringValidLength(password, 5, 255)){
         res.status(400);
         res.json({
             message: "Invalid length of parameter."

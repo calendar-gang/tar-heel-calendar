@@ -1,7 +1,7 @@
 const {isStringValidLength} = require("./util");
 const {db} = require("../server");
 
-exports.getinfo = (req, res) => {
+exports.getInfo = (req, res) => {
     const { token } = req.body;
 
     if(!isStringValidLength(token, 60, 60)){

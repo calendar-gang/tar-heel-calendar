@@ -51,8 +51,11 @@ app.post('/login', login);
 const {logout} = require('./server/logout');
 app.post('/logout', logout);
 
-const {getinfo} = require('./server/getinfo');
-app.get('/getinfo', getinfo);
+const {getInfo} = require('./server/getInfo');
+app.get('/getinfo', getInfo);
+
+const {makeEvent} = require('./server/makeEvent');
+app.post('/makeevent', makeEvent);
 
 app.listen(port);
 

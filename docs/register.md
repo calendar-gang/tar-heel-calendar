@@ -1,7 +1,7 @@
 # register
 This file describes the `/register` endpoint.
 
-## Core Details
+## Core details
 * Endpoint: `/register`.
 * Request method: `POST`.
 * Body parameters:

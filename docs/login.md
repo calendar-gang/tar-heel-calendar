@@ -1,7 +1,7 @@
 # login
 This file describes the `/login` endpoint.
 
-## Core Details
+## Core details
 * Endpoint: `/login`.
 * Request method: `POST`.
 * Body parameters:
