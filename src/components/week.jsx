@@ -102,7 +102,7 @@ class Week extends Component {
 
                     </section>
                 </div>
-                <div className="container">
+                <div className="container" style ={{height: "700px", overflow: "scroll"}}>
                     <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                         <thead>
                             <tr className="is-bordered">
