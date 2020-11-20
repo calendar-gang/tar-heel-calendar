@@ -31,7 +31,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "create-database": "node scripts/create/createDatabase.js",
-    "create-tables": "node scripts/create/createTables.js"
+    "create-tables": "node scripts/create/createTables.js",
+    "drop-tables": "node scripts/delete/dropTables.js",
+    "create-sample-data": "node scripts/create/createSampleData.js"
   },
   "eslintConfig": {
     "extends": "tar-heel-calendar"
