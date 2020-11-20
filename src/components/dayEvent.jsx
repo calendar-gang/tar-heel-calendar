@@ -23,18 +23,24 @@ class DayEvent extends Component {
 
     _toggleEventBox(event) {
 
-        if (this.eventBox.current.className === "is-hidden box eventBox") {
-            this.eventBox.current.className = "box eventBox";
+        if (this.eventBox.current.className === "is-hidden box") {
+            this.eventBox.current.className = "box";
         } else {
-            this.eventBox.current.className = "is-hidden box eventBox";
+            this.eventBox.current.className = "is-hidden box";
         }
     }
 
     _createEventBox() {
-
+        const event_style = {
+            width: "200px",
+            position: "absolute",
+            height: "200px",
+            margin: "60px 0px 0px 50px",
+            zIndex: "1"
+        }
 
         return (
-            <div ref={this.eventBox} className="is-hidden box eventBox" >
+            <div ref={this.eventBox} className="is-hidden box" style={event_style}>
                 <header className="card-head">
                     <p className="card-title">Here is this event!</p>
                 </header>
