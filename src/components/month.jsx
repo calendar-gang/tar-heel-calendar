@@ -1,48 +1,43 @@
 import React, { Component } from 'react';
 import NewEntry from './newentry';
+import ReactDOM from 'react-dom';
+import MonthEvent from './monthEvent';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 class Month extends Component {
     state = {};
 
-    toggleEditBox(event) {
-        event.persist();
-        let td = event.nativeEvent.path[0];
-        let edit_box = document.getElementById("edit-box");
-        let content = document.getElementById("edit-box-content");
-        if (edit_box.className === "modal is-active") {
-            edit_box.className = "modal";
-            while (content.firstChild) {
-                content.removeChild(content.firstChild);
+    eventlist = [{ day: 0, row: 0, start: 2, end: 4, name: "History Lecture", category: 0 },
+    { day: 2, row: 2, start: 2, end: 4, name: "History Lecture", category: 1 },
+    { day: 1, row: 1, start: 1, end: 2, name: "Math Lecture", category: 2 },
+    { day: 5, row: 3, start: 1, end: 2, name: "Math Lecture", category: 3 },
+    { day: 5, row: 0, start: 1, end: 2, name: "Math Lecture", category: 4 },
+    { day: 4, row: 2, start: 2, end: 3.5, name: "Breakfast in Durham", category: 5 },
+    { day: 3, row: 0, start: 3, end: 5.5, name: "426 Lecture", category: 6 },
+    { day: 1, row: 3, start: 3, end: 5.5, name: "426 Lecture", category: 7 },
+    { day: 5, row: 0, start: 3, end: 5.5, name: "426 Lecture", category: 8 },
+    { day: 6, row: 1, start: 1, end: 2.5, name: "Coffee with Friends", category: 0 }]
+
+    constructor(props) {
+        super(props);
+
+        this.dayRef = {}
+        for (let i = 0; i < 7; i++) {
+            for (let j = 0; j < 5; j++) {
+                this.dayRef[`${i}${j}`] = React.createRef()
             }
-        } else {
-            edit_box.className = "modal is-active";
-            let task = document.createElement("p");
-            task.innerHTML = td.innerHTML;
-            content.append(task);
         }
     }
 
-    createEditBox() {
-        return (
-            <div id="edit-box" class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Here Are Your Tasks!</p>
-                        <button onClick={this.toggleEditBox} class="delete" aria-label="close"></button>
-                    </header>
-                    <section id="edit-box-content" class="modal-card-body">
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button class="button is-warning">Edit</button>
-                        <button class="button is-success">Save changes</button>
-                        <button onClick={this.toggleEditBox} class="button">Cancel</button>
-                    </footer>
-                </div>
-            </div>
+    componentDidMount() {
+        this._rendercurrentevents()
+    }
 
-        )
+    _rendercurrentevents() {
+        for (let i = 0; i < this.eventlist.length; i++) {
+            let evt = this.eventlist[i]
+            ReactDOM.render(<MonthEvent eventstate={evt}></MonthEvent>, this.dayRef[`${evt.day}${evt.row}`].current)
+        }
     }
 
     _renderRowByDay(week_position) {
@@ -61,7 +56,7 @@ class Month extends Component {
                 }
             }
             rows.push(
-                <td className="has-text-grey" style={{ height: "100px", textAlign: "left" }} onClick={this.toggleEditBox}>{day}</td>
+                <td className="has-text-grey" style={{ height: "100px", textAlign: "left" }} onClick={this.toggleEditBox}><div ref={this.dayRef[`${i}${week_position}`]}></div>{day}</td>
             );
         }
         return (
@@ -124,7 +119,6 @@ class Month extends Component {
                         </thead>
                         {this._renderBody()}
                     </table>
-                    {this.createEditBox()}
                 </div>
             </div >
 
