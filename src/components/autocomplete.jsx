@@ -11,6 +11,22 @@ class AutoCompleteText extends Component {
         }
     }
 
+    debounce = (func) => { 
+        let delay = 1000
+        let debounceTimer 
+        return function() { 
+            const context = this
+            const args = arguments 
+                clearTimeout(debounceTimer) 
+                    debounceTimer 
+                = setTimeout(() => func.apply(context, args), delay) 
+        } 
+    } 
+    
+    helper(e) {
+        this.debounce(this.onTextChanged(e))
+    }
+
     onTextChanged = (e) => {
         const value = e.target.value
         let suggestions = []
@@ -25,6 +41,7 @@ class AutoCompleteText extends Component {
     renderSuggestions() {
         const suggeststyle = {
             backgroundColor: "white", 
+            width: "300px"
         }
         const suggestions = this.state.suggestions
         if (suggestions.length === 0 ) {
@@ -33,7 +50,7 @@ class AutoCompleteText extends Component {
         return (
             <div class="box" style={{position: "absolute", zIndex: "1"}}>
             <ul>
-                 {suggestions.map((item => <li style= {suggeststyle} onClick= {() => this.suggestionSelected(item)}>{item}</li>))}
+                 {suggestions.map((item => <li class="ishoverable" style= {suggeststyle} onClick= {() => this.suggestionSelected(item)}>{item}</li>))}
             </ul>
             </div>
         )
@@ -51,7 +68,7 @@ class AutoCompleteText extends Component {
         }
         return (
             <div>
-               <input class= "input" value={text} placeholder= {this.props.hold} style={inputval} type="text" onChange={this.onTextChanged.bind(this)}/>
+               <input class= "input" value={text} placeholder= {this.props.hold} style={inputval} type="text" onChange={this.helper.bind(this)}/>
                {this.renderSuggestions()}
             </div>
 
@@ -60,3 +77,5 @@ class AutoCompleteText extends Component {
 }
 
 export default AutoCompleteText
+
+// <input class= "input" value={text} placeholder= {this.props.hold} style={inputval} type="text" onChange={this.onTextChanged.bind(this)}/>

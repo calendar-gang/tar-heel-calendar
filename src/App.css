@@ -75,3 +75,7 @@ td:hover {
   top: -10px;
   left: calc(50% - 10px);
 }
+
+ul li:hover {
+  color: red;  /* or whatever colour you want */
+}
