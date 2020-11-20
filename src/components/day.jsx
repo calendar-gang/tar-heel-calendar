@@ -225,7 +225,7 @@ class Day extends Component {
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                     </section>
                     <div class="columns" style={{height: "100%"}}>
-                    <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px" }}>
+                    <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "90%", margin: "15px" }}>
                         <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
                         {this.rendercurrenttasks()}
                         <div id="newtasks"></div>
@@ -248,3 +248,10 @@ export default Day;
 // <input type="checkbox" id="task2" name="task2" onClick={this.strikeTask.bind(this)}/>
 
 // readd todo list button
+
+
+// change height of the todo so it isnt fucked 
+// fix icon height if not already fixed 
+// integrate news api instead of stickies
+// get tasks dynamically updating from our database info 
+// consider if we want a login screen / what we should display when not logged in 
