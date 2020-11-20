@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
 import Task from './task';
+import StickyNote from './sticknotes'
 import NewEntry from './newentry'
 import ReactDOM from 'react-dom'
 import DayEvent from './dayEvent'
@@ -40,8 +41,8 @@ class Day extends Component {
 
     _renderRowByHour(time) {
         return (
-            <tr>
-                <th className="has-text-grey-light has-text-left">{this._findHour(time)}</th>
+            <tr style={{width: "100px"}}>
+                <th className="has-text-grey-light has-text-left is-narrow">{this._findHour(time)}</th>
                 <td ref={this.timeRef[`${time}`]}></td>
             </tr>
         )
@@ -53,7 +54,7 @@ class Day extends Component {
             rows.push(this._renderRowByHour(i));
         }
         return (
-            <tbody>
+            <tbody style={{width: "50px"}}>
                 {rows}
             </tbody>
         )
@@ -143,7 +144,7 @@ class Day extends Component {
         return (
 
             <div className="daysview columns" style={{ margin: "0px" }}>
-                <div className="calendar column">
+                <div className="calendar column is-half">
                     <div className="container">
                         <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                             <div className="level-left">
@@ -157,12 +158,12 @@ class Day extends Component {
 
                         </section>
                     </div>
-                    <div className="container" style={{ margin: "10px" }}>
+                    <div className="container" style={{ margin: "10px"}}>
                         <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                             <thead>
                                 <tr className="is-bordered">
                                     <th></th>
-                                    <th className="has-text-grey-light" >Events</th>
+                                    <th className="has-text-grey-light is-4">Events</th>
                                 </tr>
                             </thead>
                             {this._renderBody()}
@@ -170,15 +171,22 @@ class Day extends Component {
                     </div>
 
                 </div>
-                <div className="dailytodo container column box is-one-quarter" style={{ backgroundColor: "#0b1846" }}>
+                <div className="dailytodo container column box is-half" style={{ backgroundColor: "#0b1846" }}>
                     <section className="level" style={{ backgroundColor: "#0b1846", height: "50px" }}>
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                     </section>
-                    <div className="container tasklist box" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px" }}>
+                    <div class="columns" style={{height: "100%"}}>
+                    <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "95%", margin: "15px" }}>
                         <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
                         {this.rendercurrenttasks()}
                         <div id="newtasks"></div>
                         {this.rendertaskform()}
+                    </div>
+                    <div class="column is-half stickynotes">
+                        <StickyNote color="lightyellow"></StickyNote>
+                        <StickyNote color="lightpink"></StickyNote>
+                        <StickyNote color="lightblue"></StickyNote>
+                    </div>
                     </div>
                 </div>
             </div>
