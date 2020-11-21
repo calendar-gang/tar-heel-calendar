@@ -65,6 +65,7 @@ class NavBar extends Component {
     }
 
     _loginPress(event) {
+        console.log(this.SIfields)
         let pword = this.SIfields.password.current.value
         let uname = this.SIfields.username.current.value
         let valid = this.checkpassword(pword)
@@ -222,7 +223,7 @@ class NavBar extends Component {
                         </div>
                     </div>
                     <footer className="modal-card-foot" style={header_style}>
-                        <button className="button login" onClick={this._loginPress} style={center}>Log in</button>
+                        <button className="button login" onClick={this._loginPress.bind(this)} style={center}>Log in</button>
                     </footer>
 
                 </div>
