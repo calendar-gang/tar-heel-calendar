@@ -57,6 +57,9 @@ app.get('/getinfo', getInfo);
 const {makeEvent} = require('./server/makeEvent');
 app.post('/makeevent', makeEvent);
 
+const {viewEvents} = require('./server/viewEvents');
+app.post('/viewevents', viewEvents);
+
 app.listen(port);
 
 console.log("App listening on port " + port)

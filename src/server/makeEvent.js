@@ -10,7 +10,9 @@ exports.makeEvent = (req, res) => {
             || !isStringValidLength(description, 0, 65535)
             || !isStringValidLength(start, 19, 19)
             || !isStringValidLength(end, 19, 19)
-            || !isStringValidLength(recurring, 0, 7)){
+            || !isStringValidLength(recurring, 0, 7)
+            || !isStringValidLength(recurringuntil, 0, 19)
+            || !isStringValidLength(category, 0, 7)){
         res.status(400);
         res.json({
             message: "Invalid length of parameter."
@@ -40,6 +42,8 @@ exports.makeEvent = (req, res) => {
         return;
     }
 
+    // TODO: there are many checks we could/should do with the time stamps
+
     db.query(`SELECT username
             FROM tokens
             WHERE token=?`, [token], (error, results, fields) => {
@@ -57,6 +61,7 @@ exports.makeEvent = (req, res) => {
         let username = results[0].username;
 
         // TODO: This looks a bit silly.
+        // Also WebStorm's database tool says there are errors here, but in works fine.
         db.query(`INSERT INTO events(
                    username,
                    title,

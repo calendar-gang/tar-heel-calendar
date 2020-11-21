@@ -35,3 +35,70 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
 });
 ```
 
+#### Response (status: 200)
+```json
+{
+    "message": "Event made."
+}
+```
+
+### Example (valid input without optional parameters)
+```js
+let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+    title: 'Event title',
+    start: '2020-11-10 12:30:00',
+    end: '2020-11-11 12:30:00'
+});
+```
+
+#### Response (status: 200)
+```json
+{
+    "message": "Event made."
+}
+```
+
+### Example (invalid timestamp)
+```js
+let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+    title: 'Event title',
+    location: 'Event location',
+    description: 'This is an event.',
+    start: '2020-11-10 12:30:AA',
+    end: '2020-11-11 12:30:00',
+    recurring: 'weekly',
+    recurringuntil: '2020-12-11 12:30:00',
+    category: 'school'
+});
+```
+
+#### Response (status: 400)
+```json
+{
+    "message": "Invalid time stamp."
+}
+```
+
+### Example (invalid enum)
+```js
+let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+    title: 'Event title',
+    location: 'Event location',
+    description: 'This is an event.',
+    start: '2020-11-10 12:30:00',
+    end: '2020-11-11 12:30:00',
+    recurring: 'weekly',
+    recurringuntil: '2020-12-11 12:30:00',
+    category: '----'
+});
+```
+
+#### Response (status: 400)
+```json
+{
+    "message": "Invalid enum."
+}
+```
