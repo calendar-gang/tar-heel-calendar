@@ -13,7 +13,11 @@ module.exports.register = (req, res) => {
         res.json({
             message: "Invalid length of parameter.",
             body: req.body,
-            req: req
+            username: username,
+            email: email,
+            firstname: firstname,
+            lastname: lastname,
+            password: password
         });
 
         return;
