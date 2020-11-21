@@ -46,7 +46,7 @@ class NewEntry extends Component {
 
         return (
             <div>
-            <a className="button is-light" onClick={this.toggleNewEntry.bind(this)}>New Entry</a>
+            <a className="button is-light" onClick={this.toggleNewEntry.bind(this)}>New Event</a>
             <div className={this.state.view}>
                 <div className="modal-background"></div>
                 <div className="modal-card">
@@ -76,19 +76,19 @@ class NewEntry extends Component {
                         <div className="field is-horizontal">
                             <label className="label" style={sulabel}>Date:</label>
                             <div className="control">
-                                <input type="date" style={inputval}/>
+                                <input className="input" type="date" style={inputval}/>
                             </div>
                         </div>
                         <div className="field is-horizontal">
                             <label className="label" style={sulabel}>Start Time:</label>
                             <div className="control">
-                                <input type="time" style={inputval}/>
+                                <input className="input" type="time" style={inputval}/>
                             </div>
                         </div>
                         <div className="field is-horizontal">
                             <label className="label" style={sulabel}>End Time:</label>
                             <div className="control">
-                                <input type="time" style={inputval}/>
+                                <input className="input" type="time" style={inputval}/>
                             </div>
                         </div>
                     </div>

@@ -80,21 +80,25 @@ class MonthEvent extends Component {
         const event_style = {
             width: "200px",
             position: "absolute",
-            height: "200px",
             margin: "10px 0px 0px 50px",
             zIndex: "1",
         }
         return (
             <div ref={this.editBox} className="is-hidden box monthevent" style={event_style}>
                 <form>
-                    <input className="input" type="text" placeholder={`${this.props.eventstate.name}`} style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
-                    <input className="input" type="text" placeholder={`${this._findHour(this.props.eventstate.start)} - ${this._findHour(this.props.eventstate.end)}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <textarea className="input" type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.name}`}</textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" type="text" placeholder={`${this.props.eventstate.location}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <textarea className="input" type="text" style={{  fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this._findHour(this.props.eventstate.start)} - ${this._findHour(this.props.eventstate.end)}`}</textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" type="text" placeholder={`${this.props.eventstate.description}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
-                    <button style={{ fontSize: "10px" }}><BiCheck /></button>
-                    <button style={{ fontSize: "10px" }}><BiX /></button>
+                    <textarea className="input" type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.location}`}</textarea>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <textarea className="input" type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <hr className="hr" style={{ margin: "2px"}}></hr>
+                    <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <button className="button" style={{ fontSize: "10px", marginTop: "5px"}}><BiCheck /></button>
+                    <button className="button" style={{ fontSize: "10px" , marginTop: "5px"}}><BiX /></button>
                 </form>
             </div>
         )
