@@ -1,11 +1,13 @@
 # logout
 This file describes the `/logout` endpoint.
 
-## Core Details
+## Core details
 * Endpoint: `/logout`.
 * Request method: `POST`.
 * Body parameters:
     * `token`: string of 60 characters.
+* Response parameters:
+    * `message`
 
 ## Example operations
 ### Example (valid input)

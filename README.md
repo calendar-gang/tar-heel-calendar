@@ -24,6 +24,8 @@ If you're only working on one end of the project, this may be a bit slow. There 
 2. `npm run start-server` will run the backend without attempting to build the frontend. If your frontend is already built, this is fine, but any changes to the frontend must be rebuilt manually.
 3. `npm run build` will build the frontend.
 4. `npm run test` will run frontend unit tests.
+5. `npm run drop-tables` will drop all tables in the database (if they exist).
+6. `npm run create-sample-data` will insert some sample data into the database for testing purposes.
 
 ## Technologies used
 * [Node.JS](https://github.com/nodejs/node)

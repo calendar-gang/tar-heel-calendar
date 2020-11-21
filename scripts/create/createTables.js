@@ -17,7 +17,14 @@ db.connect(function(err) {
     console.log('Connected to database as id ' + db.threadId);
 });
 
-['create_users.sql', 'create_tokens.sql'].forEach(file => {
+// Note that the order is in fact important here, as earlier tables rely on previous tables.
+let scripts = [
+    'create_users.sql',
+    'create_tokens.sql',
+    'create_events.sql'
+];
+
+scripts.forEach(file => {
     fs.readFile(`scripts/create/sql/${file}`, 'utf8', (err, data) => {
         if(err){
             console.error(err);

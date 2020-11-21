@@ -1,11 +1,17 @@
 # getinfo
 This file describes the `/getinfo` endpoint.
 
-## Core Details
+## Core details
 * Endpoint: `/getinfo`.
 * Request method: `GET`.
 * Body parameters:
-    * `token`: string of 60 characters
+    * `token`: string of 60 characters.
+* Response parameters:
+    * `message`
+    * `username`
+    * `email`
+    * `firstname`
+    * `lastname`
 
 ## Example operations
 ### Example (valid input)
@@ -26,7 +32,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
 }
 ```
 
-### Example (no token)
+### Example (invalid token)
 ```js
 let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
     token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
