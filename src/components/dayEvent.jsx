@@ -58,11 +58,6 @@ class DayEvent extends Component {
 
     }
 
-    _findTime(time) {
-        return this._findHour(time)
-
-    }
-
 
     render() {
         const event_style = {
@@ -81,7 +76,7 @@ class DayEvent extends Component {
                             <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
                         </div>
                         <div className="level-right">
-                            <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findTime(this.props.eventstate.start)} - {this._findTime(this.props.eventstate.end)}</p>
+                            <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start)} - {this._findHour(this.props.eventstate.end)}</p>
                         </div>
                     </div>
                     <hr className="hr" style={{ margin: "4px" }}></hr>
