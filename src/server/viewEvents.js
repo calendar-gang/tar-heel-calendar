@@ -1,7 +1,7 @@
 const {isStringValidLength, isTimeStampValid} = require("./util");
 const {db} = require("../server");
 
-exports.makeEvent = (req, res) => {
+exports.viewEvents = (req, res) => {
     let { token, earliest, latest } = req.body;
 
     if(!isStringValidLength(token, 60, 60)
@@ -43,7 +43,7 @@ exports.makeEvent = (req, res) => {
 
         db.query(`SELECT *
                 FROM events
-                WHERE username=?`,
+                WHERE username=? AND start > ? AND end < ?`,
                 [username, earliest, latest],
                 (error, results, fields) => {
             if(error) throw error;

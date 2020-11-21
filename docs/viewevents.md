@@ -11,3 +11,10 @@ This file describes the `/viewevents` endpoint.
 
 ## Example operations
 ### Example (valid input)
+```js
+let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
+    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+    earliest: '2020-10-10 12:30:00',
+    latest: '2020-12-11 12:30:00'
+});
+```
