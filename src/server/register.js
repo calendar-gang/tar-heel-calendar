@@ -11,7 +11,8 @@ module.exports.register = (req, res) => {
         // It would be better to specify which field is wrong but this is considered an internal error
         res.status(400);
         res.json({
-            message: "Invalid length of parameter."
+            message: "Invalid length of parameter.",
+            body: req.body
         });
 
         return;
