@@ -86,12 +86,12 @@ class WeekEvent extends Component {
 
         return (
             <div>
-                <div style={event_style} className="box week-event" /*onDoubleClick={this.toggleEventEditBox}*/ onClick={this._toggleEventBox.bind(this)}>
+                <div style={event_style} className="box week-event" /*onDoubleClick={this.toggleEventEditBox}*/ onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)}>
                     <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findTime(this.props.eventstate.start)} - {this._findTime(this.props.eventstate.end)}</p>
                     <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
                 </div>
-                {this._createEventBox()}
-            </div>
+                { this._createEventBox()}
+            </div >
 
 
         )

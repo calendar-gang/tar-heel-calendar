@@ -84,6 +84,10 @@ class DayEvent extends Component {
                             <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findTime(this.props.eventstate.start)} - {this._findTime(this.props.eventstate.end)}</p>
                         </div>
                     </div>
+                    <hr className="hr" style={{ margin: "4px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
+                    <hr className="hr" style={{ margin: "4px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.description}</p>
 
                 </div>
                 {this._createEventBox()}

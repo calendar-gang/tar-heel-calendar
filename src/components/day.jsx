@@ -11,12 +11,13 @@ class Day extends Component {
     state = {}
     tasklist = ["get", "this", "to", "work", "check", "task", "scroll", "power"]
 
+    fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
     eventlist = [
-        { day: 0, start: 9, end: 10.5, name: "Breakfast in Durham", category: 5 },
-        { day: 0, start: 11, end: 13, name: "History Lecture", category: 0 },
-        { day: 0, start: 14, end: 15.5, name: "Math Lecture", category: 4 },
-        { day: 0, start: 16, end: 18, name: "426 Lecture", category: 8 },
-        { day: 0, start: 19, end: 20, name: "Dinner with Friends", category: 0 }]
+        { day: 0, start: 9, end: 10.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+        { day: 0, start: 11, end: 13, name: "History Lecture", location: "Dey 301", description: `${this.fakeDescription}`, category: 0 },
+        { day: 0, start: 14, end: 15.5, name: "Math Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 4 },
+        { day: 0, start: 16, end: 18, name: "426 Lecture", location: "Sitterson 111", description: `${this.fakeDescription}`, category: 8 },
+        { day: 0, start: 19, end: 21, name: "Dinner with Friends", location: "Franklin", description: `${this.fakeDescription}`, category: 0 }]
 
     constructor(props) {
         super(props);
