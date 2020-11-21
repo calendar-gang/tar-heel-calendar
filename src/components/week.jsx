@@ -7,16 +7,18 @@ import AutoCompleteText from './autocomplete';
 
 class Week extends Component {
     state = {}
-    eventlist = [{ day: 0, start: 12, end: 14, name: "History Lecture", category: 0 },
-    { day: 2, start: 12, end: 14, name: "History Lecture", category: 1 },
-    { day: 1, start: 11, end: 12, name: "Math Lecture", category: 2 },
-    { day: 3, start: 11, end: 12, name: "Math Lecture", category: 3 },
-    { day: 5, start: 11, end: 12, name: "Math Lecture", category: 4 },
-    { day: 4, start: 12, end: 13.5, name: "Breakfast in Durham", category: 5 },
-    { day: 3, start: 13, end: 15.5, name: "426 Lecture", category: 6 },
-    { day: 1, start: 13, end: 15.5, name: "426 Lecture", category: 7 },
-    { day: 5, start: 13, end: 15.5, name: "426 Lecture", category: 8 },
-    { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", category: 0 }]
+
+    fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
+    eventlist = [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
+    { day: 2, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
+    { day: 1, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
+    { day: 3, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
+    { day: 5, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
+    { day: 4, start: 12, end: 13.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+    { day: 3, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
+    { day: 1, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
+    { day: 5, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
+    { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }]
 
     constructor(props) {
         super(props);

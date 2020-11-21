@@ -8,7 +8,7 @@ class WeekEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth };
+        this.state = { windowWidth: window.innerWidth, viewState: "normal" };
 
         this.eventBox = React.createRef()
     }
@@ -24,73 +24,46 @@ class WeekEvent extends Component {
 
     _toggleEventBox(event) {
 
-        if (this.eventBox.current.className === "is-hidden box") {
+        if (this.state.viewState === "normal") {
             this.eventBox.current.className = "box";
+            this.state.viewState = "details";
         } else {
             this.eventBox.current.className = "is-hidden box";
+            this.state.viewState = "normal";
         }
     }
 
+    _switchState() {
+
+    }
+
     _createEventBox() {
+        let depth = `${(this.props.eventstate.end - this.props.eventstate.start) * 80 - 20}px`
+        let marg = this.props.eventstate.day === 6 ? `${depth} 0px -50px 0px` : `${depth} 0px 0px 50px`;
+
         const event_style = {
             width: "200px",
             position: "absolute",
             height: "200px",
-            margin: "60px 0px 0px 50px",
-            zIndex: "1"
+            margin: `${marg}`,
+            zIndex: "1",
+            padding: "10px"
         }
-
-
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
                 <header className="card-head">
-                    <p className="card-title">Here is this event!</p>
+                    <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findTime(this.props.eventstate.start)} - {this._findTime(this.props.eventstate.end)}</p>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.description}</p>
                 </header>
 
             </div>
 
         )
     }
-
-    /*toggleEventEditBox(event) {
-        event.persist();
-        let td = event.nativeEvent.path[0];
-        let edit_box = document.getElementById("edit-box");
-        let content = document.getElementById("edit-box-content");
-        if (edit_box.className === "modal is-active") {
-            edit_box.className = "modal";
-            while (content.firstChild) {
-                content.removeChild(content.firstChild);
-            }
-        } else {
-            edit_box.className = "modal is-active";
-            let task = document.createElement("p");
-            task.innerHTML = td.innerHTML;
-            content.append(task);
-        }
-    }
-    
-    createEventEditBox() {
-        return (
-            <div id="edit-box" className="modal">
-                <div className="modal-background"></div>
-                <div className="modal-card">
-                    <header className="modal-card-head">
-                        <p className="modal-card-title">Edit this task!</p>
-                        <button onClick={this.toggleEditBox} className="delete" aria-label="close"></button>
-                    </header>
-                    <section id="edit-box-content" className="modal-card-body">
-                    </section>
-                    <footer className="modal-card-foot">
-                        <button className="button is-warning">Edit</button>
-                        <button className="button is-success">Save changes</button>
-                        <button onClick={this.toggleEditBox} className="button">Cancel</button>
-                    </footer>
-                </div>
-            </div>
-    
-        )
-    }*/
 
     _findHour(time) {
         if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }

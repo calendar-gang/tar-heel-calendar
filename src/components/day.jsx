@@ -16,7 +16,7 @@ class Day extends Component {
         { day: 0, start: 11, end: 13, name: "History Lecture", category: 0 },
         { day: 0, start: 14, end: 15.5, name: "Math Lecture", category: 4 },
         { day: 0, start: 16, end: 18, name: "426 Lecture", category: 8 },
-        { day: 0, start: 19, end: 20, name: "Coffee with Friends", category: 0 }]
+        { day: 0, start: 19, end: 20, name: "Dinner with Friends", category: 0 }]
 
     constructor(props) {
         super(props);
@@ -225,7 +225,7 @@ class Day extends Component {
                     <div style={{ height: "30px" }}></div>
 
                 </div>
-                <div className="dailytodo container column box is-half" style={{ backgroundColor: "#0b1846" }}>
+                <div className="dailytodo container column is-half" style={{ backgroundColor: "#0b1846" }}>
                     <section className="level" style={{ backgroundColor: "#0b1846", height: "50px", marginBottom: "8px" }}>
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                     </section>
