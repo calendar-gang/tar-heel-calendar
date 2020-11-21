@@ -58,7 +58,7 @@ class MonthEvent extends Component {
             width: "200px",
             position: "absolute",
             height: "200px",
-            margin: "10px 0px 0px 50px",
+            margin: "5px 0px 0px 50px",
             zIndex: "1",
         }
 
