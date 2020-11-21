@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BiCheck, BiX } from 'react-icons/bi';
 
 class DayEvent extends Component {
     state = {}
@@ -24,28 +25,41 @@ class DayEvent extends Component {
 
     _toggleEventBox(event) {
         // I think we may just want to display all event info on a day event since it is pretty big?
-        /*
+
         if (this.eventBox.current.className === "is-hidden box") {
             this.eventBox.current.className = "box";
         } else {
             this.eventBox.current.className = "is-hidden box";
-        }*/
+        }
     }
 
     _createEventBox() {
         const event_style = {
-            width: "200px",
+            width: `${(this.state.windowWidth / 2.5)}px`,
             position: "absolute",
-            height: "200px",
-            margin: "60px 0px 0px 50px",
+            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
+            backgroundColor: this.catcolors[this.props.eventstate.category % 9],
             zIndex: "1"
         }
 
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
-                <header className="card-head">
-                    <p className="card-title">Here is this event!</p>
-                </header>
+                <div className="level">
+                    <div className="level-left">
+                        <input className="input" type="text" placeholder={`${this.props.eventstate.name}`} style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    </div>
+                    <div className="level-right">
+                        <button style={{ fontSize: "10px" }}><BiCheck /></button>
+                        <button style={{ fontSize: "10px" }}><BiX /></button>
+
+                    </div>
+                </div>
+                <input className="input" type="text" placeholder={`${this._findHour(this.props.eventstate.start)} - ${this._findHour(this.props.eventstate.end)}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                <hr className="hr" style={{ margin: "4px" }}></hr>
+                <input className="input" type="text" placeholder={`${this.props.eventstate.location}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                <hr className="hr" style={{ margin: "4px" }}></hr>
+                <input className="input" type="text" placeholder={`${this.props.eventstate.description}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+
 
             </div>
 
@@ -70,7 +84,7 @@ class DayEvent extends Component {
 
         return (
             <div>
-                <div style={event_style} className="box" onClick={this._toggleEventBox.bind(this)}>
+                <div style={event_style} className="box" onDoubleClick={this._toggleEventBox.bind(this)}>
                     <div className="level">
                         <div className="level-left">
                             <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
