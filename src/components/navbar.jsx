@@ -12,6 +12,8 @@ class NavBar extends Component {
         this.SIfields = { username: React.createRef(), password: React.createRef() }
     }
 
+
+
     toggleSUBox(event) {
         event.persist();
         let edit_box = document.getElementById("signup-box");
@@ -26,6 +28,7 @@ class NavBar extends Component {
         // checks to make sure passowrd is between 8 and 100 chars, 
         // contains at least one lowercase letter, one uppercase letter, 
         // one numeric digit, and one special character
+        console.log(pword)
         let decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
         if (decimal.test(pword)) {
             return true;
@@ -35,12 +38,15 @@ class NavBar extends Component {
     }
 
     clickMe(event) {
-        let pword = this.SUBfields.password.value
+        console.log(this.SUBfields)
+        let pword = this.SUBfields.password.current.value
+        console.log(this.SUBfields.password.current)
         let valid = this.checkpassword(pword)
-        let fname = this.SUBfields.fname.value
-        let lname = this.SUBfields.lname.value
-        let uname = this.SUBfields.username.value
-        let email = this.SUBfields.email.value
+        console.log(valid)
+        let fname = this.SUBfields.fname.current.value
+        let lname = this.SUBfields.lname.current.value
+        let uname = this.SUBfields.username.current.value
+        let email = this.SUBfields.email.current.value
         if (valid && fname.length > 0 && lname.length > 0 && uname.length > 0 && email.length > 4) {
             console.log("made it to submit valid")
             this._submitValidatedNewUser(uname, email, fname, lname, pword)
@@ -118,7 +124,7 @@ class NavBar extends Component {
                         <div className="field is-horizontal">
                             <label className="label sulabel" style={sulabel}>Password:</label>
                             <div className="control">
-                                <input className="input" ref={this.SUBfields.passname} type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
+                                <input className="input" ref={this.SUBfields.password} type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
                             </div>
                         </div>
                         <p>Note: Passwords must be at least 8 characters long and include at least one of each of the following:
