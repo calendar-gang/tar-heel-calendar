@@ -27,12 +27,7 @@ class Month extends Component {
             date: this.props.date,
             dayRef: {}
         }
-<<<<<<< HEAD
-        this.dayRef = {}
-        for (let i = 0; i < 7; i++) {
-=======
         for(let i = 0; i < 7; i++) {
->>>>>>> 0d50a33 (able to change months)
             this.state.event_objs[i] = [];
             for (let j = 0; j < 5; j++) {
                 this.state.event_objs[i][j] = 0;
@@ -40,13 +35,8 @@ class Month extends Component {
         }
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 5; j++) {
-<<<<<<< HEAD
                 for (let k = 0; k < 3; k++) {
-                    this.dayRef[`${i}${j}${k}`] = React.createRef()
-=======
-                for(let k = 0; k < 3; k++) {
                     this.state.dayRef[`${i}${j}${k}`] = React.createRef()
->>>>>>> 0d50a33 (able to change months)
                 }
             }
         }
