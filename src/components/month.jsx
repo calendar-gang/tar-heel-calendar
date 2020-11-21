@@ -74,7 +74,7 @@ class Month extends Component {
             rows.push(
                 <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
                     {day}
-                    <div>
+                    <div style={{width: "120px"}}>
                         <div ref={this.state.dayRef[`${i}${week_position}${0}`]}></div>
                         <div ref={this.state.dayRef[`${i}${week_position}${1}`]}></div>
                         <div ref={this.state.dayRef[`${i}${week_position}${2}`]}></div>
