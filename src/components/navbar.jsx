@@ -94,7 +94,7 @@ class NavBar extends Component {
     async _submitValidatedLogin(uname, pword) {
         const result = await axios({
             method: 'post',
-            url: 'https://tar-heel-calendar.herokuapp.com/register',
+            url: 'https://tar-heel-calendar.herokuapp.com/login',
             data: {
                 username: uname,
                 password: pword
