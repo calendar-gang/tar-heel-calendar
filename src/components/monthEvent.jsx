@@ -31,6 +31,17 @@ class MonthEvent extends Component {
         }
     }
 
+    _findHour(time) {
+        if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
+        else { return (time % 12) === 0 ? "12 PM" : (time % 12) + " PM" }
+
+    }
+
+    _findTime(time) {
+        return this._findHour(time)
+
+    }
+
     _createEventBox() {
         const event_style = {
             width: "200px",
@@ -46,7 +57,12 @@ class MonthEvent extends Component {
         return (
             <div ref={this.eventBox} className="is-hidden box monthevent" style={event_style} >
                 <header className="card-head">
-                    <p className="card-title">Here is this event!</p>
+                    <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findTime(this.props.eventstate.start)} - {this._findTime(this.props.eventstate.end)}</p>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.description}</p>
                 </header>
             </div>
         )
