@@ -25,6 +25,12 @@ class Week extends Component {
 
         this.scrollBox = React.createRef()
 
+        let date_to_set = new Date(this.props.date.getTime());
+        date_to_set.setDate(date_to_set.getDate() - date_to_set.getDay());
+        this.state = {
+            date: date_to_set
+        }
+
         this.inputRef = {}
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 24; j++) {
@@ -72,13 +78,15 @@ class Week extends Component {
     }
 
     _getWeek() {
-        var curr = new Date(); // get current date
-        var first = curr.getDate() - curr.getDay() - 1; // First day is the day of the month - the day of the week
-        var last = first + 6; // last day is the first day + 6
+        var curr = new Date(this.state.date.getTime()); // get current date
+        // var first = curr.getDate() - curr.getDay() - 1; // First day is the day of the month - the day of the week
+        // var last = first + 6; // last day is the first day + 6
 
-        var firstday = new Date(curr.setDate(first)).toUTCString();
+        var firstday = new Date(curr.getTime()).toUTCString();
         firstday = firstday.substring(0, 11)
-        var lastday = new Date(curr.setDate(last)).toUTCString();
+        var lastday = new Date(curr.getTime());
+        lastday.setDate(lastday.getDate() + 6);
+        lastday = lastday.toUTCString();
         lastday = lastday.substring(0, 11)
 
         return firstday + " - " + lastday
@@ -92,6 +100,16 @@ class Week extends Component {
         }
     }
 
+    changeWeek(direction) {
+        let new_date_obj = new Date(this.state.date.getTime());
+        if(direction == 1) {
+            new_date_obj.setDate(new_date_obj.getDate() + 7);
+        } else {
+            new_date_obj.setDate(new_date_obj.getDate() - 7);
+        }
+        this.setState({date: new_date_obj})
+    }
+
     render() {
         let header_style = { position: "sticky", top: "0px", zIndex: "2", backgroundColor: "#fff" }
         return (
@@ -99,12 +117,12 @@ class Week extends Component {
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
+                            <h1 className="has-text-light" onClick={() => this.changeWeek(0)} style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>{this._getWeek()} </h1>
                         </div>
                         <div className="level-right">
                             <NewEntry></NewEntry>
-                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
+                            <h1 className="has-text-light" onClick={() => this.changeWeek(1)} style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
 
                     </section>
