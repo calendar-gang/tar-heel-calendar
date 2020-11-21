@@ -46,7 +46,7 @@ exports.makeEvent = (req, res) => {
 
     db.query(`SELECT username
             FROM tokens
-            WHERE token=?`, [token], (error, results, fields) => {
+            WHERE token = ?`, [token], (error, results, fields) => {
         if(error) throw error;
 
         if(results.length === 0){
@@ -88,7 +88,7 @@ exports.makeEvent = (req, res) => {
 
             db.query(`SELECT MAX(id) AS id
                     FROM events
-                    WHERE username=?`, [username], (error, results, fields) => {
+                    WHERE username = ?`, [username], (error, results, fields) => {
                 if(error) throw error;
 
                 res.json({

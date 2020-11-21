@@ -19,7 +19,7 @@ module.exports.register = (req, res) => {
 
     db.query(`SELECT username, email
             FROM users
-            WHERE username=? OR email=?`, [username, email], (error, results, fields) => {
+            WHERE username = ? OR email = ?`, [username, email], (error, results, fields) => {
         if(error) throw error;
 
         if(results.length !== 0){

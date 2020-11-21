@@ -15,7 +15,7 @@ exports.logout = (req, res) => {
 
     db.query(`SELECT token
             FROM tokens
-            WHERE token=?`, [token], (error, results, fields) => {
+            WHERE token = ?`, [token], (error, results, fields) => {
         if(error) throw error;
 
         if(results.length=== 0){
@@ -29,7 +29,7 @@ exports.logout = (req, res) => {
 
         db.query(`DELETE
                 FROM tokens
-                WHERE token=?`, [token], (error, results, fields) => {
+                WHERE token = ?`, [token], (error, results, fields) => {
             if(error) throw error;
 
             res.json({

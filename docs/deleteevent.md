@@ -34,7 +34,7 @@ let res = await axios.delete('tar-heel-calendar.herokuapp.com/deleteevent', {
 });
 ```
 
-#### Response (status: 200)
+#### Response (status: 400)
 ```json
 {
     "message": "Token not found."
@@ -49,7 +49,7 @@ let res = await axios.delete('tar-heel-calendar.herokuapp.com/deleteevent', {
 });
 ```
 
-#### Response (status: 200)
+#### Response (status: 400)
 ```json
 {
     "message": "No event found."

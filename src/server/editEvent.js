@@ -53,7 +53,7 @@ exports.editEvent = (req, res) => {
 
     db.query(`SELECT username
             FROM tokens
-            WHERE token=?`, [token], (error, results, fields) => {
+            WHERE token = ?`, [token], (error, results, fields) => {
         if(error) throw error;
 
         if(results.length === 0) {

@@ -16,11 +16,11 @@ exports.login = (req, res) => {
 
     db.query(`SELECT username, password
             FROM users
-            WHERE username=?`, [username], (error, results, fields) => {
+            WHERE username = ?`, [username], (error, results, fields) => {
 
         if(error) throw error;
 
-        if(results.length=== 0){
+        if(results.length === 0){
             res.status(400);
             res.json({
                 message: "Username missing."

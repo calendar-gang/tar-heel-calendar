@@ -25,7 +25,7 @@ exports.deleteEvent = (req, res) => {
 
     db.query(`SELECT username
             FROM tokens
-            WHERE token=?`, [token], (error, results, fields) => {
+            WHERE token = ?`, [token], (error, results, fields) => {
         if (error) throw error;
 
         if (results.length === 0) {
@@ -40,7 +40,7 @@ exports.deleteEvent = (req, res) => {
         let username = results[0].username;
 
         db.query(`DELETE FROM events
-                WHERE username=? AND id=?`,
+                WHERE username = ? AND id = ?`,
                 [username, Number(id)], (error, results, fields) => {
             if (error) throw error;
 

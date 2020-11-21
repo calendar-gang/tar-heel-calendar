@@ -27,7 +27,7 @@ exports.viewEvents = (req, res) => {
 
     db.query(`SELECT username
             FROM tokens
-            WHERE token=?`, [token], (error, results, fields) => {
+            WHERE token = ?`, [token], (error, results, fields) => {
         if (error) throw error;
 
         if (results.length === 0) {
@@ -43,7 +43,7 @@ exports.viewEvents = (req, res) => {
 
         db.query(`SELECT *
                 FROM events
-                WHERE username=? AND start > ? AND end < ?`,
+                WHERE username = ? AND start > ? AND end < ?`,
                 [username,
                 earliest || '1970-01-01 00:00:01',
                 latest || '2038-01-09 03:14:07'],
