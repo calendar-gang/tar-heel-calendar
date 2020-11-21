@@ -50,7 +50,7 @@ class ViewSelector extends Component {
                             } else if (button.name === "Week") {
                                 view = <Week />
                             } else {
-                                view = <Month />
+                                view = <Month date={(new Date())}/>
                             }
                         }
                     })

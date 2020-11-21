@@ -23,11 +23,16 @@ class Month extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            popup_shown: 0,
-            event_objs: []
+            event_objs: [],
+            date: this.props.date,
+            dayRef: {}
         }
+<<<<<<< HEAD
         this.dayRef = {}
         for (let i = 0; i < 7; i++) {
+=======
+        for(let i = 0; i < 7; i++) {
+>>>>>>> 0d50a33 (able to change months)
             this.state.event_objs[i] = [];
             for (let j = 0; j < 5; j++) {
                 this.state.event_objs[i][j] = 0;
@@ -35,8 +40,13 @@ class Month extends Component {
         }
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 5; j++) {
+<<<<<<< HEAD
                 for (let k = 0; k < 3; k++) {
                     this.dayRef[`${i}${j}${k}`] = React.createRef()
+=======
+                for(let k = 0; k < 3; k++) {
+                    this.state.dayRef[`${i}${j}${k}`] = React.createRef()
+>>>>>>> 0d50a33 (able to change months)
                 }
             }
         }
@@ -48,7 +58,7 @@ class Month extends Component {
 
     _rendercurrentevents() {
         for (let i = 0; i < this.eventlist.length; i++) {
-            let evt = this.eventlist[i]
+            let evt = this.eventlist[i];
             let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
 
             // introduce more bookeeping in the state to check how many month events are present
@@ -58,30 +68,26 @@ class Month extends Component {
             current_state[evt.day][evt.row] += 1;
             this.setState({ event_objs: current_state });
             // manipulates the dom directly
-            ReactDOM.render(event_object, this.dayRef[`${evt.day}${evt.row}${div_position}`].current)
+            ReactDOM.render(event_object, this.state.dayRef[`${evt.day}${evt.row}${div_position}`].current)
         }
     }
 
     _renderRowByDay(week_position) {
-        let date = new Date();
+        let date = new Date(this.state.date.getTime());
         let year = date.getFullYear();
         let month = date.getMonth();
         let day_count = this.numDays(year, month) - 1;
-        let day_num = (month, day, year) => (new Date(year, month, day)).getDay();
+        //let day_num = (month, day, year) => (new Date(year, month, day)).getDay();
         let rows = [];
         for (let i = 0; i < 7; i++) {
             let day = (week_position * 7 + i + 1) > day_count ? "" : (week_position * 7 + i + 1);
-            if (day !== "") {
-                let real_day_num = day_num(month, day, year);
-                day = real_day_num !== i ? "" : day;
-            }
             rows.push(
                 <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
                     {day}
                     <div>
-                        <div ref={this.dayRef[`${i}${week_position}${0}`]}></div>
-                        <div ref={this.dayRef[`${i}${week_position}${1}`]}></div>
-                        <div ref={this.dayRef[`${i}${week_position}${2}`]}></div>
+                        <div ref={this.state.dayRef[`${i}${week_position}${0}`]}></div>
+                        <div ref={this.state.dayRef[`${i}${week_position}${1}`]}></div>
+                        <div ref={this.state.dayRef[`${i}${week_position}${2}`]}></div>
                     </div>
                 </td>
             );
@@ -99,7 +105,7 @@ class Month extends Component {
 
     _renderBody() {
         let rows = [];
-        let date = new Date();
+        let date = this.state.date;
         let year = date.getFullYear();
         let month = date.getMonth();
         for (let i = 0; i < (this.numDays(year, month) % 7) + 2; i++) {
@@ -112,22 +118,44 @@ class Month extends Component {
         )
     }
 
+    switchMonth(direction) {
+        let date_to_set = new Date(this.state.date.getTime());
+        if(direction == 0) {
+            date_to_set.setMonth(date_to_set.getMonth() - 1);
+        } else {
+            date_to_set.setMonth(date_to_set.getMonth() + 1);
+        }
+        let replaced_event_objs = [];
+        for(let i = 0; i < 7; i++) {
+            replaced_event_objs[i] = [];
+            for (let j = 0; j < 5; j++) {
+                replaced_event_objs[i][j] = 0;
+            }
+        }
+        this.setState({
+            event_objs: replaced_event_objs,
+            date: date_to_set,
+            dayRef: {}
+        });
+    }
+
     render() {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
 
         return (
+            <div id="month-view">
             <div className="calendar">
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
-                            <h1 className="title has-text-light" style={{ margin: "10px" }}>{monthNames[(new Date()).getMonth()]} </h1>
+                            <h1 onClick={() => this.switchMonth(0)} className="has-text-light" style={{ fontSize: "60px" }} ><BiChevronLeft /></h1>
+                            <h1 className="title has-text-light" style={{ margin: "10px" }}>{monthNames[(this.state.date).getMonth()] + " " + this.state.date.getFullYear()} </h1>
                             <h1 className="subtitle" style={{ margin: "10px" }}> A Monthly View Designed Just For You!</h1>
                         </div>
                         <div className="level-right">
                             <NewEntry></NewEntry>
-                            <h1 className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
+                            <h1 onClick={() => this.switchMonth(1)} className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
                     </section>
                 </div >
@@ -149,7 +177,7 @@ class Month extends Component {
                 </div>
                 <div style={{ height: "30px" }}></div>
             </div >
-
+            </div>
         )
     }
 }
