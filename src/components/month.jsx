@@ -134,7 +134,6 @@ class Month extends Component {
             "July", "August", "September", "October", "November", "December"];
 
         return (
-            <div id="month-view">
             <div className="calendar">
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
@@ -167,7 +166,6 @@ class Month extends Component {
                 </div>
                 <div style={{ height: "30px" }}></div>
             </div >
-            </div>
         )
     }
 }
