@@ -13,4 +13,4 @@ This file provides a list of endpoints for the backend.
 ## Events
 * [/makeevent](makeevent.md): makes an event given a token and other information.
 * [/viewevents](viewevents.md): view events given a token.
-
+* [/deleteevent](deleteevent.md): deletes an event given a token and an ID.

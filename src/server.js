@@ -59,6 +59,9 @@ app.post('/makeevent', makeEvent);
 const {viewEvents} = require('./server/viewEvents');
 app.get('/viewevents', viewEvents);
 
+const {deleteEvent} = require('./server/deleteEvent');
+app.delete('/deleteevent', deleteEvent);
+
 app.listen(port);
 
 console.log("App listening on port " + port)
