@@ -12,18 +12,6 @@ class NavBar extends Component {
         this.SIfields = { username: React.createRef(), password: React.createRef() }
     }
 
-
-
-    toggleSUBox(event) {
-        event.persist();
-        let edit_box = document.getElementById("signup-box");
-        if (edit_box.className === "modal is-active") {
-            edit_box.className = "modal";
-        } else {
-            edit_box.className = "modal is-active";
-        }
-    }
-
     checkpassword(pword) {
         // checks to make sure passowrd is between 8 and 100 chars, 
         // contains at least one lowercase letter, one uppercase letter, 
@@ -37,7 +25,28 @@ class NavBar extends Component {
         }
     }
 
-    clickMe(event) {
+
+    toggleSUBox(event) {
+        event.persist();
+        let edit_box = document.getElementById("signup-box");
+        if (edit_box.className === "modal is-active") {
+            edit_box.className = "modal";
+        } else {
+            edit_box.className = "modal is-active";
+        }
+    }
+
+    toggleLoginBox(event) {
+        event.persist();
+        let edit_box = document.getElementById("login-box");
+        if (edit_box.className === "modal is-active") {
+            edit_box.className = "modal";
+        } else {
+            edit_box.className = "modal is-active";
+        }
+    }
+
+    _submitPress(event) {
         console.log(this.SUBfields)
         let pword = this.SUBfields.password.current.value
         console.log(this.SUBfields.password.current)
@@ -48,7 +57,6 @@ class NavBar extends Component {
         let uname = this.SUBfields.username.current.value
         let email = this.SUBfields.email.current.value
         if (valid && fname.length > 0 && lname.length > 0 && uname.length > 0 && email.length > 4) {
-            console.log("made it to submit valid")
             this._submitValidatedNewUser(uname, email, fname, lname, pword)
             this.toggleSUBox(event)
         } else {
@@ -56,15 +64,19 @@ class NavBar extends Component {
         }
     }
 
+    _loginPress(event) {
+        let pword = this.SIfields.password.current.value
+        let uname = this.SIfields.username.current.value
+        let valid = this.checkpassword(pword)
+        if (valid && uname.length > 0) {
+            this._submitValidatedLogin(uname, pword)
+            this.toggleLoginBox(event)
+        } else {
+            window.alert("Invalid input field, please try again.")
+        }
+    }
+
     async _submitValidatedNewUser(uname, email, fname, lname, pword) {
-        console.log("made it in submit valid updated updated")
-        // let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
-        //     username: 'user12',
-        //     email: 'user12@tar-heel-calendar.herokuapp.com',
-        //     firstname: 'Us12',
-        //     lastname: 'Er12',
-        //     password: 'Passw0rd!!'
-        // });
         const result = await axios({
             method: 'post',
             url: 'https://tar-heel-calendar.herokuapp.com/register',
@@ -76,7 +88,19 @@ class NavBar extends Component {
                 password: pword
             }
         });
+    }
+
+    async _submitValidatedLogin(uname, pword) {
+        const result = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/register',
+            data: {
+                username: uname,
+                password: pword
+            }
+        });
         console.log(result)
+
     }
 
     renderSignUp() {
@@ -143,7 +167,7 @@ class NavBar extends Component {
                             </p>
                     </div>
                     <footer className="modal-card-foot" style={header_style}>
-                        <button className="button signup" id="signupbutton" onClick={this.clickMe.bind(this)} style={center}>Sign Up</button>
+                        <button className="button signup" id="signupbutton" onClick={this._submitPress.bind(this)} style={center}>Sign Up</button>
                     </footer>
                 </div>
             </div>
@@ -152,15 +176,6 @@ class NavBar extends Component {
         )
     }
 
-    toggleLoginBox(event) {
-        event.persist();
-        let edit_box = document.getElementById("login-box");
-        if (edit_box.className === "modal is-active") {
-            edit_box.className = "modal";
-        } else {
-            edit_box.className = "modal is-active";
-        }
-    }
 
     renderLogin() {
         const header_style = {
@@ -207,7 +222,7 @@ class NavBar extends Component {
                         </div>
                     </div>
                     <footer className="modal-card-foot" style={header_style}>
-                        <button className="button login" onClick={this.toggleLoginBox} style={center}>Log in</button>
+                        <button className="button login" onClick={this._loginPress} style={center}>Log in</button>
                     </footer>
 
                 </div>
