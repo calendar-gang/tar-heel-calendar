@@ -57,13 +57,13 @@ class NavBar extends Component {
     }
 
     async _submitValidatedNewUser(uname, email, fname, lname, pword) {
-        console.log("made it in submit valid")
+        console.log("made it in submit valid updated")
         let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
-            username: uname,
-            email: email,
-            firstname: fname,
-            lastname: lname,
-            password: pword
+            username: 'user',
+            email: 'user@tar-heel-calendar.herokuapp.com',
+            firstname: 'Us',
+            lastname: 'Er',
+            password: 'Passw0rd!'
         });
         console.log(res)
     }
