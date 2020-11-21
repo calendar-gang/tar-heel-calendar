@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BiCheck, BiX } from 'react-icons/bi';
 
 class MonthEvent extends Component {
     state = {}
@@ -11,10 +12,11 @@ class MonthEvent extends Component {
         this.state = { windowWidth: window.innerWidth };
 
         this.eventBox = React.createRef()
+        this.editBox = React.createRef()
     }
 
     handleResize = (e) => {
-        this.setState({ windowWidth: window.innerWidth });
+        this.setState({ windowWidth: window.innerWidth, viewState: "normal" });
     };
 
     componentDidMount() {
@@ -23,12 +25,23 @@ class MonthEvent extends Component {
 
 
     _toggleEventBox(event) {
-
-        if (this.eventBox.current.className === "is-hidden box monthevent") {
-            this.eventBox.current.className = "box monthevent";
-        } else {
-            this.eventBox.current.className = "is-hidden box monthevent";
+        if (this.state.viewState != "edit") {
+            if (this.state.viewState === "normal") {
+                this.eventBox.current.className = "box monthevent is-hidden";
+                this.state.viewState = "details";
+            } else {
+                this.eventBox.current.className = "box monthevent";
+                this.state.viewState = "normal";
+            }
         }
+    }
+
+    _editMode(event) {
+        // pauses event info toggle 
+        this.state.viewState = "edit";
+
+        this.eventBox.current.className = "is-hidden box monthevent"
+        this.editBox.current.className = "box monthevent"
     }
 
     _findHour(time) {
@@ -47,12 +60,9 @@ class MonthEvent extends Component {
             width: "200px",
             position: "absolute",
             height: "200px",
-            margin: "30px 0px 0px 50px",
+            margin: "10px 0px 0px 50px",
             zIndex: "1",
         }
-
-
-        // backgroundColor: this.catcolors[this.props.eventstate.category % 9],
 
         return (
             <div ref={this.eventBox} className="is-hidden box monthevent" style={event_style} >
@@ -68,6 +78,29 @@ class MonthEvent extends Component {
         )
     }
 
+    _createEditBox() {
+        const event_style = {
+            width: "200px",
+            position: "absolute",
+            height: "200px",
+            margin: "10px 0px 0px 50px",
+            zIndex: "1",
+        }
+        return (
+            <div ref={this.editBox} className="is-hidden box monthevent" style={event_style}>
+                <form>
+                    <input className="input" type="text" placeholder={`${this.props.eventstate.name}`} style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <input className="input" type="text" placeholder={`${this._findTime(this.props.eventstate.start)} - ${this._findTime(this.props.eventstate.end)}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" type="text" placeholder={`${this.props.eventstate.location}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" type="text" placeholder={`${this.props.eventstate.description}`} style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <button style={{ fontSize: "10px" }}><BiCheck /></button>
+                    <button style={{ fontSize: "10px" }}><BiX /></button>
+                </form>
+            </div>
+        )
+    }
 
     render() {
         const event_style = {
@@ -95,10 +128,11 @@ class MonthEvent extends Component {
 
         return (
             <div>
-                <div style={event_style} content={after_content} className="box" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)}>
+                <div style={event_style} content={after_content} className="box" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
                     <p className="has-text-centered is-size-7">{this.props.eventstate.name}</p>
                 </div>
                 {this._createEventBox()}
+                {this._createEditBox()}
             </div>
 
 
