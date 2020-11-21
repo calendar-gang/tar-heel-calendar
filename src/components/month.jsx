@@ -26,7 +26,7 @@ class Month extends Component {
             event_objs: []
         }
         this.dayRef = {}
-        for(let i = 0; i < 7; i++) {
+        for (let i = 0; i < 7; i++) {
             this.state.event_objs[i] = [];
             for (let j = 0; j < 5; j++) {
                 this.state.event_objs[i][j] = 0;
@@ -34,7 +34,7 @@ class Month extends Component {
         }
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 5; j++) {
-                for(let k = 0; k < 3; k++) {
+                for (let k = 0; k < 3; k++) {
                     this.dayRef[`${i}${j}${k}`] = React.createRef()
                 }
             }
@@ -54,8 +54,8 @@ class Month extends Component {
             // for each day
             let current_state = this.state.event_objs.slice();
             let div_position = current_state[evt.day][evt.row];
-            current_state[evt.day][evt.row]+=1;
-            this.setState({event_objs: current_state});
+            current_state[evt.day][evt.row] += 1;
+            this.setState({ event_objs: current_state });
             // manipulates the dom directly
             ReactDOM.render(event_object, this.dayRef[`${evt.day}${evt.row}${div_position}`].current)
         }
@@ -75,13 +75,13 @@ class Month extends Component {
                 day = real_day_num !== i ? "" : day;
             }
             rows.push(
-                <td className="has-text-grey" style={{ height: "100px", textAlign: "left" }} onClick={this.toggleEditBox}>
+                <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
+                    {day}
                     <div>
                         <div ref={this.dayRef[`${i}${week_position}${0}`]}></div>
                         <div ref={this.dayRef[`${i}${week_position}${1}`]}></div>
                         <div ref={this.dayRef[`${i}${week_position}${2}`]}></div>
                     </div>
-                    {day}
                 </td>
             );
         }
@@ -146,6 +146,7 @@ class Month extends Component {
                         {this._renderBody()}
                     </table>
                 </div>
+                <div style={{ height: "30px" }}></div>
             </div >
 
         )

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from '../logo.svg';
 
 class Footer extends Component {
@@ -6,24 +6,14 @@ class Footer extends Component {
     render() {
         return (
             <footer className="footer">
-            <div className="content has-text-centered">
-                <p>
-                <strong>Tar Heel Calendar</strong> by Victoria Hoffmanne, Ezri White, Eric Schneider, Alfred Mathew.
+                <div className="content has-text-centered">
+                    <p>
+                        <strong>Tar Heel Calendar</strong> by Victoria Hoffmanne, Ezri White, Eric Schneider, Alfred Mathew.
             </p>
-            </div>
+                </div>
 
-            <img src={logo} className="App-logo" alt="logo" />
-
-            <p>Edit <code>src/App.js</code> and save to reload.</p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Learn React
-            </a>
-            <p>This is a calendar. Very fancy.</p>
+                <img src={logo} className="App-logo" alt="logo" />
+                <p>This is a calendar. Very fancy.</p>
             </footer>
         )
     }

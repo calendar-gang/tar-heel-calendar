@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class DayEvent extends Component {
     state = {}
     catcolors = ["#ffd4d4", "#ffe6d4", "#fffbd4", "#e2ffd4", "#d4ffec", "#d4f6ff", "#d4dfff", "#f0d4ff", "#ffd4ee"]
+    darkcatcolors = ["#cf4c4c", "#de813e", "#9e8600", "#54b027", "#2fa36f", "#3aa0bd", "#4d6fd6", "#9c52c4", "#bf5a97"]
 
     constructor(props) {
         super(props);
@@ -51,10 +52,21 @@ class DayEvent extends Component {
         )
     }
 
+    _findHour(time) {
+        if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
+        else { return (time % 12) === 0 ? "12 PM" : (time % 12) + " PM" }
+
+    }
+
+    _findTime(time) {
+        return this._findHour(time)
+
+    }
+
 
     render() {
         const event_style = {
-            width: `${(this.state.windowWidth / 3)}px`,
+            width: `${(this.state.windowWidth / 2.5)}px`,
             position: "absolute",
             height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
@@ -64,7 +76,15 @@ class DayEvent extends Component {
         return (
             <div>
                 <div style={event_style} className="box" onClick={this._toggleEventBox.bind(this)}>
-                    <p className="has-text-left">{this.props.eventstate.name}</p>
+                    <div className="level">
+                        <div className="level-left">
+                            <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
+                        </div>
+                        <div className="level-right">
+                            <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findTime(this.props.eventstate.start)} - {this._findTime(this.props.eventstate.end)}</p>
+                        </div>
+                    </div>
+
                 </div>
                 {this._createEventBox()}
             </div>

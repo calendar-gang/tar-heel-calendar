@@ -12,9 +12,9 @@ class Day extends Component {
     tasklist = ["get", "this", "to", "work", "check", "task", "scroll", "power"]
 
     eventlist = [
-        { day: 0, start: 10, end: 11.5, name: "Breakfast in Durham", category: 5 },
-        { day: 0, start: 12, end: 14, name: "History Lecture", category: 0 },
-        { day: 0, start: 15, end: 15.5, name: "Math Lecture", category: 4 },
+        { day: 0, start: 9, end: 10.5, name: "Breakfast in Durham", category: 5 },
+        { day: 0, start: 11, end: 13, name: "History Lecture", category: 0 },
+        { day: 0, start: 14, end: 15.5, name: "Math Lecture", category: 4 },
         { day: 0, start: 16, end: 18, name: "426 Lecture", category: 8 },
         { day: 0, start: 19, end: 20, name: "Coffee with Friends", category: 0 }]
 
@@ -57,7 +57,7 @@ class Day extends Component {
         return (
             <tr style={{ width: "100px" }}>
                 <th className="has-text-grey-light has-text-left is-narrow">{this._findHour(time)}</th>
-                <td ref={this.timeRef[`${time}`]}></td>
+                <td ref={this.timeRef[`${time}`]} style={{ padding: "0px" }}></td>
             </tr>
         )
     }
@@ -211,7 +211,7 @@ class Day extends Component {
 
                         </section>
                     </div>
-                    <div className="container box" ref={this.scrollBox} style={{ margin: "10px", height: "600px", overflow: "scroll", padding: "0px" }}>
+                    <div className="container box" ref={this.scrollBox} style={{ margin: "10px", height: "575px", overflow: "scroll", padding: "0px" }}>
                         <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                             <thead style={header_style}>
                                 <tr className="is-bordered" style={header_style}>
@@ -222,6 +222,7 @@ class Day extends Component {
                             {this._renderBody()}
                         </table>
                     </div>
+                    <div style={{ height: "30px" }}></div>
 
                 </div>
                 <div className="dailytodo container column box is-half" style={{ backgroundColor: "#0b1846" }}>
@@ -229,7 +230,7 @@ class Day extends Component {
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
                     </section>
                     <div class="columns" style={{ height: "100%" }}>
-                        <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "600px", overflow: "scroll", margin: "15px" }}>
+                        <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "575px", overflow: "scroll", margin: "15px" }}>
                             <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
                             {this.rendercurrenttasks()}
                             <div id="newtasks"></div>

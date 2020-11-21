@@ -107,7 +107,7 @@ class Week extends Component {
 
                     </section>
                 </div>
-                <div className="container weektable box" ref={this.scrollBox} style={{ height: "700px", overflow: "scroll", padding: "0px" }}>
+                <div className="container weektable box" ref={this.scrollBox} style={{ height: "600px", overflow: "scroll", padding: "0px" }}>
                     <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
                         <thead style={header_style}>
                             <tr className="is-bordered" style={header_style}>
@@ -124,6 +124,7 @@ class Week extends Component {
                         {this._renderBody()}
                     </table>
                 </div>
+                <div style={{ height: "30px" }}></div>
             </div >
 
         )

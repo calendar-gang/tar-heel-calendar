@@ -10,11 +10,11 @@ class StickyNote extends Component {
 
     render() {
         return (
-            <div className="box" style={{backgroundColor: this.props.color}}>
-                <textarea class="textarea" style={{backgroundColor: this.props.color, border: "none", height: "100px"}}></textarea>
+            <div className="box" style={{ backgroundColor: this.props.color }}>
+                <textarea class="textarea" style={{ backgroundColor: this.props.color, border: "none", height: "135px" }}></textarea>
             </div>
 
-        ) 
+        )
     }
 }
 
