@@ -4,7 +4,7 @@ class AutoCompleteText extends Component {
 
     constructor(props) {
         super(props)
-        this.items = ['quiz', 'exam', 'test', 'paper', 'coffee', 'chapter', 'due', 'UNC', 'Sitterson', 'project', 'english', 'math', 'science', 'chemistry', 'biology']
+        this.items = ['quiz', 'exam', 'test', 'paper', 'coffee', 'chapter', 'due', 'UNC', 'Sitterson', 'project', 'english', 'math', 'science', 'chemistry', 'biology', 'lecture']
         this.state = {
             suggestions: [],
             text: ""
