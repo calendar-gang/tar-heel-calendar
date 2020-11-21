@@ -61,7 +61,6 @@ exports.makeEvent = (req, res) => {
         let username = results[0].username;
 
         // TODO: This looks a bit silly.
-        // Also WebStorm's database tool says there are errors here, but in works fine.
         db.query(`INSERT INTO events(
                    username,
                    title,
