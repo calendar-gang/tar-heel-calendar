@@ -7,6 +7,8 @@ This file describes the `/deleteevent` endpoint.
 * Body parameters:
     * `token`: string of 60 characters.
     * `id`: the id of the event to be deleted.
+* Response parameters:
+    * `message`
 
 ## Example operations
 ### Example (valid input)
