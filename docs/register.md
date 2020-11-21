@@ -10,6 +10,8 @@ This file describes the `/register` endpoint.
     * `firstname`: string of 1-100 characters.
     * `lastname`: string of up 1-100 characters.
     * `password`: string of up to 5-255 characters. Currently, there are not any kind of complexity check, excluding length restrictions.
+* Response parameters:
+    * `message`
     
 ## Notes
 * Make sure to check for constraints on the frontend so that no improper requests are sent. As seen below, the server can deal with bad requests, but the error messages are not very specific.

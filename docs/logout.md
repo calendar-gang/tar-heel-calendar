@@ -6,6 +6,8 @@ This file describes the `/logout` endpoint.
 * Request method: `POST`.
 * Body parameters:
     * `token`: string of 60 characters.
+* Response parameters:
+    * `message`
 
 ## Example operations
 ### Example (valid input)

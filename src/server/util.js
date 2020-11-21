@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 exports.isStringValidLength = (str, min, max) => {
     return min !== 0 ?
         str !== undefined && typeof(str) === "string" && str.length >= min && str.length <= max :

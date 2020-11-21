@@ -6,6 +6,12 @@ This file describes the `/getinfo` endpoint.
 * Request method: `GET`.
 * Body parameters:
     * `token`: string of 60 characters.
+* Response parameters:
+    * `message`
+    * `username`
+    * `email`
+    * `firstname`
+    * `lastname`
 
 ## Example operations
 ### Example (valid input)
@@ -26,7 +32,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
 }
 ```
 
-### Example (no token)
+### Example (invalid token)
 ```js
 let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
     token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'

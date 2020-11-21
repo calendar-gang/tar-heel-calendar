@@ -2,7 +2,6 @@ const express = require('express');
 const favicon = require('express-favicon');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const crypto = require('crypto');
 const path = require('path');
 const mysql = require('mysql');
 

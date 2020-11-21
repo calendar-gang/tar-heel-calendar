@@ -42,13 +42,13 @@ exports.login = (req, res) => {
 
         db.query(`INSERT INTO tokens(token, username)
                 VALUES (?, ?)`, [token, username],
-            (error, results, fields) => {
-                if(error) throw error;
+                (error, results, fields) => {
+            if(error) throw error;
 
-                res.json({
-                    message: "Logged in.",
-                    token: token
-                });
+            res.json({
+                message: "Logged in.",
+                token: token
             });
+        });
     });
 };

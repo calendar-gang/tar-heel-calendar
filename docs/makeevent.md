@@ -14,6 +14,9 @@ This file describes the `/makeevent` endpoint.
     * `recurring`: (_optional_): an enum/string, either `not`, `weekly`, `monthly`, or `yearly`. Defaults to `not`.
     * `recurringuntil`: (_optional_): a timestamp/string of the format `YYYY-MM-DD HH:MM:SS`.
     * `category`:  (_optional_): an enum/string, either `default`, or `school`. Defaults to `default`.
+* Response parameters:
+    * `message`
+    * `id`: the id of the event. Unique.
 
 ## Future changes
 * The `category` body parameter will feature more possible values soon. Possibly, even custom ones.
@@ -38,7 +41,8 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
 #### Response (status: 200)
 ```json
 {
-    "message": "Event made."
+    "message": "Event made.",
+    "id": 10
 }
 ```
 
@@ -55,7 +59,8 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
 #### Response (status: 200)
 ```json
 {
-    "message": "Event made."
+    "message": "Event made.",
+    "id": 11
 }
 ```
 

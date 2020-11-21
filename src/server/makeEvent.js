@@ -86,8 +86,15 @@ exports.makeEvent = (req, res) => {
 
             if(error) throw error;
 
-            res.json({
-                message: "Event made."
+            db.query(`SELECT MAX(id) AS id
+                    FROM events
+                    WHERE username=?`, [username], (error, results, fields) => {
+                if(error) throw error;
+
+                res.json({
+                    message: "Event made.",
+                    id: results[0].id
+                });
             });
         });
     });
