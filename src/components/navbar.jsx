@@ -67,13 +67,13 @@ class NavBar extends Component {
         // });
         const result = await axios({
             method: 'post',
-            url: 'https://tar-heel-calendar.herokuapp.com/register',
-            body: {
+            url: 'http://localhost:8080/register',
+            data : {
                 username: 'user12',
-                email: 'user12@tar-heel-calendar.herokuapp.com',
-                firstname: 'Us12',
-                lastname: 'Er12',
-                password: 'Passw0rd!12'
+                    email: 'user12@tar-heel-calendar.herokuapp.com',
+                    firstname: 'Us12',
+                    lastname: 'Er12',
+                    password: 'Passw0rd!12'
             }
         });
         console.log(result)
