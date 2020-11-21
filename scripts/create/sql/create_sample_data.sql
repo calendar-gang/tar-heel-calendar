@@ -1,3 +1,5 @@
+/* TODO: these works individually but doesn't work together */
+
 INSERT INTO `users`(`username`, `email`, `firstname`, `lastname`, `password`)
 VALUES
        ('eric',
@@ -15,5 +17,9 @@ VALUES
 INSERT INTO `tokens`(`token`, `username`)
 VALUES('bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740', 'user');
 
-/* TODO: sample events */
-/* TODO: these works individually but doesn't work together */
+INSERT INTO `events`(`username`, `title`, `location`, `description`, `start`, `end`)
+VALUES('user', 'Event title', 'Location', 'Nice place.', '2020-11-10 12:30:00', '2020-11-11 12:30:00');
+
+INSERT INTO `events`(`username`, `title`, `start`, `end`)
+VALUES('user', 'Event title 2', '2020-11-10 12:30:00', '2020-11-11 12:30:00');
+
