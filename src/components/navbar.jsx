@@ -57,26 +57,26 @@ class NavBar extends Component {
     }
 
     async _submitValidatedNewUser(uname, email, fname, lname, pword) {
-        console.log("made it in submit valid updated")
-        let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
-            username: 'user12',
-            email: 'user12@tar-heel-calendar.herokuapp.com',
-            firstname: 'Us12',
-            lastname: 'Er12',
-            password: 'Passw0rd!!'
-        });
-        // const result = await axios({
-        //     method: 'post',
-        //     url: 'https://tar-heel-calendar.herokuapp.com/register',
-        //     body: {
-        //         username: 'user',
-        //         email: 'user@tar-heel-calendar.herokuapp.com',
-        //         firstname: 'Us',
-        //         lastname: 'Er',
-        //         password: 'Passw0rd!'
-        //     }
+        console.log("made it in submit valid updated updated")
+        // let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
+        //     username: 'user12',
+        //     email: 'user12@tar-heel-calendar.herokuapp.com',
+        //     firstname: 'Us12',
+        //     lastname: 'Er12',
+        //     password: 'Passw0rd!!'
         // });
-        console.log(res)
+        const result = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/register',
+            body: {
+                username: 'user12',
+                email: 'user12@tar-heel-calendar.herokuapp.com',
+                firstname: 'Us12',
+                lastname: 'Er12',
+                password: 'Passw0rd!12'
+            }
+        });
+        console.log(result)
     }
 
     renderSignUp() {
