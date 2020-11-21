@@ -42,6 +42,7 @@ class NavBar extends Component {
         let uname = this.SUBfields.username.value
         let email = this.SUBfields.email.value
         if (valid && fname.length > 0 && lname.length > 0 && uname.length > 0 && email.length > 4) {
+            console.log("made it to submit valid")
             this._submitValidatedNewUser(uname, email, fname, lname, pword)
             this.toggleSUBox(event)
         } else {
@@ -50,6 +51,7 @@ class NavBar extends Component {
     }
 
     async _submitValidatedNewUser(uname, email, fname, lname, pword) {
+        console.log("made it in submit valid")
         let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
             username: uname,
             email: email,
