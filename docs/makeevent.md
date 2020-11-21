@@ -25,7 +25,7 @@ This file describes the `/makeevent` endpoint.
 ## Example operations
 ### Example (valid input with all parameters)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/makeevent', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     title: 'Event title',
     location: 'Event location',
@@ -48,7 +48,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
 
 ### Example (valid input without optional parameters)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/makeevent', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     title: 'Event title',
     start: '2020-11-10 12:30:00',
@@ -66,7 +66,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
 
 ### Example (invalid timestamp)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/makeevent', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     title: 'Event title',
     location: 'Event location',
@@ -88,7 +88,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
 
 ### Example (invalid enum)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/makeevent', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/makeevent', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     title: 'Event title',
     location: 'Event location',

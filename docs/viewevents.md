@@ -15,7 +15,7 @@ This file describes the `/viewevents` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/viewevents', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     earliest: '2020-10-10 12:30:00',
     latest: '2020-12-11 12:30:00'
@@ -57,7 +57,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
 
 ### Example (valid but no results)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/viewevents', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     earliest: '2019-10-10 12:30:00',
     latest: '2019-12-11 12:30:00'
@@ -74,7 +74,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
 
 ### Example (valid without optional parameters)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/viewevents', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740'
 });
 ```
@@ -114,7 +114,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
 
 ### Example (invalid token)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/viewevents', {
     token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
 });
 ```
@@ -128,7 +128,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
 
 ### Example (invalid timestamp)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/viewevents', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/viewevents', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
     earliest: '2019-10-ZZ 12:30:00',
     latest: '2019-12-11 12:30:00'

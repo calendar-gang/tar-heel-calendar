@@ -16,7 +16,7 @@ This file describes the `/getinfo` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
     token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740'
 });
 ```
@@ -34,7 +34,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
 
 ### Example (invalid token)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
     token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
 });
 ```
@@ -48,7 +48,7 @@ let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
 
 ### Example (bad length)
 ```js
-let res = await axios.get('tar-heel-calendar.herokuapp.com/getinfo', {
+let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
     token: 'ZZZ'
 });
 ```

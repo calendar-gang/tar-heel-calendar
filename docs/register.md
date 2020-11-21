@@ -20,7 +20,7 @@ This file describes the `/register` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
     username: 'user',
     email: 'user@tar-heel-calendar.herokuapp.com',
     firstname: 'Us',
@@ -38,7 +38,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (repeat username)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
     username: 'user',
     email: 'user2@email.com',
     firstname: 'Us',
@@ -56,7 +56,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (repeat email)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
     username: 'user2',
     email: 'user@tar-heel-calendar.herokuapp.com',
     firstname: 'Us',
@@ -74,7 +74,7 @@ let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (bad length)
 ```js
-let res = await axios.post('tar-heel-calendar.herokuapp.com/register', {
+let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
     username: '',
     email: 'user2@tar-heel-calendar.herokuapp.com',
     firstname: 'Us',
