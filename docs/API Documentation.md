@@ -15,3 +15,6 @@ This file provides a list of endpoints for the backend.
 * [/viewevents](viewevents.md): view events given a token.
 * [/deleteevent](deleteevent.md): deletes an event given a token and an ID.
 * [/editevent](editevent.md)
+
+## Tasks
+* [/maketask](maketask.md): makes a task given a token and other information.
