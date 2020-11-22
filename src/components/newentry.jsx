@@ -92,15 +92,18 @@ class NewEntry extends Component {
         /*
         This code is necessary to handle the submit feature of a new entry form
          */
-        // this.props.submit({ 
-        //         date: date,
-        //         start: start.split(":")[0], 
-        //         end: end.split(":")[0], 
-        //         name: name, 
-        //         location: loc, 
-        //         description: des, 
-        //         category: 1 
-        //     });
+        if(this.props.submit) {
+            this.props.submit({ 
+                date: date,
+                start: start.split(":")[0], 
+                end: end.split(":")[0], 
+                name: name, 
+                location: loc, 
+                description: des, 
+                category: 1 
+            });
+        }
+        
     }
 
     updateAutoValsEvent(value) {
