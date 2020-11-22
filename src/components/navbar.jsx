@@ -27,6 +27,12 @@ class NavBar extends Component {
         }
     }
 
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
 
     toggleSUBox(event) {
         event.persist();
@@ -123,6 +129,17 @@ class NavBar extends Component {
             this.toggleMessage()
         }
         console.log(document.cookie)
+
+        let tok = this._getCookie("token")
+
+        const res = await axios({
+            method: 'get',
+            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+            data: {
+                token: tok,
+            }
+        });
+        console.log(res)
 
     }
 
