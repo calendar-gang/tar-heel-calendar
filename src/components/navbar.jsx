@@ -154,19 +154,56 @@ class NavBar extends Component {
             // this.componentDidMount() guessing not supposed to do this but maybe come back to
 
         }
-        console.log(document.cookie)
 
-        let tok = this._getCookie("token")
-        console.log(tok)
-
-        const res = await axios({
+        const res1 = await axios({
             method: 'post',
-            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+            url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
             data: {
-                token: tok
+                token: this._getCookie("token"),
+                title: 'Breakfast',
+                location: 'in bed',
+                description: 'event creation experiment one',
+                start: '2020-11-23 10:00:00',
+                end: '2020-11-23 12:30:00',
             }
         });
-        console.log(res)
+        console.log(res1)
+        const res2 = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
+            data: {
+                token: this._getCookie("token"),
+                title: 'Flight',
+                location: 'RDU->LAS',
+                description: 'event creation experiment two',
+                start: '2020-11-27 11:00:00',
+                end: '2020-11-27 14:00:00',
+            }
+        });
+        console.log(res2)
+        const res3 = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
+            data: {
+                token: this._getCookie("token"),
+                title: 'Drop out',
+                location: 'Chapel Hill',
+                description: 'event creation experiment three',
+                start: '2020-11-25 12:00:00',
+                end: '2020-11-25 13:30:00',
+            }
+        });
+        console.log(res3)
+        const final = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
+            data: {
+                token: this._getCookie("token")
+            }
+        });
+        console.log(final)
+
+
 
     }
 
