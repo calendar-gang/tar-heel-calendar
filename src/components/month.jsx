@@ -155,6 +155,20 @@ class Month extends Component {
         let state_copy = [...this.state.eventlist];
         state_copy.push(object);
         this.setState({eventlist: state_copy});
+
+        let event_object = <MonthEvent eventstate={object}></MonthEvent>;
+        let date = new Date(object.date)
+
+        // this math isn't great and it's temporary
+        date.setDate(date.getDate()+1);
+
+        // introduce more bookeeping in the state to check how many month events are present
+        // for each day
+        if(date.getMonth() == this.state.date.getMonth()){
+            let current_state = [...this.state.days];
+            current_state[date.getDate()].event_objs.push(event_object);
+            this.setState({ days: current_state });
+        }
     }
 
     render() {
