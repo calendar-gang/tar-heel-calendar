@@ -2,8 +2,6 @@ const {isStringValidLength, getHashedPassword} = require("./util");
 const {db} = require("../server");
 
 module.exports.register = (req, res) => {
-    console.log(req);
-
     const { username, email, firstname, lastname, password } = req.body;
     if(!isStringValidLength(username, 1, 100)
             || !isStringValidLength(email, 5, 255)

@@ -10,6 +10,8 @@ exports.getInfo = (req, res) => {
             message: "Invalid length of parameter."
         });
 
+        console.log(req.body);
+
         return;
     }
 
