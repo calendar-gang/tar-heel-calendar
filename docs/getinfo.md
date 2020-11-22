@@ -3,7 +3,7 @@ This file describes the `/getinfo` endpoint.
 
 ## Core details
 * Endpoint: `/getinfo`.
-* Request method: `GET`.
+* Request method: `POST`.
 * Body parameters:
     * `token`: string of 60 characters.
 * Response parameters:
@@ -17,7 +17,7 @@ This file describes the `/getinfo` endpoint.
 ### Example (valid input)
 ```js
 let res = await axios({
-    method: 'get',
+    method: 'post',
     url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
     data: {
         token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740'
@@ -39,7 +39,7 @@ let res = await axios({
 ### Example (invalid token)
 ```js
 let res = await axios({
-    method: 'get',
+    method: 'post',
     url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
     data: {
         token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
@@ -57,7 +57,7 @@ let res = await axios({
 ### Example (bad length)
 ```js
 let res = await axios({
-    method: 'get',
+    method: 'post',
     url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
     data: {
         token: 'ZZZ'
