@@ -52,8 +52,8 @@ class WeekEvent extends Component {
 
 
     _createEventBox() {
-        let depth = `${(this._getEventLength()) * 80 - 20}px`
-        let marg = this.props.eventstate.day === 6 ? `60px 0px -50px 0px` : `60px 0px 0px 50px`;
+        let depth = `${60 + (this.props.eventstate.smin / 60) * 80}px`
+        let marg = this.props.eventstate.day === 6 ? `${depth} 0px -50px 0px` : `${depth} 0px 0px 50px`;
 
         const event_style = {
             width: "200px",
@@ -77,8 +77,8 @@ class WeekEvent extends Component {
     }
 
     _createEditBox() {
-        let depth = `${(this._getEventLength()) * 80 - 20}px`
-        let marg = this.props.eventstate.day === 6 ? `60px 0px -50px 0px` : `60px 0px 0px 50px`;
+        let depth = `${60 + (this.props.eventstate.smin / 60) * 80}px`
+        let marg = this.props.eventstate.day === 6 ? `${depth} 0px -50px 0px` : `${depth} 0px 0px 50px`;
 
         const event_style = {
             width: "200px",
