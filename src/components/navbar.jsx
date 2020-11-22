@@ -99,9 +99,6 @@ class NavBar extends Component {
                 password: pword
             }
         });
-        console.log(result)
-        console.log(result["message"])
-        console.log(result.message)
         console.log(result.data)
         if (result.data.message === "Registration complete.") {
             this.setState({ messagefield: "Successfully registered!" })
@@ -121,9 +118,6 @@ class NavBar extends Component {
                 password: pword
             }
         });
-        console.log(result)
-        console.log(result["message"])
-        console.log(result.message)
         console.log(result.data)
         if (result.data.message === "Logged in.") {
             document.cookie = `token=${result.data.token}`
