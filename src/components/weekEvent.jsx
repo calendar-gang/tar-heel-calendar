@@ -44,10 +44,16 @@ class WeekEvent extends Component {
         this.editBox.current.className = "box"
     }
 
+    _getEventLength() {
+        let ending = this.props.eventstate.end + (this.props.eventstate.emin / 60)
+        let starting = this.props.eventstate.start + (this.props.eventstate.smin / 60)
+        return ending - starting
+    }
+
 
     _createEventBox() {
-        let depth = `${(this.props.eventstate.end - this.props.eventstate.start) * 80 - 20}px`
-        let marg = this.props.eventstate.day === 6 ? `${depth} 0px -50px 0px` : `${depth} 0px 0px 50px`;
+        let depth = `${(this._getEventLength()) * 80 - 20}px`
+        let marg = this.props.eventstate.day === 6 ? `60px 0px -50px 0px` : `60px 0px 0px 50px`;
 
         const event_style = {
             width: "200px",
@@ -71,8 +77,8 @@ class WeekEvent extends Component {
     }
 
     _createEditBox() {
-        let depth = `${(this.props.eventstate.end - this.props.eventstate.start) * 80 - 20}px`
-        let marg = this.props.eventstate.day === 6 ? `${depth} 0px -50px 0px` : `${depth} 0px 0px 50px`;
+        let depth = `${(this._getEventLength()) * 80 - 20}px`
+        let marg = this.props.eventstate.day === 6 ? `60px 0px -50px 0px` : `60px 0px 0px 50px`;
 
         const event_style = {
             width: "200px",
@@ -93,12 +99,12 @@ class WeekEvent extends Component {
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <textarea className="input" type="text" style={{ fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
-                    <hr className="hr" style={{ margin: "2px"}}></hr>
-                    <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
-                    <hr className="hr" style={{ margin: "2px"}}></hr>
-                    <button className= "button" style={{ fontSize: "10px" }}><BiCheck /></button>
-                    <button className= "button" style={{ fontSize: "10px" }}><BiX /></button>
+                    <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <button className="button" style={{ fontSize: "10px" }}><BiCheck /></button>
+                    <button className="button" style={{ fontSize: "10px" }}><BiX /></button>
                 </form>
             </div>
         )
@@ -114,15 +120,15 @@ class WeekEvent extends Component {
         const event_style = {
             width: `${(this.state.windowWidth - 250) / 8}px`,
             position: "absolute",
-            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
+            height: `${(this._getEventLength()) * 80}px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
-            margin: "0px",
+            margin: `${(this.props.eventstate.smin / 60) * 80}px 0px 0px 0px`,
             padding: "10px"
         }
 
         return (
             <div>
-                <div style={event_style} className="box week-event" /*onDoubleClick={this.toggleEventEditBox}*/ onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
+                <div style={event_style} className="box week-event" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
                     <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start)} - {this._findHour(this.props.eventstate.end)}</p>
                     <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
                 </div>

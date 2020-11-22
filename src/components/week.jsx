@@ -65,8 +65,20 @@ class Week extends Component {
                 let endtime = events[i].end
                 let day = starttime.split("T")[0].split("-")[2] - 22 // 22 should be whatever the beginning of the week date is
                 let start = starttime.split("T")[1].split(":")[0]
+                let minspaststart = starttime.split("T")[1].split(":")[1]
                 let end = endtime.split("T")[1].split(":")[0]
-                this.eventlist.push({ day: parseFloat(day), start: parseFloat(start), end: parseFloat(end), name: events[i].title, location: events[i].location, description: events[i].description, category: i % 9 })
+                let minspastend = endtime.split("T")[1].split(":")[1]
+                this.eventlist.push({
+                    day: parseFloat(day),
+                    start: parseFloat(start),
+                    smin: parseFloat(minspaststart),
+                    end: parseFloat(end),
+                    emin: parseFloat(minspastend),
+                    name: events[i].title,
+                    location: events[i].location,
+                    description: events[i].description,
+                    category: i % 9
+                })
             }
         }
 
