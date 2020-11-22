@@ -9,7 +9,7 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {messagefield: "Successfully logged in!"}
+        this.state = { messagefield: "Successfully logged in!" }
         this.SUBfields = { fname: React.createRef(), lname: React.createRef(), email: React.createRef(), username: React.createRef(), password: React.createRef() };
         this.SIfields = { username: React.createRef(), password: React.createRef() }
     }
@@ -96,7 +96,7 @@ class NavBar extends Component {
         console.log(result.message)
         console.log(result.data)
         if (result.data.message === "Registration complete.") {
-            this.setState({messagefield: "Successfully registered!"})
+            this.setState({ messagefield: "Successfully registered!" })
             this.toggleMessage()
 
         } else {
@@ -117,25 +117,27 @@ class NavBar extends Component {
         console.log(result["message"])
         console.log(result.message)
         console.log(result.data)
-       if (result.data.message === "Logged in.") {
-           this.setState({messagefield: "Successfully logged in!"})
-           this.toggleMessage()
-       }
+        if (result.data.message === "Logged in.") {
+            document.cookie = `token=${result.data.token}`
+            this.setState({ messagefield: "Successfully logged in!" })
+            this.toggleMessage()
+        }
+        console.log(document.cookie)
 
     }
 
     toggleMessage() {
         let edit_box = document.getElementById("successmessage");
         edit_box.className = "modal is-active"
-        setTimeout(function(){ edit_box.className = "modal" }, 500);
+        setTimeout(function () { edit_box.className = "modal" }, 500);
     }
 
     renderMessage() {
         return (<div className="modal" id="successmessage">
             <div className="modal-background"></div>
-                <div className="modal-card">
-                    <p style={{color: "#60f542"}}>{this.state.messagefield}</p>
-                </div>
+            <div className="modal-card">
+                <p style={{ color: "#60f542" }}>{this.state.messagefield}</p>
+            </div>
         </div>)
     }
 
