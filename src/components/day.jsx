@@ -7,18 +7,13 @@ import NewEntry from './newentry'
 import ReactDOM from 'react-dom'
 import DayEvent from './dayEvent'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import axios from '../../node_modules/axios/index.js';
 
 class Day extends Component {
     state = {}
     tasklist = ["get", "this", "to", "work", "check", "task", "scroll", "power"]
 
     fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-    eventlist = [
-        { day: 0, start: 9, smin: 0, end: 10, emin: 30, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-        { day: 0, start: 11, smin: 15, end: 13, emin: 0, name: "History Lecture", location: "Dey 301", description: `${this.fakeDescription}`, category: 0 },
-        { day: 0, start: 14, smin: 0, end: 15, emin: 30, name: "Math Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 4 },
-        { day: 0, start: 16, smin: 0, end: 18, emin: 0, name: "426 Lecture", location: "Sitterson 111", description: `${this.fakeDescription}`, category: 8 },
-        { day: 0, start: 19, smin: 0, end: 21, emin: 0, name: "Dinner with Friends", location: "Franklin", description: `${this.fakeDescription}`, category: 0 }]
 
     constructor(props) {
         super(props);
@@ -43,10 +38,74 @@ class Day extends Component {
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         */
         this.state = {
-            eventlist: this.eventlist,
+            eventlist: [],
             date: this.props.date,
+            loggedIn: this._getCookie("token").length === 60,
             display: "first"
         }
+        console.log(this.state.date)
+
+    }
+
+    componentDidMount() {
+        this.scrollBox.current.scrollTop = 800
+        this._getcurrentevents()
+    }
+
+    async _getcurrentevents() {
+        if (!this.state.loggedIn) {
+            this.setState({ eventlist: [] });
+        } else {
+            const results = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
+                data: {
+                    token: this._getCookie("token"),
+                    earliest: '2020-11-22 00:00:00',
+                    latest: '2020-11-22 23:59:00'
+                }
+            });
+            let events = results.data.results // this should hold our events results data !
+            let elist = []
+            for (let i = 0; i < events.length; i++) {
+                let starttime = events[i].start
+                let endtime = events[i].end
+                let day = starttime.split("T")[0].split("-")[2] - 22 // 22 should be whatever the beginning of the week date is
+                let start = starttime.split("T")[1].split(":")[0]
+                let minspaststart = starttime.split("T")[1].split(":")[1]
+                let end = endtime.split("T")[1].split(":")[0]
+                let minspastend = endtime.split("T")[1].split(":")[1]
+                elist.push({
+                    day: parseFloat(day),
+                    start: parseFloat(start),
+                    smin: parseFloat(minspaststart),
+                    end: parseFloat(end),
+                    emin: parseFloat(minspastend),
+                    name: events[i].title,
+                    location: events[i].location,
+                    description: events[i].description,
+                    category: i % 9
+                })
+            }
+            this.setState(elist);
+
+        }
+        this._rendercurrentevents()
+    }
+
+
+    _rendercurrentevents() {
+        for (let i = 0; i < this.state.eventlist.length; i++) {
+            let evt = this.state.eventlist[i]
+            ReactDOM.render(<DayEvent eventstate={evt}></DayEvent>, this.timeRef[`${evt.start}`].current)
+        }
+    }
+
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
 
     }
 
@@ -72,10 +131,6 @@ class Day extends Component {
         ReactDOM.render(<DayEvent eventstate={obj}></DayEvent>, this.timeRef[`${obj.start}`].current)
     }
 
-    componentDidMount() {
-        this.scrollBox.current.scrollTop = 800
-        this._rendercurrentevents()
-    }
 
     _findHour(time) {
         if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
@@ -167,12 +222,6 @@ class Day extends Component {
         return tasks
     }
 
-    _rendercurrentevents() {
-        for (let i = 0; i < this.eventlist.length; i++) {
-            let evt = this.eventlist[i]
-            ReactDOM.render(<DayEvent eventstate={evt}></DayEvent>, this.timeRef[`${evt.start}`].current)
-        }
-    }
 
     // updateDate(dir) {
     //     // just for funzies so we can see it update, feel free to remove once we have backend if necessary :)
