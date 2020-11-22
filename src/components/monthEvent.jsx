@@ -86,13 +86,11 @@ class MonthEvent extends Component {
         return (
             <div ref={this.editBox} className="is-hidden box monthevent" style={event_style}>
                 <form>
-                    <textarea className="input" type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.name}`}</textarea>
+                    <textarea className="input" defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" type="text" style={{  fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this._findHour(this.props.eventstate.start)} - ${this._findHour(this.props.eventstate.end)}`}</textarea>
+                    <textarea className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.location}`}</textarea>
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
+                    <textarea className="input" defaultValue={`${this.props.eventstate.description}`} type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
                     <hr className="hr" style={{ margin: "2px"}}></hr>
