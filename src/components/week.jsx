@@ -50,6 +50,17 @@ class Week extends Component {
         if (this._getCookie("token") == "") {
             return []
         } else {
+            let tok = this._getCookie("token")
+            console.log(tok)
+
+            const res = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
+                data: {
+                    token: tok
+                }
+            });
+            console.log(res)
             return [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
             { day: 2, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
             { day: 1, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
