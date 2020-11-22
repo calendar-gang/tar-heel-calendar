@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { useState } from 'react';
 import Task from './task';
 import StickyNote from './sticknotes'
+import News from './news'
 import NewEntry from './newentry'
 import ReactDOM from 'react-dom'
 import DayEvent from './dayEvent'
@@ -25,6 +26,7 @@ class Day extends Component {
         this.scrollBox = React.createRef()
 
         this.timeRef = {}
+        this.display = "first"
 
         for (let i = 0; i < 24; i++) {
             this.timeRef[`${i}`] = React.createRef()
@@ -41,7 +43,8 @@ class Day extends Component {
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         */
         this.state = { 
-            date: this.props.date
+            date: this.props.date,
+            display: "first"
         }
 
     }
@@ -220,6 +223,30 @@ class Day extends Component {
         this.setState({date: new_date_object})
     }
 
+    toggletools() {
+        if (this.state.display === "first") {
+            // this.display = "second"
+            this.setState({ 
+                date: this.props.date,
+                display: "second"
+            })
+        } else {
+            this.setState({ 
+                date: this.props.date,
+                display: "first"
+            })
+        }
+        console.log(this.display)
+    }
+
+    rendertools() {
+        if (this.state.display === 'first') {
+            return <StickyNote />
+          } else if (this.state.display === 'second') {
+            return <News />
+          }
+    }
+
     render() {
         let header_style = { position: "sticky", top: "0px", zIndex: "2", backgroundColor: "#fff" }
 
@@ -257,6 +284,7 @@ class Day extends Component {
                 <div className="dailytodo container column is-half" style={{ backgroundColor: "#0b1846" }}>
                     <section className="level" style={{ backgroundColor: "#0b1846", height: "50px", marginBottom: "8px" }}>
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
+                        <button class="button is-small is-rounded" style={{ backgroundColor: "#606163", color: "white" , border: "none"}} onClick={this.toggletools.bind(this)}>Toggle Tools</button>
                     </section>
                     <div class="columns" style={{ height: "100%" }}>
                         <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "575px", overflow: "scroll", margin: "15px" }}>
@@ -266,9 +294,7 @@ class Day extends Component {
                             {this.rendertaskform()}
                         </div>
                         <div class="column is-half stickynotes">
-                            <StickyNote color="lightyellow"></StickyNote>
-                            <StickyNote color="lightpink"></StickyNote>
-                            <StickyNote color="lightblue"></StickyNote>
+                            {this.rendertools()}
                         </div>
                     </div>
                 </div>
@@ -289,3 +315,5 @@ export default Day;
 // integrate news api instead of stickies
 // get tasks dynamically updating from our database info 
 // consider if we want a login screen / what we should display when not logged in 
+
+// <StickyNote color="lightblue"></StickyNote>
