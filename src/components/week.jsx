@@ -77,7 +77,7 @@ class Week extends Component {
                 let minspaststart = starttime.split("T")[1].split(":")[1]
                 let end = endtime.split("T")[1].split(":")[0]
                 let minspastend = endtime.split("T")[1].split(":")[1]
-                this.elist.push({
+                elist.push({
                     day: parseFloat(day),
                     start: parseFloat(start),
                     smin: parseFloat(minspaststart),
