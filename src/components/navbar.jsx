@@ -94,7 +94,7 @@ class NavBar extends Component {
         console.log(result)
         console.log(result["message"])
         console.log(result.message)
-        console.log(results.data)
+        console.log(result.data)
         if (result.message === "Registration complete.") {
             this.setState({messagefield: "Successfully registered!"})
             this.toggleMessage()
@@ -116,7 +116,7 @@ class NavBar extends Component {
         console.log(result)
         console.log(result["message"])
         console.log(result.message)
-        console.log(results.data)
+        console.log(result.data)
        if (result.message === "Logged in.") {
            this.setState({messagefield: "Successfully logged in!"})
            this.toggleMessage()
