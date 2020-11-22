@@ -135,9 +135,9 @@ class NavBar extends Component {
 
         const res = await axios({
             method: 'get',
-            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+            url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
             data: {
-                token: tok,
+                token: tok
             }
         });
         console.log(res)
