@@ -25,6 +25,8 @@ class Week extends Component {
             loggedIn: this._getCookie("token").length === 60,
             inputRef: {}
         }
+
+        console.log(this.state.date)
         
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 24; j++) {
