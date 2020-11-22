@@ -11,9 +11,11 @@ class NewEntry extends Component {
         super(props)
         this.state = {
             view: "modal",
+            style: {backgroundColor: "white"}
         }
         
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
+        this.colors = { color1: React.createRef(), color2: React.createRef(), color3: React.createRef(), color4: React.createRef(), color5: React.createRef(), color6: React.createRef(), color7: React.createRef(), color8: React.createRef(), color9: React.createRef() }
     }
 
     toggleNewEntry() {
@@ -21,9 +23,9 @@ class NewEntry extends Component {
         let ev = this.state.event 
         let loc = this.state.loc
         if (this.state.view === "modal is-active") {
-            this.setState({ view: "modal"});
+            this.setState({ view: "modal", style: this.state.style});
         } else {
-            this.setState({ view: "modal is-active"});
+            this.setState({ view: "modal is-active", style: this.state.style});
         }
     }
 
@@ -106,6 +108,10 @@ class NewEntry extends Component {
         this.autoinfo[1] = value;
     }
 
+    updateColor(color) {
+        console.log(color)
+    }
+
     render() {
         const header_style = {
             backgroundColor: "#b5e3f8",
@@ -127,6 +133,7 @@ class NewEntry extends Component {
             width: "100px"
         }
 
+
         // <input className="input" type="text" placeholder="426 final expo" style={inputval}></input>
         // <input className="input" type="text" placeholder="Virtual Sitterson" style={inputval}></input> 
 
@@ -146,18 +153,18 @@ class NewEntry extends Component {
                                 <div className="control">
                                     <AutoCompleteText ref={this.formFields.name} hold='426 Project Expo' triggerParentUpdate={this.updateAutoValsEvent.bind(this)}></AutoCompleteText>
                                 </div>
-                                <div className="dropdown" style={{ width: "75px"}}>
-                                <button className="dropbtn button">Category</button>
-                                <div className="dropdown-content" style={{margin: "10px", width: "75px", height: "200px", overflow: "scroll"}}>
-                                    <div className="box" style={{backgroundColor: "#ffd4d4", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor: "#ffe6d4", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor:  "#fffbd4", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor: "#e2ffd4", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor: "#d4ffec", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor: "#d4f6ff", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor: "#d4dfff", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor: "#f0d4ff", width: "75px"}}></div>
-                                    <div className="box" style={{backgroundColor:  "#ffd4ee", width: "75px"}}></div>
+                                <div className="dropdown" style={{ width: "75px", marginTop: "10px", marginLeft: "10px"}}>
+                                <button className="dropbtn button" style={this.state.style}>Category</button>
+                                <div className="dropdown-content" style={{marginTop: "40px", marginLeft: "10px" , width: "75px", height: "200px", overflow: "scroll"}}>
+                                    <div className="box" style={{backgroundColor: "#ffd4d4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffd4d4"}})}></div>
+                                    <div className="box" style={{backgroundColor: "#ffe6d4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffe6d4"}})}></div>
+                                    <div className="box" style={{backgroundColor:  "#fffbd4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#fffbd4"}})}></div>
+                                    <div className="box" style={{backgroundColor: "#e2ffd4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#e2ffd4"}})}></div>
+                                    <div className="box" style={{backgroundColor: "#d4ffec", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#d4ffec"}})}></div>
+                                    <div className="box" style={{backgroundColor: "#d4f6ff", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#d4f6ff"}})}></div>
+                                    <div className="box" style={{backgroundColor: "#d4dfff", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#d4dfff"}})}></div>
+                                    <div className="box" style={{backgroundColor: "#f0d4ff", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#f0d4ff"}})}></div>
+                                    <div className="box" style={{backgroundColor:  "#ffd4ee", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffd4ee"}})}></div>
                                 </div>
                             </div>
                             </div>
