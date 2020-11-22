@@ -45,7 +45,7 @@ class Week extends Component {
 
     }
 
-    _getcurrentevents() {
+    async _getcurrentevents() {
 
         if (this._getCookie("token") == "") {
             return []
