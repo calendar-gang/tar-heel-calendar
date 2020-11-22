@@ -89,6 +89,26 @@ class NavBar extends Component {
         }
     }
 
+    async _logoutPress(event) {
+        console.log("made to logout")
+
+        const result = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+            data: {
+                token: this._getCookie("token")
+            }
+        });
+
+        if (result.data.message === "Deleted token.") {
+            console.log("deleted token")
+            this.setState((state, props) => { return { loggedIn: false } })
+            document.cookie = "token="
+        }
+
+
+    }
+
     async _submitValidatedNewUser(uname, email, fname, lname, pword) {
         const result = await axios({
             method: 'post',
@@ -292,7 +312,7 @@ class NavBar extends Component {
             buttons = <div className="navbar-item">
                 <div className="buttons">
                     <div>
-                        <a className="button is-light" id="loginbutton" onClick={this.toggleLoginBox}><p id="logintext">Log Out</p></a>
+                        <a className="button is-light" id="loginbutton" onClick={this._logoutPress.bind(this)}><p id="logintext">Log Out</p></a>
                     </div>
                     <div>
                         <p style={{ fontSize: "45px", color: "#b5e3f8", margin: "0px 10px" }} ><BiUserCircle /></p>
