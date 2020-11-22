@@ -9,16 +9,7 @@ class Week extends Component {
     state = {}
 
     fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-    eventlist = [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
-    { day: 2, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
-    { day: 1, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
-    { day: 3, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
-    { day: 5, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
-    { day: 4, start: 12, end: 13.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-    { day: 3, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
-    { day: 1, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
-    { day: 5, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
-    { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }]
+    eventlist = []
 
     constructor(props) {
         super(props);
@@ -41,7 +32,35 @@ class Week extends Component {
 
     componentDidMount() {
         this.scrollBox.current.scrollTop = 800
+        this.eventlist = this._getcurrentevents()
         this._rendercurrentevents()
+
+    }
+
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
+
+    }
+
+    _getcurrentevents() {
+
+        if (this._getCookie("token") == "") {
+            return []
+        } else {
+            return [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
+            { day: 2, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
+            { day: 1, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
+            { day: 3, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
+            { day: 5, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
+            { day: 4, start: 12, end: 13.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+            { day: 3, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
+            { day: 1, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
+            { day: 5, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
+            { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }]
+        }
 
     }
 
@@ -102,12 +121,12 @@ class Week extends Component {
 
     changeWeek(direction) {
         let new_date_obj = new Date(this.state.date.getTime());
-        if(direction == 1) {
+        if (direction == 1) {
             new_date_obj.setDate(new_date_obj.getDate() + 7);
         } else {
             new_date_obj.setDate(new_date_obj.getDate() - 7);
         }
-        this.setState({date: new_date_obj})
+        this.setState({ date: new_date_obj })
     }
 
     render() {
