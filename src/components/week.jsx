@@ -117,12 +117,12 @@ class Week extends Component {
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 className="has-text-light" onClick={() => this.changeWeek(0)} style={{ fontSize: "60px" }}><BiChevronLeft /></h1>
+                            <h1 className="has-text-light" onClick={() => this.changeWeek(0)} style={{ fontSize: "60px", marginTop: "12px"  }}><BiChevronLeft /></h1>
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>{this._getWeek()} </h1>
                         </div>
                         <div className="level-right">
                             <NewEntry></NewEntry>
-                            <h1 className="has-text-light" onClick={() => this.changeWeek(1)} style={{ fontSize: "60px" }}><BiChevronRight /></h1>
+                            <h1 className="has-text-light" onClick={() => this.changeWeek(1)} style={{ fontSize: "60px" , marginTop: "12px" }}><BiChevronRight /></h1>
                         </div>
 
                     </section>
