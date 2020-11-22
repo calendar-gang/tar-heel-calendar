@@ -91,12 +91,16 @@ class NavBar extends Component {
                 password: pword
             }
         });
-        if (result.message === "Registration complete.") {
+        console.log(result)
+        console.log(result["message"])
+        console.log(result.message)
+        console.log(results.data)
+        if (result["message"] === "Registration complete.") {
             this.setState({messagefield: "Successfully registered!"})
             this.toggleMessage()
 
         } else {
-            window.alert(result.message)
+            window.alert(result["message"])
         }
     }
 
@@ -109,7 +113,11 @@ class NavBar extends Component {
                 password: pword
             }
         });
-       if (result.message === "Logged in.") {
+        console.log(result)
+        console.log(result["message"])
+        console.log(result.message)
+        console.log(results.data)
+       if (result["message"] === "Logged in.") {
            this.setState({messagefield: "Successfully logged in!"})
            this.toggleMessage()
        }
