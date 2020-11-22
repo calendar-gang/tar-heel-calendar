@@ -4,6 +4,7 @@ import WeekEvent from './weekEvent';
 import ReactDOM from 'react-dom'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import AutoCompleteText from './autocomplete';
+import axios from '../../node_modules/axios/index.js';
 
 class Week extends Component {
     state = {}
