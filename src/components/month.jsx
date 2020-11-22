@@ -13,36 +13,46 @@ class Month extends Component {
     constructor(props) {
         super(props);
 
-        let eventlist = [{ day: 0, row: 0, start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
-            { day: 2, row: 2, start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
-            { day: 2, row: 2, start: 2, end: 4, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
-            { day: 1, row: 1, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
-            { day: 5, row: 3, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
-            { day: 5, row: 0, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
-            { day: 4, row: 2, start: 2, end: 3.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-            { day: 3, row: 0, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
-            { day: 1, row: 3, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
-            { day: 5, row: 0, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
-            { day: 6, row: 1, start: 1, end: 2.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
+        let eventlist = [
+            { date: "11-20-2020", start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
+            { date: "11-20-2020", start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
+            { date: "11-21-2020", start: 2, end: 4, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
+            { date: "11-22-2020", start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
+            { date: "11-23-2020", start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
+            { date: "11-24-2020", start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
+            { date: "11-24-2020", start: 2, end: 3.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+            { date: "11-25-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
+            { date: "11-26-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
+            { date: "11-27-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
+            { date: "11-28-2020", start: 1, end: 2.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
 
         this.state = {
-            event_objs: [],
+            // grid: {},
+            days: [],
             eventlist: eventlist,
-            date: this.props.date,
+            date: new Date(this.props.date.getFullYear(), this.props.date.getMonth()),
             dayRef: {}
         }
-        for(let i = 0; i < 7; i++) {
-            this.state.event_objs[i] = [];
-            for (let j = 0; j < 5; j++) {
-                this.state.event_objs[i][j] = 0;
-            }
+
+        for(let i = 1; i < 32; i++) {
+            let obj = this.calcDayRow(i)
+            this.state.days[i] = {
+                row: obj.row,
+                day: obj.day,
+                event_objs: []
+            };
+            this.state.dayRef[`${obj.day}${obj.row}`] = React.createRef()
         }
-        for (let i = 0; i < 7; i++) {
-            for (let j = 0; j < 5; j++) {
-                for (let k = 0; k < 3; k++) {
-                    this.state.dayRef[`${i}${j}${k}`] = React.createRef()
-                }
-            }
+        console.log(this.state.dayRef);
+    }
+
+    calcDayRow(day_num) {
+        // need to be able to calculate day and row from date
+        let row = Math.floor(day_num / 7);
+        let day = day_num % 7;
+        return {
+            row: row,
+            day: day
         }
     }
 
@@ -54,37 +64,35 @@ class Month extends Component {
         for (let i = 0; i < this.state.eventlist.length; i++) {
             let evt = this.state.eventlist[i];
             let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
+            let date = new Date(evt.date)
+            let day_row = this.calcDayRow(date.getDate());
 
             // introduce more bookeeping in the state to check how many month events are present
             // for each day
-            let current_state = this.state.event_objs.slice();
-            let div_position = current_state[evt.day][evt.row];
-            current_state[evt.day][evt.row] += 1;
-            this.setState({ event_objs: current_state });
+            let current_state = [...this.state.days];
+            current_state[date.getDate()].event_objs.push(event_object);
+            this.setState({ days: current_state });
             // manipulates the dom directly
-            ReactDOM.render(event_object, this.state.dayRef[`${evt.day}${evt.row}${div_position}`].current)
+            // ReactDOM.render(event_object, this.state.dayRef[`${day_row.day}${day_row.row}`].current)
         }
     }
 
     _renderRowByDay(week_position) {
-        let date = new Date(this.state.date.getTime());
-        let year = date.getFullYear();
-        let month = date.getMonth();
-        let day_count = this.numDays(year, month) - 1;
-        //let day_num = (month, day, year) => (new Date(year, month, day)).getDay();
         let rows = [];
         for (let i = 0; i < 7; i++) {
-            let day = (week_position * 7 + i + 1) > day_count ? "" : (week_position * 7 + i + 1);
-            rows.push(
-                <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
-                    {day}
-                    <div style={{width: "120px"}}>
-                        <div ref={this.state.dayRef[`${i}${week_position}${0}`]}></div>
-                        <div ref={this.state.dayRef[`${i}${week_position}${1}`]}></div>
-                        <div ref={this.state.dayRef[`${i}${week_position}${2}`]}></div>
-                    </div>
-                </td>
-            );
+            let day = (week_position * 7 + i + 1)
+            console.log(this.state.days)
+            console.log(day)
+            if(day < 32) {
+                rows.push(
+                    <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
+                        {day}
+                        <div ref={this.state.dayRef[`${i}${week_position}`]} style={{width: "120px"}}>
+                            {this.state.days[day].event_objs}
+                        </div>
+                    </td>
+                );
+            }
         }
         return (
             <tr>
@@ -94,15 +102,12 @@ class Month extends Component {
     }
 
     numDays(year, month) {
-        return (new Date(year, month, 0)).getDate();
+        return (new Date(year, month, 0)).getDate() - 1;
     }
 
     _renderBody() {
         let rows = [];
-        let date = this.state.date;
-        let year = date.getFullYear();
-        let month = date.getMonth();
-        for (let i = 0; i < (this.numDays(year, month) % 7) + 2; i++) {
+        for (let i = 0; i < 5; i++) {
             rows.push(this._renderRowByDay(i));
         }
         return (
@@ -119,15 +124,7 @@ class Month extends Component {
         } else {
             date_to_set.setMonth(date_to_set.getMonth() + 1);
         }
-        let replaced_event_objs = [];
-        for(let i = 0; i < 7; i++) {
-            replaced_event_objs[i] = [];
-            for (let j = 0; j < 5; j++) {
-                replaced_event_objs[i][j] = 0;
-            }
-        }
         this.setState({
-            event_objs: replaced_event_objs,
             date: date_to_set,
             dayRef: {}
         });
