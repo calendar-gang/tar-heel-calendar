@@ -20,13 +20,19 @@ class NavBar extends Component {
         // one numeric digit, and one special character
         console.log(pword)
         let decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,100}$/;
-        return decimal.test(pword);
+        if (decimal.test(pword)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     _getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
+
     }
 
 
@@ -84,7 +90,7 @@ class NavBar extends Component {
     async _submitValidatedNewUser(uname, email, fname, lname, pword) {
         const result = await axios({
             method: 'post',
-            url: 'register',
+            url: 'https://tar-heel-calendar.herokuapp.com/register',
             data: {
                 username: uname,
                 email: email,
@@ -109,7 +115,7 @@ class NavBar extends Component {
     async _submitValidatedLogin(uname, pword) {
         const result = await axios({
             method: 'post',
-            url: 'login',
+            url: 'https://tar-heel-calendar.herokuapp.com/login',
             data: {
                 username: uname,
                 password: pword
@@ -130,8 +136,8 @@ class NavBar extends Component {
         console.log(tok)
 
         const res = await axios({
-            method: 'get',
-            url: 'getinfo',
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
             data: {
                 token: tok
             }
