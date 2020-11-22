@@ -13,6 +13,7 @@ class WeekEvent extends Component {
 
         this.eventBox = React.createRef()   // reference for hidden event details pop-up
         this.editBox = React.createRef()    // reference for hidden event edit pop-up
+        this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
     }
 
     handleResize = (e) => {
