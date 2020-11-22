@@ -58,12 +58,16 @@ class Week extends Component {
                     token: this._getCookie("token")
                 }
             });
-            console.log(results)
             let events = results.data.results // this should hold our events results data !
-            this.eventlist = [{ day: 0, start: 12, end: 14, name: events[0].title, location: events[0].location, description: events[0].description, category: 0 },
-            { day: 1, start: 12, end: 14, name: events[1].title, location: events[1].location, description: events[1].description, category: 1 },
-            { day: 2, start: 12, end: 14, name: events[2].title, location: events[2].location, description: events[2].description, category: 2 }
-            ]
+            this.eventlist = []
+            for (let i = 0; i < this.events.length; i++) {
+                let starttime = events[i].start
+                let endtime = events[i].end
+                let day = starttime.split("T")[0].split("-")[2] - 22 // 22 should be whatever the beginning of the week date is
+                let start = starttime.split("T")[1].split(":")[0]
+                let end = endtime.split("T")[1].split(":")[0]
+                this.eventlist.push({ day: day, start: start, end: end, name: events[i].title, location: events[i].location, description: events[i].description, category: i % 9 })
+            }
         }
 
         this._rendercurrentevents()
