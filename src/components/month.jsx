@@ -8,22 +8,26 @@ class Month extends Component {
     state = {};
 
     fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-    eventlist = [{ day: 0, row: 0, start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
-    { day: 2, row: 2, start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
-    { day: 2, row: 2, start: 2, end: 4, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
-    { day: 1, row: 1, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
-    { day: 5, row: 3, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
-    { day: 5, row: 0, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
-    { day: 4, row: 2, start: 2, end: 3.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-    { day: 3, row: 0, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
-    { day: 1, row: 3, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
-    { day: 5, row: 0, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
-    { day: 6, row: 1, start: 1, end: 2.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }]
+    
 
     constructor(props) {
         super(props);
+
+        let eventlist = [{ day: 0, row: 0, start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
+            { day: 2, row: 2, start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
+            { day: 2, row: 2, start: 2, end: 4, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
+            { day: 1, row: 1, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
+            { day: 5, row: 3, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
+            { day: 5, row: 0, start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
+            { day: 4, row: 2, start: 2, end: 3.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+            { day: 3, row: 0, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
+            { day: 1, row: 3, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
+            { day: 5, row: 0, start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
+            { day: 6, row: 1, start: 1, end: 2.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
+
         this.state = {
             event_objs: [],
+            eventlist: eventlist,
             date: this.props.date,
             dayRef: {}
         }
@@ -47,8 +51,8 @@ class Month extends Component {
     }
 
     _rendercurrentevents() {
-        for (let i = 0; i < this.eventlist.length; i++) {
-            let evt = this.eventlist[i];
+        for (let i = 0; i < this.state.eventlist.length; i++) {
+            let evt = this.state.eventlist[i];
             let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
 
             // introduce more bookeeping in the state to check how many month events are present
@@ -129,6 +133,12 @@ class Month extends Component {
         });
     }
 
+    createEvent(object) {
+        let state_copy = [...this.state.eventlist];
+        state_copy.push(object);
+        this.setState({eventlist: state_copy});
+    }
+
     render() {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
@@ -143,7 +153,7 @@ class Month extends Component {
                             <h1 className="subtitle" style={{ margin: "10px" }}> A Monthly View Designed Just For You!</h1>
                         </div>
                         <div className="level-right">
-                            <NewEntry></NewEntry>
+                            <NewEntry submit={(obj) => this.createEvent(obj)}></NewEntry>
                             <h1 onClick={() => this.switchMonth(1)} className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
                     </section>
