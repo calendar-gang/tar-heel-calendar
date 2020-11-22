@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import { BiCheck, BiX } from 'react-icons/bi';
+import axios from '../../node_modules/axios/index.js';
 
 class MonthEvent extends Component {
     state = {}
@@ -26,6 +27,14 @@ class MonthEvent extends Component {
 
     componentDidMount() {
         window.addEventListener("resize", this.handleResize);
+    }
+
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
+
     }
 
 
@@ -54,10 +63,10 @@ class MonthEvent extends Component {
         event.preventDefault()
         this.state.viewState = "details";
         this.eventBox.current.className = "box monthevent";
-        this.editBox.current.className="is-hidden box monthevent"
+        this.editBox.current.className = "is-hidden box monthevent"
     }
 
-    _submitEdit(event) {
+    async _submitEdit(event) {
         this._toggleEdit(event)
         window.alert("submitting")
         // all info for submit: 
@@ -76,6 +85,30 @@ class MonthEvent extends Component {
         console.log(des)
         console.log(startdate)
         console.log(enddate)
+
+        if (!this.state.loggedIn) {
+            this.setState({ eventlist: [] });
+        } else {
+            const results = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/editevent',
+                data: {
+                    token: this._getCookie("token"),
+                    id: this.state.eventstate.id,
+                    title: name,
+                    location: loc,
+                    description: des,
+                    start: startdate,
+                    end: enddate
+                }
+            });
+            console.log(results)
+
+            if (results.data.message === "Event edited.") {
+                console.log("success!!")
+                // this.render()
+            }
+        }
 
     }
 
@@ -151,15 +184,15 @@ class MonthEvent extends Component {
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <input className="input" ref={this.formFields.location} defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" ref={this.formFields.description} type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
+                    <textarea className="input" ref={this.formFields.description} type="text" style={{ fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input ref={this.formFields.date} className="input" defaultValue={`${defaultdate}`} type="date" style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <input ref={this.formFields.date} className="input" defaultValue={`${defaultdate}`} type="date" style={{ fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" ref={this.formFields.start} type="time" defaultValue={`${defaultstart}`} style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
-                    <hr className="hr" style={{ margin: "2px"}}></hr>
-                    <input className="input" ref={this.formFields.end} defaultValue={`${defaultend}`} type="time" style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
-                    <button className="button" style={{ fontSize: "10px", marginTop: "5px"}} onClick={this._submitEdit.bind(this)}><BiCheck /></button>
-                    <button className="button" style={{ fontSize: "10px" , marginTop: "5px"}} onClick={this._toggleEdit.bind(this)}><BiX /></button>
+                    <input className="input" ref={this.formFields.start} type="time" defaultValue={`${defaultstart}`} style={{ fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" ref={this.formFields.end} defaultValue={`${defaultend}`} type="time" style={{ fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
+                    <button className="button" style={{ fontSize: "10px", marginTop: "5px" }} onClick={this._submitEdit.bind(this)}><BiCheck /></button>
+                    <button className="button" style={{ fontSize: "10px", marginTop: "5px" }} onClick={this._toggleEdit.bind(this)}><BiX /></button>
                 </form>
             </div>
         )

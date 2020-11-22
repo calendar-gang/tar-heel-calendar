@@ -53,6 +53,7 @@ class Month extends Component {
                 let end = endtime.split("T")[1].split(":")[0]
                 let minspastend = endtime.split("T")[1].split(":")[1]
                 elist.push({
+                    id: events[i].id,
                     date: date,
                     start: parseFloat(start),
                     smin: parseFloat(minspaststart),
