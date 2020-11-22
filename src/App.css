@@ -78,3 +78,23 @@ td:hover {
 ul li:hover {
   color: red;  /* or whatever colour you want */
 }
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown-content div {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}

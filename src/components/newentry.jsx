@@ -4,22 +4,26 @@ import AutoComplete from './autocomplete';
 import axios from '../../node_modules/axios/index.js';
 
 class NewEntry extends Component {
+    state = {}
+    autoinfo = ["", ""]
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            view: "modal"
+            view: "modal",
         }
-
+        
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
     }
 
     toggleNewEntry() {
         /// let edit_box = document.getElementById("login-box");
+        let ev = this.state.event 
+        let loc = this.state.loc
         if (this.state.view === "modal is-active") {
-            this.setState({ view: "modal" });
+            this.setState({ view: "modal"});
         } else {
-            this.setState({ view: "modal is-active" });
+            this.setState({ view: "modal is-active"});
         }
     }
 
@@ -32,8 +36,10 @@ class NewEntry extends Component {
     }
 
     async _handleSubmit(event) {
-        let name = this.formFields.name.current.state.text
-        let loc = this.formFields.location.current.state.text
+        // let name = this.formFields.name.current.state.text
+        let name = this.autoinfo[0]
+        // let loc = this.formFields.location.current.state.text
+        let loc = this.autoinfo[1]
         let date = this.formFields.date.current.value
         let des = this.formFields.description.current.value
         let start = this.formFields.start.current.value
@@ -41,23 +47,30 @@ class NewEntry extends Component {
 
         // validate fields and process dates for entry
         // eventually needs recurring fields and category
-        let startdate = '2020-11-10 12:30:00'
-        let enddate = '2020-11-11 12:30:00'
+        // let startdate = '2020-11-10 12:30:00'
+        let startdate = date + " " + start
+        // let enddate = '2020-11-11 12:30:00'
+        let enddate = date + " " + end
         let recurring = 'weekly'
         let reccuringuntil = '2020-12-11 12:30:00'
         let category = 'school'
 
-        // will then query here
+        // console.log(name)
+        // console.log(loc)
+        // console.log(des)
+        // console.log(startdate)
+        // console.log(enddate)
 
-        /*if (this._getCookie("token") == "") {
+
+
+        if (this._getCookie("token") == "") {
             console.log("not logged in")
         } else {
-            let tok = this._getCookie("token")
             let res = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
                 data: {
-                    token: tok,
+                    token: this._getCookie("token"),
                     title: name,
                     location: loc,
                     description: des,
@@ -68,22 +81,29 @@ class NewEntry extends Component {
                     category: category
                 }
             });
-
-
-    }*/
+        }
 
 
 
         this.toggleNewEntry()
-        this.props.submit({ 
-                date: date,
-                start: 2, 
-                end: 4, 
-                name: name, 
-                location: loc, 
-                description: des, 
-                category: 1 
-            });
+        // this.props.submit({ 
+        //         date: date,
+        //         start: 2, 
+        //         end: 4, 
+        //         name: name, 
+        //         location: loc, 
+        //         description: des, 
+        //         category: 1 
+        //     });
+    }
+
+    updateAutoValsEvent(value) {
+        this.autoinfo[0] = value;
+        // console.log(this.autoinfo[0])
+    }
+
+    updateAutoValsLoc(value) {
+        this.autoinfo[1] = value;
     }
 
     render() {
@@ -108,7 +128,7 @@ class NewEntry extends Component {
         }
 
         // <input className="input" type="text" placeholder="426 final expo" style={inputval}></input>
-        // <input className="input" type="text" placeholder="Virtual Sitterson" style={inputval}></input>
+        // <input className="input" type="text" placeholder="Virtual Sitterson" style={inputval}></input> 
 
         return (
             <div>
@@ -124,13 +144,27 @@ class NewEntry extends Component {
                             <div className="field is-horizontal">
                                 <label className="label" style={sulabel}>Event Name:</label>
                                 <div className="control">
-                                    <AutoCompleteText ref={this.formFields.name} hold='426 Project Expo'></AutoCompleteText>
+                                    <AutoCompleteText ref={this.formFields.name} hold='426 Project Expo' triggerParentUpdate={this.updateAutoValsEvent.bind(this)}></AutoCompleteText>
                                 </div>
+                                <div className="dropdown" style={{ width: "75px"}}>
+                                <button className="dropbtn button">Category</button>
+                                <div className="dropdown-content" style={{margin: "10px", width: "75px", height: "200px", overflow: "scroll"}}>
+                                    <div className="box" style={{backgroundColor: "#ffd4d4", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor: "#ffe6d4", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor:  "#fffbd4", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor: "#e2ffd4", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor: "#d4ffec", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor: "#d4f6ff", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor: "#d4dfff", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor: "#f0d4ff", width: "75px"}}></div>
+                                    <div className="box" style={{backgroundColor:  "#ffd4ee", width: "75px"}}></div>
+                                </div>
+                            </div>
                             </div>
                             <div className="field is-horizontal">
                                 <label className="label" style={sulabel}>Location:</label>
                                 <div className="control">
-                                    <AutoCompleteText ref={this.formFields.location} hold='Virtual Sitterson'></AutoCompleteText>
+                                    <AutoCompleteText ref={this.formFields.location} hold='Virtual Sitterson' triggerParentUpdate={this.updateAutoValsLoc.bind(this)}></AutoCompleteText>
                                 </div>
                             </div>
                             <div className="field is-horizontal">
@@ -172,10 +206,3 @@ class NewEntry extends Component {
 }
 
 export default NewEntry
-
-// Name
-// Description 
-// Start time 
-// End time 
-// Date 
-// Category
