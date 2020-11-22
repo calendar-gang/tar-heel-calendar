@@ -86,10 +86,15 @@ class NewEntry extends Component {
 
 
         this.toggleNewEntry()
+
+        /*
+        This code is necessary to handle the submit feature of a new entry form
+         */
+        
         // this.props.submit({ 
         //         date: date,
-        //         start: 2, 
-        //         end: 4, 
+        //         start: 8, 
+        //         end: 10, 
         //         name: name, 
         //         location: loc, 
         //         description: des, 

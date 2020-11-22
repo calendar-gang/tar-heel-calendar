@@ -20,14 +20,15 @@ class Week extends Component {
         let date_to_set = new Date(this.props.date.getTime());
         date_to_set.setDate(date_to_set.getDate() - date_to_set.getDay());
         this.state = {
+            eventlist: [],
             date: date_to_set,
-            loggedIn: this._getCookie("token").length === 60
+            loggedIn: this._getCookie("token").length === 60,
+            inputRef: {}
         }
-
-        this.inputRef = {}
+        
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 24; j++) {
-                this.inputRef[`${i}${j}`] = React.createRef()
+                this.state.inputRef[`${i}${j}`] = React.createRef()
             }
         }
     }
@@ -36,6 +37,15 @@ class Week extends Component {
         this.scrollBox.current.scrollTop = 800
         this._getcurrentevents()
 
+    }
+
+    handleSubmit(obj) {
+        let current_events = [...this.state.eventlist];
+        current_events.push(obj);
+        let date = new Date(obj.date);
+        date.setDate(date.getDate() + 1);
+        ReactDOM.render(<WeekEvent eventstate={obj}></WeekEvent>, this.state.inputRef[`${date.getDay()}${obj.start}`].current);
+        this.setState({eventlist: current_events});
     }
 
     _getCookie(name) {
@@ -95,7 +105,7 @@ class Week extends Component {
     _renderRowByHour(time) {
         let rows = [];
         for (let i = 0; i < 7; i++) {
-            rows.push(<td style={{ padding: "0px 8px" }} ref={this.inputRef[`${i}${time}`]}></td>);
+            rows.push(<td style={{ padding: "0px 8px" }} ref={this.state.inputRef[`${i}${time}`]}></td>);
         }
 
         return (
@@ -137,7 +147,7 @@ class Week extends Component {
     _rendercurrentevents() {
         for (let i = 0; i < this.eventlist.length; i++) {
             let evt = this.eventlist[i]
-            ReactDOM.render(<WeekEvent eventstate={evt}></WeekEvent>, this.inputRef[`${evt.day}${evt.start}`].current)
+            ReactDOM.render(<WeekEvent eventstate={evt}></WeekEvent>, this.state.inputRef[`${evt.day}${evt.start}`].current)
         }
     }
 
@@ -162,7 +172,7 @@ class Week extends Component {
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>{this._getWeek()} </h1>
                         </div>
                         <div className="level-right">
-                            <NewEntry></NewEntry>
+                            <NewEntry submit={(obj) => this.handleSubmit(obj)}></NewEntry>
                             <h1 className="has-text-light" onClick={() => this.changeWeek(1)} style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
 
