@@ -20,7 +20,8 @@ class Week extends Component {
         let date_to_set = new Date(this.props.date.getTime());
         date_to_set.setDate(date_to_set.getDate() - date_to_set.getDay());
         this.state = {
-            date: date_to_set
+            date: date_to_set,
+            loggedIn: this._getCookie("token").length === 60
         }
 
         this.inputRef = {}
@@ -47,7 +48,7 @@ class Week extends Component {
 
     async _getcurrentevents() {
 
-        if (this._getCookie("token") == "") {
+        if (this.state.loggedIn) {
             this.eventlist = []
         } else {
 
@@ -59,16 +60,10 @@ class Week extends Component {
                 }
             });
             let events = results.data.results // this should hold our events results data !
-            this.eventlist = [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
-            { day: 2, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
-            { day: 1, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
-            { day: 3, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
-            { day: 5, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
-            { day: 4, start: 12, end: 13.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-            { day: 3, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
-            { day: 1, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
-            { day: 5, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
-            { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }]
+            this.eventlist = [{ day: 0, start: 12, end: 14, name: events[0].title, location: events[0].location, description: events[0].description, category: 0 },
+            { day: 1, start: 12, end: 14, name: events[1].title, location: events[1].location, description: events[1].description, category: 1 },
+            { day: 2, start: 12, end: 14, name: events[2].title, location: events[2].location, description: events[2].description, category: 2 }
+            ]
         }
 
         this._rendercurrentevents()
