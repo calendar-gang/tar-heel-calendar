@@ -48,10 +48,9 @@ class Week extends Component {
 
     async _getcurrentevents() {
 
-        if (this.state.loggedIn) {
+        if (!this.state.loggedIn) {
             this.eventlist = []
         } else {
-
             const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
@@ -59,6 +58,7 @@ class Week extends Component {
                     token: this._getCookie("token")
                 }
             });
+            console.log(results)
             let events = results.data.results // this should hold our events results data !
             this.eventlist = [{ day: 0, start: 12, end: 14, name: events[0].title, location: events[0].location, description: events[0].description, category: 0 },
             { day: 1, start: 12, end: 14, name: events[1].title, location: events[1].location, description: events[1].description, category: 1 },
