@@ -26,24 +26,35 @@ class Month extends Component {
             { date: "11-27-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
             { date: "11-28-2020", start: 1, end: 2.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
 
+        let create_day = this.createDays();
+        
         this.state = {
-            // grid: {},
-            days: [],
+            cache: {},
+            days: create_day.days,
             eventlist: eventlist,
             date: new Date(this.props.date.getFullYear(), this.props.date.getMonth()),
-            dayRef: {}
+            dayRef: create_day.dayRef
         }
 
+        this.state.cache[this.state.date.getMonth()] = create_day;
+    }
+
+    createDays() {
+        let days = [];
+        let dayRef = [];
         for(let i = 1; i < 32; i++) {
             let obj = this.calcDayRow(i)
-            this.state.days[i] = {
+            days[i] = {
                 row: obj.row,
                 day: obj.day,
                 event_objs: []
             };
-            this.state.dayRef[`${obj.day}${obj.row}`] = React.createRef()
+            dayRef[`${obj.day}${obj.row}`] = React.createRef()
         }
-        console.log(this.state.dayRef);
+        return {
+            days: days,
+            dayRef: dayRef
+        }
     }
 
     calcDayRow(day_num) {
@@ -65,13 +76,14 @@ class Month extends Component {
             let evt = this.state.eventlist[i];
             let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
             let date = new Date(evt.date)
-            let day_row = this.calcDayRow(date.getDate());
 
             // introduce more bookeeping in the state to check how many month events are present
             // for each day
-            let current_state = [...this.state.days];
-            current_state[date.getDate()].event_objs.push(event_object);
-            this.setState({ days: current_state });
+            if(date.getMonth() == this.state.date.getMonth()){
+                let current_state = [...this.state.days];
+                current_state[date.getDate()].event_objs.push(event_object);
+                this.setState({ days: current_state });
+            }
             // manipulates the dom directly
             // ReactDOM.render(event_object, this.state.dayRef[`${day_row.day}${day_row.row}`].current)
         }
@@ -81,8 +93,6 @@ class Month extends Component {
         let rows = [];
         for (let i = 0; i < 7; i++) {
             let day = (week_position * 7 + i + 1)
-            console.log(this.state.days)
-            console.log(day)
             if(day < 32) {
                 rows.push(
                     <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
@@ -124,10 +134,21 @@ class Month extends Component {
         } else {
             date_to_set.setMonth(date_to_set.getMonth() + 1);
         }
-        this.setState({
-            date: date_to_set,
-            dayRef: {}
-        });
+        let create_day = this.createDays()
+        if(!this.state.cache[date_to_set.getMonth()]){
+            this.state.cache[date_to_set.getMonth()] = create_day;
+            this.setState({
+                date: date_to_set,
+                days: create_day.days,
+                dayRef: create_day.dayRef
+            });
+        } else {
+            this.setState({
+                date: date_to_set,
+                days: this.state.cache[date_to_set.getMonth()].days,
+                dayRef: this.state.cache[date_to_set.getMonth()].dayRef
+            });
+        }
     }
 
     createEvent(object) {
