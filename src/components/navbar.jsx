@@ -3,11 +3,13 @@ import '../App.css'
 import axios from '../../node_modules/axios/index.js';
 
 class NavBar extends Component {
-    state = {};
+    // state = {};
+    // messagefield = "Successfully logged in!"
 
     constructor(props) {
         super(props);
 
+        this.state = {messagefield: "Successfully logged in!"}
         this.SUBfields = { fname: React.createRef(), lname: React.createRef(), email: React.createRef(), username: React.createRef(), password: React.createRef() };
         this.SIfields = { username: React.createRef(), password: React.createRef() }
     }
@@ -89,6 +91,13 @@ class NavBar extends Component {
                 password: pword
             }
         });
+        if (result.message === "Registration complete.") {
+            this.setState({messagefield: "Successfully registered!"})
+            this.toggleMessage()
+
+        } else {
+            window.alert(result.message)
+        }
     }
 
     async _submitValidatedLogin(uname, pword) {
@@ -100,8 +109,26 @@ class NavBar extends Component {
                 password: pword
             }
         });
-        console.log(result)
+       if (result.message === "Logged in.") {
+           this.setState({messagefield: "Successfully logged in!"})
+           this.toggleMessage()
+       }
 
+    }
+
+    toggleMessage() {
+        let edit_box = document.getElementById("successmessage");
+        edit_box.className = "modal is-active"
+        setTimeout(function(){ edit_box.className = "modal" }, 500);
+    }
+
+    renderMessage() {
+        return (<div className="modal" id="successmessage">
+            <div className="modal-background"></div>
+                <div className="modal-card">
+                    <p style={{color: "#60f542"}}>{this.state.messagefield}</p>
+                </div>
+        </div>)
     }
 
     renderSignUp() {
@@ -243,6 +270,7 @@ class NavBar extends Component {
                 </div>
                 <div className="navbar-end" id="navbarend">
                     <div className="navbar-item">
+                        {this.renderMessage()}
                         <div className="buttons">
                             <div className="signup">
                                 <a className="button" id="signupbutton" style={{ backgroundColor: "#b5e3f8" }} onClick={this.toggleSUBox}>
