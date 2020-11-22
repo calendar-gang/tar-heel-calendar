@@ -13,9 +13,13 @@ This file describes the `/deleteevent` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.delete('https://tar-heel-calendar.herokuapp.com/deleteevent', {
-    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
-    id: 5
+let res = await axios({
+    method: 'delete',
+    url: 'https://tar-heel-calendar.herokuapp.com/deleteevent',
+    data: {
+        token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+        id: 5
+    }
 });
 ```
 
@@ -28,9 +32,13 @@ let res = await axios.delete('https://tar-heel-calendar.herokuapp.com/deleteeven
 
 ### Example (invalid token)
 ```js
-let res = await axios.delete('https://tar-heel-calendar.herokuapp.com/deleteevent', {
-    token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ',
-    id: 5
+let res = await axios({
+    method: 'delete',
+    url: 'https://tar-heel-calendar.herokuapp.com/deleteevent',
+    data: {
+        token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ',
+        id: 5
+    }
 });
 ```
 
@@ -43,9 +51,13 @@ let res = await axios.delete('https://tar-heel-calendar.herokuapp.com/deleteeven
 
 ### Example (invalid id)
 ```js
-let res = await axios.delete('https://tar-heel-calendar.herokuapp.com/deleteevent', {
-    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
-    id: 200
+let res = await axios({
+    method: 'delete',
+    url: 'https://tar-heel-calendar.herokuapp.com/deleteevent',
+    data: {
+        token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+        id: 200
+    }
 });
 ```
 

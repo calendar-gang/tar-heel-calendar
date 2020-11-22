@@ -12,8 +12,12 @@ This file describes the `/logout` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/logout', {
-    token: 'b15efc04cb19d956fc982451343981ecf956dc31eab7486a4d7939a77476'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/logout',
+    data: {
+        token: 'b15efc04cb19d956fc982451343981ecf956dc31eab7486a4d7939a77476'
+    }
 });
 ```
 
@@ -24,10 +28,14 @@ let res = await axios.post('https://tar-heel-calendar.herokuapp.com/logout', {
 }
 ```
 
-### Example (no token)
+### Example (token not found)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/logout', {
-    token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/logout',
+    data: {
+        token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
+    }
 });
 ```
 
@@ -40,8 +48,12 @@ let res = await axios.post('https://tar-heel-calendar.herokuapp.com/logout', {
 
 ### Example (bad length)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/logout', {
-    token: 'b15efc04cb19d956fc982451343'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/logout',
+    data: {
+        token: 'b15efc04cb19d956fc982451343'
+    }
 });
 ```
 
