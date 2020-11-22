@@ -74,7 +74,7 @@ class DayEvent extends Component {
                 <hr className="hr" style={{ margin: "4px" }}></hr>
                 <textarea className="input" defaultValue={`${this.props.eventstate.description}`} type="text" style={{ height: "75px", fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></textarea>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <input className="input" ref={this.formFields.end} defaultValue={`${this.props.eventstate.date}`} type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}/>
+                <input className="input" defaultValue={`${this.props.eventstate.date}`} type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}/>
                 <hr className="hr" style={{ margin: "2px"}}></hr>
                 <input className="input" type="time" defaultValue={`${defaultstart}`}  style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
                 <hr className="hr" style={{ margin: "2px" }}></hr>
