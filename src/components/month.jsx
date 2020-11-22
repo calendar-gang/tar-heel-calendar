@@ -8,26 +8,26 @@ class Month extends Component {
     state = {};
 
     fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-    
+
 
     constructor(props) {
         super(props);
 
         let eventlist = [
-            { date: "11-20-2020", start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
-            { date: "11-20-2020", start: 2, end: 4, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
-            { date: "11-21-2020", start: 2, end: 4, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
-            { date: "11-22-2020", start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
-            { date: "11-23-2020", start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
-            { date: "11-24-2020", start: 1, end: 2, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
-            { date: "11-24-2020", start: 2, end: 3.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-            { date: "11-25-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
-            { date: "11-26-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
-            { date: "11-27-2020", start: 3, end: 5.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
-            { date: "11-28-2020", start: 1, end: 2.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
+            { date: "11-20-2020", start: 2, smin: 30, end: 4, emin: 20, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
+            { date: "11-20-2020", start: 2, smin: 30, end: 4, emin: 20, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
+            { date: "11-21-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
+            { date: "11-22-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
+            { date: "11-23-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
+            { date: "11-24-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
+            { date: "11-24-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+            { date: "11-25-2020", start: 2, smin: 30, end: 4, emin: 20, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
+            { date: "11-26-2020", start: 2, smin: 30, end: 4, emin: 20, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
+            { date: "11-27-2020", start: 2, smin: 30, end: 4, emin: 20, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
+            { date: "11-28-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
 
         let create_day = this.createDays();
-        
+
         this.state = {
             cache: {},
             days: create_day.days,
@@ -42,7 +42,7 @@ class Month extends Component {
     createDays() {
         let days = [];
         let dayRef = [];
-        for(let i = 1; i < 32; i++) {
+        for (let i = 1; i < 32; i++) {
             let obj = this.calcDayRow(i)
             days[i] = {
                 row: obj.row,
@@ -79,7 +79,7 @@ class Month extends Component {
 
             // introduce more bookeeping in the state to check how many month events are present
             // for each day
-            if(date.getMonth() == this.state.date.getMonth()){
+            if (date.getMonth() == this.state.date.getMonth()) {
                 let current_state = [...this.state.days];
                 current_state[date.getDate()].event_objs.push(event_object);
                 this.setState({ days: current_state });
@@ -93,11 +93,11 @@ class Month extends Component {
         let rows = [];
         for (let i = 0; i < 7; i++) {
             let day = (week_position * 7 + i + 1)
-            if(day < 32) {
+            if (day < 32) {
                 rows.push(
                     <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
                         {day}
-                        <div ref={this.state.dayRef[`${i}${week_position}`]} style={{width: "120px"}}>
+                        <div ref={this.state.dayRef[`${i}${week_position}`]} style={{ width: "120px" }}>
                             {this.state.days[day].event_objs}
                         </div>
                     </td>
@@ -129,13 +129,13 @@ class Month extends Component {
 
     switchMonth(direction) {
         let date_to_set = new Date(this.state.date.getTime());
-        if(direction == 0) {
+        if (direction == 0) {
             date_to_set.setMonth(date_to_set.getMonth() - 1);
         } else {
             date_to_set.setMonth(date_to_set.getMonth() + 1);
         }
         let create_day = this.createDays()
-        if(!this.state.cache[date_to_set.getMonth()]){
+        if (!this.state.cache[date_to_set.getMonth()]) {
             this.state.cache[date_to_set.getMonth()] = create_day;
             this.setState({
                 date: date_to_set,
@@ -154,17 +154,17 @@ class Month extends Component {
     createEvent(object) {
         let state_copy = [...this.state.eventlist];
         state_copy.push(object);
-        this.setState({eventlist: state_copy});
+        this.setState({ eventlist: state_copy });
 
         let event_object = <MonthEvent eventstate={object}></MonthEvent>;
         let date = new Date(object.date)
 
         // this math isn't great and it's temporary
-        date.setDate(date.getDate()+1);
+        date.setDate(date.getDate() + 1);
 
         // introduce more bookeeping in the state to check how many month events are present
         // for each day
-        if(date.getMonth() == this.state.date.getMonth()){
+        if (date.getMonth() == this.state.date.getMonth()) {
             let current_state = [...this.state.days];
             current_state[date.getDate()].event_objs.push(event_object);
             this.setState({ days: current_state });

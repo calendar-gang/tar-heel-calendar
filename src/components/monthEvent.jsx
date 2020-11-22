@@ -10,9 +10,9 @@ class MonthEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
+        this.state = {
             windowWidth: window.innerWidth,
-            showEvent: true 
+            showEvent: true
         };
 
         this.eventBox = React.createRef()   // reference for hidden event details pop-up
@@ -49,6 +49,7 @@ class MonthEvent extends Component {
         this.editBox.current.className = "box monthevent"
     }
 
+
     _toggleEdit(event) {
         event.preventDefault()
         this.state.viewState = "details";
@@ -78,9 +79,23 @@ class MonthEvent extends Component {
 
     }
 
-    _findHour(time) {
-        if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
-        else { return (time % 12) === 0 ? "12 PM" : (time % 12) + " PM" }
+
+    _findHour(hour, minutes) {
+        if (hour < 12) {
+            if (hour === 0) {
+                return minutes === 0 ? "12 AM" : `12:${minutes} AM`
+            } else {
+                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes} AM`
+            }
+        } else {
+            if (hour % 12 === 0) {
+                return minutes === 0 ? "12 PM" : `12:${minutes} PM`
+            } else {
+                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes} PM`
+            }
+
+        }
+
     }
 
     _createEventBox() {
@@ -96,7 +111,7 @@ class MonthEvent extends Component {
             <div ref={this.eventBox} className="is-hidden box monthevent" style={event_style} >
                 <header className="card-head">
                     <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
-                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start)} - {this._findHour(this.props.eventstate.end)}</p>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
@@ -163,15 +178,15 @@ class MonthEvent extends Component {
             return (
                 <div>
                     <div style={event_style} content={after_content} className="box" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
-                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={() => {this.setState({showEvent: !this.state.showEvent})}} style={{float: "right"}} class="delete is-small"></a> </p>
-                        
+                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={() => { this.setState({ showEvent: !this.state.showEvent }) }} style={{ float: "right" }} class="delete is-small"></a> </p>
+
                     </div>
-                    
+
                     {this._createEventBox()}
                     {this._createEditBox()}
                 </div>
-    
-    
+
+
             )
         } else {
             return (
