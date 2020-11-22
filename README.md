@@ -6,7 +6,7 @@ In order to run this project locally, you must have the following software insta
 1. NodeJS and NPM. These will handle our JavaScript dependencies.
 2. MariaDB. (Theoretically MySQL might work too but let's not be soulless here.)
 
-HeidiSQL is also recommended for viewing the MariaDB databases directly. It can be installed alongside MariaDB.
+HeidiSQL is also recommended for viewing the MariaDB database directly. It can be installed alongside MariaDB.
 
 The database then needs to be set up. Run the following in the command line to do this:
 1. `npm run create-database`
@@ -47,4 +47,4 @@ Other technologies used are listed in [`package.json`](package.json).
 * Ezri White
 
 ## Live website
-The live website is currently located at [tar-heel-calendar.herokuapp.com](https://tar-heel-calendar.herokuapp.com/). Note it is not stable nor secure, so use with caution. The live website will restart with each upstream Git commit.
+The live website is currently located at [tar-heel-calendar.herokuapp.com](https://tar-heel-calendar.herokuapp.com/). Note it is not stable nor especially secure, so use with caution. The live website will restart with each upstream Git commit.
