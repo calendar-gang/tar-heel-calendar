@@ -14,18 +14,21 @@ This file describes the `/register` endpoint.
     * `message`
     
 ## Notes
-* Make sure to check for constraints on the frontend so that no improper requests are sent. As seen below, the server can deal with bad requests, but the error messages are not very specific.
-* Although the password is encrypted in the database, security is not being strongly focused on here. Please warn the user that this application is in the development phase and as such, any password should be specific to this site.
+* Although the password is encrypted in the database, security is not being strongly focused on at this stage. Please warn the user that this application is in the development phase and as such, any password should be specific to this site.
     
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
-    username: 'user',
-    email: 'user@tar-heel-calendar.herokuapp.com',
-    firstname: 'Us',
-    lastname: 'Er',
-    password: 'password'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/register',
+    data: {
+        username: 'user',
+        email: 'user@tar-heel-calendar.herokuapp.com',
+        firstname: 'Us',
+        lastname: 'Er',
+        password: 'password'
+    }
 });
 ```
 
@@ -38,12 +41,16 @@ let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (repeat username)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
-    username: 'user',
-    email: 'user2@email.com',
-    firstname: 'Us',
-    lastname: 'Er',
-    password: 'password'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/register',
+    data: {
+        username: 'user',
+        email: 'user2@tar-heel-calendar.herokuapp.com',
+        firstname: 'Us',
+        lastname: 'Er',
+        password: 'password'
+    }
 });
 ```
 
@@ -56,12 +63,16 @@ let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (repeat email)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
-    username: 'user2',
-    email: 'user@tar-heel-calendar.herokuapp.com',
-    firstname: 'Us',
-    lastname: 'Er',
-    password: 'password'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/register',
+    data: {
+        username: 'user2',
+        email: 'user@tar-heel-calendar.herokuapp.com',
+        firstname: 'Us',
+        lastname: 'Er',
+        password: 'password'
+    }
 });
 ```
 
@@ -74,12 +85,16 @@ let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
 
 ### Example (bad length)
 ```js
-let res = await axios.post('https://tar-heel-calendar.herokuapp.com/register', {
-    username: '',
-    email: 'user2@tar-heel-calendar.herokuapp.com',
-    firstname: 'Us',
-    lastname: 'Er',
-    password: 'password'
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/register',
+    data: {
+        username: '',
+        email: 'user2@tar-heel-calendar.herokuapp.com',
+        firstname: 'Us',
+        lastname: 'Er',
+        password: 'password'
+    }
 });
 ```
 

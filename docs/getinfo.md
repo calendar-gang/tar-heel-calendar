@@ -16,8 +16,12 @@ This file describes the `/getinfo` endpoint.
 ## Example operations
 ### Example (valid input)
 ```js
-let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
-    token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740'
+let res = await axios({
+    method: 'get',
+    url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+    data: {
+        token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740'
+    }
 });
 ```
 
@@ -34,8 +38,12 @@ let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
 
 ### Example (invalid token)
 ```js
-let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
-    token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
+let res = await axios({
+    method: 'get',
+    url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+    data: {
+        token: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ'
+    }
 });
 ```
 
@@ -48,8 +56,12 @@ let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
 
 ### Example (bad length)
 ```js
-let res = await axios.get('https://tar-heel-calendar.herokuapp.com/getinfo', {
-    token: 'ZZZ'
+let res = await axios({
+    method: 'get',
+    url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+    data: {
+        token: 'ZZZ'
+    }
 });
 ```
 
