@@ -44,6 +44,19 @@ class DayEvent extends Component {
             overflow: "scroll"
         }
 
+        let defaultstart = this.props.eventstate.start + ":" + this.props.eventstate.smin
+        // console.log(defaultstart)
+        let defaultend = this.props.eventstate.end + ":" + this.props.eventstate.emin
+        // console.log(this.props.eventstate.start + ":" + this.props.eventstate.smin)
+        // let defaultdate = this.props.eventstate.date.split("-")[2] + "-" + this.props.eventstate.date.split("-")[0] + "-" + this.props.eventstate.date.split("-")[1]
+
+        if (defaultstart.length == 4) {
+            defaultstart = 0 + defaultstart
+        }
+        if (defaultend.length == 4) {
+            defaultend = 0 + defaultend
+        }
+
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
                 <div className="level">
@@ -61,10 +74,12 @@ class DayEvent extends Component {
                 <hr className="hr" style={{ margin: "4px" }}></hr>
                 <textarea className="input" defaultValue={`${this.props.eventstate.description}`} type="text" style={{ height: "75px", fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></textarea>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
+                <input className="input" ref={this.formFields.end} defaultValue={`${this.props.eventstate.date}`} type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}/>
+                <hr className="hr" style={{ margin: "2px"}}></hr>
+                <input className="input" type="time" defaultValue={`${defaultstart}`}  style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
                 <hr className="hr" style={{ margin: "2px" }}></hr>
-                <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
-
+                <input className="input" type="time" defaultValue={`${defaultend}`} style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />         
+                
             </div>
 
         )
@@ -103,6 +118,7 @@ class DayEvent extends Component {
             margin: `${(this.props.eventstate.smin / 60) * 80}px 0px 0px 0px`,
             overflow: "scroll"
         }
+
 
         return (
             <div>

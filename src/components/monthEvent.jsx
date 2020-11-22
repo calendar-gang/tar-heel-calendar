@@ -128,6 +128,21 @@ class MonthEvent extends Component {
             margin: "10px 0px 0px 50px",
             zIndex: "1",
         }
+        let defaultstart = this.props.eventstate.start + ":" + this.props.eventstate.smin
+        // console.log(defaultstart)
+        let defaultend = this.props.eventstate.end + ":" + this.props.eventstate.emin
+        // console.log(this.props.eventstate.start + ":" + this.props.eventstate.smin)
+        let defaultdate = this.props.eventstate.date.split("-")[2] + "-" + this.props.eventstate.date.split("-")[0] + "-" + this.props.eventstate.date.split("-")[1]
+
+        if (defaultstart.length == 4) {
+            defaultstart = 0 + defaultstart
+        }
+        if (defaultend.length == 4) {
+            defaultend = 0 + defaultend
+        }
+
+
+
         return (
             <div ref={this.editBox} className="is-hidden box monthevent" style={event_style}>
                 <form>
@@ -138,11 +153,11 @@ class MonthEvent extends Component {
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <textarea className="input" ref={this.formFields.description} type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input ref={this.formFields.date} className="input" type="date" style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <input ref={this.formFields.date} className="input" defaultValue={`${defaultdate}`} type="date" style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" ref={this.formFields.start} type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <input className="input" ref={this.formFields.start} type="time" defaultValue={`${defaultstart}`} style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
                     <hr className="hr" style={{ margin: "2px"}}></hr>
-                    <input className="input" ref={this.formFields.end} type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <input className="input" ref={this.formFields.end} defaultValue={`${defaultend}`} type="time" style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
                     <button className="button" style={{ fontSize: "10px", marginTop: "5px"}} onClick={this._submitEdit.bind(this)}><BiCheck /></button>
                     <button className="button" style={{ fontSize: "10px" , marginTop: "5px"}} onClick={this._toggleEdit.bind(this)}><BiX /></button>
                 </form>
