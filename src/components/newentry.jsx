@@ -159,7 +159,7 @@ class NewEntry extends Component {
                                 </div>
                                 <div className="dropdown" style={{ width: "75px", marginTop: "10px", marginLeft: "10px"}}>
                                 <button className="dropbtn button" style={this.state.style}>Category</button>
-                                <div className="dropdown-content" style={{marginTop: "40px", marginLeft: "10px" , width: "75px", height: "200px", overflow: "scroll"}}>
+                                <div className="dropdown-content" style={{ marginLeft: "10px" , width: "75px", height: "200px", overflow: "scroll"}}>
                                     <div className="box" style={{backgroundColor: "#ffd4d4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffd4d4"}})}></div>
                                     <div className="box" style={{backgroundColor: "#ffe6d4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffe6d4"}})}></div>
                                     <div className="box" style={{backgroundColor:  "#fffbd4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#fffbd4"}})}></div>

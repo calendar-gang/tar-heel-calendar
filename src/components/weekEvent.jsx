@@ -95,8 +95,6 @@ class WeekEvent extends Component {
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <input className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.location}`}</textarea>
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
                     <textarea className="input" type="text" style={{ fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
