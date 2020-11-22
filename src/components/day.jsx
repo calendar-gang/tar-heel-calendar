@@ -43,6 +43,7 @@ class Day extends Component {
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         */
         this.state = { 
+            eventlist: this.eventlist,
             date: this.props.date,
             display: "first"
         }
@@ -59,6 +60,16 @@ class Day extends Component {
 
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         return writtendate;
+    }
+
+    handleSubmit(obj) {
+        let current_events = [...this.state.eventlist];
+        current_events.push(obj);
+        this.setState({eventlist: current_events});
+        if(parseInt(obj.start) < 10) {
+            obj.start = obj.start.slice(1);
+        }
+        ReactDOM.render(<DayEvent eventstate={obj}></DayEvent>, this.timeRef[`${obj.start}`].current)
     }
 
     componentDidMount() {
@@ -261,7 +272,7 @@ class Day extends Component {
                                 <h1 className="title has-text-light" style={{ fontSize: "25px", margin: "20px" }}>{this.getWrittenDate(this.state.date)} </h1>
                             </div>
                             <div className="level-right">
-                                <NewEntry></NewEntry>
+                                <NewEntry submit={(obj) => {this.handleSubmit(obj)}}></NewEntry>
                                 <h1 className="has-text-light" style={{ fontSize: "60px", marginTop: "10px" }} onClick={() => this.changeDay(1)}><BiChevronRight /></h1>
                             </div>
 
