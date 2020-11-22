@@ -131,6 +131,7 @@ class NavBar extends Component {
         console.log(document.cookie)
 
         let tok = this._getCookie("token")
+        console.log(tok)
 
         const res = await axios({
             method: 'get',
