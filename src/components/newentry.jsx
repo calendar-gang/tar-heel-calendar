@@ -32,15 +32,12 @@ class NewEntry extends Component {
     }
 
     async _handleSubmit(event) {
-        let name = this.formFields.name.current.value
-        let loc = this.formFields.location.current.value
-        let date = this.formFields.description.current.value
-        let des = this.formFields.date.current.value
+        let name = this.formFields.name.current.state.text
+        let loc = this.formFields.location.current.state.text
+        let date = this.formFields.date.current.value
+        let des = this.formFields.description.current.value
         let start = this.formFields.start.current.value
         let end = this.formFields.end.current.value
-
-        console.log(name)
-        console.log(des)
 
         // validate fields and process dates for entry
         // eventually needs recurring fields and category
@@ -79,7 +76,16 @@ class NewEntry extends Component {
 
         this.toggleNewEntry()
 
-
+        this.props.submit({ 
+                day: 2, 
+                row: 3, 
+                start: 2, 
+                end: 4, 
+                name: name, 
+                location: loc, 
+                description: des, 
+                category: 1 
+            });
     }
 
     render() {
