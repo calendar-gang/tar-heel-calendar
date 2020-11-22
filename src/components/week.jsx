@@ -10,7 +10,6 @@ class Week extends Component {
     state = {}
 
     fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-    eventlist = []
 
     constructor(props) {
         super(props);
@@ -25,7 +24,7 @@ class Week extends Component {
             loggedIn: this._getCookie("token").length === 60,
             inputRef: {}
         }
-        
+
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 24; j++) {
                 this.state.inputRef[`${i}${j}`] = React.createRef()
@@ -45,7 +44,7 @@ class Week extends Component {
         let date = new Date(obj.date);
         date.setDate(date.getDate() + 1);
         ReactDOM.render(<WeekEvent eventstate={obj}></WeekEvent>, this.state.inputRef[`${date.getDay()}${obj.start}`].current);
-        this.setState({eventlist: current_events});
+        this.setState({ eventlist: current_events });
     }
 
     _getCookie(name) {
@@ -59,7 +58,7 @@ class Week extends Component {
     async _getcurrentevents() {
 
         if (!this.state.loggedIn) {
-            this.eventlist = []
+            this.setState({ eventlist: [] });
         } else {
             const results = await axios({
                 method: 'post',
@@ -69,7 +68,7 @@ class Week extends Component {
                 }
             });
             let events = results.data.results // this should hold our events results data !
-            this.eventlist = []
+            let elist = []
             for (let i = 0; i < events.length; i++) {
                 let starttime = events[i].start
                 let endtime = events[i].end
@@ -78,7 +77,7 @@ class Week extends Component {
                 let minspaststart = starttime.split("T")[1].split(":")[1]
                 let end = endtime.split("T")[1].split(":")[0]
                 let minspastend = endtime.split("T")[1].split(":")[1]
-                this.eventlist.push({
+                this.elist.push({
                     day: parseFloat(day),
                     start: parseFloat(start),
                     smin: parseFloat(minspaststart),
@@ -90,6 +89,8 @@ class Week extends Component {
                     category: i % 9
                 })
             }
+            this.setState({ eventlist: elist });
+
         }
 
         this._rendercurrentevents()
@@ -145,8 +146,8 @@ class Week extends Component {
     }
 
     _rendercurrentevents() {
-        for (let i = 0; i < this.eventlist.length; i++) {
-            let evt = this.eventlist[i]
+        for (let i = 0; i < this.state.eventlist.length; i++) {
+            let evt = this.state.eventlist[i]
             ReactDOM.render(<WeekEvent eventstate={evt}></WeekEvent>, this.state.inputRef[`${evt.day}${evt.start}`].current)
         }
     }
