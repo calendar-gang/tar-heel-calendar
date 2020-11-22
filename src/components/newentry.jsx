@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AutoCompleteText from './autocomplete';
 import AutoComplete from './autocomplete';
+import axios from '../../node_modules/axios/index.js';
+
 class NewEntry extends Component {
 
     constructor() {
@@ -8,16 +10,76 @@ class NewEntry extends Component {
         this.state = {
             view: "modal"
         }
+
+        this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
     }
 
-    toggleNewEntry(event) {
-        event.persist();
+    toggleNewEntry() {
         /// let edit_box = document.getElementById("login-box");
         if (this.state.view === "modal is-active") {
-            this.setState({view: "modal"});
+            this.setState({ view: "modal" });
         } else {
-            this.setState({view: "modal is-active"});
+            this.setState({ view: "modal is-active" });
         }
+    }
+
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
+
+    }
+
+    async _handleSubmit(event) {
+        let name = this.formFields.name.current.value
+        let loc = this.formFields.location.current.value
+        let date = this.formFields.description.current.value
+        let des = this.formFields.date.current.value
+        let start = this.formFields.start.current.value
+        let end = this.formFields.end.current.value
+
+        console.log(name)
+        console.log(des)
+
+        // validate fields and process dates for entry
+        // eventually needs recurring fields and category
+        let startdate = '2020-11-10 12:30:00'
+        let enddate = '2020-11-11 12:30:00'
+        let recurring = 'weekly'
+        let reccuringuntil = '2020-12-11 12:30:00'
+        let category = 'school'
+
+        // will then query here
+
+        /*if (this._getCookie("token") == "") {
+            console.log("not logged in")
+        } else {
+            let tok = this._getCookie("token")
+            let res = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
+                data: {
+                    token: tok,
+                    title: name,
+                    location: loc,
+                    description: des,
+                    start: startdate,
+                    end: enddate,
+                    recurring: recurring,
+                    recurringuntil: reccuringuntil,
+                    category: category
+                }
+            });
+
+
+    }*/
+
+
+
+        this.toggleNewEntry()
+
+
     }
 
     render() {
@@ -46,58 +108,58 @@ class NewEntry extends Component {
 
         return (
             <div>
-            <a className="button is-light" onClick={this.toggleNewEntry.bind(this)}>New Event</a>
-            <div className={this.state.view}>
-                <div className="modal-background"></div>
-                <div className="modal-card">
-                    <header className="modal-card-head" style={header_style}>
-                        <p className="modal-card-title">New Event:</p>
-                        <button onClick={this.toggleNewEntry.bind(this)} className="delete" aria-label="close"></button>
-                    </header>
-                    <div className="form modal-card-body">
-                        <div className="field is-horizontal">
-                            <label className="label" style={sulabel}>Event Name:</label>
-                            <div className="control">
-                                <AutoCompleteText hold='426 Project Expo'></AutoCompleteText>
+                <a className="button is-light" onClick={this.toggleNewEntry.bind(this)}>New Event</a>
+                <div className={this.state.view}>
+                    <div className="modal-background"></div>
+                    <div className="modal-card">
+                        <header className="modal-card-head" style={header_style}>
+                            <p className="modal-card-title">New Event:</p>
+                            <button onClick={this.toggleNewEntry.bind(this)} className="delete" aria-label="close"></button>
+                        </header>
+                        <div className="form modal-card-body">
+                            <div className="field is-horizontal">
+                                <label className="label" style={sulabel}>Event Name:</label>
+                                <div className="control">
+                                    <AutoCompleteText ref={this.formFields.name} hold='426 Project Expo'></AutoCompleteText>
+                                </div>
+                            </div>
+                            <div className="field is-horizontal">
+                                <label className="label" style={sulabel}>Location:</label>
+                                <div className="control">
+                                    <AutoCompleteText ref={this.formFields.location} hold='Virtual Sitterson'></AutoCompleteText>
+                                </div>
+                            </div>
+                            <div className="field is-horizontal">
+                                <label className="label" style={sulabel}>Description:</label>
+                                <div className="control">
+                                    <textarea ref={this.formFields.description} class="textarea" style={inputval} placeholder="e.g. Hello world" placeholder="Present final project to class!"></textarea>
+                                </div>
+                            </div>
+                            <div className="field is-horizontal">
+                                <label className="label" style={sulabel}>Date:</label>
+                                <div className="control">
+                                    <input ref={this.formFields.date} className="input" type="date" style={inputval} />
+                                </div>
+                            </div>
+                            <div className="field is-horizontal">
+                                <label className="label" style={sulabel}>Start Time:</label>
+                                <div className="control">
+                                    <input ref={this.formFields.start} className="input" type="time" style={inputval} />
+                                </div>
+                            </div>
+                            <div className="field is-horizontal">
+                                <label className="label" style={sulabel}>End Time:</label>
+                                <div className="control">
+                                    <input ref={this.formFields.end} className="input" type="time" style={inputval} />
+                                </div>
                             </div>
                         </div>
-                        <div className="field is-horizontal">
-                            <label className="label" style={sulabel}>Location:</label>
-                            <div className="control">
-                            <AutoCompleteText hold='Virtual Sitterson'></AutoCompleteText>
-                            </div>
-                        </div>
-                        <div className="field is-horizontal">
-                            <label className="label" style={sulabel}>Description:</label>
-                            <div className="control">
-                                <textarea class="textarea" style={inputval} placeholder="e.g. Hello world" placeholder="Present final project to class!"></textarea>
-                            </div>
-                        </div>
-                        <div className="field is-horizontal">
-                            <label className="label" style={sulabel}>Date:</label>
-                            <div className="control">
-                                <input className="input" type="date" style={inputval}/>
-                            </div>
-                        </div>
-                        <div className="field is-horizontal">
-                            <label className="label" style={sulabel}>Start Time:</label>
-                            <div className="control">
-                                <input className="input" type="time" style={inputval}/>
-                            </div>
-                        </div>
-                        <div className="field is-horizontal">
-                            <label className="label" style={sulabel}>End Time:</label>
-                            <div className="control">
-                                <input className="input" type="time" style={inputval}/>
-                            </div>
-                        </div>
+                        <footer className="modal-card-foot" style={header_style}>
+                            <button className="button login" onClick={this._handleSubmit.bind(this)} style={center}>Create Event</button>
+                        </footer>
+
                     </div>
-                    <footer className="modal-card-foot" style={header_style}>
-                        <button className="button login" onClick={this.toggleNewEntry.bind(this)} style={center}>Create Event</button>
-                    </footer>
-                    
                 </div>
-            </div>
             </div>
 
 

@@ -33,8 +33,7 @@ class Week extends Component {
 
     componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        this.eventlist = this._getcurrentevents()
-        this._rendercurrentevents()
+        this._getcurrentevents()
 
     }
 
@@ -49,20 +48,20 @@ class Week extends Component {
     async _getcurrentevents() {
 
         if (this._getCookie("token") == "") {
-            return []
+            this.eventlist = []
         } else {
             let tok = this._getCookie("token")
             console.log(tok)
 
-            const res = await axios({
+            const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
                 data: {
                     token: tok
                 }
             });
-            console.log(res)
-            return [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
+            let events = results.data.results // this should hold our events results data !
+            this.eventlist = [{ day: 0, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
             { day: 2, start: 12, end: 14, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
             { day: 1, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
             { day: 3, start: 11, end: 12, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
@@ -73,6 +72,8 @@ class Week extends Component {
             { day: 5, start: 13, end: 15.5, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
             { day: 6, start: 11, end: 12.5, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }]
         }
+
+        this._rendercurrentevents()
 
     }
 
