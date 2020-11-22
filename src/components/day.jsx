@@ -14,11 +14,11 @@ class Day extends Component {
 
     fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
     eventlist = [
-        { day: 0, start: 9, end: 10.5, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-        { day: 0, start: 11, end: 13, name: "History Lecture", location: "Dey 301", description: `${this.fakeDescription}`, category: 0 },
-        { day: 0, start: 14, end: 15.5, name: "Math Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 4 },
-        { day: 0, start: 16, end: 18, name: "426 Lecture", location: "Sitterson 111", description: `${this.fakeDescription}`, category: 8 },
-        { day: 0, start: 19, end: 21, name: "Dinner with Friends", location: "Franklin", description: `${this.fakeDescription}`, category: 0 }]
+        { day: 0, start: 9, smin: 0, end: 10, emin: 30, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
+        { day: 0, start: 11, smin: 15, end: 13, emin: 0, name: "History Lecture", location: "Dey 301", description: `${this.fakeDescription}`, category: 0 },
+        { day: 0, start: 14, smin: 0, end: 15, emin: 30, name: "Math Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 4 },
+        { day: 0, start: 16, smin: 0, end: 18, emin: 0, name: "426 Lecture", location: "Sitterson 111", description: `${this.fakeDescription}`, category: 8 },
+        { day: 0, start: 19, smin: 0, end: 21, emin: 0, name: "Dinner with Friends", location: "Franklin", description: `${this.fakeDescription}`, category: 0 }]
 
     constructor(props) {
         super(props);
@@ -42,7 +42,7 @@ class Day extends Component {
 
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         */
-        this.state = { 
+        this.state = {
             eventlist: this.eventlist,
             date: this.props.date,
             display: "first"
@@ -65,8 +65,8 @@ class Day extends Component {
     handleSubmit(obj) {
         let current_events = [...this.state.eventlist];
         current_events.push(obj);
-        this.setState({eventlist: current_events});
-        if(parseInt(obj.start) < 10) {
+        this.setState({ eventlist: current_events });
+        if (parseInt(obj.start) < 10) {
             obj.start = obj.start.slice(1);
         }
         ReactDOM.render(<DayEvent eventstate={obj}></DayEvent>, this.timeRef[`${obj.start}`].current)
@@ -224,25 +224,25 @@ class Day extends Component {
     changeDay(direction) {
         // method to change the date
         let new_date_object = new Date(this.state.date.getTime());
-        if(direction == 1) {
+        if (direction == 1) {
             // move forward one day
             new_date_object.setDate(new_date_object.getDate() + 1);
         } else {
             // move backwards one day
             new_date_object.setDate(new_date_object.getDate() - 1);
         }
-        this.setState({date: new_date_object})
+        this.setState({ date: new_date_object })
     }
 
     toggletools() {
         if (this.state.display === "first") {
             // this.display = "second"
-            this.setState({ 
+            this.setState({
                 date: this.props.date,
                 display: "second"
             })
         } else {
-            this.setState({ 
+            this.setState({
                 date: this.props.date,
                 display: "first"
             })
@@ -253,9 +253,9 @@ class Day extends Component {
     rendertools() {
         if (this.state.display === 'first') {
             return <StickyNote />
-          } else if (this.state.display === 'second') {
+        } else if (this.state.display === 'second') {
             return <News />
-          }
+        }
     }
 
     render() {
@@ -272,7 +272,7 @@ class Day extends Component {
                                 <h1 className="title has-text-light" style={{ fontSize: "25px", margin: "20px" }}>{this.getWrittenDate(this.state.date)} </h1>
                             </div>
                             <div className="level-right">
-                                <NewEntry submit={(obj) => {this.handleSubmit(obj)}}></NewEntry>
+                                <NewEntry submit={(obj) => { this.handleSubmit(obj) }}></NewEntry>
                                 <h1 className="has-text-light" style={{ fontSize: "60px", marginTop: "10px" }} onClick={() => this.changeDay(1)}><BiChevronRight /></h1>
                             </div>
 
@@ -295,7 +295,7 @@ class Day extends Component {
                 <div className="dailytodo container column is-half" style={{ backgroundColor: "#0b1846" }}>
                     <section className="level" style={{ backgroundColor: "#0b1846", height: "50px", marginBottom: "8px" }}>
                         <h1 className="title has-text-light" style={{ margin: "10px" }}>My Daily To-Do:</h1>
-                        <button class="button is-small is-rounded" style={{ backgroundColor: "#606163", color: "white" , border: "none"}} onClick={this.toggletools.bind(this)}>Toggle Tools</button>
+                        <button class="button is-small is-rounded" style={{ backgroundColor: "#606163", color: "white", border: "none" }} onClick={this.toggletools.bind(this)}>Toggle Tools</button>
                     </section>
                     <div class="columns" style={{ height: "100%" }}>
                         <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "575px", overflow: "scroll", margin: "15px" }}>

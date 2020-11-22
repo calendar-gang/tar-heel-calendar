@@ -37,9 +37,10 @@ class DayEvent extends Component {
         const event_style = {
             width: `${(this.state.windowWidth / 2.5)}px`,
             position: "absolute",
-            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
+            height: `${(this._getEventLength()) * 80}px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
-            zIndex: "1", 
+            margin: `${(this.props.eventstate.smin / 60) * 80}px 0px 0px 0px`,
+            zIndex: "1",
             overflow: "scroll"
         }
 
@@ -51,28 +52,45 @@ class DayEvent extends Component {
                     </div>
                     <div className="level-right">
                         <button className="button" style={{ fontSize: "10px" }}><BiCheck /></button>
-                        <button  className="button" style={{ fontSize: "10px" }}><BiX /></button>
+                        <button className="button" style={{ fontSize: "10px" }}><BiX /></button>
 
                     </div>
                 </div>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
                 <input className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></input>
-                <hr className="hr" style={{ margin: "4px"}}></hr>
+                <hr className="hr" style={{ margin: "4px" }}></hr>
                 <textarea className="input" defaultValue={`${this.props.eventstate.description}`} type="text" style={{ height: "75px", fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></textarea>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9],  backgroundColor: this.catcolors[this.props.eventstate.category % 9]}}/>
-                <hr className="hr" style={{ margin: "2px"}}></hr>
-                <input className="input" type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9],  backgroundColor: this.catcolors[this.props.eventstate.category % 9]}}/>
+                <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
+                <hr className="hr" style={{ margin: "2px" }}></hr>
+                <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
 
             </div>
 
         )
     }
 
-    _findHour(time) {
-        if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
-        else { return (time % 12) === 0 ? "12 PM" : (time % 12) + " PM" }
+    _getEventLength() {
+        let ending = this.props.eventstate.end + (this.props.eventstate.emin / 60)
+        let starting = this.props.eventstate.start + (this.props.eventstate.smin / 60)
+        return ending - starting
+    }
 
+    _findHour(hour, minutes) {
+        if (hour < 12) {
+            if (hour === 0) {
+                return minutes === 0 ? "12 AM" : `12:${minutes} AM`
+            } else {
+                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes} AM`
+            }
+        } else {
+            if (hour % 12 === 0) {
+                return minutes === 0 ? "12 PM" : `12:${minutes} PM`
+            } else {
+                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes} PM`
+            }
+
+        }
     }
 
 
@@ -80,9 +98,9 @@ class DayEvent extends Component {
         const event_style = {
             width: `${(this.state.windowWidth / 2.5)}px`,
             position: "absolute",
-            height: `${(this.props.eventstate.end - this.props.eventstate.start) * 80}px`,
+            height: `${(this._getEventLength()) * 80}px`,
             backgroundColor: this.catcolors[this.props.eventstate.category % 9],
-            margin: "0px",
+            margin: `${(this.props.eventstate.smin / 60) * 80}px 0px 0px 0px`,
             overflow: "scroll"
         }
 
@@ -94,7 +112,7 @@ class DayEvent extends Component {
                             <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
                         </div>
                         <div className="level-right">
-                            <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start)} - {this._findHour(this.props.eventstate.end)}</p>
+                            <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
                         </div>
                     </div>
                     <hr className="hr" style={{ margin: "4px" }}></hr>
