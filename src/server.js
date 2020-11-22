@@ -52,13 +52,13 @@ const {logout} = require('./server/logout');
 app.post('/logout', logout);
 
 const {getInfo} = require('./server/getInfo');
-app.get('/getinfo', getInfo);
+app.post('/getinfo', getInfo);
 
 const {makeEvent} = require('./server/makeEvent');
 app.post('/makeevent', makeEvent);
 
 const {viewEvents} = require('./server/viewEvents');
-app.get('/viewevents', viewEvents);
+app.post('/viewevents', viewEvents);
 
 const {deleteEvent} = require('./server/deleteEvent');
 app.delete('/deleteevent', deleteEvent);
