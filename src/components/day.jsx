@@ -13,8 +13,6 @@ class Day extends Component {
     state = {}
     tasklist = ["get", "this", "to", "work", "check", "task", "scroll", "power"]
 
-    fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-
     constructor(props) {
         super(props);
 
@@ -56,14 +54,6 @@ class Day extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            const res = await axios({
-                method: 'post',
-                url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
-                data: {
-                    token: this._getCookie("token"),
-                }
-            });
-            console.log(res)
             const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
@@ -73,7 +63,6 @@ class Day extends Component {
                     latest: '2020-11-22 23:59:00'
                 }
             });
-            console.log(results)
             let events = results.data.results // this should hold our events results data !
             let elist = []
             for (let i = 0; i < events.length; i++) {

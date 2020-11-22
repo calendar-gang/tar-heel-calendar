@@ -9,8 +9,6 @@ import axios from '../../node_modules/axios/index.js';
 class Week extends Component {
     state = {}
 
-    fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-
     constructor(props) {
         super(props);
 

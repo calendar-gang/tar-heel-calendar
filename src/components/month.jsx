@@ -3,40 +3,99 @@ import NewEntry from './newentry';
 import ReactDOM from 'react-dom';
 import MonthEvent from './monthEvent';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import axios from '../../node_modules/axios/index.js';
 
 class Month extends Component {
     state = {};
 
-    fakeDescription = "This is a description of an event, please work! Should probably go to class or something."
-
-
     constructor(props) {
         super(props);
-
-        let eventlist = [
-            { date: "11-20-2020", start: 2, smin: 30, end: 4, emin: 20, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 0 },
-            { date: "11-20-2020", start: 2, smin: 30, end: 4, emin: 20, name: "History Lecture", location: "Coker 211", description: `${this.fakeDescription}`, category: 1 },
-            { date: "11-21-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Chem Lecture", location: "Coker 105", description: `${this.fakeDescription}`, category: 2 },
-            { date: "11-22-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 2 },
-            { date: "11-23-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 3 },
-            { date: "11-24-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Math Lecture", location: "Wilson 105", description: `${this.fakeDescription}`, category: 4 },
-            { date: "11-24-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Breakfast", location: "Durham", description: `${this.fakeDescription}`, category: 5 },
-            { date: "11-25-2020", start: 2, smin: 30, end: 4, emin: 20, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 6 },
-            { date: "11-26-2020", start: 2, smin: 30, end: 4, emin: 20, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 7 },
-            { date: "11-27-2020", start: 2, smin: 30, end: 4, emin: 20, name: "426 Lecture", location: "Sitterson 118", description: `${this.fakeDescription}`, category: 8 },
-            { date: "11-28-2020", start: 2, smin: 30, end: 4, emin: 20, name: "Coffee with Friends", location: "Franklin St.", description: `${this.fakeDescription}`, category: 0 }];
 
         let create_day = this.createDays();
 
         this.state = {
             cache: {},
             days: create_day.days,
-            eventlist: eventlist,
+            eventlist: [],
             date: new Date(this.props.date.getFullYear(), this.props.date.getMonth()),
-            dayRef: create_day.dayRef
+            dayRef: create_day.dayRef,
+            loggedIn: this._getCookie("token").length === 60,
         }
 
         this.state.cache[this.state.date.getMonth()] = create_day;
+    }
+
+    componentDidMount() {
+        this._getcurrentevents()
+    }
+
+    async _getcurrentevents() {
+        if (!this.state.loggedIn) {
+            this.setState({ eventlist: [] });
+        } else {
+            const results = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
+                data: {
+                    token: this._getCookie("token"),
+                    earliest: '2020-11-00 00:00:00',
+                    latest: '2020-11-30 23:59:00'
+                }
+            });
+            let events = results.data.results // this should hold our events results data !
+            let elist = []
+            for (let i = 0; i < events.length; i++) {
+                let starttime = events[i].start
+                let endtime = events[i].end
+                let date = `${starttime.split("T")[0].split("-")[1]}-${starttime.split("T")[0].split("-")[2]}-${starttime.split("T")[0].split("-")[0]}`
+                let start = starttime.split("T")[1].split(":")[0]
+                let minspaststart = starttime.split("T")[1].split(":")[1]
+                let end = endtime.split("T")[1].split(":")[0]
+                let minspastend = endtime.split("T")[1].split(":")[1]
+                elist.push({
+                    date: date,
+                    start: parseFloat(start),
+                    smin: parseFloat(minspaststart),
+                    end: parseFloat(end),
+                    emin: parseFloat(minspastend),
+                    name: events[i].title,
+                    location: events[i].location,
+                    description: events[i].description,
+                    category: i % 9
+                })
+            }
+            this.setState({ eventlist: elist });
+
+        }
+
+        this._rendercurrentevents()
+
+    }
+
+    _rendercurrentevents() {
+        for (let i = 0; i < this.state.eventlist.length; i++) {
+            let evt = this.state.eventlist[i];
+            let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
+            let date = new Date(evt.date)
+
+            // introduce more bookeeping in the state to check how many month events are present
+            // for each day
+            if (date.getMonth() == this.state.date.getMonth()) {
+                let current_state = [...this.state.days];
+                current_state[date.getDate()].event_objs.push(event_object);
+                this.setState({ days: current_state });
+            }
+            // manipulates the dom directly
+            // ReactDOM.render(event_object, this.state.dayRef[`${day_row.day}${day_row.row}`].current)
+        }
+    }
+
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
+
     }
 
     createDays() {
@@ -67,27 +126,6 @@ class Month extends Component {
         }
     }
 
-    componentDidMount() {
-        this._rendercurrentevents()
-    }
-
-    _rendercurrentevents() {
-        for (let i = 0; i < this.state.eventlist.length; i++) {
-            let evt = this.state.eventlist[i];
-            let event_object = <MonthEvent eventstate={evt}></MonthEvent>;
-            let date = new Date(evt.date)
-
-            // introduce more bookeeping in the state to check how many month events are present
-            // for each day
-            if (date.getMonth() == this.state.date.getMonth()) {
-                let current_state = [...this.state.days];
-                current_state[date.getDate()].event_objs.push(event_object);
-                this.setState({ days: current_state });
-            }
-            // manipulates the dom directly
-            // ReactDOM.render(event_object, this.state.dayRef[`${day_row.day}${day_row.row}`].current)
-        }
-    }
 
     _renderRowByDay(week_position) {
         let rows = [];
