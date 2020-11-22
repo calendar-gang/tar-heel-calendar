@@ -60,13 +60,13 @@ class Week extends Component {
             });
             let events = results.data.results // this should hold our events results data !
             this.eventlist = []
-            for (let i = 0; i < this.events.length; i++) {
+            for (let i = 0; i < events.length; i++) {
                 let starttime = events[i].start
                 let endtime = events[i].end
                 let day = starttime.split("T")[0].split("-")[2] - 22 // 22 should be whatever the beginning of the week date is
                 let start = starttime.split("T")[1].split(":")[0]
                 let end = endtime.split("T")[1].split(":")[0]
-                this.eventlist.push({ day: day, start: start, end: end, name: events[i].title, location: events[i].location, description: events[i].description, category: i % 9 })
+                this.eventlist.push({ day: parseFloat(day), start: parseFloat(start), end: parseFloat(end), name: events[i].title, location: events[i].location, description: events[i].description, category: i % 9 })
             }
         }
 
