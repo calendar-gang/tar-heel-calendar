@@ -12,6 +12,7 @@ class DayEvent extends Component {
         this.state = { windowWidth: window.innerWidth };
 
         this.eventBox = React.createRef()
+        this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
     }
 
     handleResize = (e) => {
@@ -32,6 +33,31 @@ class DayEvent extends Component {
             this.eventBox.current.className = "is-hidden box";
         }
     }
+
+    deleteEdit(event) {
+        this._toggleEventBox(event)
+
+    }
+
+    submitEdit(event) {
+        this._toggleEventBox(event) 
+        let name = this.formFields.name.current.value
+        let loc = this.formFields.location.current.value
+        let des = this.formFields.description.current.value
+        let date = this.formFields.date.current.value
+        let start = this.formFields.start.current.value
+        let end = this.formFields.end.current.value
+
+        let startdate = date + " " + start + ":00"
+        let enddate = date + " " + end + ":00"
+
+        console.log(name)
+        console.log(loc)
+        console.log(des)
+        console.log(startdate)
+        console.log(enddate)
+    }
+    
 
     _createEventBox() {
         const event_style = {
@@ -56,29 +82,29 @@ class DayEvent extends Component {
         if (defaultend.length == 4) {
             defaultend = 0 + defaultend
         }
-
+        
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
                 <div className="level">
                     <div className="level-left">
-                        <input className="input" defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "15px", fontWeight: "bolder", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></input>
+                        <input className="input" ref={this.formFields.name} defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "15px", fontWeight: "bolder", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></input>
                     </div>
                     <div className="level-right">
-                        <button className="button" style={{ fontSize: "10px" }}><BiCheck /></button>
-                        <button className="button" style={{ fontSize: "10px" }}><BiX /></button>
+                        <button className="button" style={{ fontSize: "10px" }} onClick={this.submitEdit.bind(this)}><BiCheck /></button>
+                        <button className="button" style={{ fontSize: "10px" }} onClick={this.deleteEdit.bind(this)}><BiX /></button>
 
                     </div>
                 </div>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <input className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></input>
+                <input className="input" ref={this.formFields.location} defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></input>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <textarea className="input" defaultValue={`${this.props.eventstate.description}`} type="text" style={{ height: "75px", fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></textarea>
+                <textarea className="input" ref={this.formFields.description} defaultValue={`${this.props.eventstate.description}`} type="text" style={{ height: "75px", fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></textarea>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <input className="input" defaultValue={`${this.props.eventstate.date}`} type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}/>
+                <input className="input" ref={this.formFields.date} defaultValue={`${this.props.eventstate.date}`} type="date" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}/>
                 <hr className="hr" style={{ margin: "2px"}}></hr>
-                <input className="input" type="time" defaultValue={`${defaultstart}`}  style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
+                <input className="input" ref={this.formFields.start} type="time" defaultValue={`${defaultstart}`}  style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
                 <hr className="hr" style={{ margin: "2px" }}></hr>
-                <input className="input" type="time" defaultValue={`${defaultend}`} style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />         
+                <input className="input" ref={this.formFields.end} type="time" defaultValue={`${defaultend}`} style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />         
                 
             </div>
 
@@ -146,3 +172,5 @@ class DayEvent extends Component {
 }
 
 export default DayEvent;
+
+// get check and x going on day, get default vals on week

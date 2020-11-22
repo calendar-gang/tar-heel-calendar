@@ -376,15 +376,3 @@ class Day extends Component {
 
 export default Day;
 
-// <input type="checkbox" id="task2" name="task2" onClick={this.strikeTask.bind(this)}/>
-
-// readd todo list button
-
-
-// change height of the todo so it isnt fucked 
-// fix icon height if not already fixed 
-// integrate news api instead of stickies
-// get tasks dynamically updating from our database info 
-// consider if we want a login screen / what we should display when not logged in 
-
-// <StickyNote color="lightblue"></StickyNote>
