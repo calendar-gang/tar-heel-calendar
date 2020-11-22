@@ -12,6 +12,9 @@ This file describes the `/viewevents` endpoint.
     * `message`
     * `results`: an array of the events.
 
+## Notes
+* Recurring events may be a little bit janky. For now, don't trust them to show up.
+
 ## Example operations
 ### Example (valid input)
 ```js
