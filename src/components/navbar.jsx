@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Cookies from 'universal-cookie';
 import '../App.css'
 import axios from '../../node_modules/axios/index.js';
 
@@ -8,9 +7,6 @@ class NavBar extends Component {
 
     constructor(props) {
         super(props);
-        /*this.cookies = new Cookies();
-        this.cookies.set('token', 'none', { path: '/' });
-        console.log(this.cookies.get('token')); // Pacman*/
 
         this.SUBfields = { fname: React.createRef(), lname: React.createRef(), email: React.createRef(), username: React.createRef(), password: React.createRef() };
         this.SIfields = { username: React.createRef(), password: React.createRef() }
@@ -106,8 +102,6 @@ class NavBar extends Component {
             }
         });
         console.log(result)
-        /*this.cookies.set('token', `${result.data.token}`, { path: '/' });
-        console.log(this.cookies.get('token'))*/
 
     }
 
