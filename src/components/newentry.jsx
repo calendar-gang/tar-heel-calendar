@@ -75,10 +75,8 @@ class NewEntry extends Component {
 
 
         this.toggleNewEntry()
-
         this.props.submit({ 
-                day: 2, 
-                row: 3, 
+                date: date,
                 start: 2, 
                 end: 4, 
                 name: name, 
