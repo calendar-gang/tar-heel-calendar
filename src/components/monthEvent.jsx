@@ -86,9 +86,9 @@ class MonthEvent extends Component {
         return (
             <div ref={this.editBox} className="is-hidden box monthevent" style={event_style}>
                 <form>
-                    <textarea className="input" defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></textarea>
+                    <input className="input" defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></textarea>
+                    <input className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
                     <textarea className="input" defaultValue={`${this.props.eventstate.description}`} type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></textarea>
                     <hr className="hr" style={{ margin: "2px" }}></hr>
