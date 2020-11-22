@@ -119,16 +119,20 @@ class WeekEvent extends Component {
         }
 
         let defaultstart = this.props.eventstate.start + ":" + this.props.eventstate.smin
-        // console.log(defaultstart)
         let defaultend = this.props.eventstate.end + ":" + this.props.eventstate.emin
-        // console.log(this.props.eventstate.start + ":" + this.props.eventstate.smin)
-        // let defaultdate = this.props.eventstate.date.split("-")[2] + "-" + this.props.eventstate.date.split("-")[0] + "-" + this.props.eventstate.date.split("-")[1]
-
         if (defaultstart.length == 4) {
-            defaultstart = 0 + defaultstart
+            if (defaultstart.split(":")[0].length == 1) {
+                defaultstart = 0 + defaultstart
+            } else {
+                defaultstart =  defaultstart + 0
+            }
         }
         if (defaultend.length == 4) {
-            defaultend = 0 + defaultend
+            if (defaultend.split(":")[0].length == 1) {
+                defaultend = 0 + defaultend
+            } else {
+                defaultend =  defaultend + 0
+            }
         }
 
         return (

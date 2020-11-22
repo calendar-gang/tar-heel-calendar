@@ -74,6 +74,7 @@ class Day extends Component {
                 let end = endtime.split("T")[1].split(":")[0]
                 let minspastend = endtime.split("T")[1].split(":")[1]
                 elist.push({
+                    id: this.events[i].id,
                     date: starttime.split("T")[0],
                     day: parseFloat(day),
                     start: parseFloat(start),
