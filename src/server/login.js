@@ -23,7 +23,7 @@ exports.login = (req, res) => {
         if(results.length === 0){
             res.status(400);
             res.json({
-                message: "Username missing."
+                message: "Username not found."
             });
 
             return;
