@@ -138,13 +138,13 @@ class Month extends Component {
                 <div className="container">
                     <section className="level" style={{ backgroundColor: "#b5e3f8", height: "50px" }}>
                         <div className="level-left">
-                            <h1 onClick={() => this.switchMonth(0)} className="has-text-light" style={{ fontSize: "60px" , marginTop: "12px" }} ><BiChevronLeft /></h1>
+                            <h1 onClick={() => this.switchMonth(0)} className="has-text-light" style={{ fontSize: "60px" }} ><BiChevronLeft /></h1>
                             <h1 className="title has-text-light" style={{ margin: "10px" }}>{monthNames[(this.state.date).getMonth()] + " " + this.state.date.getFullYear()} </h1>
                             <h1 className="subtitle" style={{ margin: "10px" }}> A Monthly View Designed Just For You!</h1>
                         </div>
                         <div className="level-right">
                             <NewEntry></NewEntry>
-                            <h1 onClick={() => this.switchMonth(1)} className="has-text-light" style={{ fontSize: "60px", marginTop: "12px"  }}><BiChevronRight /></h1>
+                            <h1 onClick={() => this.switchMonth(1)} className="has-text-light" style={{ fontSize: "60px" }}><BiChevronRight /></h1>
                         </div>
                     </section>
                 </div >
