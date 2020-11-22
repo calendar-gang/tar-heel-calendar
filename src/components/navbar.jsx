@@ -94,7 +94,7 @@ class NavBar extends Component {
 
         const result = await axios({
             method: 'post',
-            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+            url: 'https://tar-heel-calendar.herokuapp.com/logout',
             data: {
                 token: this._getCookie("token")
             }
