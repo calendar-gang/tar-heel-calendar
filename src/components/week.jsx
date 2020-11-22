@@ -50,8 +50,6 @@ class Week extends Component {
         if (this._getCookie("token") == "") {
             this.eventlist = []
         } else {
-            let tok =
-                console.log(tok)
 
             const results = await axios({
                 method: 'post',
