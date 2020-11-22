@@ -13,7 +13,8 @@ class MonthEvent extends Component {
 
         this.state = {
             windowWidth: window.innerWidth,
-            showEvent: true
+            showEvent: true,
+            loggedIn: this._getCookie("token").length === 60
         };
 
         this.eventBox = React.createRef()   // reference for hidden event details pop-up
@@ -86,15 +87,13 @@ class MonthEvent extends Component {
         console.log(startdate)
         console.log(enddate)
 
-        if (!this.state.loggedIn) {
-            this.setState({ eventlist: [] });
-        } else {
+        if (this.state.loggedIn) {
             const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/editevent',
                 data: {
                     token: this._getCookie("token"),
-                    id: this.state.eventstate.id,
+                    id: this.props.eventstate.id,
                     title: name,
                     location: loc,
                     description: des,
