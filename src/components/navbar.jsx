@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css'
 import axios from '../../node_modules/axios/index.js';
+import { BiUserCircle } from 'react-icons/bi';
 
 class NavBar extends Component {
     // state = {};
@@ -8,8 +9,9 @@ class NavBar extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = { messagefield: "Successfully logged in!" }
+        console.log(this._getCookie("token"))
+        console.log(this._getCookie("token").length)
+        this.state = { messagefield: "Successfully logged in!", loggedIn: this._getCookie("token").length === 60 }
         this.SUBfields = { fname: React.createRef(), lname: React.createRef(), email: React.createRef(), username: React.createRef(), password: React.createRef() };
         this.SIfields = { username: React.createRef(), password: React.createRef() }
     }
@@ -121,7 +123,7 @@ class NavBar extends Component {
         console.log(result.data)
         if (result.data.message === "Logged in.") {
             document.cookie = `token=${result.data.token}`
-            this.setState({ messagefield: "Successfully logged in!" })
+            this.setState((state, props) => { return { messagefield: "Successfully logged in!", loggedIn: true } })
             this.toggleMessage()
         }
         console.log(document.cookie)
@@ -285,6 +287,39 @@ class NavBar extends Component {
     }
 
     render() {
+        let buttons;
+        if (this.state.loggedIn) {
+            buttons = <div className="navbar-item">
+                <div className="buttons">
+                    <div>
+                        <a className="button is-light" id="loginbutton" onClick={this.toggleLoginBox}><p id="logintext">Log Out</p></a>
+                    </div>
+                    <div>
+                        <p style={{ fontSize: "45px", color: "#b5e3f8", margin: "0px 10px" }} ><BiUserCircle /></p>
+                    </div>
+                </div>
+            </div>
+        } else {
+            buttons = <div className="navbar-item">
+                {this.renderMessage()}
+                <div className="buttons">
+                    <div className="signup">
+                        <a className="button" id="signupbutton" style={{ backgroundColor: "#b5e3f8" }} onClick={this.toggleSUBox}>
+                            Sign Up
+                    </a>
+                        {this.renderSignUp()}
+                    </div>
+                    <div className="login">
+                        <a className="button is-light" id="loginbutton" onClick={this.toggleLoginBox}>
+                            <p id="logintext">Log in</p>
+
+                        </a>
+                    </div>
+                    {this.renderLogin()}
+                </div>
+
+            </div>
+        }
         return (
             <nav id="top-nav" className="navbar" aria-label="main-navigation">
                 <div className="navbar-brand">
@@ -293,25 +328,7 @@ class NavBar extends Component {
                     </a>
                 </div>
                 <div className="navbar-end" id="navbarend">
-                    <div className="navbar-item">
-                        {this.renderMessage()}
-                        <div className="buttons">
-                            <div className="signup">
-                                <a className="button" id="signupbutton" style={{ backgroundColor: "#b5e3f8" }} onClick={this.toggleSUBox}>
-                                    Sign Up
-                                </a>
-                                {this.renderSignUp()}
-                            </div>
-                            <div className="login">
-                                <a className="button is-light" id="loginbutton" onClick={this.toggleLoginBox}>
-                                    <p id="logintext">Log in</p>
-
-                                </a>
-                            </div>
-                            {this.renderLogin()}
-                        </div>
-
-                    </div>
+                    {buttons}
                 </div>
 
             </nav>
