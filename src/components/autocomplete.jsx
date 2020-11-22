@@ -34,7 +34,6 @@ class AutoCompleteText extends Component {
         if (value.length > 0 ) {
             const regex = new RegExp(`^${value}`);
             suggestions = this.items.sort().filter(value => regex.test(value))
-            // console.log(suggestions)
         }
         this.setState({suggestions: suggestions, text: value})
         this.props.triggerParentUpdate(value)
@@ -71,7 +70,7 @@ class AutoCompleteText extends Component {
         }
         return (
             <div>
-               <input class= "input" value={text} id="autoinput" placeholder= {this.props.hold} style={inputval} type="text" onChange={this.helper.bind(this)}/>
+               <input class= "input" value={text} placeholder= {this.props.hold} style={inputval} type="text" onChange={this.helper.bind(this)}/>
                {this.renderSuggestions()}
             </div>
 

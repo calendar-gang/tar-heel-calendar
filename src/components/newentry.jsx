@@ -48,9 +48,9 @@ class NewEntry extends Component {
         // validate fields and process dates for entry
         // eventually needs recurring fields and category
         // let startdate = '2020-11-10 12:30:00'
-        let startdate = date + " " + start
+        let startdate = date + " " + start + ":00"
         // let enddate = '2020-11-11 12:30:00'
-        let enddate = date + " " + end
+        let enddate = date + " " + end + ":00"
         let recurring = 'weekly'
         let reccuringuntil = '2020-12-11 12:30:00'
         let category = 'school'
