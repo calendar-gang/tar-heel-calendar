@@ -12,8 +12,16 @@ class NavBar extends Component {
         console.log(this._getCookie("token"))
         console.log(this._getCookie("token").length)
         this.state = { messagefield: "Successfully logged in!", loggedIn: this._getCookie("token").length === 60 }
+        this.user = React.createRef()
         this.SUBfields = { fname: React.createRef(), lname: React.createRef(), email: React.createRef(), username: React.createRef(), password: React.createRef() };
         this.SIfields = { username: React.createRef(), password: React.createRef() }
+    }
+
+    async componentDidMount() {
+        if (this.state.loggedIn) {
+            let username = await this._getUserName()
+            this.user.current.innerHTML = username
+        }
     }
 
     checkpassword(pword) {
@@ -90,7 +98,6 @@ class NavBar extends Component {
     }
 
     async _logoutPress(event) {
-        console.log("made to logout")
 
         const result = await axios({
             method: 'post',
@@ -101,7 +108,6 @@ class NavBar extends Component {
         });
 
         if (result.data.message === "Deleted token.") {
-            console.log("deleted token")
             this.setState((state, props) => { return { loggedIn: false } })
             document.cookie = "token="
         }
@@ -159,6 +165,23 @@ class NavBar extends Component {
             }
         });
         console.log(res)
+
+    }
+
+    async _getUserName() {
+        const result = await axios({
+            method: 'post',
+            url: 'https://tar-heel-calendar.herokuapp.com/getinfo',
+            data: {
+                token: this._getCookie("token")
+            }
+        });
+
+        if (result.data.message === "Information found.") {
+            return result.data.message
+        } else {
+            return ""
+        }
 
     }
 
@@ -312,11 +335,15 @@ class NavBar extends Component {
             buttons = <div className="navbar-item">
                 <div className="buttons">
                     <div>
-                        <a className="button is-light" id="loginbutton" onClick={this._logoutPress.bind(this)}><p id="logintext">Log Out</p></a>
+                        <p ref={this.user} style={{ fontSize: "20px", color: "#b5e3f8", margin: "0px 10px 10px 0px" }} ></p>
                     </div>
                     <div>
-                        <p style={{ fontSize: "45px", color: "#b5e3f8", margin: "0px 10px" }} ><BiUserCircle /></p>
+                        <p style={{ fontSize: "45px", color: "#b5e3f8", margin: "0px 10px 0px 0px" }} ><BiUserCircle /></p>
                     </div>
+                    <div>
+                        <a className="button is-light" id="loginbutton" onClick={this._logoutPress.bind(this)}><p id="logintext">Log Out</p></a>
+                    </div>
+
                 </div>
             </div>
         } else {
