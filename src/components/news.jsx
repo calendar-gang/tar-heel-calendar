@@ -16,9 +16,8 @@ class News extends Component {
     }
 
     async componentDidMount() {
-        var url = 'https://newsapi.org/v2/top-headlines?' +
-          'country=us&' +
-          'apiKey=a50bcbb32f2048089bc9eb4b093acf48';
+        var url = 'https://gnews.io/api/v4/search?q=example&token=' +
+        '4b261c4e9e3581ba343911efa830a0e8';
         const res = await axios({
             method: 'get',
             url: url,
