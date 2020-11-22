@@ -8,7 +8,6 @@ module.exports.register = (req, res) => {
             || !isStringValidLength(firstname, 1, 100)
             || !isStringValidLength(lastname, 1, 100)
             || !isStringValidLength(password, 5, 255)){
-        // It would be better to specify which field is wrong but this is considered an internal error
         res.status(400);
         res.json({
             message: "Invalid length of parameter.",
