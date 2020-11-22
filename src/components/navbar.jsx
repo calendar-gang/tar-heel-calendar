@@ -149,8 +149,10 @@ class NavBar extends Component {
         console.log(result.data)
         if (result.data.message === "Logged in.") {
             document.cookie = `token=${result.data.token}`
-            this.setState((state, props) => { return { messagefield: "Successfully logged in!", loggedIn: true } })
             this.toggleMessage()
+            this.setState((state, props) => { return { messagefield: "Successfully logged in!", loggedIn: true } })
+            this.componentDidMount()
+
         }
         console.log(document.cookie)
 
@@ -178,7 +180,7 @@ class NavBar extends Component {
         });
 
         if (result.data.message === "Information found.") {
-            return result.data.message
+            return result.data.username
         } else {
             return ""
         }
