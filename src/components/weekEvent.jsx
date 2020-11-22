@@ -44,6 +44,35 @@ class WeekEvent extends Component {
         this.editBox.current.className = "box"
     }
 
+    _toggleEdit(event) {
+        event.preventDefault()
+        this.state.viewState = "details";
+        this.eventBox.current.className = "box monthevent";
+        this.editBox.current.className="is-hidden box monthevent"
+    }
+
+    _submitEdit(event) {
+        this._toggleEdit(event)
+        window.alert("submitting")
+        // all info for submit: 
+        let name = this.formFields.name.current.value
+        let loc = this.formFields.location.current.value
+        let des = this.formFields.description.current.value
+        let date = this.formFields.date.current.value
+        let start = this.formFields.start.current.value
+        let end = this.formFields.end.current.value
+
+        let startdate = date + " " + start + ":00"
+        let enddate = date + " " + end + ":00"
+
+        console.log(name)
+        console.log(loc)
+        console.log(des)
+        console.log(startdate)
+        console.log(enddate)
+
+    }
+
     _getEventLength() {
         let ending = this.props.eventstate.end + (this.props.eventstate.emin / 60)
         let starting = this.props.eventstate.start + (this.props.eventstate.smin / 60)
@@ -90,19 +119,20 @@ class WeekEvent extends Component {
         return (
             <div ref={this.editBox} className="is-hidden box" style={event_style}>
                 <form>
+                <input className="input" ref={this.formFields.name} defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" ref={this.formFields.location} defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <textarea className="input" ref={this.formFields.description} type="text" style={{fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input ref={this.formFields.date} className="input" type="date" style={{fontSize: "13px", height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <hr className="hr" style={{ margin: "2px" }}></hr>
+                    <input className="input" ref={this.formFields.start} type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <hr className="hr" style={{ margin: "2px"}}></hr>
+                    <input className="input" ref={this.formFields.end} type="time" style={{height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9]}}/>
+                    <button className="button" style={{ fontSize: "10px", marginTop: "5px"}} onClick={this._submitEdit.bind(this)}><BiCheck /></button>
+                    <button className="button" style={{ fontSize: "10px" , marginTop: "5px"}} onClick={this._toggleEdit.bind(this)}><BiX /></button>
 
-                    <input className="input" defaultValue={`${this.props.eventstate.name}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" defaultValue={`${this.props.eventstate.location}`} type="text" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}></input>
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <textarea className="input" type="text" style={{ fontSize: "13px", height: "75px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{`${this.props.eventstate.description}`}</textarea>
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <input className="input" type="time" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9] }} />
-                    <hr className="hr" style={{ margin: "2px" }}></hr>
-                    <button className="button" style={{ fontSize: "10px" }}><BiCheck /></button>
-                    <button className="button" style={{ fontSize: "10px" }}><BiX /></button>
                 </form>
             </div>
         )

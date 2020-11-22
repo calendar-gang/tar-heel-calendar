@@ -215,6 +215,7 @@ class Day extends Component {
     }
 
     rendercurrenttasks() {
+        // console.log(this.state.date)
         const tasks = []
         for (let i = 0; i < this.tasklist.length; i++) {
             tasks.push(<Task text={this.tasklist[i]}></Task>)
