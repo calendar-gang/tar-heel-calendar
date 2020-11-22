@@ -151,7 +151,7 @@ class NavBar extends Component {
             document.cookie = `token=${result.data.token}`
             this.toggleMessage()
             this.setState((state, props) => { return { messagefield: "Successfully logged in!", loggedIn: true } })
-            this.componentDidMount()
+            // this.componentDidMount() guessing not supposed to do this but maybe come back to
 
         }
         console.log(document.cookie)
