@@ -16,7 +16,7 @@ class News extends Component {
     }
 
     async componentDidMount() {
-        var url = 'http://newsapi.org/v2/top-headlines?' +
+        var url = 'https://newsapi.org/v2/top-headlines?' +
           'country=us&' +
           'apiKey=a50bcbb32f2048089bc9eb4b093acf48';
         const res = await axios({
