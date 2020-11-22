@@ -66,7 +66,7 @@ class WeekEvent extends Component {
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
                 <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
-                <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start)} - {this._findHour(this.props.eventstate.end)}</p>
+                <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
                 <hr className="hr" style={{ margin: "2px" }}></hr>
                 <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
                 <hr className="hr" style={{ margin: "2px" }}></hr>
@@ -110,10 +110,21 @@ class WeekEvent extends Component {
         )
     }
 
-    _findHour(time) {
-        if (time < 12) { return time === 0 ? "12 AM" : time + " AM" }
-        else { return (time % 12) === 0 ? "12 PM" : (time % 12) + " PM" }
+    _findHour(hour, minutes) {
+        if (hour < 12) {
+            if (hour === 0) {
+                return minutes === 0 ? "12 AM" : `12:${minutes} AM`
+            } else {
+                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes} AM`
+            }
+        } else {
+            if (hour % 12 === 0) {
+                return minutes === 0 ? "12 PM" : `12:${minutes} PM`
+            } else {
+                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes} PM`
+            }
 
+        }
     }
 
     render() {
@@ -129,7 +140,7 @@ class WeekEvent extends Component {
         return (
             <div>
                 <div style={event_style} className="box week-event" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
-                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start)} - {this._findHour(this.props.eventstate.end)}</p>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
                     <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
                 </div>
                 { this._createEventBox()}
