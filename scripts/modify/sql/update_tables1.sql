@@ -1,0 +1,2 @@
+ALTER TABLE `events`
+MODIFY `category` TINYINT NOT NULL DEFAULT 0;

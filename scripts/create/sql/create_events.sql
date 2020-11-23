@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `events` (
     `end` TIMESTAMP NOT NULL,
     `recurring` ENUM('not','weekly','monthly','yearly') NOT NULL DEFAULT 'not' COLLATE 'utf8_general_ci',
     `recurringuntil` TIMESTAMP NULL DEFAULT NULL,
-    `category` ENUM('default','school') NOT NULL DEFAULT 'default' COLLATE 'utf8_general_ci',
+    `category` TINYINT(4) NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     CONSTRAINT `username_events`
         FOREIGN KEY (`username`) REFERENCES `users` (`username`)

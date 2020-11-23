@@ -8,7 +8,7 @@ const db = mysql.createConnection(process.env.JAWSDB_MARIA_URL || {
     database: 'calendar'
 });
 
-let dropTablesScript = fs.readFileSync(`scripts/delete/sql/drop_tables.sql`, 'utf8');
+let dropTablesScript = fs.readFileSync(`scripts/modify/sql/update_tables1.sql`, 'utf8');
 
 db.query(dropTablesScript, (error, results, fields) => {
     if(error) throw error;
