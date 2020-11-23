@@ -73,6 +73,7 @@ class Day extends Component {
                     })
                 }
             }
+            console.log(tlist)
             this.setState({ tasklist: tlist });
 
         }
@@ -137,6 +138,7 @@ class Day extends Component {
             const id = Math.random()
             d.id = id
             document.getElementById('newtasks').appendChild(d)
+            console.log(this.state.tasklist[i])
             ReactDOM.render(<Task text={this.state.tasklist[i].content} complete={this.state.tasklist[i].iscompleted} id={this.state.tasklist[i].id}></Task>, document.getElementById(id));
         }
     }

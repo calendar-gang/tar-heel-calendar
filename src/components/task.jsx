@@ -8,7 +8,7 @@ class Task extends Component {
     constructor() {
         super()
         // window.alert("hello")
-        this.state = { style: { textDecoration: 'none', margin: "10px", hideComponent: false, loggedIn: this._getCookie("token").length === 60 } }
+        this.state = { style: { textDecoration: 'none', margin: "10px", hideComponent: false }, loggedIn: this._getCookie("token").length === 60 }
     }
 
     _getCookie(name) {
@@ -32,6 +32,7 @@ class Task extends Component {
         console.log(this.props.id)
         console.log(this.props.complete)
         // task is now hidden but not actually removed from our list
+        console.log(this.state.loggedIn)
         if (this.state.loggedIn) {
             console.log("made inside logged in delete")
             const results = await axios({
