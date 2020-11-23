@@ -10,7 +10,7 @@ class WeekEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, viewState: "normal", loggedIn: this._getCookie("token").length === 60, showEvent: true, };
+        this.state = { windowWidth: window.innerWidth, viewState: "normal", loggedIn: this._getCookie("token").length === 60, };
 
         this.eventBox = React.createRef()   // reference for hidden event details pop-up
         this.editBox = React.createRef()    // reference for hidden event edit pop-up
@@ -75,7 +75,7 @@ class WeekEvent extends Component {
 
             if (results.data.message === "Deleted event.") {
                 console.log("delete success!!")
-                this.setState({ showEvent: !this.state.showEvent })
+
             }
         }
 
@@ -232,23 +232,21 @@ class WeekEvent extends Component {
             margin: `${(this.props.eventstate.smin / 60) * 80}px 0px 0px 0px`,
             padding: "10px"
         }
-        if (this.state.showEvent) {
-            return (
-                <div>
-                    <div style={event_style} className="box week-event" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
-                        <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}<a style={{ float: "right" }} class="delete is-small"></a></p>
-                        <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
-                    </div>
-                    { this._createEventBox()}
-                    {this._createEditBox()}
-                </div >
+
+        return (
+            <div>
+                <div style={event_style} className="box week-event" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}<a style={{ float: "right" }} class="delete is-small"></a></p>
+                    <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
+                </div>
+                { this._createEventBox()}
+                {this._createEditBox()}
+            </div >
 
 
-            )
-        }
-        else {
-            return (<div></div>)
-        }
+        )
+
+
     }
 }
 

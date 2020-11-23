@@ -10,7 +10,7 @@ class DayEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60, showEvent: true, };
+        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60 };
 
         this.eventBox = React.createRef()
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
@@ -102,7 +102,6 @@ class DayEvent extends Component {
 
             if (results.data.message === "Deleted event.") {
                 console.log("delete success!!")
-                this.setState({ showEvent: !this.state.showEvent })
             }
         }
 
@@ -199,30 +198,28 @@ class DayEvent extends Component {
             overflow: "scroll"
         }
 
-        if (this.state.showEvent) {
-            return (
-                <div>
-                    <div style={event_style} className="box" onDoubleClick={this._toggleEventBox.bind(this)}>
-                        <div className="level">
-                            <div className="level-left">
-                                <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
-                            </div>
-                            <div className="level-right">
-                                <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
-                                <a style={{ float: "right", margin: "0px 5px" }} class="delete is-small"></a>
-                            </div>
-                        </div>
-                        <hr className="hr" style={{ margin: "4px" }}></hr>
-                        <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
-                        <hr className="hr" style={{ margin: "4px" }}></hr>
-                        <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.description}</p>
 
+        return (
+            <div>
+                <div style={event_style} className="box" onDoubleClick={this._toggleEventBox.bind(this)}>
+                    <div className="level">
+                        <div className="level-left">
+                            <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
+                        </div>
+                        <div className="level-right">
+                            <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
+                            <a style={{ float: "right", margin: "0px 5px" }} class="delete is-small"></a>
+                        </div>
                     </div>
-                    {this._createEventBox()}
-                </div>)
-        } else {
-            return (<div></div>)
-        }
+                    <hr className="hr" style={{ margin: "4px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
+                    <hr className="hr" style={{ margin: "4px" }}></hr>
+                    <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.description}</p>
+
+                </div>
+                {this._createEventBox()}
+            </div>)
+
 
 
 
