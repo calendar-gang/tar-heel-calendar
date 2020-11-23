@@ -62,7 +62,9 @@ class NewEntry extends Component {
         let reccuringuntil = '2020-12-11 12:30:00'
         let category = Math.floor((Math.random() * 8) + 1)
 
-        if (this._getCookie("token") == "") {
+
+        if (this._getCookie("token") === "") {
+
             console.log("not logged in")
         } else {
             let res = await axios({

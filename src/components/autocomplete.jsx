@@ -41,7 +41,7 @@ class AutoCompleteText extends Component {
     }
 
     renderSuggestions() {
-        const suggeststyle = {
+        const suggestStyle = {
             backgroundColor: "white", 
             width: "300px"
         }
@@ -50,9 +50,9 @@ class AutoCompleteText extends Component {
             return null
         }
         return (
-            <div class="box" style={{position: "absolute", zIndex: "1"}}>
+            <div className="box" style={{position: "absolute", zIndex: "1"}}>
             <ul>
-                 {suggestions.map((item => <li class="ishoverable" style= {suggeststyle} onClick= {() => this.suggestionSelected(item)}>{item}</li>))}
+                 {suggestions.map((item => <li className="ishoverable" style= {suggestStyle} onClick= {() => this.suggestionSelected(item)}>{item}</li>))}
             </ul>
             </div>
         )
