@@ -65,7 +65,7 @@ class NewEntry extends Component {
 
 
 
-        if (this._getCookie("token") == "") {
+        if (this._getCookie("token") === "") {
             console.log("not logged in")
         } else {
             let res = await axios({

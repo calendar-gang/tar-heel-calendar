@@ -20,7 +20,7 @@ class Task extends Component {
     }
 
     async strikethrough() {
-        if (this.state.style.textDecoration == "none") {
+        if (this.state.style.textDecoration === "none") {
             this.setState({ style: { textDecoration: 'line-through', backgroundColor: '#bebfc2', margin: "10px" } })
         } else {
             this.setState({ style: { textDecoration: 'none', margin: "10px" } })
