@@ -7,7 +7,7 @@ This file describes the `/maketask` endpoint.
 * Body parameters:
     * `token`: string of 60 characters.
     * `description` (_optional_): string of up to 65,535 characters.
-    * `iscomplete` (_optional_): boolean. Defaults to false.
+    * `iscompleted` (_optional_): boolean. Defaults to false.
     * `isshown` (_optional_): boolean. Defaults to true.
 * Response parameters:
     * `message`
@@ -22,7 +22,7 @@ let res = await axios({
     data: {
         token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
         description: 'Task description.',
-        iscomplete: true,
+        iscompleted: true,
         isshown: false
     }
 });
@@ -64,7 +64,7 @@ let res = await axios({
     data: {
         token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
         description: 'Task description.',
-        iscomplete: 'trzz',
+        iscompleted: 'trzz',
     }
 });
 ```

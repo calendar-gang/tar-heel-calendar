@@ -1,8 +1,8 @@
-const {isStringValidLength, isBooleanValid} = require("./util");
+const {isStringValidLength, isBooleanValid, isBooleanTrue} = require("./util");
 const {db} = require("../server");
 
 exports.makeTask = (req, res) => {
-    let { token, description, iscomplete, isshown } = req.body;
+    let { token, description, iscompleted, isshown } = req.body;
 
     if(!isStringValidLength(token, 60, 60)
             || !isStringValidLength(description, 0, 65535)){
@@ -14,7 +14,7 @@ exports.makeTask = (req, res) => {
         return;
     }
 
-    if(!isBooleanValid(iscomplete, true)
+    if(!isBooleanValid(iscompleted, true)
             || !isBooleanValid(isshown, true)){
         res.status(400);
         res.json({
@@ -48,8 +48,8 @@ exports.makeTask = (req, res) => {
                   VALUES(?, ?, ?, ?)`,
                 [username,
                 description,
-                (iscomplete === 'true') || false,
-                (isshown === 'true') || true],
+                isBooleanTrue(iscompleted) || false,
+                isBooleanTrue(isshown) || true],
                 (error, results, fields) => {
             if(error) throw error;
 
