@@ -28,8 +28,12 @@ class Task extends Component {
     }
 
     async deleteTask() {
+        console.log("made to delete")
+        console.log(this.props.id)
+        console.log(this.props.complete)
         // task is now hidden but not actually removed from our list
         if (this.state.loggedIn) {
+            console.log("made inside logged in delete")
             const results = await axios({
                 method: 'delete',
                 url: 'https://tar-heel-calendar.herokuapp.com/deletetask',
