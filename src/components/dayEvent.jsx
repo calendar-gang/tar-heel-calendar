@@ -209,7 +209,7 @@ class DayEvent extends Component {
                         </div>
                         <div className="level-right">
                             <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
-                            <a style={{ float: "right" }} class="delete is-small"></a>
+                            <a style={{ float: "right", margin: "0px 5px" }} class="delete is-small"></a>
                         </div>
                     </div>
                     <hr className="hr" style={{ margin: "4px" }}></hr>

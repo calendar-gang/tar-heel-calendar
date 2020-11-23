@@ -111,7 +111,7 @@ class MonthEvent extends Component {
     }
 
     async _submitDelete() {
-        this.setState({ showEvent: !this.state.showEvent })
+        console.log("made to delete")
         if (this.state.loggedIn) {
             const results = await axios({
                 method: 'delete',
@@ -124,6 +124,7 @@ class MonthEvent extends Component {
 
             if (results.data.message === "Deleted event.") {
                 console.log("delete success!!")
+                this.setState({ showEvent: !this.state.showEvent })
                 // this.render()
             }
         }
@@ -251,7 +252,7 @@ class MonthEvent extends Component {
             return (
                 <div>
                     <div style={event_style} content={after_content} className="box" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
-                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={() => { this.setState({ showEvent: !this.state.showEvent }) }} style={{ float: "right" }} class="delete is-small"></a> </p>
+                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={this._submitDelete.bind(this)} style={{ float: "right" }} class="delete is-small"></a> </p>
 
                     </div>
 
