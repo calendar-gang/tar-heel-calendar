@@ -41,7 +41,7 @@ class MonthEvent extends Component {
 
     // if in edit mode, will not toggle details box
     _toggleEventBox(event) {
-        if (this.state.viewState != "edit") {
+        if (this.state.viewState !== "edit") {
             if (this.state.viewState === "normal") {
                 this.eventBox.current.className = "box monthevent is-hidden";
                 this.state.viewState = "details";
@@ -185,15 +185,15 @@ class MonthEvent extends Component {
 
         let defaultstart = this.props.eventstate.start + ":" + this.props.eventstate.smin
         let defaultend = this.props.eventstate.end + ":" + this.props.eventstate.emin
-        if (defaultstart.length == 4) {
-            if (defaultstart.split(":")[0].length == 1) {
+        if (defaultstart.length === 4) {
+            if (defaultstart.split(":")[0].length === 1) {
                 defaultstart = 0 + defaultstart
             } else {
                 defaultstart = defaultstart + 0
             }
         }
-        if (defaultend.length == 4) {
-            if (defaultend.split(":")[0].length == 1) {
+        if (defaultend.length === 4) {
+            if (defaultend.split(":")[0].length === 1) {
                 defaultend = 0 + defaultend
             } else {
                 defaultend = defaultend + 0

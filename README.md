@@ -28,8 +28,8 @@ If you're only working on one end of the project, this may be a bit slow. There 
 6. `npm run create-sample-data` will insert some sample data into the database for testing purposes.
 
 ## Technologies used
-* [Node.JS](https://github.com/nodejs/node)
-* [React.JS](https://github.com/facebook/react) (and [Create React App](https://github.com/facebook/create-react-app))
+* [Node.js](https://github.com/nodejs/node)
+* [React](https://github.com/facebook/react) (with [Create React App](https://github.com/facebook/create-react-app))
 * [Bulma](https://github.com/jgthms/bulma)
 * [axios](https://github.com/axios/axios)
 * [express](https://github.com/expressjs/express)
@@ -41,7 +41,7 @@ If you're only working on one end of the project, this may be a bit slow. There 
 Other technologies used are listed in [`package.json`](package.json).
 
 ## Authors
-* Victoria Hoffman
+* Victoria Hoffmann
 * Alfred Mathew
 * Eric Schneider
 * Ezri White

@@ -155,7 +155,7 @@ class Week extends Component {
 
     changeWeek(direction) {
         let new_date_obj = new Date(this.state.date.getTime());
-        if (direction == 1) {
+        if (direction === 1) {
             new_date_obj.setDate(new_date_obj.getDate() + 7);
         } else {
             new_date_obj.setDate(new_date_obj.getDate() - 7);
