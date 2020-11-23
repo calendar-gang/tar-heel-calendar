@@ -75,7 +75,7 @@ class Day extends Component {
                     tlist.push({
                         content: tasks[i].description,
                         iscompleted: tasks[i].iscompleted,
-                        id: tasks[i].iscompleted.id
+                        id: tasks[i].id
                     })
                 }
             }
@@ -247,7 +247,7 @@ class Day extends Component {
                 // <input type="checkbox"/>
                 // <label className="task" style={{marginLeft: "5px"}}>{tasktext}</label><br/>
                 // </div>), document.getElementById(id));
-                ReactDOM.render(<Task text={tasktext} complete={false} id={results.data.id}></Task>, document.getElementById(id));
+                ReactDOM.render(<Task text={tasktext} complete={0} id={results.data.id}></Task>, document.getElementById(id));
             }
         }
 

@@ -5,8 +5,8 @@ import axios from '../../node_modules/axios/index.js';
 
 class Task extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         // window.alert("hello")
         this.state = { style: { textDecoration: 'none', margin: "10px", hideComponent: false }, loggedIn: this._getCookie("token").length === 60 }
     }
