@@ -18,7 +18,7 @@ This file describes the `/maketask` endpoint.
 ```js
 let res = await axios({
     method: 'post',
-    url: 'https://tar-heel-calendar.herokuapp.com/maketasks',
+    url: 'https://tar-heel-calendar.herokuapp.com/maketask',
     data: {
         token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
         description: 'Task description.',
@@ -40,7 +40,7 @@ let res = await axios({
 ```js
 let res = await axios({
     method: 'post',
-    url: 'https://tar-heel-calendar.herokuapp.com/maketasks',
+    url: 'https://tar-heel-calendar.herokuapp.com/maketask',
     data: {
         token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
         description: 'Task description.'
@@ -60,7 +60,7 @@ let res = await axios({
 ```js
 let res = await axios({
     method: 'post',
-    url: 'https://tar-heel-calendar.herokuapp.com/maketasks',
+    url: 'https://tar-heel-calendar.herokuapp.com/maketask',
     data: {
         token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
         description: 'Task description.',
