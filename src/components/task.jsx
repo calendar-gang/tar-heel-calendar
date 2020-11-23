@@ -8,7 +8,10 @@ class Task extends Component {
     constructor(props) {
         super(props)
         // window.alert("hello")
-        this.state = { style: { textDecoration: 'none', margin: "10px", hideComponent: false }, loggedIn: this._getCookie("token").length === 60 }
+        let decoration = this.props.complete === 0 ? 'none' : 'line-through'
+        let bgColor = this.props.complete === 0 ? "" : '#bebfc2'
+
+        this.state = { style: { textDecoration: decoration, margin: "10px", hideComponent: false, backgroundColor: bgColor }, loggedIn: this._getCookie("token").length === 60 }
     }
 
     _getCookie(name) {
@@ -21,20 +24,49 @@ class Task extends Component {
 
     async strikethrough() {
         if (this.state.style.textDecoration === "none") {
-            this.setState({ style: { textDecoration: 'line-through', backgroundColor: '#bebfc2', margin: "10px" } })
+            if (this.state.loggedIn) {
+                const results = await axios({
+                    method: 'post',
+                    url: 'https://tar-heel-calendar.herokuapp.com/edittask',
+                    data: {
+                        token: this._getCookie("token"),
+                        id: this.props.id,
+                        iscomplete: 1
+                    }
+                });
+
+                if (results.data.message === "Task edited.") {
+                    this.setState({ style: { textDecoration: 'line-through', backgroundColor: '#bebfc2', margin: "10px" } })
+
+                }
+            }
+
+
         } else {
-            this.setState({ style: { textDecoration: 'none', margin: "10px" } })
+            if (this.state.loggedIn) {
+                const results = await axios({
+                    method: 'post',
+                    url: 'https://tar-heel-calendar.herokuapp.com/edittask',
+                    data: {
+                        token: this._getCookie("token"),
+                        id: this.props.id,
+                        iscomplete: 0
+                    }
+                });
+
+                if (results.data.message === "Task edited.") {
+                    this.setState({ style: { textDecoration: 'none', margin: "10px" } })
+
+                }
+            }
+
+
         }
     }
 
     async deleteTask() {
-        console.log("made to delete")
-        console.log(this.props.id)
-        console.log(this.props.complete)
         // task is now hidden but not actually removed from our list
-        console.log(this.state.loggedIn)
         if (this.state.loggedIn) {
-            console.log("made inside logged in delete")
             const results = await axios({
                 method: 'delete',
                 url: 'https://tar-heel-calendar.herokuapp.com/deletetask',
