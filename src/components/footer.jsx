@@ -9,11 +9,8 @@ class Footer extends Component {
                 <div className="content has-text-centered">
                     <p>
                         <strong>Tar Heel Calendar</strong> by Victoria Hoffmanne, Ezri White, Eric Schneider, Alfred Mathew.
-            </p>
+                    </p>
                 </div>
-
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>This is a calendar. Very fancy.</p>
             </footer>
         )
     }
