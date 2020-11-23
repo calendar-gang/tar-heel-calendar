@@ -11,16 +11,18 @@ class Month extends Component {
     constructor(props) {
         super(props);
 
-        let create_day = this.createDays();
-
         this.state = {
             cache: {},
-            days: create_day.days,
             eventlist: [],
             date: new Date(this.props.date.getFullYear(), this.props.date.getMonth()),
-            dayRef: create_day.dayRef,
             loggedIn: this._getCookie("token").length === 60,
         }
+
+        let create_day = this.createDays(this.state.date);
+
+        this.state["month_struct"] = create_day.month_struct;
+        this.state["dayRef"] = create_day.dayRef;
+        this.state["days"] = create_day.days;
 
         this.state.cache[this.state.date.getMonth()] = create_day;
     }
@@ -99,9 +101,10 @@ class Month extends Component {
 
     }
 
-    createDays() {
+    createDays(date_to_set) {
         let days = [];
         let dayRef = [];
+        let month_struct = [];
         for (let i = 1; i < 32; i++) {
             let obj = this.calcDayRow(i)
             days[i] = {
@@ -111,10 +114,42 @@ class Month extends Component {
             };
             dayRef[`${obj.day}${obj.row}`] = React.createRef()
         }
+
+        // init month_struct
+        for(let i = 0; i < 6; i++) {
+            month_struct.push([]);
+            for(let j = 0; j < 7; j++) {
+                month_struct[i].push(0);
+            } 
+        }
+
+        // month_struct setup
+        let date_obj = new Date(date_to_set.getTime());
+        let month = date_obj.getMonth();
+        for(let i = 0; i < 6; i++) {
+            for(let j = 0; j < 7; j++) {
+                if(j == date_obj.getDay()) {
+                    month_struct[i][j] = date_obj.getDate();
+                    date_obj.setDate(date_obj.getDate() + 1);
+                    if(month != date_obj.getMonth()) {
+                        break;
+                    }
+                }
+            }
+            if(month != date_obj.getMonth()) {
+                break;
+            }
+        }
+
         return {
             days: days,
-            dayRef: dayRef
+            dayRef: dayRef,
+            month_struct: month_struct
         }
+    }
+
+    initMonthStruct() {
+        
     }
 
     calcDayRow(day_num) {
@@ -131,13 +166,20 @@ class Month extends Component {
     _renderRowByDay(week_position) {
         let rows = [];
         for (let i = 0; i < 7; i++) {
-            let day = (week_position * 7 + i + 1)
-            if (day < 32) {
+            let day = this.state.month_struct[week_position][i];
+            if (day) {
                 rows.push(
                     <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }} onClick={this.toggleEditBox}>
                         {day}
                         <div ref={this.state.dayRef[`${i}${week_position}`]} style={{ width: "120px" }}>
                             {this.state.days[day].event_objs}
+                        </div>
+                    </td>
+                );
+            } else {
+                rows.push(
+                    <td className="has-text-grey" style={{ height: "114px", textAlign: "left" }}>
+                        <div style={{ width: "120px" }}>
                         </div>
                     </td>
                 );
@@ -156,7 +198,7 @@ class Month extends Component {
 
     _renderBody() {
         let rows = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             rows.push(this._renderRowByDay(i));
         }
         return (
@@ -173,19 +215,21 @@ class Month extends Component {
         } else {
             date_to_set.setMonth(date_to_set.getMonth() + 1);
         }
-        let create_day = this.createDays()
         if (!this.state.cache[date_to_set.getMonth()]) {
+            let create_day = this.createDays(date_to_set)
             this.state.cache[date_to_set.getMonth()] = create_day;
             this.setState({
                 date: date_to_set,
                 days: create_day.days,
-                dayRef: create_day.dayRef
+                dayRef: create_day.dayRef,
+                month_struct: create_day.month_struct
             });
         } else {
             this.setState({
                 date: date_to_set,
                 days: this.state.cache[date_to_set.getMonth()].days,
-                dayRef: this.state.cache[date_to_set.getMonth()].dayRef
+                dayRef: this.state.cache[date_to_set.getMonth()].dayRef,
+                month_struct: this.state.cache[date_to_set.getMonth()].month_struct
             });
         }
     }
