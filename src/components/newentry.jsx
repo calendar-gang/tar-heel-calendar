@@ -11,21 +11,21 @@ class NewEntry extends Component {
         super(props)
         this.state = {
             view: "modal",
-            style: {backgroundColor: "white"}
+            style: { backgroundColor: "white" }
         }
-        
+
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
         this.colors = { color1: React.createRef(), color2: React.createRef(), color3: React.createRef(), color4: React.createRef(), color5: React.createRef(), color6: React.createRef(), color7: React.createRef(), color8: React.createRef(), color9: React.createRef() }
     }
 
     toggleNewEntry() {
         /// let edit_box = document.getElementById("login-box");
-        let ev = this.state.event 
+        let ev = this.state.event
         let loc = this.state.loc
         if (this.state.view === "modal is-active") {
-            this.setState({ view: "modal", style: this.state.style});
+            this.setState({ view: "modal", style: this.state.style });
         } else {
-            this.setState({ view: "modal is-active", style: this.state.style});
+            this.setState({ view: "modal is-active", style: this.state.style });
         }
     }
 
@@ -55,7 +55,7 @@ class NewEntry extends Component {
         let enddate = date + " " + end + ":00"
         let recurring = 'weekly'
         let reccuringuntil = '2020-12-11 12:30:00'
-        let category = 'school'
+        let category = Math.floor((Math.random() * 8) + 1)
 
         // console.log(name)
         // console.log(loc)
@@ -92,18 +92,18 @@ class NewEntry extends Component {
         /*
         This code is necessary to handle the submit feature of a new entry form
          */
-        if(this.props.submit) {
-            this.props.submit({ 
+        if (this.props.submit) {
+            this.props.submit({
                 date: date,
-                start: start.split(":")[0], 
-                end: end.split(":")[0], 
-                name: name, 
-                location: loc, 
-                description: des, 
-                category: 1 
+                start: start.split(":")[0],
+                end: end.split(":")[0],
+                name: name,
+                location: loc,
+                description: des,
+                category: 1
             });
         }
-        
+
     }
 
     updateAutoValsEvent(value) {
@@ -160,20 +160,20 @@ class NewEntry extends Component {
                                 <div className="control">
                                     <AutoCompleteText ref={this.formFields.name} hold='426 Project Expo' triggerParentUpdate={this.updateAutoValsEvent.bind(this)}></AutoCompleteText>
                                 </div>
-                                <div className="dropdown" style={{ width: "75px", marginTop: "10px", marginLeft: "10px"}}>
-                                <button className="dropbtn button" style={this.state.style}>Category</button>
-                                <div className="dropdown-content" style={{ marginLeft: "10px" , width: "75px", height: "200px", overflow: "scroll"}}>
-                                    <div className="box" style={{backgroundColor: "#ffd4d4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffd4d4"}})}></div>
-                                    <div className="box" style={{backgroundColor: "#ffe6d4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffe6d4"}})}></div>
-                                    <div className="box" style={{backgroundColor:  "#fffbd4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#fffbd4"}})}></div>
-                                    <div className="box" style={{backgroundColor: "#e2ffd4", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#e2ffd4"}})}></div>
-                                    <div className="box" style={{backgroundColor: "#d4ffec", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#d4ffec"}})}></div>
-                                    <div className="box" style={{backgroundColor: "#d4f6ff", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#d4f6ff"}})}></div>
-                                    <div className="box" style={{backgroundColor: "#d4dfff", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#d4dfff"}})}></div>
-                                    <div className="box" style={{backgroundColor: "#f0d4ff", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#f0d4ff"}})}></div>
-                                    <div className="box" style={{backgroundColor:  "#ffd4ee", width: "75px"}} onClick={() => this.setState({view: this.state.view, style: {backgroundColor: "#ffd4ee"}})}></div>
+                                <div className="dropdown" style={{ width: "75px", marginTop: "10px", marginLeft: "10px" }}>
+                                    <button className="dropbtn button" style={this.state.style}>Category</button>
+                                    <div className="dropdown-content" style={{ marginLeft: "10px", width: "75px", height: "200px", overflow: "scroll" }}>
+                                        <div className="box" style={{ backgroundColor: "#ffd4d4", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#ffd4d4" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#ffe6d4", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#ffe6d4" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#fffbd4", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#fffbd4" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#e2ffd4", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#e2ffd4" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#d4ffec", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#d4ffec" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#d4f6ff", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#d4f6ff" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#d4dfff", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#d4dfff" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#f0d4ff", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#f0d4ff" } })}></div>
+                                        <div className="box" style={{ backgroundColor: "#ffd4ee", width: "75px" }} onClick={() => this.setState({ view: this.state.view, style: { backgroundColor: "#ffd4ee" } })}></div>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div className="field is-horizontal">
                                 <label className="label" style={sulabel}>Location:</label>

@@ -87,7 +87,7 @@ class Week extends Component {
                     name: events[i].title,
                     location: events[i].location,
                     description: events[i].description,
-                    category: i % 9
+                    category: events[i].category
                 })
             }
             this.setState({ eventlist: elist });
