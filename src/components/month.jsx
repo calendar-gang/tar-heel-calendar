@@ -116,27 +116,27 @@ class Month extends Component {
         }
 
         // init month_struct
-        for(let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
             month_struct.push([]);
-            for(let j = 0; j < 7; j++) {
+            for (let j = 0; j < 7; j++) {
                 month_struct[i].push(0);
-            } 
+            }
         }
 
         // month_struct setup
         let date_obj = new Date(date_to_set.getTime());
         let month = date_obj.getMonth();
-        for(let i = 0; i < 6; i++) {
-            for(let j = 0; j < 7; j++) {
-                if(j == date_obj.getDay()) {
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 7; j++) {
+                if (j == date_obj.getDay()) {
                     month_struct[i][j] = date_obj.getDate();
                     date_obj.setDate(date_obj.getDate() + 1);
-                    if(month != date_obj.getMonth()) {
+                    if (month != date_obj.getMonth()) {
                         break;
                     }
                 }
             }
-            if(month != date_obj.getMonth()) {
+            if (month != date_obj.getMonth()) {
                 break;
             }
         }
@@ -149,7 +149,7 @@ class Month extends Component {
     }
 
     initMonthStruct() {
-        
+
     }
 
     calcDayRow(day_num) {
@@ -257,7 +257,7 @@ class Month extends Component {
     render() {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
-
+        let header_style = { position: "sticky", top: "0px", zIndex: "2", backgroundColor: "#fff" }
         return (
             <div className="calendar">
                 <div className="container">
@@ -273,17 +273,17 @@ class Month extends Component {
                         </div>
                     </section>
                 </div >
-                <div className="container box" style={{ height: "650px", overflow: "scroll", padding: "0px" }}>
-                    <table className="table is-bordered is-narrow is-hoverable is-fullwidth">
-                        <thead>
-                            <tr className="is-bordered">
-                                <th className="has-text-grey-light">Sunday</th>
-                                <th className="has-text-grey-light">Monday</th>
-                                <th className="has-text-grey-light">Tuesday</th>
-                                <th className="has-text-grey-light">Wednesday</th>
-                                <th className="has-text-grey-light">Thursday</th>
-                                <th className="has-text-grey-light">Friday</th>
-                                <th className="has-text-grey-light">Saturday</th>
+                <div className="container box" style={{ height: "600px", overflow: "scroll", padding: "0px" }}>
+                    <table className="table is-bordered is-narrow is-hoverable is-fullwidth" >
+                        <thead style={header_style}>
+                            <tr className="is-bordered" style={header_style}>
+                                <th className="has-text-grey-light" style={header_style}>Sunday</th>
+                                <th className="has-text-grey-light" style={header_style}>Monday</th>
+                                <th className="has-text-grey-light" style={header_style}>Tuesday</th>
+                                <th className="has-text-grey-light" style={header_style}>Wednesday</th>
+                                <th className="has-text-grey-light" style={header_style}>Thursday</th>
+                                <th className="has-text-grey-light" style={header_style}>Friday</th>
+                                <th className="has-text-grey-light" style={header_style}>Saturday</th>
                             </tr>
                         </thead>
                         {this._renderBody()}
