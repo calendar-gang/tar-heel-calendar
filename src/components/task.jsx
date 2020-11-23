@@ -34,7 +34,7 @@ class Task extends Component {
                     data: {
                         token: this._getCookie("token"),
                         id: this.props.id,
-                        iscompleted: 1
+                        iscompleted: true
                     }
                 });
 
@@ -54,7 +54,7 @@ class Task extends Component {
                     data: {
                         token: this._getCookie("token"),
                         id: this.props.id,
-                        iscompleted: 0
+                        iscompleted: false
                     }
                 });
 
