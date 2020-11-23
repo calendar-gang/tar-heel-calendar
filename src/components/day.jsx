@@ -11,7 +11,6 @@ import axios from '../../node_modules/axios/index.js';
 
 class Day extends Component {
     state = {}
-    tasklist = ["get", "this", "to", "work", "check", "task", "scroll", "power"]
 
     constructor(props) {
         super(props);
@@ -137,7 +136,7 @@ class Day extends Component {
             const id = Math.random()
             d.id = id
             document.getElementById('newtasks').appendChild(d)
-            ReactDOM.render(<Task text={this.state.tasklist[i]}></Task>, document.getElementById(id));
+            ReactDOM.render(<Task text={this.state.tasklist[i].content}></Task>, document.getElementById(id));
         }
     }
 
