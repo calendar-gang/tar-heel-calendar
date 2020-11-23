@@ -4,7 +4,8 @@ class AutoCompleteText extends Component {
 
     constructor(props) {
         super(props)
-        this.items = ['quiz', 'exam', 'test', 'paper', 'coffee', 'chapter', 'due', 'UNC', 'Sitterson', 'project', 'english', 'math', 'science', 'chemistry', 'biology', 'lecture']
+        this.items = ['Quiz', 'Exam', 'Test', 'Paper', 'Coffee', 'Chapter', 'Due', 'UNC', 'Sitterson', 'Project', 
+        'English', 'Math', 'Science', 'Chemistry', 'Biology', 'Lecture', 'Virtual Sitterson']
         this.state = {
             suggestions: [],
             text: ""
@@ -32,7 +33,7 @@ class AutoCompleteText extends Component {
         const value = e.target.value
         let suggestions = []
         if (value.length > 0 ) {
-            const regex = new RegExp(`^${value}`);
+            const regex = new RegExp(`^${value}`, 'i');
             suggestions = this.items.sort().filter(value => regex.test(value))
         }
         this.setState({suggestions: suggestions, text: value})
