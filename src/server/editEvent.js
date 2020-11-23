@@ -105,7 +105,7 @@ exports.editEvent = (req, res) => {
                     username,
                     id],
                     (error, results, fields) => {
-                if (error) throw error;
+                if(error) throw error;
 
                 res.json({
                     message: "Event edited."
