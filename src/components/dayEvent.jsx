@@ -203,7 +203,7 @@ class DayEvent extends Component {
         return (
             <div>
                 <div style={event_style} className="box" onDoubleClick={this._toggleEventBox.bind(this)}>
-                    <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={this._submitDelete().bind()} style={{ float: "right" }} class="delete is-small"></a> </p>
+                    <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a style={{ float: "right" }} class="delete is-small"></a> </p>
                     <div className="level">
                         <div className="level-left">
                             <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
