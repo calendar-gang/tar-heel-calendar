@@ -23,7 +23,10 @@ class Task extends Component {
     }
 
     async strikethrough() {
+        console.log("made it to strikethrough")
         if (this.state.style.textDecoration === "none") {
+            console.log("made it to trying to query to complete")
+            console.log(this.state.loggedIn)
             if (this.state.loggedIn) {
                 const results = await axios({
                     method: 'post',
@@ -35,7 +38,7 @@ class Task extends Component {
                     }
                 });
 
-                if (results.data.message === "Task edited.") {
+                if (results.data.message === "Event edited.") {
                     this.setState({ style: { textDecoration: 'line-through', backgroundColor: '#bebfc2', margin: "10px" } })
 
                 }
@@ -43,6 +46,7 @@ class Task extends Component {
 
 
         } else {
+            console.log("made it to trying to query to uncomplete")
             if (this.state.loggedIn) {
                 const results = await axios({
                     method: 'post',
@@ -54,7 +58,7 @@ class Task extends Component {
                     }
                 });
 
-                if (results.data.message === "Task edited.") {
+                if (results.data.message === "Event edited.") {
                     this.setState({ style: { textDecoration: 'none', margin: "10px" } })
 
                 }
