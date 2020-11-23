@@ -211,20 +211,40 @@ class Day extends Component {
         }
     }
 
-    createTask(event) {
+    async createTask(event) {
         let tasktext = this.refs.tasktext.value;
-        this.tasklist.push(tasktext)
-        // window.alert(tasktext)
         this.toggletaskform(event)
-        const d = document.createElement("div")
-        const id = Math.random()
-        d.id = id
-        document.getElementById('newtasks').appendChild(d)
-        // ReactDOM.render((<div className="box" style={{margin: "10px"}}>
-        // <input type="checkbox"/>
-        // <label className="task" style={{marginLeft: "5px"}}>{tasktext}</label><br/>
-        // </div>), document.getElementById(id));
-        ReactDOM.render(<Task text={tasktext}></Task>, document.getElementById(id));
+
+        if (this.state.loggedIn) {
+            const results = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/maketask',
+                data: {
+                    token: this._getCookie("token"),
+                    description: tasktext,
+                    iscomplete: false,
+                    isshown: true
+                }
+            });
+
+            if (results.data.message === "Task made.") {
+                console.log("success!!")
+                this.state.tasklist.push(tasktext)
+                // window.alert(tasktext)
+
+                const d = document.createElement("div")
+                const id = Math.random()
+                d.id = id
+                document.getElementById('newtasks').appendChild(d)
+                // ReactDOM.render((<div className="box" style={{margin: "10px"}}>
+                // <input type="checkbox"/>
+                // <label className="task" style={{marginLeft: "5px"}}>{tasktext}</label><br/>
+                // </div>), document.getElementById(id));
+                ReactDOM.render(<Task text={tasktext}></Task>, document.getElementById(id));
+            }
+        }
+
+
 
     }
 
