@@ -37,6 +37,7 @@ class Day extends Component {
         */
         this.state = {
             eventlist: [],
+            tasklist: [],
             date: this.props.date,
             loggedIn: this._getCookie("token").length === 60,
             display: "first"
@@ -48,6 +49,35 @@ class Day extends Component {
     componentDidMount() {
         this.scrollBox.current.scrollTop = 800
         this._getcurrentevents()
+        this._getcurrenttasks()
+    }
+
+    async _getcurrenttasks() {
+        if (!this.state.loggedIn) {
+            this.setState({ tasklist: [] });
+        } else {
+            const results = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/viewtasks',
+                data: {
+                    token: this._getCookie("token")
+                }
+            });
+            let tasks = results.data.results // this should hold our tasks results data !
+            let tlist = []
+            for (let i = 0; i < tasks.length; i++) {
+                if (tasks[i].isshown === 1) {
+                    tlist.push({
+                        content: tasks[i].description,
+                        iscompleted: tasks[i].iscompleted
+                    })
+                }
+            }
+            this.setState({ tasklist: tlist });
+
+        }
+        this.rendercurrenttasks()
+
     }
 
     async _getcurrentevents() {
@@ -98,6 +128,16 @@ class Day extends Component {
         for (let i = 0; i < this.state.eventlist.length; i++) {
             let evt = this.state.eventlist[i]
             ReactDOM.render(<DayEvent eventstate={evt}></DayEvent>, this.timeRef[`${evt.start}`].current)
+        }
+    }
+
+    rendercurrenttasks() {
+        for (let i = 0; i < this.state.tasklist.length; i++) {
+            const d = document.createElement("div")
+            const id = Math.random()
+            d.id = id
+            document.getElementById('newtasks').appendChild(d)
+            ReactDOM.render(<Task text={this.state.tasklist[i]}></Task>, document.getElementById(id));
         }
     }
 
@@ -214,14 +254,7 @@ class Day extends Component {
         </div>)
     }
 
-    rendercurrenttasks() {
-        // console.log(this.state.date)
-        const tasks = []
-        for (let i = 0; i < this.tasklist.length; i++) {
-            tasks.push(<Task text={this.tasklist[i]}></Task>)
-        }
-        return tasks
-    }
+
 
 
     // updateDate(dir) {
@@ -350,7 +383,6 @@ class Day extends Component {
                     <div class="columns" style={{ height: "100%" }}>
                         <div className="container tasklist box column" id="tasklist" style={{ backgroundColor: "white", height: "575px", overflow: "scroll", margin: "15px" }}>
                             <button className="button create is-rounded" style={{ backgroundColor: "#606163", color: "white" }} onClick={this.toggletaskform.bind(this)}>New Task</button>
-                            {this.rendercurrenttasks()}
                             <div id="newtasks"></div>
                             {this.rendertaskform()}
                         </div>
