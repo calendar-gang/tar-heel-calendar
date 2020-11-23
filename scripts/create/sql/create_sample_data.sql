@@ -23,3 +23,6 @@ VALUES('user', 'Event title', 'Location', 'Nice place.', '2020-11-10 12:30:00', 
 INSERT INTO `events`(`username`, `title`, `start`, `end`)
 VALUES('user', 'Event title 2', '2020-11-10 12:30:00', '2020-11-11 12:30:00');
 
+INSERT INTO `tasks`(`username`, `description`, `iscompleted`, `isshown`)
+VALUES('user', 'A description', false, true);
+

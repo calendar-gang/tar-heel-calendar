@@ -28,9 +28,9 @@ exports.viewEvents = (req, res) => {
     db.query(`SELECT username
             FROM tokens
             WHERE token = ?`, [token], (error, results, fields) => {
-        if (error) throw error;
+        if(error) throw error;
 
-        if (results.length === 0) {
+        if(results.length === 0){
             res.status(400);
             res.json({
                 message: "Token not found."

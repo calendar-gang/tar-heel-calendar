@@ -21,7 +21,8 @@ db.connect(function(err) {
 let scripts = [
     'create_users.sql',
     'create_tokens.sql',
-    'create_events.sql'
+    'create_events.sql',
+    'create_tasks.sql'
 ];
 
 scripts.forEach(file => {

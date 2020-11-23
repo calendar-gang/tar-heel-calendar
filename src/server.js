@@ -28,7 +28,7 @@ const app = express();
 app.use(favicon(__dirname + '/../build/favicon.ico'));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, '../build')));
-//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({strict: false}));
 app.use(cookieParser());
 
@@ -65,6 +65,18 @@ app.delete('/deleteevent', deleteEvent);
 
 const {editEvent} = require('./server/editEvent');
 app.post('/editevent', editEvent);
+
+const {makeTask} = require('./server/makeTask');
+app.post('/maketask', makeTask);
+
+const {viewTasks} = require('./server/viewTasks');
+app.post('/viewtasks', viewTasks);
+
+const {deleteTask} = require('./server/deleteTask');
+app.delete('/deletetask', deleteTask);
+
+const {editTask} = require('./server/editTask');
+app.post('/edittask', editTask);
 
 app.listen(port);
 

@@ -83,7 +83,6 @@ exports.makeEvent = (req, res) => {
                 recurringuntil || null,
                 category || 'default'],
                 (error, results, fields) => {
-
             if(error) throw error;
 
             db.query(`SELECT MAX(id) AS id
