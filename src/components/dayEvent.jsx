@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BiCheck, BiX } from 'react-icons/bi';
+import axios from '../../node_modules/axios/index.js';
 
 class DayEvent extends Component {
     state = {}
@@ -9,7 +10,7 @@ class DayEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth };
+        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60 };
 
         this.eventBox = React.createRef()
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
@@ -21,6 +22,14 @@ class DayEvent extends Component {
 
     componentDidMount() {
         window.addEventListener("resize", this.handleResize);
+    }
+
+    _getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        else return ""
+
     }
 
 
@@ -40,7 +49,7 @@ class DayEvent extends Component {
     }
 
     submitEdit(event) {
-        this._toggleEventBox(event) 
+        this._toggleEventBox(event)
         let name = this.formFields.name.current.value
         let loc = this.formFields.location.current.value
         let des = this.formFields.description.current.value
@@ -56,8 +65,29 @@ class DayEvent extends Component {
         console.log(des)
         console.log(startdate)
         console.log(enddate)
+
+        if (this.state.loggedIn) {
+            const results = await axios({
+                method: 'post',
+                url: 'https://tar-heel-calendar.herokuapp.com/editevent',
+                data: {
+                    token: this._getCookie("token"),
+                    id: this.props.eventstate.id,
+                    title: name,
+                    location: loc,
+                    description: des,
+                    start: startdate,
+                    end: enddate
+                }
+            });
+
+            if (results.data.message === "Event edited.") {
+                console.log("success from day!!")
+                // this.render()
+            }
+        }
     }
-    
+
 
     _createEventBox() {
         const event_style = {
@@ -76,17 +106,17 @@ class DayEvent extends Component {
             if (defaultstart.split(":")[0].length == 1) {
                 defaultstart = 0 + defaultstart
             } else {
-                defaultstart =  defaultstart + 0
+                defaultstart = defaultstart + 0
             }
         }
         if (defaultend.length == 4) {
             if (defaultend.split(":")[0].length == 1) {
                 defaultend = 0 + defaultend
             } else {
-                defaultend =  defaultend + 0
+                defaultend = defaultend + 0
             }
         }
-        
+
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
                 <div className="level">
@@ -104,12 +134,12 @@ class DayEvent extends Component {
                 <hr className="hr" style={{ margin: "4px" }}></hr>
                 <textarea className="input" ref={this.formFields.description} defaultValue={`${this.props.eventstate.description}`} type="text" style={{ height: "75px", fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}></textarea>
                 <hr className="hr" style={{ margin: "4px" }}></hr>
-                <input className="input" ref={this.formFields.date} defaultValue={`${this.props.eventstate.date}`} type="date" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }}/>
-                <hr className="hr" style={{ margin: "2px"}}></hr>
-                <input className="input" ref={this.formFields.start} type="time" defaultValue={`${defaultstart}`}  style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
+                <input className="input" ref={this.formFields.date} defaultValue={`${this.props.eventstate.date}`} type="date" style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
                 <hr className="hr" style={{ margin: "2px" }}></hr>
-                <input className="input" ref={this.formFields.end} type="time" defaultValue={`${defaultend}`} style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />         
-                
+                <input className="input" ref={this.formFields.start} type="time" defaultValue={`${defaultstart}`} style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
+                <hr className="hr" style={{ margin: "2px" }}></hr>
+                <input className="input" ref={this.formFields.end} type="time" defaultValue={`${defaultend}`} style={{ height: "30px", color: this.darkcatcolors[this.props.eventstate.category % 9], backgroundColor: this.catcolors[this.props.eventstate.category % 9] }} />
+
             </div>
 
         )

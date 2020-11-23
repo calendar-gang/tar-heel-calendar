@@ -101,7 +101,6 @@ class MonthEvent extends Component {
                     end: enddate
                 }
             });
-            console.log(results)
 
             if (results.data.message === "Event edited.") {
                 console.log("success!!")
@@ -163,20 +162,20 @@ class MonthEvent extends Component {
 
         let defaultdate = this.props.eventstate.date.split("-")[2] + "-" + this.props.eventstate.date.split("-")[0] + "-" + this.props.eventstate.date.split("-")[1]
 
-        let defaultstart =  this.props.eventstate.start + ":" + this.props.eventstate.smin
+        let defaultstart = this.props.eventstate.start + ":" + this.props.eventstate.smin
         let defaultend = this.props.eventstate.end + ":" + this.props.eventstate.emin
         if (defaultstart.length == 4) {
             if (defaultstart.split(":")[0].length == 1) {
                 defaultstart = 0 + defaultstart
             } else {
-                defaultstart =  defaultstart + 0
+                defaultstart = defaultstart + 0
             }
         }
         if (defaultend.length == 4) {
             if (defaultend.split(":")[0].length == 1) {
                 defaultend = 0 + defaultend
             } else {
-                defaultend =  defaultend + 0
+                defaultend = defaultend + 0
             }
         }
 
