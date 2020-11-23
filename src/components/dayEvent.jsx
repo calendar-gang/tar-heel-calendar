@@ -203,13 +203,13 @@ class DayEvent extends Component {
         return (
             <div>
                 <div style={event_style} className="box" onDoubleClick={this._toggleEventBox.bind(this)}>
-                    <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a style={{ float: "right" }} class="delete is-small"></a> </p>
                     <div className="level">
                         <div className="level-left">
                             <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>
                         </div>
                         <div className="level-right">
                             <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this._findHour(this.props.eventstate.start, this.props.eventstate.smin)} - {this._findHour(this.props.eventstate.end, this.props.eventstate.emin)}</p>
+                            <a style={{ float: "right" }} class="delete is-small"></a>
                         </div>
                     </div>
                     <hr className="hr" style={{ margin: "4px" }}></hr>

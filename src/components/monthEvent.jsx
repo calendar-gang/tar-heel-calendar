@@ -251,7 +251,7 @@ class MonthEvent extends Component {
             return (
                 <div>
                     <div style={event_style} content={after_content} className="box" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
-                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={this._submitDelete().bind()} style={{ float: "right" }} class="delete is-small"></a> </p>
+                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={() => { this.setState({ showEvent: !this.state.showEvent }) }} style={{ float: "right" }} class="delete is-small"></a> </p>
 
                     </div>
 
