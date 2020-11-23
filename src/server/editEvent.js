@@ -11,8 +11,7 @@ exports.editEvent = (req, res) => {
             || !isStringValidLength(start, 0, 19)
             || !isStringValidLength(end, 0, 19)
             || !isStringValidLength(recurring, 0, 7)
-            || !isStringValidLength(recurringuntil, 0, 19)
-            || !isStringValidLength(category, 0, 7)){
+            || !isStringValidLength(recurringuntil, 0, 19)){
         res.status(400);
         res.json({
             message: "Invalid length of parameter."
@@ -21,8 +20,7 @@ exports.editEvent = (req, res) => {
         return;
     }
 
-    if(!isEnumValid(recurring, ['not', 'weekly', 'monthly', 'yearly'], true)
-            || !isEnumValid(category, ['default', 'school'], true)){
+    if(!isEnumValid(recurring, ['not', 'weekly', 'monthly', 'yearly'], true)){
         res.status(400);
         res.json({
             message: "Invalid enum."
@@ -37,6 +35,15 @@ exports.editEvent = (req, res) => {
         res.status(400);
         res.json({
             message: "Invalid time stamp."
+        });
+
+        return;
+    }
+
+    if(category !== undefined && category !== null && isNaN(Number(category)) || Number(category) < 0 || Number(category) > 9){
+        res.status(400);
+        res.json({
+            message: "Category is NaN or out of range."
         });
 
         return;

@@ -113,3 +113,25 @@ let res = await axios({
     "message": "Invalid enum."
 }
 ```
+
+### Example (invalid category)
+```js
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
+    data: {
+        token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+        title: 'Event title',
+        start: '2020-11-10 12:30:00',
+        end: '2020-11-11 12:30:00',
+        category: 50
+    }
+});
+```
+
+#### Response (status: 400)
+```json
+{
+    "message": "Category is NaN or out of range."
+}
+```

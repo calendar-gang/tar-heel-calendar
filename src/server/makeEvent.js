@@ -11,18 +11,21 @@ exports.makeEvent = (req, res) => {
             || !isStringValidLength(start, 19, 19)
             || !isStringValidLength(end, 19, 19)
             || !isStringValidLength(recurring, 0, 7)
-            || !isStringValidLength(recurringuntil, 0, 19)
-            || !isStringValidLength(category, 0, 7)){
+            || !isStringValidLength(recurringuntil, 0, 19)){
         res.status(400);
         res.json({
-            message: "Invalid length of parameter."
+            message: "Invalid length of parameter.",
+            huh: req.body,
+            token: token,
+            title: title,
+            start: start,
+            end: end
         });
 
         return;
     }
 
-    if(!isEnumValid(recurring, ['not', 'weekly', 'monthly', 'yearly'], true)
-            || !isEnumValid(category, ['default', 'school'], true)){
+    if(!isEnumValid(recurring, ['not', 'weekly', 'monthly', 'yearly'], true)){
         res.status(400);
         res.json({
             message: "Invalid enum."
@@ -37,6 +40,15 @@ exports.makeEvent = (req, res) => {
         res.status(400);
         res.json({
             message: "Invalid time stamp."
+        });
+
+        return;
+    }
+
+    if(category !== undefined && category !== null && isNaN(Number(category)) || Number(category) < 0 || Number(category) > 9){
+        res.status(400);
+        res.json({
+            message: "Category is NaN or out of range."
         });
 
         return;
@@ -60,7 +72,6 @@ exports.makeEvent = (req, res) => {
 
         let username = results[0].username;
 
-        // TODO: This looks a bit silly.
         db.query(`INSERT INTO events(
                    username,
                    title,
@@ -81,7 +92,7 @@ exports.makeEvent = (req, res) => {
                 end,
                 recurring || 'not',
                 recurringuntil || null,
-                category || 'default'],
+                category || 0],
                 (error, results, fields) => {
 
             if(error) throw error;
