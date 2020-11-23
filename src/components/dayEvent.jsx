@@ -10,7 +10,7 @@ class DayEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60 };
+        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60, showEvent: true, };
 
         this.eventBox = React.createRef()
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
@@ -86,6 +86,26 @@ class DayEvent extends Component {
                 // this.render()
             }
         }
+    }
+
+    async _submitDelete() {
+        this.setState({ showEvent: !this.state.showEvent })
+        if (this.state.loggedIn) {
+            const results = await axios({
+                method: 'delete',
+                url: 'https://tar-heel-calendar.herokuapp.com/deleteevent',
+                data: {
+                    token: this._getCookie("token"),
+                    id: this.props.eventstate.id
+                }
+            });
+
+            if (results.data.message === "Deleted event.") {
+                console.log("delete success!!")
+                // this.render()
+            }
+        }
+
     }
 
 
@@ -183,6 +203,7 @@ class DayEvent extends Component {
         return (
             <div>
                 <div style={event_style} className="box" onDoubleClick={this._toggleEventBox.bind(this)}>
+                    <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={this._submitDelete().bind()} style={{ float: "right" }} class="delete is-small"></a> </p>
                     <div className="level">
                         <div className="level-left">
                             <p className="has-text-left has-text-weight-semibold" style={{ fontSize: "15px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.name}</p>

@@ -110,6 +110,26 @@ class MonthEvent extends Component {
 
     }
 
+    async _submitDelete() {
+        this.setState({ showEvent: !this.state.showEvent })
+        if (this.state.loggedIn) {
+            const results = await axios({
+                method: 'delete',
+                url: 'https://tar-heel-calendar.herokuapp.com/deleteevent',
+                data: {
+                    token: this._getCookie("token"),
+                    id: this.props.eventstate.id
+                }
+            });
+
+            if (results.data.message === "Deleted event.") {
+                console.log("delete success!!")
+                // this.render()
+            }
+        }
+
+    }
+
 
     _findHour(hour, minutes) {
         if (hour < 12) {
@@ -231,7 +251,7 @@ class MonthEvent extends Component {
             return (
                 <div>
                     <div style={event_style} content={after_content} className="box" onMouseEnter={this._toggleEventBox.bind(this)} onMouseLeave={this._toggleEventBox.bind(this)} onDoubleClick={this._editMode.bind(this)}>
-                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={() => { this.setState({ showEvent: !this.state.showEvent }) }} style={{ float: "right" }} class="delete is-small"></a> </p>
+                        <p className="has-text-centered is-size-7">{this.props.eventstate.name} <a onClick={this._submitDelete().bind()} style={{ float: "right" }} class="delete is-small"></a> </p>
 
                     </div>
 
