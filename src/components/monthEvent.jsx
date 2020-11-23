@@ -127,6 +127,8 @@ class MonthEvent extends Component {
                 this.setState({ showEvent: !this.state.showEvent })
                 // this.render()
             }
+        } else { // if user not logged in and just wants to test
+            this.setState({ showEvent: !this.state.showEvent })
         }
 
     }
