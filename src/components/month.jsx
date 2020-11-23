@@ -148,10 +148,6 @@ class Month extends Component {
         }
     }
 
-    initMonthStruct() {
-
-    }
-
     calcDayRow(day_num) {
         // need to be able to calculate day and row from date
         let row = Math.floor(day_num / 7);
