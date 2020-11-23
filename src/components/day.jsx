@@ -221,9 +221,7 @@ class Day extends Component {
                 url: 'https://tar-heel-calendar.herokuapp.com/maketask',
                 data: {
                     token: this._getCookie("token"),
-                    description: tasktext,
-                    iscomplete: false,
-                    isshown: true
+                    description: tasktext
                 }
             });
 
