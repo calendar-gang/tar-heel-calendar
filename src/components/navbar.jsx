@@ -153,7 +153,7 @@ class NavBar extends Component {
             let username = await this._getUserName()
             this.user.current.innerHTML = username
             this.setState({ messagefield: "Successfully logged in!", loggedIn: true })
-            // this.forceUpdate
+            this.forceUpdate()
             // this.user.current.innerHTML = uname
 
         }
