@@ -8,8 +8,8 @@ class Task extends Component {
     constructor(props) {
         super(props)
         // window.alert("hello")
-        let decoration = this.props.complete === 0 ? 'none' : 'line-through'
-        let bgColor = this.props.complete === 0 ? "" : '#bebfc2'
+        let decoration = this.props.complete === 0 ? 'none' : 'line-through';
+        let bgColor = this.props.complete === 0 ? "" : '#bebfc2';
 
         this.state = { style: { textDecoration: decoration, margin: "10px", hideComponent: false, backgroundColor: bgColor }, loggedIn: this._getCookie("token").length === 60 }
     }
@@ -34,7 +34,7 @@ class Task extends Component {
                     data: {
                         token: this._getCookie("token"),
                         id: this.props.id,
-                        iscomplete: 1
+                        iscompleted: 1
                     }
                 });
 
@@ -54,7 +54,7 @@ class Task extends Component {
                     data: {
                         token: this._getCookie("token"),
                         id: this.props.id,
-                        iscomplete: 0
+                        iscompleted: 0
                     }
                 });
 

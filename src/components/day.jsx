@@ -68,6 +68,7 @@ class Day extends Component {
                     token: this._getCookie("token")
                 }
             });
+            console.log(results)
             let tasks = results.data.results // this should hold our tasks results data !
             let tlist = []
             for (let i = 0; i < tasks.length; i++) {

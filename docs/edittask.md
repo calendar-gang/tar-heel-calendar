@@ -8,7 +8,7 @@ This file describes the `/edittask` endpoint.
     * `token`: string of 60 characters.
     * `id`: the id of the event to be edited.
     * `description` (_optional_): string of up to 65,535 characters.
-    * `iscomplete` (_optional_): boolean.
+    * `iscompleted` (_optional_): boolean.
     * `isshown` (_optional_): boolean.
 
 ## Example operations
