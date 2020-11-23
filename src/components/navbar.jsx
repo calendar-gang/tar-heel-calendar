@@ -303,7 +303,7 @@ class NavBar extends Component {
                         <div className="field is-horizontal">
                             <label className="label" style={sulabel}>Password:</label>
                             <div className="control">
-                                <input className="input" ref={this.SIfields.password} type="text" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
+                                <input className="input" ref={this.SIfields.password} type="password" placeholder="SuperSecretP@ssw0rd" style={inputval}></input>
                             </div>
                         </div>
                     </div>
