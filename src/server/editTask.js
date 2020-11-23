@@ -1,8 +1,8 @@
-const {isStringValidLength} = require("./util");
+const {isStringValidLength, isBooleanValid, isBooleanTrue} = require("./util");
 const {db} = require("../server");
 
 exports.editTask = (req, res) => {
-    let {token, id, description, iscomplete, isshown} = req.body;
+    let {token, id, description, iscompleted, isshown} = req.body;
 
     if(!isStringValidLength(token, 60, 60)
             || !isStringValidLength(description, 0, 65535)){
@@ -18,6 +18,16 @@ exports.editTask = (req, res) => {
         res.status(400);
         res.json({
             message: "id is NaN."
+        });
+
+        return;
+    }
+
+    if(!isBooleanValid(iscompleted, true)
+        || !isBooleanValid(isshown, true)){
+        res.status(400);
+        res.json({
+            message: "Invalid boolean."
         });
 
         return;
@@ -62,8 +72,8 @@ exports.editTask = (req, res) => {
                     WHERE username = ? AND id = ?`,
 
                     [description || results[0].description,
-                    (iscomplete === 'true') || results[0].iscompleted,
-                    (isshown === 'true') || results[0].isshown,
+                    isBooleanTrue(iscompleted) || results[0].iscompleted,
+                    isBooleanTrue(isshown) || results[0].isshown,
                     username,
                     id],
                     (error, results, fields) => {

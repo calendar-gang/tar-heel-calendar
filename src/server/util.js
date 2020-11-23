@@ -27,9 +27,16 @@ exports.isTimeStampValid = (str, ndAllowed) => {
     return ((str === undefined || str == null) && ndAllowed) || str.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/) != null;
 };
 
-exports.isBooleanValid = (str, ndAllowed) => {
-    return ((str === undefined || str == null) && ndAllowed) || str === 'true' || str === 'false';
+exports.isBooleanValid = (bool, ndAllowed) => {
+    return ((bool === undefined || bool == null) && ndAllowed) || (typeof(bool) === 'string' && (bool === 'true' || bool === 'false')) || typeof(bool) === 'boolean';
 };
+
+/**
+ * This is a bit smarter than what it looks like, I swear!
+ */
+exports.isBooleanTrue = (bool) => {
+    return bool !== undefined && bool !== null && ((typeof(bool) === 'string' && bool === 'true') || (typeof(bool) === 'boolean' && bool));
+}
 
 exports.getHashedPassword = (password) => {
     return crypto.createHash('sha256').update(password).digest('base64');
