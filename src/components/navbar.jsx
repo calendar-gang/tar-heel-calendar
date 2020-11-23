@@ -129,7 +129,7 @@ class NavBar extends Component {
         });
         console.log(result.data)
         if (result.data.message === "Registration complete.") {
-            this.setState({ messagefield: "Successfully registered!" })
+            this.setState({ messagefield: "Successfully registered! Make sure to log in!" })
             this.toggleMessage()
 
         } else {
@@ -150,8 +150,8 @@ class NavBar extends Component {
         if (result.data.message === "Logged in.") {
             document.cookie = `token=${result.data.token}`
             this.toggleMessage()
-            this.setState((state, props) => { return { messagefield: "Successfully logged in!", loggedIn: true } })
-            this.user.current.innerHTML = uname
+            this.setState({ messagefield: "Successfully logged in!", loggedIn: true })
+            // this.user.current.innerHTML = uname
 
         }
 
