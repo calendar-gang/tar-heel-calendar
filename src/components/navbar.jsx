@@ -149,8 +149,11 @@ class NavBar extends Component {
         console.log(result.data)
         if (result.data.message === "Logged in.") {
             document.cookie = `token=${result.data.token}`
-            this.toggleMessage()
+            // this.toggleMessage()
+            let username = await this._getUserName()
+            this.user.current.innerHTML = username
             this.setState({ messagefield: "Successfully logged in!", loggedIn: true })
+            this.forceUpdate()
             // this.user.current.innerHTML = uname
 
         }
