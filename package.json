@@ -34,7 +34,8 @@
     "create-database": "node scripts/create/createDatabase.js",
     "create-tables": "node scripts/create/createTables.js",
     "drop-tables": "node scripts/delete/dropTables.js",
-    "create-sample-data": "node scripts/create/createSampleData.js"
+    "create-sample-data": "node scripts/create/createSampleData.js",
+    "update-tables1": "node scripts/modify/updateTables1.js"
   },
   "eslintConfig": {
     "extends": "tar-heel-calendar"

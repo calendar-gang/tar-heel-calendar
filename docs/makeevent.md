@@ -13,13 +13,12 @@ This file describes the `/makeevent` endpoint.
     * `end`: a timestamp/string of the format `YYYY-MM-DD HH:MM:SS`. Should be after the `start` timestamp.
     * `recurring`: (_optional_): an enum/string, either `not`, `weekly`, `monthly`, or `yearly`. Defaults to `not`.
     * `recurringuntil`: (_optional_): a timestamp/string of the format `YYYY-MM-DD HH:MM:SS`.
-    * `category`:  (_optional_): an enum/string, either `default`, or `school`. Defaults to `default`.
+    * `category`:  (_optional_): an int, between 0-9. Defaults to 0.
 * Response parameters:
     * `message`
     * `id`: the id of the event. Unique.
 
 ## Future changes
-* The `category` body parameter will feature more possible values soon. Possibly, even custom ones.
 * The calendar only supports events up to the year 2038, which could be a problem.
 
 ## Example operations
@@ -37,7 +36,7 @@ let res = await axios({
         end: '2020-11-11 12:30:00',
         recurring: 'weekly',
         recurringuntil: '2020-12-11 12:30:00',
-        category: 'school'
+        category: 0
     }
 });
 ```
@@ -103,7 +102,7 @@ let res = await axios({
         title: 'Event title',
         start: '2020-11-10 12:30:00',
         end: '2020-11-11 12:30:00',
-        category: '----'
+        recurring: '----'
     }
 });
 ```
@@ -112,5 +111,27 @@ let res = await axios({
 ```json
 {
     "message": "Invalid enum."
+}
+```
+
+### Example (invalid category)
+```js
+let res = await axios({
+    method: 'post',
+    url: 'https://tar-heel-calendar.herokuapp.com/makeevent',
+    data: {
+        token: 'bde8bf3f06cd24faabc60c9dfac94769daf666751eaea86e7f06255c9740',
+        title: 'Event title',
+        start: '2020-11-10 12:30:00',
+        end: '2020-11-11 12:30:00',
+        category: 50
+    }
+});
+```
+
+#### Response (status: 400)
+```json
+{
+    "message": "Category is NaN or out of range."
 }
 ```
