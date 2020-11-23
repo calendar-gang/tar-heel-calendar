@@ -16,13 +16,9 @@ class Day extends Component {
         super(props);
 
         this.scrollBox = React.createRef()
-
-        this.timeRef = {}
         this.display = "first"
 
-        for (let i = 0; i < 24; i++) {
-            this.timeRef[`${i}`] = React.createRef()
-        }
+        
 
         /*
         var now = new Date();
@@ -35,20 +31,30 @@ class Day extends Component {
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         */
         this.state = {
+            date: this.props.date,
+            dayEvents: this.initDayEvents(),
             eventlist: [],
             tasklist: [],
-            date: this.props.date,
+            cache: {},
             loggedIn: this._getCookie("token").length === 60,
             display: "first"
         }
-        console.log(this.state.date)
 
+        this.state.cache[this.state.date] = {}
     }
 
     componentDidMount() {
         this.scrollBox.current.scrollTop = 800
         this._getcurrentevents()
         this._getcurrenttasks()
+    }
+
+    initDayEvents() {
+        let dayEvents = {};
+        for(let i = 0; i < 24; i++) {
+            dayEvents[i] = [];
+        }
+        return dayEvents;
     }
 
     async _getcurrenttasks() {
@@ -73,8 +79,7 @@ class Day extends Component {
                     })
                 }
             }
-            this.setState({ tasklist: tlist });
-
+            this.setState({tasklist: tlist});
         }
         this.rendercurrenttasks()
 
@@ -117,8 +122,7 @@ class Day extends Component {
                     category: i % 9
                 })
             }
-            this.setState({ eventlist: elist });
-
+            this.setState({eventlist: elist});
         }
         this._rendercurrentevents()
     }
@@ -126,8 +130,9 @@ class Day extends Component {
 
     _rendercurrentevents() {
         for (let i = 0; i < this.state.eventlist.length; i++) {
-            let evt = this.state.eventlist[i]
-            ReactDOM.render(<DayEvent eventstate={evt}></DayEvent>, this.timeRef[`${evt.start}`].current)
+            let evt = this.state.eventlist[i];
+            let day_evt = <DayEvent eventstate={evt}></DayEvent>;
+            this.state.dayEvents[`${evt.start}`].push(day_evt);
         }
     }
 
@@ -164,11 +169,12 @@ class Day extends Component {
     handleSubmit(obj) {
         let current_events = [...this.state.eventlist];
         current_events.push(obj);
-        this.setState({ eventlist: current_events });
-        if (parseInt(obj.start) < 10) {
-            obj.start = obj.start.slice(1);
-        }
-        ReactDOM.render(<DayEvent eventstate={obj}></DayEvent>, this.timeRef[`${obj.start}`].current)
+        let day_evt = <DayEvent eventstate={obj}></DayEvent>;
+        this.state.dayEvents[`${obj.start}`].push(day_evt);
+        this.setState({ 
+            eventlist: current_events,
+            dayEvents: this.state.dayEvents
+        });
     }
 
 
@@ -182,7 +188,7 @@ class Day extends Component {
         return (
             <tr style={{ width: "100px" }}>
                 <th className="has-text-grey-light has-text-left is-narrow">{this._findHour(time)}</th>
-                <td ref={this.timeRef[`${time}`]} style={{ padding: "0px" }}></td>
+            <td style={{ padding: "0px" }}>{this.state.dayEvents[time]}</td>
             </tr>
         )
     }
@@ -332,7 +338,35 @@ class Day extends Component {
             // move backwards one day
             new_date_object.setDate(new_date_object.getDate() - 1);
         }
-        this.setState({ date: new_date_object })
+
+        this.state.cache[this.state.date] = {
+            date: this.state.date,
+            dayEvents: this.state.dayEvents,
+            eventlist: this.state.eventlist,
+            tasklist: this.state.tasklist,
+        }
+
+        if(this.state.cache[new_date_object]) {
+            this.setState({ 
+                date: new_date_object,
+                dayEvents: this.state.cache[new_date_object].dayEvents,
+                eventlist: this.state.cache[new_date_object].eventlist,
+                tasklist: this.state.cache[new_date_object].tasklist,
+            })
+        } else {
+            let new_state = {
+                date: new_date_object,
+                dayEvents: this.initDayEvents(),
+                eventlist: [],
+                tasklist: [],
+            }
+            this.state.cache[new_date_object] = {
+                dayEvents: new_state.dayEvents,
+                eventlist: new_state.eventlist,
+                tasklist: new_state.tasklist,
+            }
+            this.setState(new_state);
+        }
     }
 
     toggletools() {
