@@ -72,6 +72,9 @@ app.post('/maketask', makeTask);
 const {viewTasks} = require('./server/viewTasks');
 app.post('/viewtasks', viewTasks);
 
+const {deleteTask} = require('./server/deleteTask');
+app.delete('/deletetask', deleteTask);
+
 app.listen(port);
 
 console.log("App listening on port " + port)

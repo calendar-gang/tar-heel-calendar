@@ -1,8 +1,8 @@
 const {isStringValidLength} = require("./util");
 const {db} = require("../server");
 
-exports.deleteEvent = (req, res) => {
-    let { token, id } = req.body;
+exports.deleteTask = (req, res) => {
+    let {token, id} = req.body;
 
     if(!isStringValidLength(token, 60, 60)){
         res.status(400);
@@ -38,19 +38,19 @@ exports.deleteEvent = (req, res) => {
 
         let username = results[0].username;
 
-        db.query(`DELETE FROM events
+        db.query(`DELETE FROM tasks
                 WHERE username = ? AND id = ?`,
                 [username, Number(id)], (error, results, fields) => {
             if(error) throw error;
 
             if(results.affectedRows !== 0)
                 res.json({
-                    message: "Deleted event."
+                    message: "Deleted task."
                 });
             else{
                 res.status(400);
                 res.json({
-                    message: "No event found."
+                    message: "No task found."
                 });
             }
         });
