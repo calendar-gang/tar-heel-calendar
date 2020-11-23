@@ -16,7 +16,7 @@ class News extends Component {
     }
 
     async componentDidMount() {
-        var url = 'https://gnews.io/api/v4/search?q=example&token=' +
+        let url = 'https://gnews.io/api/v4/search?q=example&token=' +
         '4b261c4e9e3581ba343911efa830a0e8';
         const res = await axios({
             method: 'get',
