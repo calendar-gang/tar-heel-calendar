@@ -48,7 +48,7 @@ class DayEvent extends Component {
 
     }
 
-    submitEdit(event) {
+    async submitEdit(event) {
         this._toggleEventBox(event)
         let name = this.formFields.name.current.value
         let loc = this.formFields.location.current.value

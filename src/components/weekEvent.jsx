@@ -61,7 +61,7 @@ class WeekEvent extends Component {
         this.editBox.current.className = "is-hidden box monthevent"
     }
 
-    _submitEdit(event) {
+    async _submitEdit(event) {
         this._toggleEdit(event)
         window.alert("submitting")
         // all info for submit: 
