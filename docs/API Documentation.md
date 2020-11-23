@@ -18,3 +18,4 @@ This file provides a list of endpoints for the backend.
 
 ## Tasks
 * [/maketask](maketask.md): makes a task given a token and other information.
+* [/viewtasks](viewtasks.md): view tasks given a token.

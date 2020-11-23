@@ -69,6 +69,9 @@ app.post('/editevent', editEvent);
 const {makeTask} = require('./server/makeTask');
 app.post('/maketask', makeTask);
 
+const {viewTasks} = require('./server/viewTasks');
+app.post('/viewtasks', viewTasks);
+
 app.listen(port);
 
 console.log("App listening on port " + port)
