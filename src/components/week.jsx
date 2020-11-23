@@ -65,6 +65,7 @@ class Week extends Component {
                     token: this._getCookie("token")
                 }
             });
+            console.log(results)
             let events = results.data.results // this should hold our events results data !
             let elist = []
             for (let i = 0; i < events.length; i++) {
