@@ -144,7 +144,7 @@ class Day extends Component {
             const id = Math.random()
             d.id = id
             document.getElementById('newtasks').appendChild(d)
-            ReactDOM.render(<Task text={this.state.tasklist[i].content} complete={this.state.tasklist[i].iscompleted} id={this.state.tasklist[i].id}></Task>, document.getElementById(id));
+            ReactDOM.render(<Task text={this.state.tasklist[i].content} iscompleted={this.state.tasklist[i].iscompleted} id={this.state.tasklist[i].id}></Task>, document.getElementById(id));
         }
     }
 
@@ -245,7 +245,7 @@ class Day extends Component {
                 // <input type="checkbox"/>
                 // <label className="task" style={{marginLeft: "5px"}}>{tasktext}</label><br/>
                 // </div>), document.getElementById(id));
-                ReactDOM.render(<Task text={tasktext} complete={0} id={results.data.id}></Task>, document.getElementById(id));
+                ReactDOM.render(<Task text={tasktext} iscompleted={0} id={results.data.id}></Task>, document.getElementById(id));
             }
         }
 
