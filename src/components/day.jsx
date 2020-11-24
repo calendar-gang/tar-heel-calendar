@@ -129,7 +129,6 @@ class Day extends Component {
             }
             this.setState({ eventlist: elist });
         }
-        return elist;
     }
 
 
@@ -137,7 +136,11 @@ class Day extends Component {
         for (let i = 0; i < this.state.eventlist.length; i++) {
             let evt = this.state.eventlist[i];
             let day_evt = <DayEvent eventstate={evt}></DayEvent>;
-            this.state.dayEvents[`${evt.start}`].push(day_evt);
+            this.setState((state) => {
+                let day_events = Object.assign({}, state.dayEvents);
+                day_events[`${evt.start}`].push(day_evt);
+                return {dayEvents: day_events}
+            });
         }
     }
 
@@ -175,11 +178,17 @@ class Day extends Component {
         let current_events = [...this.state.eventlist];
         current_events.push(obj);
         let day_evt = <DayEvent eventstate={obj}></DayEvent>;
-        this.state.dayEvents[`${obj.start}`].push(day_evt);
-        this.setState({
-            eventlist: current_events,
-            dayEvents: this.state.dayEvents
+        this.setState((state) => {
+            let day_events = Object.assign({}, state.dayEvents);
+            day_events[`${evt.start}`].push(day_evt);
+            return {
+                dayEvents: day_events,
+                eventlist: current_events
+            }
         });
+        // this.setState({
+        //     eventlist: current_events
+        // });
     }
 
 
@@ -345,7 +354,9 @@ class Day extends Component {
 
         await this._getcurrentevents(new_date_object);
         await this._getcurrenttasks();
-        this.setState({ date: new_date_object });
+        this.setState({ 
+            date: new_date_object,
+        });
 
 
         // this.state.cache[this.state.date] = {
