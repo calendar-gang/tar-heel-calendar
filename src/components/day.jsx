@@ -45,7 +45,7 @@ class Day extends Component {
 
     componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        this._getcurrentevents()
+        this._getcurrentevents(this.state.date)
         this._getcurrenttasks()
     }
 
@@ -87,11 +87,12 @@ class Day extends Component {
 
     }
 
-    async _getcurrentevents() {
+    async _getcurrentevents(date) {
+        let elist = []
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${this.state.date.getDate()}`
+            let formatted_date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
             const results = await axios({
                 method: 'post',
@@ -103,7 +104,6 @@ class Day extends Component {
                 }
             });
             let events = results.data.results // this should hold our events results data !
-            let elist = []
             for (let i = 0; i < events.length; i++) {
                 let starttime = events[i].start
                 let endtime = events[i].end
@@ -129,6 +129,7 @@ class Day extends Component {
             this.setState({ eventlist: elist });
         }
         this._rendercurrentevents()
+        return elist;
     }
 
 
@@ -360,17 +361,14 @@ class Day extends Component {
             let new_state = {
                 date: new_date_object,
                 dayEvents: this.initDayEvents(),
-                eventlist: [],
                 tasklist: [],
             }
             this.state.cache[new_date_object] = {
                 dayEvents: new_state.dayEvents,
-                eventlist: new_state.eventlist,
-                tasklist: new_state.tasklist,
+                tasklist: new_state.tasklist
             }
+            this.state.cache[new_date_object]["eventlist"] = this._getcurrentevents(new_date_object);
             this.setState(new_state);
-            this.forceUpdate();
-            this._getcurrentevents();
         }
     }
 
