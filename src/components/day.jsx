@@ -91,7 +91,7 @@ class Day extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            let formatted_date = `${this.props.date.getFullYear()}-${this.props.date.getMonth()}-${this.props.date.getDate()}`
+            let formatted_date = `${this.props.date.getFullYear()}-${this.props.date.getMonth() + 1}-${this.props.date.getDate()}`
 
             const results = await axios({
                 method: 'post',
