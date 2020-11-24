@@ -64,7 +64,7 @@ class Month extends Component {
                     name: events[i].title,
                     location: events[i].location,
                     description: events[i].description,
-                    category: i % 9
+                    category: events[i].category
                 })
             }
             this.setState({ eventlist: elist });
@@ -265,7 +265,7 @@ class Month extends Component {
                         </div>
                         <div className="level-right">
                             <NewEntry submit={(obj) => this.createEvent(obj)}></NewEntry>
-                            <h1 onClick={() => this.switchMonth(1)} className="has-text-light" style={{ fontSize: "60px" , marginTop: "13px"}}><BiChevronRight /></h1>
+                            <h1 onClick={() => this.switchMonth(1)} className="has-text-light" style={{ fontSize: "60px", marginTop: "13px" }}><BiChevronRight /></h1>
                         </div>
                     </section>
                 </div >
