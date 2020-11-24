@@ -35,7 +35,7 @@ exports.viewTasks = (req, res) => {
             if(error) throw error;
 
             res.json({
-                message: "Got events.",
+                message: "Got tasks.",
                 results: results
             });
         });

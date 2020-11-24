@@ -25,7 +25,7 @@ let res = await axios({
 #### Response (status: 200)
 ```json
 {
-    "message": "Got events.",
+    "message": "Got tasks.",
     "results": [
         {
             "id": 3,
