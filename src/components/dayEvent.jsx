@@ -173,16 +173,11 @@ class DayEvent extends Component {
     }
 
     _getEventLength() {
-        let start = this.state.eventstate.start
-        let end = this.state.eventstate.end
-        if (this.state.eventstate.start > 12) {
-            start = start - 12
-        }
-        if (this.state.eventstate.end > 12) {
-            end = end - 12
-        }
-        let ending = end + (this.state.eventstate.emin / 60)
-        let starting = start + (this.state.eventstate.smin / 60)
+        let start = this.props.eventstate.start
+        let end = this.props.eventstate.end
+
+        let ending = end + (this.props.eventstate.emin / 60)
+        let starting = start + (this.props.eventstate.smin / 60)
         return ending - starting
     }
 
