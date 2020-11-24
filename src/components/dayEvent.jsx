@@ -166,8 +166,16 @@ class DayEvent extends Component {
     }
 
     _getEventLength() {
-        let ending = this.props.eventstate.end + (this.props.eventstate.emin / 60)
-        let starting = this.props.eventstate.start + (this.props.eventstate.smin / 60)
+        let start = this.props.eventstate.start
+        let end = this.props.eventstate.end
+        if (this.props.eventstate.start > 12) {
+            start = start - 12
+        }
+        if (this.props.eventstate.end > 12) {
+            end = end - 12
+        }
+        let ending = end + (this.props.eventstate.emin / 60)
+        let starting = start + (this.props.eventstate.smin / 60)
         return ending - starting
     }
 
@@ -235,5 +243,3 @@ class DayEvent extends Component {
 }
 
 export default DayEvent;
-
-// get check and x going on day, get default vals on week
