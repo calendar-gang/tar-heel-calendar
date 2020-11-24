@@ -23,14 +23,10 @@ class Week extends Component {
             date: date_to_set,
             cache: {},
             loggedIn: this._getCookie("token").length === 60,
-            event_objects: {}
+            event_objects: this.createEventObjs()
         }
 
-        for (let i = 0; i < 7; i++) {
-            for (let j = 0; j < 24; j++) {
-                this.state.event_objects[`${i}${j}`] = [];
-            }
-        }
+        
     }
 
     componentDidMount() {
@@ -39,7 +35,15 @@ class Week extends Component {
 
     }
 
-    
+    createEventObjs() {
+        let event_objects = [];
+        for (let i = 0; i < 7; i++) {
+            for (let j = 0; j < 24; j++) {
+                event_objects[`${i}${j}`] = [];
+            }
+        }
+        return event_objects;
+    }
 
 
     handleSubmit(obj) {
@@ -192,7 +196,7 @@ class Week extends Component {
             this.setState({ 
                 date: new_date_obj,
                 eventlist: [],
-                event_objects: []
+                event_objects: this.createEventObjs()
             }, () => this._getcurrentevents());
         }
     }
