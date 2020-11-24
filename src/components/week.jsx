@@ -16,6 +16,8 @@ class Week extends Component {
 
         let date_to_set = new Date(this.props.date.getTime());
         date_to_set.setDate(date_to_set.getDate() - date_to_set.getDay());
+        // fix for week being inaccurate
+        date_to_set.setHours(0,0,0,0);
         this.state = {
             eventlist: [],
             date: date_to_set,
@@ -139,7 +141,6 @@ class Week extends Component {
         var curr = new Date(this.state.date.getTime()); // get current date
         // var first = curr.getDate() - curr.getDay() - 1; // First day is the day of the month - the day of the week
         // var last = first + 6; // last day is the first day + 6
-
         var firstday = new Date(curr.getTime()).toUTCString();
         firstday = firstday.substring(0, 11)
         var lastday = new Date(curr.getTime());
