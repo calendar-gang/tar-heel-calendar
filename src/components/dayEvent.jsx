@@ -108,6 +108,16 @@ class DayEvent extends Component {
 
     }
 
+    _getTime(hour, mins) {
+        if (hour < 10) {
+            hour = "0" + hour
+        } 
+        if (mins < 10) {
+            mins = "0" + mins
+        }
+        return hour + ":" + mins 
+    }
+
 
     _createEventBox() {
         const event_style = {
@@ -119,25 +129,9 @@ class DayEvent extends Component {
             zIndex: "1",
             overflow: "scroll"
         }
-
-        let start = this.props.eventstate.start.length
-        let smins = this.props.eventstate.smin
-        let end = this.props.eventstate.end.length
-        let emins = this.props.eventstate.emin
-        if (this.props.eventstate.start.length == 1) {
-            start = '0' + start
-        } 
-        if (this.props.eventstate.smin.length == 1) {
-            smins = '0' + smins
-        } 
-        if (this.props.eventstate.end.length == 1) {
-            end = '0' + end
-        } 
-        if (this.props.eventstate.emin.length == 1) {
-            emins = '0' + emins 
-        } 
-        let defaultstart = start + ":" + smins
-        let defaultend = end + ":" + emins
+ 
+        let defaultstart = this._getTime(this.props.eventstate.start, this.props.eventstate.smin)
+        let defaultend = this._getTime(this.props.eventstate.end, this.props.eventstate.emin)
 
         return (
             <div ref={this.eventBox} className="is-hidden box" style={event_style}>
