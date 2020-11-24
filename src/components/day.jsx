@@ -66,7 +66,6 @@ class Day extends Component {
                     token: this._getCookie("token")
                 }
             });
-            console.log(results)
             let tasks = results.data.results // this should hold our tasks results data !
             let tlist = []
             for (let i = 0; i < tasks.length; i++) {
@@ -122,7 +121,7 @@ class Day extends Component {
                     category: events[i].category
                 })
             }
-            this.setState({ eventlist: elist }, ()=>this._rendercurrentevents());
+            this.setState({ eventlist: elist }, () => this._rendercurrentevents());
         }
     }
 
@@ -381,7 +380,6 @@ class Day extends Component {
                 display: "first"
             })
         }
-        console.log(this.display)
     }
 
     rendertools() {

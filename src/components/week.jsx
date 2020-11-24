@@ -17,7 +17,7 @@ class Week extends Component {
         let date_to_set = new Date(this.props.date.getTime());
         date_to_set.setDate(date_to_set.getDate() - date_to_set.getDay());
         // fix for week being inaccurate
-        date_to_set.setHours(0,0,0,0);
+        date_to_set.setHours(0, 0, 0, 0);
         this.state = {
             eventlist: [],
             date: date_to_set,
@@ -26,7 +26,7 @@ class Week extends Component {
             event_objects: this.createEventObjs()
         }
 
-        
+
     }
 
     componentDidMount() {
@@ -48,15 +48,14 @@ class Week extends Component {
 
     handleSubmit(obj) {
         let current_events = [...this.state.eventlist];
-        // console.log(obj)
         current_events.push(obj);
         let date = new Date(obj.date);
         date.setDate(date.getDate() + 1);
         let evt = <WeekEvent eventstate={obj}></WeekEvent>
         this.state.event_objects[`${date.getDay()}${obj.start}`].push(evt);
-        this.setState({ 
+        this.setState({
             eventlist: current_events,
-            event_objects: this.state.event_objects 
+            event_objects: this.state.event_objects
         });
     }
 
@@ -86,7 +85,6 @@ class Week extends Component {
                     latest: `${formatted_end_date} 23:59:00`
                 }
             });
-            console.log(results)
             let events = results.data.results // this should hold our events results data !
             let elist = []
             for (let i = 0; i < events.length; i++) {
@@ -186,14 +184,14 @@ class Week extends Component {
             event_objects: this.state.event_objects
         }
 
-        if(this.state.cache[new_date_obj]) {
+        if (this.state.cache[new_date_obj]) {
             this.setState({
                 date: new_date_obj,
                 eventlist: this.state.cache[new_date_obj].eventlist,
                 event_objects: this.state.cache[new_date_obj].event_objects
             })
         } else {
-            this.setState({ 
+            this.setState({
                 date: new_date_obj,
                 eventlist: [],
                 event_objects: this.createEventObjs()
@@ -206,7 +204,7 @@ class Week extends Component {
         let date_clone = new Date(this.state.date.getTime());
         date_clone.setDate(date_clone.getDate() - date_clone.getDay());
         let dates = [];
-        for(let i = 0; i < 7; i++) {
+        for (let i = 0; i < 7; i++) {
             dates.push((date_clone.getMonth() + 1) + "/" + date_clone.getDate());
             date_clone.setDate(date_clone.getDate() + 1);
         }

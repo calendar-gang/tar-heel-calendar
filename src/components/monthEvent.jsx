@@ -82,12 +82,6 @@ class MonthEvent extends Component {
         let startdate = date + " " + start + ":00"
         let enddate = date + " " + end + ":00"
 
-        console.log(name)
-        console.log(loc)
-        console.log(des)
-        console.log(startdate)
-        console.log(enddate)
-
         if (this.state.loggedIn) {
             const results = await axios({
                 method: 'post',
@@ -104,7 +98,6 @@ class MonthEvent extends Component {
             });
 
             if (results.data.message === "Event edited.") {
-                console.log("success!!")
                 this.setState({
                     eventstate: {
                         id: this.state.eventstate.id,
@@ -125,7 +118,6 @@ class MonthEvent extends Component {
     }
 
     async _submitDelete() {
-        console.log("made to delete")
         if (this.state.loggedIn) {
             const results = await axios({
                 method: 'delete',
@@ -137,7 +129,6 @@ class MonthEvent extends Component {
             });
 
             if (results.data.message === "Deleted event.") {
-                console.log("delete success!!")
                 this.setState({ showEvent: !this.state.showEvent })
                 // this.render()
             }
@@ -192,11 +183,11 @@ class MonthEvent extends Component {
     _getTime(hour, mins) {
         if (hour < 10) {
             hour = "0" + hour
-        } 
+        }
         if (mins < 10) {
             mins = "0" + mins
         }
-        return hour + ":" + mins 
+        return hour + ":" + mins
     }
 
     _createEditBox() {

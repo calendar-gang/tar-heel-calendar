@@ -80,7 +80,6 @@ class WeekEvent extends Component {
             });
 
             if (results.data.message === "Deleted event.") {
-                console.log("delete success!!")
                 this.setState({ showEvent: !this.state.showEvent })
 
             }
@@ -101,12 +100,6 @@ class WeekEvent extends Component {
 
         let startdate = date + " " + start + ":00"
         let enddate = date + " " + end + ":00"
-
-        console.log(name)
-        console.log(loc)
-        console.log(des)
-        console.log(startdate)
-        console.log(enddate)
 
         if (this.state.loggedIn) {
             const results = await axios({
@@ -208,9 +201,6 @@ class WeekEvent extends Component {
         let defaultstart = this._getTime(this.state.eventstate.start, this.state.eventstate.smin)
         let defaultend = this._getTime(this.state.eventstate.end, this.state.eventstate.emin)
 
-        console.log(defaultstart)
-        console.log(defaultend)
-
 
         return (
             <div ref={this.editBox} className="is-hidden box" style={event_style}>
@@ -261,7 +251,7 @@ class WeekEvent extends Component {
             padding: "10px"
         }
 
-        // console.log(event_style.height)
+
 
         if (this.state.showEvent) {
             return (
