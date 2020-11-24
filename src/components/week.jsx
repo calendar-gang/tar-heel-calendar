@@ -19,13 +19,14 @@ class Week extends Component {
         this.state = {
             eventlist: [],
             date: date_to_set,
+            cache: {},
             loggedIn: this._getCookie("token").length === 60,
-            inputRef: {}
+            event_objects: {}
         }
 
         for (let i = 0; i < 7; i++) {
             for (let j = 0; j < 24; j++) {
-                this.state.inputRef[`${i}${j}`] = React.createRef()
+                this.state.event_objects[`${i}${j}`] = [];
             }
         }
     }
@@ -41,8 +42,12 @@ class Week extends Component {
         current_events.push(obj);
         let date = new Date(obj.date);
         date.setDate(date.getDate() + 1);
-        ReactDOM.render(<WeekEvent eventstate={obj}></WeekEvent>, this.state.inputRef[`${date.getDay()}${obj.start}`].current);
-        this.setState({ eventlist: current_events });
+        let evt = <WeekEvent eventstate={obj}></WeekEvent>
+        this.state.event_objects[`${date.getDay()}${obj.start}`].push(evt);
+        this.setState({ 
+            eventlist: current_events,
+            event_objects: this.state.event_objects 
+        });
     }
 
     _getCookie(name) {
@@ -107,7 +112,7 @@ class Week extends Component {
     _renderRowByHour(time) {
         let rows = [];
         for (let i = 0; i < 7; i++) {
-            rows.push(<td style={{ padding: "0px 8px" }} ref={this.state.inputRef[`${i}${time}`]}></td>);
+            rows.push(<td style={{ padding: "0px 8px" }}>{this.state.event_objects[`${i}${time}`]}</td>);
         }
 
         return (
@@ -149,8 +154,12 @@ class Week extends Component {
     _rendercurrentevents() {
         for (let i = 0; i < this.state.eventlist.length; i++) {
             let evt = this.state.eventlist[i]
-            ReactDOM.render(<WeekEvent eventstate={evt}></WeekEvent>, this.state.inputRef[`${evt.day}${evt.start}`].current)
+            let evt_obj = <WeekEvent eventstate={evt}></WeekEvent>;
+            this.state.event_objects[`${evt.day}${evt.start}`].push(evt_obj);
         }
+        this.setState({
+            event_objects: this.state.event_objects
+        });
     }
 
     changeWeek(direction) {
@@ -160,7 +169,26 @@ class Week extends Component {
         } else {
             new_date_obj.setDate(new_date_obj.getDate() - 7);
         }
-        this.setState({ date: new_date_obj })
+
+        this.state.cache[this.state.date] = {
+            date: this.state.date,
+            eventlist: this.state.eventlist,
+            event_objects: this.state.event_objects
+        }
+
+        if(this.state.cache[new_date_obj]) {
+            this.setState({
+                date: new_date_obj,
+                eventlist: this.state.cache[new_date_obj].eventlist,
+                event_objects: this.state.cache[new_date_obj].event_objects
+            })
+        } else {
+            this.setState({ 
+                date: new_date_obj,
+                eventlist: [],
+                event_objects: []
+            })
+        }
     }
 
     render() {
