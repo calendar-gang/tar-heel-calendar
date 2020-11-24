@@ -28,7 +28,9 @@ class AutoCompleteText extends Component {
             });
             let events = eventresults.data.results // this should hold our events results data !
             for (let i = 0; i < events.length; i++) {
-                this.items.push(events[i].title)
+                if (!this.items.includes(events[i].title)) {
+                    this.items.push(events[i].title)
+                }
             }
             const taskresults = await axios({
                 method: 'post',
@@ -39,7 +41,9 @@ class AutoCompleteText extends Component {
             });
             let tasks = taskresults.data.results // this should hold our events results data !
             for (let i = 0; i < tasks.length; i++) {
-                this.items.push(tasks[i].description)
+                if (!this.items.includes(tasks[i].title)) {
+                    this.items.push(tasks[i].description)
+                }
 
             }
 
