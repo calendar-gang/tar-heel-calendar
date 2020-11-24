@@ -125,10 +125,18 @@ class WeekEvent extends Component {
     }
 
     _getEventLength() {
-        let ending = this.props.eventstate.end + (this.props.eventstate.emin / 60)
-        let starting = this.props.eventstate.start + (this.props.eventstate.smin / 60)
+        let start = this.props.eventstate.start
+        let end = this.props.eventstate.end
+        if (this.props.eventstate.start > 12) {
+            start = start - 12
+        }
+        if (this.props.eventstate.end > 12) {
+            end = end - 12
+        }
+        let ending = end + (this.props.eventstate.emin / 60)
+        let starting = start + (this.props.eventstate.smin / 60)
         return ending - starting
-    }
+    } 
 
 
     _createEventBox() {
@@ -233,6 +241,8 @@ class WeekEvent extends Component {
             margin: `${(this.props.eventstate.smin / 60) * 80}px 0px 0px 0px`,
             padding: "10px"
         }
+
+        // console.log(event_style.height)
 
         if (this.state.showEvent) {
             return (
