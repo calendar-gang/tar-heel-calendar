@@ -38,6 +38,8 @@ class Month extends Component {
             let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${1}`;
             let end_of_month = this.numDays(this.state.date.getFullYear(), this.state.date.getMonth())
             let formatted_end_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${end_of_month}`;
+            console.log(formatted_date);
+            console.log(formatted_end_date);
             const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
