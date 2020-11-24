@@ -203,6 +203,13 @@ class Week extends Component {
 
     render() {
         let header_style = { position: "sticky", top: "0px", zIndex: "2", backgroundColor: "#fff" }
+        let date_clone = new Date(this.state.date.getTime());
+        date_clone.setDate(date_clone.getDate() - date_clone.getDay());
+        let dates = [];
+        for(let i = 0; i < 7; i++) {
+            dates.push((date_clone.getMonth() + 1) + "/" + date_clone.getDate());
+            date_clone.setDate(date_clone.getDate() + 1);
+        }
         return (
             <div className="calendar">
                 <div className="container">
@@ -223,13 +230,13 @@ class Week extends Component {
                         <thead style={header_style}>
                             <tr className="is-bordered" style={header_style}>
                                 <th style={header_style}></th>
-                                <th className="has-text-grey-light" style={header_style}>Sunday</th>
-                                <th className="has-text-grey-light" style={header_style}>Monday</th>
-                                <th className="has-text-grey-light" style={header_style}>Tuesday</th>
-                                <th className="has-text-grey-light" style={header_style}>Wednesday</th>
-                                <th className="has-text-grey-light" style={header_style}>Thursday</th>
-                                <th className="has-text-grey-light" style={header_style}>Friday</th>
-                                <th className="has-text-grey-light" style={header_style}>Saturday</th>
+                                <th className="has-text-grey-light" style={header_style}>Sunday {dates[0]}</th>
+                                <th className="has-text-grey-light" style={header_style}>Monday {dates[1]}</th>
+                                <th className="has-text-grey-light" style={header_style}>Tuesday {dates[2]}</th>
+                                <th className="has-text-grey-light" style={header_style}>Wednesday {dates[3]}</th>
+                                <th className="has-text-grey-light" style={header_style}>Thursday {dates[4]}</th>
+                                <th className="has-text-grey-light" style={header_style}>Friday {dates[5]}</th>
+                                <th className="has-text-grey-light" style={header_style}>Saturday {dates[6]}</th>
                             </tr>
                         </thead>
                         {this._renderBody()}
