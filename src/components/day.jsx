@@ -33,7 +33,7 @@ class Day extends Component {
         this.state = {
             date: this.props.date,
             dayEvents: this.initDayEvents(),
-            eventlist: [],
+            eventlist: this._getcurrentevents(this.props.date),
             tasklist: [],
             cache: {},
             loggedIn: this._getCookie("token").length === 60,
@@ -45,7 +45,7 @@ class Day extends Component {
 
     componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        this._getcurrentevents(this.state.date)
+        // this._getcurrentevents(this.state.date)
         this._getcurrenttasks()
     }
 
