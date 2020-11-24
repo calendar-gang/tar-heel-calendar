@@ -35,8 +35,8 @@ exports.isBooleanValid = (bool, ndAllowed) => {
  * This is a bit smarter than what it looks like, I swear!
  */
 exports.isBooleanTrue = (bool) => {
-    return bool !== undefined && bool !== null && ((typeof(bool) === 'string' && bool === 'true') || (typeof(bool) === 'boolean' && bool));
-}
+    return bool === undefined || bool === null ? undefined : ((typeof(bool) === 'string' && bool === 'true') || (typeof(bool) === 'boolean' && bool));
+};
 
 exports.getHashedPassword = (password) => {
     return crypto.createHash('sha256').update(password).digest('base64');
