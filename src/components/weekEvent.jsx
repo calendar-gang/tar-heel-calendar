@@ -10,7 +10,7 @@ class WeekEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, viewState: "normal", loggedIn: this._getCookie("token").length === 60, showEvent: true};
+        this.state = { windowWidth: window.innerWidth, viewState: "normal", loggedIn: this._getCookie("token").length === 60, showEvent: true };
 
         this.eventBox = React.createRef()   // reference for hidden event details pop-up
         this.editBox = React.createRef()    // reference for hidden event edit pop-up
@@ -136,7 +136,7 @@ class WeekEvent extends Component {
         let ending = end + (this.props.eventstate.emin / 60)
         let starting = start + (this.props.eventstate.smin / 60)
         return ending - starting
-    } 
+    }
 
 
     _createEventBox() {
@@ -218,15 +218,15 @@ class WeekEvent extends Component {
     _findHour(hour, minutes) {
         if (hour < 12) {
             if (hour === 0) {
-                return minutes === 0 ? "12 AM" : `12:${minutes} AM`
+                return minutes === 0 ? "12 AM" : `12:${minutes < 10 ? `0${minutes}` : minutes} AM`
             } else {
-                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes} AM`
+                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes < 10 ? `0${minutes}` : minutes} AM`
             }
         } else {
             if (hour % 12 === 0) {
-                return minutes === 0 ? "12 PM" : `12:${minutes} PM`
+                return minutes === 0 ? "12 PM" : `12:${minutes < 10 ? `0${minutes}` : minutes} PM`
             } else {
-                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes} PM`
+                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes < 10 ? `0${minutes}` : minutes} PM`
             }
 
         }
@@ -254,8 +254,8 @@ class WeekEvent extends Component {
                     { this._createEventBox()}
                     {this._createEditBox()}
                 </div >
-    
-    
+
+
             )
         } else {
             return (

@@ -45,9 +45,8 @@ class Day extends Component {
 
     async componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        await this._getcurrentevents(this.state.date)
+        await this._getcurrentevents(this.state.date).then(this._rendercurrentevents())
         await this._getcurrenttasks()
-        this._rendercurrentevents()
         this.rendercurrenttasks()
     }
 

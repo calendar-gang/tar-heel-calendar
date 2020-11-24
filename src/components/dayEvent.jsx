@@ -10,7 +10,7 @@ class DayEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60 , showEvent: true};
+        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60, showEvent: true };
 
         this.eventBox = React.createRef()
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
@@ -182,15 +182,15 @@ class DayEvent extends Component {
     _findHour(hour, minutes) {
         if (hour < 12) {
             if (hour === 0) {
-                return minutes === 0 ? "12 AM" : `12:${minutes} AM`
+                return minutes === 0 ? "12 AM" : `12:${minutes < 10 ? `0${minutes}` : minutes} AM`
             } else {
-                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes} AM`
+                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes < 10 ? `0${minutes}` : minutes} AM`
             }
         } else {
             if (hour % 12 === 0) {
-                return minutes === 0 ? "12 PM" : `12:${minutes} PM`
+                return minutes === 0 ? "12 PM" : `12:${minutes < 10 ? `0${minutes}` : minutes} PM`
             } else {
-                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes} PM`
+                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes < 10 ? `0${minutes}` : minutes} PM`
             }
 
         }
@@ -224,7 +224,7 @@ class DayEvent extends Component {
                         <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.location}</p>
                         <hr className="hr" style={{ margin: "4px" }}></hr>
                         <p className="has-text-left" style={{ fontSize: "13px", color: this.darkcatcolors[this.props.eventstate.category % 9] }}>{this.props.eventstate.description}</p>
-    
+
                     </div>
                     {this._createEventBox()}
                 </div>)

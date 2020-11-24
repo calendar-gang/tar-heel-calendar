@@ -137,15 +137,15 @@ class MonthEvent extends Component {
     _findHour(hour, minutes) {
         if (hour < 12) {
             if (hour === 0) {
-                return minutes === 0 ? "12 AM" : `12:${minutes} AM`
+                return minutes === 0 ? "12 AM" : `12:${minutes < 10 ? `0${minutes}` : minutes} AM`
             } else {
-                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes} AM`
+                return minutes === 0 ? `${hour} AM` : `${hour}:${minutes < 10 ? `0${minutes}` : minutes} AM`
             }
         } else {
             if (hour % 12 === 0) {
-                return minutes === 0 ? "12 PM" : `12:${minutes} PM`
+                return minutes === 0 ? "12 PM" : `12:${minutes < 10 ? `0${minutes}` : minutes} PM`
             } else {
-                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes} PM`
+                return minutes === 0 ? `${hour % 12} PM` : `${hour % 12}:${minutes < 10 ? `0${minutes}` : minutes} PM`
             }
 
         }
