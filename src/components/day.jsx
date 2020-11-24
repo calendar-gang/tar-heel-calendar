@@ -43,10 +43,10 @@ class Day extends Component {
         // this.state.cache[this.state.date] = {}
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        this._getcurrentevents(this.state.date)
-        this._getcurrenttasks()
+        await this._getcurrentevents(this.state.date)
+        await this._getcurrenttasks()
         this._rendercurrentevents()
         this.rendercurrenttasks()
     }
