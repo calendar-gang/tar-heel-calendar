@@ -70,11 +70,9 @@ class Month extends Component {
                     category: events[i].category
                 })
             }
-            this.setState({ eventlist: elist });
+            this.setState({ eventlist: elist }, () => this._rendercurrentevents());
 
         }
-
-        this._rendercurrentevents()
 
     }
 
@@ -222,7 +220,7 @@ class Month extends Component {
                 days: create_day.days,
                 dayRef: create_day.dayRef,
                 month_struct: create_day.month_struct
-            }, () => this._rendercurrentevents());
+            }, () => this._getcurrentevents());
         } else {
             this.setState({
                 date: date_to_set,
