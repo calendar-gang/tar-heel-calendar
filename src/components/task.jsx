@@ -23,9 +23,7 @@ class Task extends Component {
     }
 
     async strikethrough() {
-        console.log("made it to strikethrough")
         if (this.state.style.textDecoration === "none") {
-            console.log("made it to trying to query to complete")
             console.log(this.state.loggedIn)
             if (this.state.loggedIn) {
                 const results = await axios({
@@ -46,7 +44,6 @@ class Task extends Component {
 
 
         } else {
-            console.log("made it to trying to query to uncomplete")
             if (this.state.loggedIn) {
                 const results = await axios({
                     method: 'post',
