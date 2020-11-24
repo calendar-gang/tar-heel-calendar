@@ -91,7 +91,7 @@ class Day extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            let formatted_date = `${this.props.date.getFullYear()}-${this.props.date.getMonth() + 1}-${this.props.date.getDate()}`
+            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${this.state.date.getDate()}`
 
             const results = await axios({
                 method: 'post',
@@ -107,7 +107,7 @@ class Day extends Component {
             for (let i = 0; i < events.length; i++) {
                 let starttime = events[i].start
                 let endtime = events[i].end
-                let day = starttime.split("T")[0].split("-")[2] - 22 // 22 should be whatever the beginning of the week date is
+                let day = starttime.split("T")[0].split("-")[2]
                 let start = starttime.split("T")[1].split(":")[0]
                 let minspaststart = starttime.split("T")[1].split(":")[1]
                 let end = endtime.split("T")[1].split(":")[0]
