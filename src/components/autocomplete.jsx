@@ -31,6 +31,9 @@ class AutoCompleteText extends Component {
                 if (!this.items.includes(events[i].title)) {
                     this.items.push(events[i].title)
                 }
+                if (!this.items.includes(events[i].location)) {
+                    this.items.push(events[i].location)
+                }
             }
             const taskresults = await axios({
                 method: 'post',
