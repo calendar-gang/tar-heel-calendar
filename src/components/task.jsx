@@ -24,7 +24,6 @@ class Task extends Component {
 
     async strikethrough() {
         if (this.state.style.textDecoration === "none") {
-            console.log(this.state.loggedIn)
             if (this.state.loggedIn) {
                 const results = await axios({
                     method: 'post',
