@@ -44,6 +44,7 @@ class Week extends Component {
 
     handleSubmit(obj) {
         let current_events = [...this.state.eventlist];
+        // console.log(obj)
         current_events.push(obj);
         let date = new Date(obj.date);
         date.setDate(date.getDate() + 1);
