@@ -47,6 +47,8 @@ class Day extends Component {
         this.scrollBox.current.scrollTop = 800
         this._getcurrentevents(this.state.date)
         this._getcurrenttasks()
+        this._rendercurrentevents()
+        this.rendercurrenttasks()
     }
 
     initDayEvents() {
@@ -83,7 +85,7 @@ class Day extends Component {
             this.setState({ tasklist: tlist });
 
         }
-        this.rendercurrenttasks()
+
 
     }
 
@@ -128,7 +130,6 @@ class Day extends Component {
             }
             this.setState({ eventlist: elist });
         }
-        this._rendercurrentevents()
         return elist;
     }
 
@@ -345,7 +346,7 @@ class Day extends Component {
 
         await this._getcurrentevents(new_date_object);
         await this._getcurrenttasks();
-        this.setState({date: new_date_object});
+        this.setState({ date: new_date_object });
 
 
         // this.state.cache[this.state.date] = {
