@@ -176,22 +176,25 @@ class WeekEvent extends Component {
             padding: "10px"
         }
 
-        let defaultstart = this.props.eventstate.start + ":" + this.props.eventstate.smin
-        let defaultend = this.props.eventstate.end + ":" + this.props.eventstate.emin
-        if (defaultstart.length === 4) {
-            if (defaultstart.split(":")[0].length === 1) {
-                defaultstart = 0 + defaultstart
-            } else {
-                defaultstart = defaultstart + 0
-            }
-        }
-        if (defaultend.length === 4) {
-            if (defaultend.split(":")[0].length === 1) {
-                defaultend = 0 + defaultend
-            } else {
-                defaultend = defaultend + 0
-            }
-        }
+        let start = this.props.eventstate.start.length
+        let smins = this.props.eventstate.smin
+        let end = this.props.eventstate.end.length
+        let emins = this.props.eventstate.emin
+        if (this.props.eventstate.start.length == 1) {
+            start = '0' + start
+        } 
+        if (this.props.eventstate.smin.length == 1) {
+            smins = '0' + smins
+        } 
+        if (this.props.eventstate.end.length == 1) {
+            end = '0' + end
+        } 
+        if (this.props.eventstate.emin.length == 1) {
+            emins = '0' + emins 
+        } 
+        let defaultstart = start + ":" + smins
+        let defaultend = end + ":" + emins
+
 
         return (
             <div ref={this.editBox} className="is-hidden box" style={event_style}>
