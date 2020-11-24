@@ -10,7 +10,7 @@ class DayEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60 };
+        this.state = { windowWidth: window.innerWidth, loggedIn: this._getCookie("token").length === 60 , showEvent: true};
 
         this.eventBox = React.createRef()
         this.formFields = { name: React.createRef(), location: React.createRef(), description: React.createRef(), date: React.createRef(), start: React.createRef(), end: React.createRef() }
@@ -102,6 +102,7 @@ class DayEvent extends Component {
 
             if (results.data.message === "Deleted event.") {
                 console.log("delete success!!")
+                this.setState({ showEvent: !this.state.showEvent })
             }
         }
 

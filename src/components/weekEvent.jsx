@@ -10,7 +10,7 @@ class WeekEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { windowWidth: window.innerWidth, viewState: "normal", loggedIn: this._getCookie("token").length === 60, };
+        this.state = { windowWidth: window.innerWidth, viewState: "normal", loggedIn: this._getCookie("token").length === 60, showEvent: true};
 
         this.eventBox = React.createRef()   // reference for hidden event details pop-up
         this.editBox = React.createRef()    // reference for hidden event edit pop-up
@@ -75,6 +75,7 @@ class WeekEvent extends Component {
 
             if (results.data.message === "Deleted event.") {
                 console.log("delete success!!")
+                this.setState({ showEvent: !this.state.showEvent })
 
             }
         }
