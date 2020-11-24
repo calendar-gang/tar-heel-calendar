@@ -11,7 +11,7 @@ class NewEntry extends Component {
         super(props)
         this.state = {
             view: "modal",
-            style: { backgroundColor: "white" }, 
+            style: { backgroundColor: "white" },
             category: 0
         }
 
@@ -24,9 +24,9 @@ class NewEntry extends Component {
         let ev = this.state.event
         let loc = this.state.loc
         if (this.state.view === "modal is-active") {
-            this.setState({ view: "modal"});
+            this.setState({ view: "modal" });
         } else {
-            this.setState({ view: "modal is-active"});
+            this.setState({ view: "modal is-active" });
         }
     }
 
@@ -47,6 +47,7 @@ class NewEntry extends Component {
         let des = this.formFields.description.current.value
         let start = this.formFields.start.current.value
         let end = this.formFields.end.current.value
+        let category = this.state.category
 
 
         // access event category through this.state.category
@@ -60,7 +61,6 @@ class NewEntry extends Component {
         let enddate = date + " " + end + ":00"
         let recurring = 'weekly'
         let reccuringuntil = '2020-12-11 12:30:00'
-        let category = Math.floor((Math.random() * 8) + 1)
 
 
         if (this._getCookie("token") === "") {
@@ -95,11 +95,13 @@ class NewEntry extends Component {
             this.props.submit({
                 date: date,
                 start: start.split(":")[0],
+                smin: start.split(":")[1],
                 end: end.split(":")[0],
+                emin: end.split(":")[1],
                 name: name,
                 location: loc,
                 description: des,
-                category: 1
+                category: category
             });
         }
 
@@ -162,15 +164,15 @@ class NewEntry extends Component {
                                 <div className="dropdown" style={{ width: "75px", marginTop: "10px", marginLeft: "10px" }}>
                                     <button className="dropbtn button" style={this.state.style}>Category</button>
                                     <div className="dropdown-content" style={{ marginLeft: "10px", width: "75px", height: "200px", overflow: "scroll" }}>
-                                        <div className="box" style={{ backgroundColor: "#ffd4d4", width: "75px" }} onClick={() => this.setState({style: { backgroundColor: "#ffd4d4" }, category: 0})}></div>
-                                        <div className="box" style={{ backgroundColor: "#ffe6d4", width: "75px" }} onClick={() => this.setState({style: { backgroundColor: "#ffe6d4" } , category: 1})}></div>
-                                        <div className="box" style={{ backgroundColor: "#fffbd4", width: "75px" }} onClick={() => this.setState({style: { backgroundColor: "#fffbd4" }, category: 2})}></div>
-                                        <div className="box" style={{ backgroundColor: "#e2ffd4", width: "75px" }} onClick={() => this.setState({style: { backgroundColor: "#e2ffd4" }, category: 3 })}></div>
-                                        <div className="box" style={{ backgroundColor: "#d4ffec", width: "75px" }} onClick={() => this.setState({style: { backgroundColor: "#d4ffec" }, category: 4 })}></div>
+                                        <div className="box" style={{ backgroundColor: "#ffd4d4", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#ffd4d4" }, category: 0 })}></div>
+                                        <div className="box" style={{ backgroundColor: "#ffe6d4", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#ffe6d4" }, category: 1 })}></div>
+                                        <div className="box" style={{ backgroundColor: "#fffbd4", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#fffbd4" }, category: 2 })}></div>
+                                        <div className="box" style={{ backgroundColor: "#e2ffd4", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#e2ffd4" }, category: 3 })}></div>
+                                        <div className="box" style={{ backgroundColor: "#d4ffec", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#d4ffec" }, category: 4 })}></div>
                                         <div className="box" style={{ backgroundColor: "#d4f6ff", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#d4f6ff" }, category: 5 })}></div>
-                                        <div className="box" style={{ backgroundColor: "#d4dfff", width: "75px" }} onClick={() => this.setState({style: { backgroundColor: "#d4dfff" }, category: 6 })}></div>
+                                        <div className="box" style={{ backgroundColor: "#d4dfff", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#d4dfff" }, category: 6 })}></div>
                                         <div className="box" style={{ backgroundColor: "#f0d4ff", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#f0d4ff" }, category: 7 })}></div>
-                                        <div className="box" style={{ backgroundColor: "#ffd4ee", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#ffd4ee" }, category: 8})}></div>
+                                        <div className="box" style={{ backgroundColor: "#ffd4ee", width: "75px" }} onClick={() => this.setState({ style: { backgroundColor: "#ffd4ee" }, category: 8 })}></div>
                                     </div>
                                 </div>
                             </div>
