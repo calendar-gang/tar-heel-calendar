@@ -343,7 +343,7 @@ class Day extends Component {
             new_date_object.setDate(new_date_object.getDate() - 1);
         }
 
-        await this._getcurrentevents();
+        await this._getcurrentevents(new_date_object);
         await this._getcurrenttasks();
         this.setState({date: new_date_object});
 
