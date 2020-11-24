@@ -50,9 +50,6 @@ class NewEntry extends Component {
         let category = this.state.category
 
 
-        // access event category through this.state.category
-        console.log(this.state.category)
-
         // validate fields and process dates for entry
         // eventually needs recurring fields and category
         // let startdate = '2020-11-10 12:30:00'
@@ -109,7 +106,6 @@ class NewEntry extends Component {
 
     updateAutoValsEvent(value) {
         this.autoinfo[0] = value;
-        // console.log(this.autoinfo[0])
     }
 
     updateAutoValsLoc(value) {
