@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom'
 import DayEvent from './dayEvent'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import axios from '../../node_modules/axios/index.js';
-import { response } from 'express';
 
 class Day extends Component {
     state = {}
@@ -46,10 +45,9 @@ class Day extends Component {
 
     async componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        await this._getcurrentevents(this.state.date);
-        await this._getcurrenttasks();
-        this.rendercurrenttasks();
-        this._rendercurrentevents();
+        await this._getcurrentevents(this.state.date)
+        await this._getcurrenttasks()
+        this.rendercurrenttasks()
     }
 
     initDayEvents() {
@@ -70,19 +68,6 @@ class Day extends Component {
                 data: {
                     token: this._getCookie("token")
                 }
-            }).then((response) => {
-                let tasks = response.data.results // this should hold our tasks results data !
-                let tlist = []
-                for (let i = 0; i < tasks.length; i++) {
-                    if (tasks[i].isshown === 1) {
-                        tlist.push({
-                            content: tasks[i].description,
-                            iscompleted: tasks[i].iscompleted,
-                            id: tasks[i].id
-                        })
-                    }
-                }  
-                this.setState({ tasklist: tlist });
             });
             console.log(results)
             let tasks = results.data.results // this should hold our tasks results data !
