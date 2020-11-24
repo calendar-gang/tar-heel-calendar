@@ -223,6 +223,7 @@ class Month extends Component {
                 dayRef: create_day.dayRef,
                 month_struct: create_day.month_struct
             });
+            this._rendercurrentevents()
         } else {
             this.setState({
                 date: date_to_set,
