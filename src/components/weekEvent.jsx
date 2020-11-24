@@ -57,8 +57,8 @@ class WeekEvent extends Component {
     _toggleEdit(event) {
         event.preventDefault()
         this.state.viewState = "normal";
-        this.eventBox.current.className = "box monthevent";
-        this.editBox.current.className = "is-hidden box monthevent"
+        this.eventBox.current.className = "box";
+        this.editBox.current.className = "is-hidden box"
     }
 
     async _submitDelete() {
