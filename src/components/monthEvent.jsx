@@ -105,7 +105,20 @@ class MonthEvent extends Component {
 
             if (results.data.message === "Event edited.") {
                 console.log("success!!")
-                // this.setState({eventstate: {}})
+                this.setState({
+                    eventstate: {
+                        id: this.state.eventstate.id,
+                        date: date,
+                        start: parseFloat(start.split(":")[0]),
+                        smin: parseFloat(start.split(":")[1]),
+                        end: parseFloat(end.split(":")[0]),
+                        emin: parseFloat(end.split(":")[1]),
+                        name: name,
+                        location: loc,
+                        description: des,
+                        category: this.state.eventstate.category
+                    }
+                })
             }
         }
 
