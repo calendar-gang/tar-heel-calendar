@@ -78,10 +78,8 @@ class Day extends Component {
                     })
                 }
             }
-            this.setState({ tasklist: tlist });
-
+            this.setState({ tasklist: tlist }, () => this.rendercurrenttasks());
         }
-        this.rendercurrenttasks()
 
     }
 
@@ -124,9 +122,8 @@ class Day extends Component {
                     category: events[i].category
                 })
             }
-            this.setState({ eventlist: elist });
+            this.setState({ eventlist: elist }, ()=>this._rendercurrentevents());
         }
-        this._rendercurrentevents()
     }
 
 
@@ -353,7 +350,7 @@ class Day extends Component {
                 dayEvents: this.state.cache[new_date_object].dayEvents,
                 eventlist: this.state.cache[new_date_object].eventlist,
                 tasklist: this.state.cache[new_date_object].tasklist,
-            })
+            }, () => this._getcurrentevents());
         } else {
             let new_state = {
                 date: new_date_object,
@@ -366,9 +363,7 @@ class Day extends Component {
                 eventlist: new_state.eventlist,
                 tasklist: new_state.tasklist,
             }
-            this.setState(new_state);
-            this.forceUpdate();
-            this._getcurrentevents();
+            this.setState(new_state, () => this._getcurrentevents());
         }
     }
 
