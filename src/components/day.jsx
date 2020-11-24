@@ -32,7 +32,7 @@ class Day extends Component {
         */
         this.state = {
             date: this.props.date,
-            dayEvents: {},
+            dayEvents: this.initDayEvents(),
             eventlist: [],
             tasklist: [],
             // cache: {},
@@ -48,16 +48,15 @@ class Day extends Component {
         await this._getcurrentevents(this.state.date)
         await this._getcurrenttasks()
         this.rendercurrenttasks()
-        this._rendercurrentevents();
     }
 
-    // initDayEvents() {
-    //     let dayEvents = {};
-    //     for (let i = 0; i < 24; i++) {
-    //         dayEvents[i] = [];
-    //     }
-    //     return dayEvents;
-    // }
+    initDayEvents() {
+        let dayEvents = {};
+        for (let i = 0; i < 24; i++) {
+            dayEvents[i] = [];
+        }
+        return dayEvents;
+    }
 
     async _getcurrenttasks() {
         if (!this.state.loggedIn) {
@@ -105,7 +104,6 @@ class Day extends Component {
                     latest: `${formatted_date} 23:59:00`
                 }
             }).then((response) => {
-                console.log(response);
                 let events = response.data.results // this should hold our events results data !
                 for (let i = 0; i < events.length; i++) {
                     let starttime = events[i].start
@@ -142,11 +140,7 @@ class Day extends Component {
         for (let i = 0; i < this.state.eventlist.length; i++) {
             let evt = this.state.eventlist[i];
             let day_evt = <DayEvent eventstate={evt}></DayEvent>;
-            this.setState(prevState => {
-                let day_event = [...prevState.dayEvents];  // creating copy of state variable jasper
-                day_event[`${evt.start}`] = day_evt;                     // update the name property, assign a new value                 
-                return { day_event };                                 // return new object jasper object
-              })
+            this.state.dayEvents[`${evt.start}`].push(day_evt);
         }
     }
 
@@ -184,13 +178,10 @@ class Day extends Component {
         let current_events = [...this.state.eventlist];
         current_events.push(obj);
         let day_evt = <DayEvent eventstate={obj}></DayEvent>;
-        this.setState(prevState => {
-            let day_event = [...prevState.dayEvents];  // creating copy of state variable jasper
-            day_event[`${evt.start}`] = day_evt;                     // update the name property, assign a new value                 
-            return { day_event };                                 // return new object jasper object
-        })
+        this.state.dayEvents[`${obj.start}`].push(day_evt);
         this.setState({
-            eventlist: current_events
+            eventlist: current_events,
+            dayEvents: this.state.dayEvents
         });
     }
 
