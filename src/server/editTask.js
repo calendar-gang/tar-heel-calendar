@@ -84,7 +84,7 @@ exports.editTask = (req, res) => {
                 if(error) throw error;
 
                 res.json({
-                    message: "Event edited."
+                    message: "Task edited."
                 });
             });
         });
