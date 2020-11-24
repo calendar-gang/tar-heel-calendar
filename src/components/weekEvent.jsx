@@ -146,15 +146,11 @@ class WeekEvent extends Component {
     _getEventLength() {
         let start = this.state.eventstate.start
         let end = this.state.eventstate.end
-        if (this.state.eventstate.start > 12) {
-            start = start - 12
-        }
-        if (this.state.eventstate.end > 12) {
-            end = end - 12
-        }
         let ending = end + (this.state.eventstate.emin / 60)
         let starting = start + (this.state.eventstate.smin / 60)
         return ending - starting
+
+        // problem 11 - 1 
     }
 
 
@@ -209,7 +205,7 @@ class WeekEvent extends Component {
         let defaultend = this._getTime(this.state.eventstate.end, this.state.eventstate.emin)
 
         console.log(defaultstart)
-        console.log(defaultend)
+        console.log(defaultend) 
 
 
         return (
@@ -261,7 +257,6 @@ class WeekEvent extends Component {
             padding: "10px"
         }
 
-        // console.log(event_style.height)
 
         if (this.state.showEvent) {
             return (

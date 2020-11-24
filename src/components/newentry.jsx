@@ -222,16 +222,3 @@ class NewEntry extends Component {
 
 export default NewEntry
 
-
-// made new event in day view, showed up immediately and in correct color
-// length was incorrect and ran off page
-// on resubmit it changed to wrong color but the time became correct 
-// month view initially incorrect color and satyed so after refresh
-// week seems to be displaying in correct color 
-// all 3 views display diff colors :( 
-// seems week is only one refactored to handle color selection and it is working properly, just need to 
-// transfer over
-
-// small things i see that need to get fixed 
-// hide events on delete - should just be able to make state isHidden and then delete so on reload is actually gone
-// make events of right length without reload 
