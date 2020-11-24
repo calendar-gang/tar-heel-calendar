@@ -198,6 +198,8 @@ class Week extends Component {
                 eventlist: [],
                 event_objects: []
             })
+            this.forceUpdate();
+            this._getcurrentevents();
         }
     }
 
