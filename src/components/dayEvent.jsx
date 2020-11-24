@@ -77,7 +77,8 @@ class DayEvent extends Component {
                     location: loc,
                     description: des,
                     start: startdate,
-                    end: enddate
+                    end: enddate,
+                    category: this.state.eventstate.category
                 }
             });
 

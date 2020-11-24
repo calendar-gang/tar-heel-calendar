@@ -70,7 +70,7 @@ class MonthEvent extends Component {
 
     async _submitEdit(event) {
         this._toggleEdit(event)
-        window.alert("submitting")
+        // window.alert("submitting")
         // all info for submit: 
         let name = this.formFields.name.current.value
         let loc = this.formFields.location.current.value
