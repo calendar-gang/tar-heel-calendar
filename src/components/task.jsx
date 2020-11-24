@@ -36,7 +36,7 @@ class Task extends Component {
                     }
                 });
 
-                if (results.data.message === "Event edited.") {
+                if (results.data.message === "Task edited.") {
                     this.setState({ style: { textDecoration: 'line-through', backgroundColor: '#bebfc2', margin: "10px" } })
 
                 }
@@ -55,7 +55,7 @@ class Task extends Component {
                     }
                 });
 
-                if (results.data.message === "Event edited.") {
+                if (results.data.message === "Task edited.") {
                     this.setState({ style: { textDecoration: 'none', margin: "10px" } })
 
                 }
