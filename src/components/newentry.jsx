@@ -94,10 +94,10 @@ class NewEntry extends Component {
         if (this.props.submit) {
             this.props.submit({
                 date: date,
-                start: start.split(":")[0],
-                smin: start.split(":")[1],
-                end: end.split(":")[0],
-                emin: end.split(":")[1],
+                start: parseFloat(start.split(":")[0]),
+                smin: parseFloat(start.split(":")[1]),
+                end: parseFloat(end.split(":")[0]),
+                emin: parseFloat(end.split(":")[1]),
                 name: name,
                 location: loc,
                 description: des,
