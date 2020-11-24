@@ -369,6 +369,8 @@ class Day extends Component {
                 tasklist: new_state.tasklist,
             }
             this.setState(new_state);
+            this.forceUpdate();
+            this._getcurrentevents();
         }
     }
 
