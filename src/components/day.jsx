@@ -35,12 +35,12 @@ class Day extends Component {
             dayEvents: this.initDayEvents(),
             eventlist: [],
             tasklist: [],
-            cache: {},
+            // cache: {},
             loggedIn: this._getCookie("token").length === 60,
             display: "first"
         }
 
-        this.state.cache[this.state.date] = {}
+        // this.state.cache[this.state.date] = {}
     }
 
     componentDidMount() {
@@ -332,7 +332,7 @@ class Day extends Component {
         return writtendate
     }
 
-    changeDay(direction) {
+    async changeDay(direction) {
         // method to change the date
         let new_date_object = new Date(this.state.date.getTime());
         if (direction == 1) {
@@ -343,33 +343,38 @@ class Day extends Component {
             new_date_object.setDate(new_date_object.getDate() - 1);
         }
 
-        this.state.cache[this.state.date] = {
-            date: this.state.date,
-            dayEvents: this.state.dayEvents,
-            eventlist: this.state.eventlist,
-            tasklist: this.state.tasklist,
-        }
+        await this._getcurrentevents();
+        await this._getcurrenttasks();
+        this.setState({date: new_date_object});
 
-        if (this.state.cache[new_date_object]) {
-            this.setState({
-                date: new_date_object,
-                dayEvents: this.state.cache[new_date_object].dayEvents,
-                eventlist: this.state.cache[new_date_object].eventlist,
-                tasklist: this.state.cache[new_date_object].tasklist,
-            })
-        } else {
-            let new_state = {
-                date: new_date_object,
-                dayEvents: this.initDayEvents(),
-                tasklist: [],
-            }
-            this.state.cache[new_date_object] = {
-                dayEvents: new_state.dayEvents,
-                tasklist: new_state.tasklist
-            }
-            this.state.cache[new_date_object]["eventlist"] = this._getcurrentevents(new_date_object);
-            this.setState(new_state);
-        }
+
+        // this.state.cache[this.state.date] = {
+        //     date: this.state.date,
+        //     dayEvents: this.state.dayEvents,
+        //     eventlist: this.state.eventlist,
+        //     tasklist: this.state.tasklist,
+        // }
+
+        // if (this.state.cache[new_date_object]) {
+        //     this.setState({
+        //         date: new_date_object,
+        //         dayEvents: this.state.cache[new_date_object].dayEvents,
+        //         eventlist: this.state.cache[new_date_object].eventlist,
+        //         tasklist: this.state.cache[new_date_object].tasklist,
+        //     })
+        // } else {
+        //     let new_state = {
+        //         date: new_date_object,
+        //         dayEvents: this.initDayEvents(),
+        //         tasklist: [],
+        //     }
+        //     this.state.cache[new_date_object] = {
+        //         dayEvents: new_state.dayEvents,
+        //         tasklist: new_state.tasklist
+        //     }
+        //     this.state.cache[new_date_object]["eventlist"] = this._getcurrentevents(new_date_object);
+        //     this.setState(new_state);
+        // }
     }
 
     toggletools() {
