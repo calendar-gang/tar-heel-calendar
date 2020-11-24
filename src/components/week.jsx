@@ -107,12 +107,9 @@ class Week extends Component {
                     category: events[i].category
                 })
             }
-            this.setState({ eventlist: elist });
+            this.setState({ eventlist: elist }, () => this._rendercurrentevents());
 
         }
-
-        this._rendercurrentevents()
-
     }
 
     _findHour(time) {
@@ -168,9 +165,7 @@ class Week extends Component {
             let evt_obj = <WeekEvent eventstate={evt}></WeekEvent>;
             this.state.event_objects[`${evt.day}${evt.start}`].push(evt_obj);
         }
-        this.setState({
-            event_objects: this.state.event_objects
-        });
+        this.forceUpdate();
     }
 
     changeWeek(direction) {
@@ -198,9 +193,7 @@ class Week extends Component {
                 date: new_date_obj,
                 eventlist: [],
                 event_objects: []
-            })
-            this.forceUpdate();
-            this._getcurrentevents();
+            }, () => this._getcurrentevents());
         }
     }
 
