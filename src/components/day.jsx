@@ -24,10 +24,8 @@ class Day extends Component {
         var now = new Date();
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
         var day = days[now.getDay()];
         var month = months[now.getMonth()];
-
         let writtendate = day + ", " + month + " " + now.getDate() + "th"
         */
         this.state = {
@@ -35,19 +33,18 @@ class Day extends Component {
             dayEvents: this.initDayEvents(),
             eventlist: [],
             tasklist: [],
-            // cache: {},
+            cache: {},
             loggedIn: this._getCookie("token").length === 60,
             display: "first"
         }
 
-        // this.state.cache[this.state.date] = {}
+        this.state.cache[this.state.date] = {}
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        await this._getcurrentevents(this.state.date).then(this._rendercurrentevents())
-        await this._getcurrenttasks()
-        this.rendercurrenttasks()
+        this._getcurrentevents()
+        this._getcurrenttasks()
     }
 
     initDayEvents() {
@@ -84,16 +81,15 @@ class Day extends Component {
             this.setState({ tasklist: tlist });
 
         }
-
+        this.rendercurrenttasks()
 
     }
 
-    async _getcurrentevents(date) {
-        let elist = []
+    async _getcurrentevents() {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            let formatted_date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${this.state.date.getDate()}`
 
             const results = await axios({
                 method: 'post',
@@ -105,6 +101,7 @@ class Day extends Component {
                 }
             });
             let events = results.data.results // this should hold our events results data !
+            let elist = []
             for (let i = 0; i < events.length; i++) {
                 let starttime = events[i].start
                 let endtime = events[i].end
@@ -124,12 +121,12 @@ class Day extends Component {
                     name: events[i].title,
                     location: events[i].location,
                     description: events[i].description,
-                    category: events[i].category
+                    category: i % 9
                 })
             }
             this.setState({ eventlist: elist });
         }
-        return elist;
+        this._rendercurrentevents()
     }
 
 
@@ -332,7 +329,7 @@ class Day extends Component {
         return writtendate
     }
 
-    async changeDay(direction) {
+    changeDay(direction) {
         // method to change the date
         let new_date_object = new Date(this.state.date.getTime());
         if (direction == 1) {
@@ -343,38 +340,36 @@ class Day extends Component {
             new_date_object.setDate(new_date_object.getDate() - 1);
         }
 
-        await this._getcurrentevents(new_date_object);
-        await this._getcurrenttasks();
-        this.setState({ date: new_date_object });
+        this.state.cache[this.state.date] = {
+            date: this.state.date,
+            dayEvents: this.state.dayEvents,
+            eventlist: this.state.eventlist,
+            tasklist: this.state.tasklist,
+        }
 
-
-        // this.state.cache[this.state.date] = {
-        //     date: this.state.date,
-        //     dayEvents: this.state.dayEvents,
-        //     eventlist: this.state.eventlist,
-        //     tasklist: this.state.tasklist,
-        // }
-
-        // if (this.state.cache[new_date_object]) {
-        //     this.setState({
-        //         date: new_date_object,
-        //         dayEvents: this.state.cache[new_date_object].dayEvents,
-        //         eventlist: this.state.cache[new_date_object].eventlist,
-        //         tasklist: this.state.cache[new_date_object].tasklist,
-        //     })
-        // } else {
-        //     let new_state = {
-        //         date: new_date_object,
-        //         dayEvents: this.initDayEvents(),
-        //         tasklist: [],
-        //     }
-        //     this.state.cache[new_date_object] = {
-        //         dayEvents: new_state.dayEvents,
-        //         tasklist: new_state.tasklist
-        //     }
-        //     this.state.cache[new_date_object]["eventlist"] = this._getcurrentevents(new_date_object);
-        //     this.setState(new_state);
-        // }
+        if (this.state.cache[new_date_object]) {
+            this.setState({
+                date: new_date_object,
+                dayEvents: this.state.cache[new_date_object].dayEvents,
+                eventlist: this.state.cache[new_date_object].eventlist,
+                tasklist: this.state.cache[new_date_object].tasklist,
+            })
+        } else {
+            let new_state = {
+                date: new_date_object,
+                dayEvents: this.initDayEvents(),
+                eventlist: [],
+                tasklist: [],
+            }
+            this.state.cache[new_date_object] = {
+                dayEvents: new_state.dayEvents,
+                eventlist: new_state.eventlist,
+                tasklist: new_state.tasklist,
+            }
+            this.setState(new_state);
+            this.forceUpdate();
+            this._getcurrentevents();
+        }
     }
 
     toggletools() {
@@ -457,4 +452,3 @@ class Day extends Component {
 }
 
 export default Day;
-
