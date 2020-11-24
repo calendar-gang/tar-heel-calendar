@@ -45,7 +45,7 @@ class Day extends Component {
 
     async componentDidMount() {
         this.scrollBox.current.scrollTop = 800
-        await this._getcurrentevents(this.state.date)
+        await this._getcurrentevents(this.state.date).then(this._rendercurrentevents())
         await this._getcurrenttasks()
         this.rendercurrenttasks()
     }
@@ -103,35 +103,31 @@ class Day extends Component {
                     earliest: `${formatted_date} 00:00:00`,
                     latest: `${formatted_date} 23:59:00`
                 }
-            }).then((response) => {
-                let events = response.data.results // this should hold our events results data !
-                for (let i = 0; i < events.length; i++) {
-                    let starttime = events[i].start
-                    let endtime = events[i].end
-                    let day = starttime.split("T")[0].split("-")[2]
-                    let start = starttime.split("T")[1].split(":")[0]
-                    let minspaststart = starttime.split("T")[1].split(":")[1]
-                    let end = endtime.split("T")[1].split(":")[0]
-                    let minspastend = endtime.split("T")[1].split(":")[1]
-                    elist.push({
-                        id: events[i].id,
-                        date: starttime.split("T")[0],
-                        day: parseFloat(day),
-                        start: parseFloat(start),
-                        smin: parseFloat(minspaststart),
-                        end: parseFloat(end),
-                        emin: parseFloat(minspastend),
-                        name: events[i].title,
-                        location: events[i].location,
-                        description: events[i].description,
-                        category: events[i].category
-                    })
-                }
-                    this.setState({ 
-                        date: date,
-                        eventlist: elist 
-                    });
-                });
+            });
+            let events = results.data.results // this should hold our events results data !
+            for (let i = 0; i < events.length; i++) {
+                let starttime = events[i].start
+                let endtime = events[i].end
+                let day = starttime.split("T")[0].split("-")[2]
+                let start = starttime.split("T")[1].split(":")[0]
+                let minspaststart = starttime.split("T")[1].split(":")[1]
+                let end = endtime.split("T")[1].split(":")[0]
+                let minspastend = endtime.split("T")[1].split(":")[1]
+                elist.push({
+                    id: events[i].id,
+                    date: starttime.split("T")[0],
+                    day: parseFloat(day),
+                    start: parseFloat(start),
+                    smin: parseFloat(minspaststart),
+                    end: parseFloat(end),
+                    emin: parseFloat(minspastend),
+                    name: events[i].title,
+                    location: events[i].location,
+                    description: events[i].description,
+                    category: events[i].category
+                })
+            }
+            this.setState({ eventlist: elist });
         }
     }
 
@@ -140,7 +136,11 @@ class Day extends Component {
         for (let i = 0; i < this.state.eventlist.length; i++) {
             let evt = this.state.eventlist[i];
             let day_evt = <DayEvent eventstate={evt}></DayEvent>;
-            this.state.dayEvents[`${evt.start}`].push(day_evt);
+            this.setState((state) => {
+                let day_events = Object.assign({}, state.dayEvents);
+                day_events[`${evt.start}`].push(day_evt);
+                return {dayEvents: day_events}
+            });
         }
     }
 
@@ -178,11 +178,17 @@ class Day extends Component {
         let current_events = [...this.state.eventlist];
         current_events.push(obj);
         let day_evt = <DayEvent eventstate={obj}></DayEvent>;
-        this.state.dayEvents[`${obj.start}`].push(day_evt);
-        this.setState({
-            eventlist: current_events,
-            dayEvents: this.state.dayEvents
+        this.setState((state) => {
+            let day_events = Object.assign({}, state.dayEvents);
+            day_events[`${evt.start}`].push(day_evt);
+            return {
+                dayEvents: day_events,
+                eventlist: current_events
+            }
         });
+        // this.setState({
+        //     eventlist: current_events
+        // });
     }
 
 
@@ -348,6 +354,9 @@ class Day extends Component {
 
         await this._getcurrentevents(new_date_object);
         await this._getcurrenttasks();
+        this.setState({ 
+            date: new_date_object,
+        });
 
 
         // this.state.cache[this.state.date] = {
