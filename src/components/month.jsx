@@ -35,7 +35,7 @@ class Month extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${0}`;
+            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-00`;
             let end_of_month = this.numDays(this.state.date.getFullYear(), this.state.date.getMonth())
             let formatted_end_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${end_of_month}`;
             const results = await axios({
