@@ -1,5 +1,5 @@
 # Tar Heel Calendar
-This is our final project for COMP 426: Modern Web Programming. It is under development.
+Tar Heel Calendar is our final project for COMP 426: Modern Web Programming. It is under development.
 
 ## Installation
 In order to run this project locally, you must have the following software installed:
@@ -27,6 +27,9 @@ If you're only working on one end of the project, this may be a bit slow. There 
 5. `npm run drop-tables` will drop all tables in the database (if they exist).
 6. `npm run create-sample-data` will insert some sample data into the database for testing purposes.
 
+## API documentation
+The backend API is fully documented [here](https://github.com/calendar-gang/tar-heel-calendar/blob/main/docs/API%20Documentation.md).
+
 ## Technologies used
 * [Node.js](https://github.com/nodejs/node)
 * [React](https://github.com/facebook/react) (with [Create React App](https://github.com/facebook/create-react-app))
@@ -47,4 +50,4 @@ Other technologies used are listed in [`package.json`](package.json).
 * Ezri White
 
 ## Live website
-The live website is currently located at [tar-heel-calendar.herokuapp.com](https://tar-heel-calendar.herokuapp.com/). Note it is not stable nor especially secure, so use with caution. The live website will restart with each upstream Git commit.
+The live website is currently located at [tar-heel-calendar.herokuapp.com](https://tar-heel-calendar.herokuapp.com/). Note it is not stable nor 100% secure, so use with caution. The live website will restart with each upstream Git commit.
