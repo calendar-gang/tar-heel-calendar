@@ -133,6 +133,7 @@ class Day extends Component {
             let day_evt = <DayEvent eventstate={evt}></DayEvent>;
             this.state.dayEvents[`${evt.start}`].push(day_evt);
         }
+        this.forceUpdate();
     }
 
     rendercurrenttasks() {
