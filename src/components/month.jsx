@@ -222,7 +222,7 @@ class Month extends Component {
                 days: create_day.days,
                 dayRef: create_day.dayRef,
                 month_struct: create_day.month_struct
-            }, this._rendercurrentevents());
+            }, () => this._rendercurrentevents());
         } else {
             this.setState({
                 date: date_to_set,
