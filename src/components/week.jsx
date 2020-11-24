@@ -39,6 +39,9 @@ class Week extends Component {
 
     }
 
+    
+
+
     handleSubmit(obj) {
         let current_events = [...this.state.eventlist];
         current_events.push(obj);
@@ -65,11 +68,17 @@ class Week extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
+            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${this.props.date.getDate()}`;
+            let end_of_week = new Date(this.state.date);
+            end_of_week.setDate(end_of_week.getDate() + 6);
+            let formatted_end_date = `${end_of_week.getFullYear()}-${end_of_week.getMonth() + 1}-${end_of_week.getDate()}`;
             const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
                 data: {
-                    token: this._getCookie("token")
+                    token: this._getCookie("token"),
+                    earliest: `${formatted_date} 00:00:00`,
+                    latest: `${formatted_end_date} 23:59:00`
                 }
             });
             console.log(results)
@@ -78,7 +87,7 @@ class Week extends Component {
             for (let i = 0; i < events.length; i++) {
                 let starttime = events[i].start
                 let endtime = events[i].end
-                let day = starttime.split("T")[0].split("-")[2] - 22 // 22 should be whatever the beginning of the week date is
+                let day = starttime.split("T")[0].split("-")[2] - this.state.date.getDate(); // 22 should be whatever the beginning of the week date is
                 let start = starttime.split("T")[1].split(":")[0]
                 let minspaststart = starttime.split("T")[1].split(":")[1]
                 let end = endtime.split("T")[1].split(":")[0]
