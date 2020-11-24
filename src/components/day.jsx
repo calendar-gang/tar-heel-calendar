@@ -91,13 +91,15 @@ class Day extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
+            let formatted_date = `${this.props.date.getFullYear()}-${this.props.date.getMonth()}-${this.props.date.getDate()}`
+
             const results = await axios({
                 method: 'post',
                 url: 'https://tar-heel-calendar.herokuapp.com/viewevents',
                 data: {
                     token: this._getCookie("token"),
-                    earliest: '2020-11-22 00:00:00',
-                    latest: '2020-11-22 23:59:00'
+                    earliest: `${formatted_date} 00:00:00`,
+                    latest: `${formatted_date} 23:59:00`
                 }
             });
             let events = results.data.results // this should hold our events results data !
