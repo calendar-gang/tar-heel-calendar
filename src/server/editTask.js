@@ -64,6 +64,10 @@ exports.editTask = (req, res) => {
                 return;
             }
 
+            // TODO: this is the most hacky bullshit I've written in 6 months
+            let isCompletedBool = isBooleanTrue(iscompleted);
+            let isShownBool = isBooleanTrue(isshown);
+
             db.query(`UPDATE tasks
                     SET
                         description = ?,
@@ -72,8 +76,8 @@ exports.editTask = (req, res) => {
                     WHERE username = ? AND id = ?`,
 
                     [description || results[0].description,
-                    isBooleanTrue(iscompleted) || results[0].iscompleted,
-                    isBooleanTrue(isshown) || results[0].isshown,
+                    typeof(isCompletedBool) === 'boolean' ? isCompletedBool: results[0].iscompleted,
+                    typeof(isShownBool) === 'boolean' ? isShownBool: results[0].isshown,
                     username,
                     id],
                     (error, results, fields) => {

@@ -40,6 +40,10 @@ exports.makeTask = (req, res) => {
 
         let username = results[0].username;
 
+        // TODO: this is the most hacky bullshit I've written in 6 months
+        let isCompletedBool = isBooleanTrue(iscompleted);
+        let isShownBool = isBooleanTrue(isshown);
+
         db.query(`INSERT INTO tasks(
                   username,
                   description,
@@ -48,8 +52,8 @@ exports.makeTask = (req, res) => {
                   VALUES(?, ?, ?, ?)`,
                 [username,
                 description,
-                isBooleanTrue(iscompleted) || false,
-                isBooleanTrue(isshown) || true],
+                typeof(isCompletedBool) === 'boolean' ? isCompletedBool: false,
+                typeof(isShownBool) === 'boolean' ? isShownBool: true],
                 (error, results, fields) => {
             if(error) throw error;
 
