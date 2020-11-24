@@ -69,7 +69,7 @@ class Week extends Component {
         if (!this.state.loggedIn) {
             this.setState({ eventlist: [] });
         } else {
-            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${this.props.date.getDate()}`;
+            let formatted_date = `${this.state.date.getFullYear()}-${this.state.date.getMonth() + 1}-${this.props.date.getDate() - this.props.date.getDay()}`;
             let end_of_week = new Date(this.state.date);
             end_of_week.setDate(end_of_week.getDate() + 6);
             let formatted_end_date = `${end_of_week.getFullYear()}-${end_of_week.getMonth() + 1}-${end_of_week.getDate()}`;
